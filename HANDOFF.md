@@ -191,4 +191,8 @@ leaderboard rows at all. A 2-class answer means one more training round.
   the answers are waiting.
 - **The official v1 fork appears to train one branch and predict with another** — documented with
   line numbers in FINDINGS.md, not yet raised with the professor.
-- **Branch-averaging at inference** (what the UNet++ paper specifies) has never been tested here.
+- **The paper's deep supervision design has never been tested.** An implementation is ready —
+  `nnUNetTrainerUNetPlusPlusPaper` (equal loss weights + branch averaging at inference, both
+  together). One training round answers it. Compare tumour-class metrics against
+  `nnUNetTrainerUNetPlusPlus` on the same fold and plans. Do **not** run equal weighting without the
+  averaging: that half-measure is already known to fail.

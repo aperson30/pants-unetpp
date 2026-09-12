@@ -66,9 +66,17 @@ class UNetPlusPlusDecoder(nn.Module):
                  dropout_op_kwargs: dict = None,
                  nonlin: Union[None, Type[torch.nn.Module]] = None,
                  nonlin_kwargs: dict = None,
-                 conv_bias: bool = None):
+                 conv_bias: bool = None,
+                 average_outputs_at_inference: bool = False):
         super().__init__()
         self.deep_supervision = deep_supervision
+        # When deep supervision is switched off (which is what nnU-Net does for validation and
+        # inference), the default is to return the single most-nested output X[0][L]. Setting this
+        # to True instead returns the MEAN of all nested outputs, which is what the UNet++ paper
+        # specifies ("the segmentation results from all segmentation branches are collected and then
+        # averaged"). Only nnUNetTrainerUNetPlusPlusPaper turns this on -- see that file for why the
+        # two settings have to travel together.
+        self.average_outputs_at_inference = average_outputs_at_inference
         self.encoder = encoder
         self.num_classes = num_classes
 
@@ -136,6 +144,16 @@ class UNetPlusPlusDecoder(nn.Module):
         if self.deep_supervision:
             # nnU-Net v2 convention: index 0 of the returned list/tuple is the primary output
             return seg_outputs[::-1]
+        elif self.average_outputs_at_inference:
+            # UNet++ paper's inference rule: average every nested branch rather than trusting only
+            # the deepest one. NOTE: the paper applies its final nonlinearity per branch and averages
+            # the resulting probability maps, whereas this averages the raw logits, because nnU-Net
+            # v2 requires the network to return logits and applies softmax itself downstream.
+            # Averaging logits is not mathematically identical to averaging probabilities. It is the
+            # closest faithful option that stays compatible with nnU-Net's inference path; if the
+            # comparison against the default configuration turns out close, this is the first
+            # approximation to revisit.
+            return torch.stack(seg_outputs, dim=0).mean(dim=0)
         else:
             return seg_outputs[-1]
 
@@ -180,7 +198,8 @@ class UNetPlusPlus(nn.Module):
                  nonlin: Union[None, Type[torch.nn.Module]] = None,
                  nonlin_kwargs: dict = None,
                  deep_supervision: bool = False,
-                 nonlin_first: bool = False):
+                 nonlin_first: bool = False,
+                 average_outputs_at_inference: bool = False):
         super().__init__()
         self.encoder = PlainConvEncoder(
             input_channels, n_stages, features_per_stage, conv_op, kernel_sizes, strides,
@@ -189,6 +208,7 @@ class UNetPlusPlus(nn.Module):
         )
         self.decoder = UNetPlusPlusDecoder(
             self.encoder, num_classes, n_conv_per_stage_decoder, deep_supervision,
+            average_outputs_at_inference=average_outputs_at_inference,
             nonlin_first=nonlin_first
         )
 

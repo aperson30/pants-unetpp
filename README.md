@@ -26,6 +26,24 @@ A 2×2 grid — architecture against deep supervision — so the effect of each 
 The two plain U-Net runs use stock, unmodified nnU-Net code and act as the control group. Only the
 two UNet++ runs use anything from this repository's `unetpp_port/`.
 
+### A fifth, optional run: `nnUNetTrainerUNetPlusPlusPaper`
+
+The four runs above use nnU-Net's deep supervision conventions. `nnUNetTrainerUNetPlusPlusPaper`
+instead follows the **UNet++ paper's** design, which differs in two coupled ways:
+
+| | Loss weighting | Inference |
+|---|---|---|
+| `nnUNetTrainerUNetPlusPlus` (the grid) | nnU-Net's exponential decay | deepest branch only |
+| `nnUNetTrainerUNetPlusPlusPaper` | equal (η ≡ 1), every branch | **average of all branches** |
+
+It is not part of the 2×2 grid — it answers a separate question, namely whether the paper's own
+scheme beats nnU-Net's on this dataset. Run it against `nnUNetTrainerUNetPlusPlus` on the same fold
+and plans, and compare **tumour-class** metrics.
+
+> **Do not apply the equal weighting without the branch averaging.** That exact half-measure was
+> tried and failed badly — 0% of epochs detected any tumour through epoch 500, versus 87% for the
+> otherwise identical default run. The two rules are a matched pair; see [FINDINGS.md](FINDINGS.md).
+
 ---
 
 ## Repository layout
@@ -72,6 +90,7 @@ nnU-Net discovers trainers by class name, so these files must live inside its ow
 cp ~/pants-unetpp/unetpp_port/unet_plusplus.py                            nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerUNetPlusPlus.py                nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerUNetPlusPlusNoDeepSupervision.py nnUNet/nnunetv2/training/nnUNetTrainer/
+cp ~/pants-unetpp/unetpp_port/nnUNetTrainerUNetPlusPlusPaper.py           nnUNet/nnunetv2/training/nnUNetTrainer/
 ```
 
 ### 4. Verify the port before touching real data

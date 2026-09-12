@@ -225,7 +225,14 @@ Four things that could not be settled from published material:
    tumour-positive cases, argmax.
 4. **Which deep supervision design should the port follow?** Given the three differ (table above),
    match the paper (equal weights + branch averaging), match the v1 port, or keep the current
-   configuration? Testing an alternative means another training round plus an inference change.
+   configuration?
+
+   **An implementation of the paper's design is now ready to test**:
+   `unetpp_port/nnUNetTrainerUNetPlusPlusPaper.py` applies equal weights (η ≡ 1) *and* averages all
+   branches at inference — both halves together, since applying only the first is the configuration
+   already measured as failing. It costs one training round to answer empirically. Note one
+   approximation: it averages logits rather than the per-branch probability maps the paper averages,
+   because nnU-Net requires the network to return logits.
 
 ---
 
