@@ -113,6 +113,33 @@ signal to spare; a class present in 10% of cases does not.
 decoder, dense skip connections — and deep supervision targets are still handled the UNet++ way (no
 downsampling).
 
+### What the port actually does at training time
+
+Worth stating plainly, since "deep supervision" can mean several things:
+
+- The network returns **all** outputs when DS is on (`seg_outputs[::-1]`, deepest first).
+- `_get_deep_supervision_scales()` returns all-ones, so **every output is compared against the
+  full-resolution ground truth** — no target downsampling. This is the UNet++-specific correction.
+- nnU-Net v2's inherited `DeepSupervisionWrapper` **computes the loss on each output and sums them**,
+  weighted:
+  ```python
+  return sum([weights[i] * self.loss(*inputs) for i, inputs in enumerate(zip(*args)) if weights[i] != 0.0])
+  ```
+- Weights come from nnU-Net's default exponential decay, normalised, with the last entry zeroed
+  (`1e-6` under DDP). With 5 outputs that is approximately:
+
+  | Output | Weight |
+  |---|---|
+  | X[0][5] — deepest, and the one used at inference | 0.533 |
+  | X[0][4] | 0.267 |
+  | X[0][3] | 0.133 |
+  | X[0][2] | 0.067 |
+  | X[0][1] — shallowest | ~0 |
+
+So: multi-output deep supervision **is** active. What distinguishes this port from the paper is the
+weighting (decaying rather than equal) and the inference rule (deepest branch rather than an average),
+not whether each output is supervised.
+
 ---
 
 ## Fidelity audit
