@@ -1,0 +1,24 @@
+# Never commit data, models, or predictions — these belong on the server / in backups
+*.pth
+*.npz
+*.npy
+*.b2nd
+*.nii
+*.nii.gz
+
+# Logs
+*.log
+nohup.out
+
+# Scratch
+_batch_input*/
+*_tmp/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS
+.DS_Store
