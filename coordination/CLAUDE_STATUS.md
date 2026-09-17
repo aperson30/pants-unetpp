@@ -112,3 +112,39 @@ equivalence test on both CPU and bdmap2's real GPU. All pass.
 
 Everything now pushed to main. Next real gap: get actual PanTS data through the real planner to
 replace the stress-bound patch sizes gate-0/gate-0b have been using with real numbers.
+
+### 2026-09-17 (night) — real plans.json obtained, batch-4 verified, full download launched
+
+Codex is down for a while (user's usage ran out); bdmap2 is free, using it directly now alongside
+bdmap3/bdmap4. bdmap1 still unreachable, no ETA.
+
+Streamed a 41-case real PanTS sample (images+labels) onto bdmap3 by piping curl directly into tar
+and killing the stream once enough cases were extracted, instead of downloading full chunks --
+1.2GB images + 184MB labels vs the naive 49.8GB (34.2GB chunk 1 + 15.6GB full label archive), all
+41 image/label pairs matched. Ran the REAL nnU-Net planner on it (after re-applying the known
+fix_affine_orthonormality.py fix -- one case needed it). Real plans:
+
+  patch_size = [64, 160, 224], n_stages = 6, features_per_stage = [32,64,128,256,320,320]
+  strides = [[1,1,1],[2,2,2],[2,2,2],[2,2,2],[2,2,2],[1,2,2]]  (note: last stride is anisotropic, not uniform)
+  default batch_size = 2 (must override to 4, per FINDINGS.md's documented defect)
+
+Verified batch 4 physically fits at this REAL patch size on one GB10: 39.4GB allocated / 51.0GB
+reserved out of 128GB unified -- comfortable headroom. Real step time (dead-head-skip applied, no
+compile yet): 4.8s/step, AMP. This is noticeably slower than the (96,160,160) stress-test proxy
+suggested (~2.1s/step) despite similar voxel count -- shape/anisotropy matters, not just volume.
+Don't trust proxy-patch extrapolations for anything beyond rough bounds going forward.
+
+compile "reduce-overhead" mode (CUDA graphs) measured for the first time: 1.171x over eager,
+marginally better than default compile mode's 1.131-1.152x (two separate runs, consistent
+ballpark). Use reduce-overhead in the final config.
+
+Important context found in training/retrain_wave1.sh: the ORIGINAL reference run used 4 GPUs per
+config via DDP (not 1), completing 1000 epochs in ~39-50h that way. We only have 4 total GB10 nodes
+(not 8), and multi-node DDP over plain lab ethernet between separate physical machines is a real
+engineering risk given this model is already memory-bandwidth-bound within one GPU -- decided to
+stick with 1-GPU-per-node, 4-configs-in-parallel (no DDP) as the safe, already-validated path,
+flagged the tradeoff to the user rather than silently picking.
+
+Full PanTS download (all 9 image chunks + full label archive, ~350GB) launched in the background on
+bdmap3 (setsid, nohup-safe). This is the long pole now -- everything else should happen in parallel
+with it, not wait for it serially where avoidable.
