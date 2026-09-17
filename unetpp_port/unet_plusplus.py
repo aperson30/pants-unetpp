@@ -67,7 +67,8 @@ class UNetPlusPlusDecoder(nn.Module):
                  nonlin: Union[None, Type[torch.nn.Module]] = None,
                  nonlin_kwargs: dict = None,
                  conv_bias: bool = None,
-                 average_outputs_at_inference: bool = False):
+                 average_outputs_at_inference: bool = False,
+                 skip_shallowest_deep_supervision_head: bool = False):
         super().__init__()
         self.deep_supervision = deep_supervision
         # When deep supervision is switched off (which is what nnU-Net does for validation and
@@ -77,6 +78,11 @@ class UNetPlusPlusDecoder(nn.Module):
         # averaged"). Only nnUNetTrainerUNetPlusPlusPaper turns this on -- see that file for why the
         # two settings have to travel together.
         self.average_outputs_at_inference = average_outputs_at_inference
+        # nnU-Net's default single-GPU deep-supervision loss assigns exactly zero weight to the
+        # final returned output. Because we return the branches deepest-first, that is X[0][1].
+        # A trainer may opt out of evaluating that segmentation head while keeping the parameter in
+        # the state dict for checkpoint compatibility. The paper trainer must leave this False.
+        self.skip_shallowest_deep_supervision_head = skip_shallowest_deep_supervision_head
         self.encoder = encoder
         self.num_classes = num_classes
 
@@ -139,12 +145,15 @@ class UNetPlusPlusDecoder(nn.Module):
 
         # row-0 outputs, in increasing nesting depth: seg_outputs[0] = shallowest (weakest), ...,
         # seg_outputs[-1] = X[0][L] = the main/final prediction (most nested, highest quality)
-        seg_outputs = [self.seg_layers[f"0_{j}"](nodes[(0, j)]) for j in range(1, self.L + 1)]
-
         if self.deep_supervision:
+            first_j = 2 if self.skip_shallowest_deep_supervision_head else 1
+            seg_outputs = [self.seg_layers[f"0_{j}"](nodes[(0, j)])
+                           for j in range(first_j, self.L + 1)]
             # nnU-Net v2 convention: index 0 of the returned list/tuple is the primary output
             return seg_outputs[::-1]
         elif self.average_outputs_at_inference:
+            seg_outputs = [self.seg_layers[f"0_{j}"](nodes[(0, j)])
+                           for j in range(1, self.L + 1)]
             # UNet++ paper's inference rule: average every nested branch rather than trusting only
             # the deepest one. NOTE: the paper applies its final nonlinearity per branch and averages
             # the resulting probability maps, whereas this averages the raw logits, because nnU-Net
@@ -155,7 +164,9 @@ class UNetPlusPlusDecoder(nn.Module):
             # approximation to revisit.
             return torch.stack(seg_outputs, dim=0).mean(dim=0)
         else:
-            return seg_outputs[-1]
+            # Validation/inference without branch averaging needs only the deepest head. Computing
+            # every other 1x1x1 head produced large full-resolution tensors that were discarded.
+            return self.seg_layers[f"0_{self.L}"](nodes[(0, self.L)])
 
     def compute_conv_feature_map_size(self, input_size):
         """Rough activation-memory estimate, used by nnU-Net's planner for VRAM budgeting."""
@@ -170,7 +181,10 @@ class UNetPlusPlusDecoder(nn.Module):
                 key = f"{i}_{j}"
                 output += self.convs[key].compute_conv_feature_map_size(sizes[i])
                 output += np.prod([self.encoder.output_channels[i], *sizes[i]], dtype=np.int64)  # transpconv out
-                if i == 0 and (self.deep_supervision or j == self.L):
+                if i == 0 and (j == self.L or
+                               (self.deep_supervision and
+                                not (self.skip_shallowest_deep_supervision_head and j == 1)) or
+                               self.average_outputs_at_inference):
                     output += np.prod([self.num_classes, *sizes[0]], dtype=np.int64)
         return output
 
@@ -199,7 +213,8 @@ class UNetPlusPlus(nn.Module):
                  nonlin_kwargs: dict = None,
                  deep_supervision: bool = False,
                  nonlin_first: bool = False,
-                 average_outputs_at_inference: bool = False):
+                 average_outputs_at_inference: bool = False,
+                 skip_shallowest_deep_supervision_head: bool = False):
         super().__init__()
         self.encoder = PlainConvEncoder(
             input_channels, n_stages, features_per_stage, conv_op, kernel_sizes, strides,
@@ -209,6 +224,7 @@ class UNetPlusPlus(nn.Module):
         self.decoder = UNetPlusPlusDecoder(
             self.encoder, num_classes, n_conv_per_stage_decoder, deep_supervision,
             average_outputs_at_inference=average_outputs_at_inference,
+            skip_shallowest_deep_supervision_head=skip_shallowest_deep_supervision_head,
             nonlin_first=nonlin_first
         )
 

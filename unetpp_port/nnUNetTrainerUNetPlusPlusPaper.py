@@ -67,6 +67,13 @@ from .unet_plusplus import UNetPlusPlus
 
 class nnUNetTrainerUNetPlusPlusPaper(nnUNetTrainerUNetPlusPlus):
 
+    # MUST override this back to False: the base trainer skips computing the shallowest,
+    # zero-weighted deep-supervision head as a speed optimization (see nnUNetTrainerUNetPlusPlus's
+    # class attribute docstring), but this trainer weights every branch equally and averages every
+    # branch at inference -- there is no zero-weighted branch here to skip. Inheriting True from the
+    # base class would silently drop a branch this trainer actually needs.
+    skip_shallowest_deep_supervision_head = False
+
     @staticmethod
     def build_network_architecture(plans_manager: PlansManager,
                                     configuration_manager: ConfigurationManager,
@@ -86,6 +93,7 @@ class nnUNetTrainerUNetPlusPlusPaper(nnUNetTrainerUNetPlusPlus):
             num_classes=num_output_channels,
             deep_supervision=enable_deep_supervision,
             average_outputs_at_inference=True,   # <-- the paper's inference rule
+            skip_shallowest_deep_supervision_head=False,   # every branch is needed, see above
             **arch_kwargs
         )
 
