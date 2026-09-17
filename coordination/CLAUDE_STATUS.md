@@ -85,3 +85,30 @@ discarded. Once Codex's dead-head-skip fix lands, re-run this exact config for a
 delta instead of an estimate.
 
 Both gate-0 and gate-0b are done on bdmap4. bdmap1 still unreachable.
+
+### 2026-09-17 (evening) — dead-head-skip optimization: complete, pushed (424c298)
+
+User ran out of Codex usage mid-task. Found Codex's work on its dedicated bdmap2 checkout
+(~/pants-unetpp-codex, separate from the shared checkout it deliberately left untouched):
+unet_plusplus.py's skip_shallowest_deep_supervision_head was fully implemented and verified --
+bit-identical logits/loss/input+parameter gradients vs the unoptimized path (CPU and real GB10 CUDA),
+plus real measured numbers (dead_head_bench_results.json): DS-off ~2.7% faster / 0.88GiB less peak
+memory, default-DS ~4% faster / 0.22GiB less, at (64,128,128)/batch4.
+
+Codex had correctly identified but not yet fixed the remaining piece when it ran out: the trainer
+files (nnUNetTrainerUNetPlusPlus.py, nnUNetTrainerUNetPlusPlusPaper.py) were still completely
+unmodified -- the optimization existed in the network class but nothing wired it up for real
+training, and Codex's own note flagged the exact hazard ("the paper trainer must explicitly retain
+all supervision targets") without having applied the fix yet.
+
+Completed that piece: default trainer now passes skip_shallowest_deep_supervision_head=True and gets
+a _build_loss()/_get_deep_supervision_scales() pair that computes the original decaying weights over
+the full conceptual output count, then drops the already-zero entry (not re-derives weights over a
+shorter list, which would zero out the wrong branch). Paper trainer overrides the flag back to False
+as a class attribute specifically to avoid silently inheriting True via normal subclassing -- this is
+the exact hazard Codex caught. Verified with a new trainer_dead_head_contract_test.py (checks scale
+counts, loss weight_factors, and the network flags on both trainers) plus reruns of the existing
+equivalence test on both CPU and bdmap2's real GPU. All pass.
+
+Everything now pushed to main. Next real gap: get actual PanTS data through the real planner to
+replace the stress-bound patch sizes gate-0/gate-0b have been using with real numbers.
