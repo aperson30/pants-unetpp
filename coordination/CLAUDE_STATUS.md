@@ -33,3 +33,24 @@ only, check nvidia-smi before and after.
 
 Node assignments as of now: bdmap1 = down/unknown, bdmap2 = Codex, bdmap4 = me (plain U-Net gate-0b),
 bdmap3 = shared with another lab member, use sparingly.
+
+### 2026-09-17 (later still) — bdmap4 plain U-Net gate-0b results (real, not estimated)
+
+| patch | batch | peak_mem_gb | mean_s_per_step |
+|---|---|---|---|
+| (64,128,128) | 1 | 2.74 | 0.231 |
+| (64,128,128) | 2 | 5.23 | 0.465 |
+| (64,128,128) | 4 | 10.21 | 0.920 |
+| (96,160,160) | 1 | 6.08 | 0.535 |
+| (96,160,160) | 2 | 11.92 | 1.074 |
+| (96,160,160) | 4 | 23.58 | 2.146 |
+
+DS-on vs DS-off at (64,128,128)/bs2: 5.227GB/0.471s vs 5.159GB/0.465s -- ~1% difference. Plain
+U-Net's DS heads are cheap (small 1x1 convs), so the dead-head-skip optimization matters for
+UNet++ specifically, not this architecture. Batch-4 memory scaling is clean/linear at both patch
+sizes, no OOM, good sign for capacity headroom once real patch size is known.
+
+Rough epoch estimate (still stress-bound patch, not the real plans.json value): (96,160,160)/bs4 at
+2.146s/step x 300 iters/epoch = ~10.75 min/epoch for plain U-Net DS-on.
+
+bdmap1 still being checked for connectivity.
