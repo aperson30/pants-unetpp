@@ -54,3 +54,34 @@ Rough epoch estimate (still stress-bound patch, not the real plans.json value): 
 2.146s/step x 300 iters/epoch = ~10.75 min/epoch for plain U-Net DS-on.
 
 bdmap1 still being checked for connectivity.
+
+### 2026-09-17 (later still x2) — bdmap4 UNet++ gate-0 results (real), torch.compile correction
+
+torch.compile did NOT crash this time -- one step completed in 10.37s (incl. compile warm-up) with
+only a benign "not enough SMs for max_autotune_gemm" fallback warning, not the sm_121a/ptxas crash
+from Triton #9181. This contradicts the "confirmed broken, skip it" conclusion from research -- that
+was about a specific crash mode, not first-step failure. One step is not enough to call it safe for
+a multi-day run (original concern was long-run recompile instability). Needs a real multi-hundred-step
+compile-vs-eager benchmark before ruling it out. Do not treat compile as settled either direction.
+
+| patch | batch | peak_mem_gb | mean_s_per_step |
+|---|---|---|---|
+| (64,128,128) | 1 | 10.20 | 0.945 |
+| (64,128,128) | 2 | 20.01 | 1.933 |
+| (64,128,128) | 4 | 39.62 | 3.859 |
+| (96,160,160) | 1 | 23.38 | 2.234 |
+| (96,160,160) | 2 | 46.37 | 4.531 |
+| (96,160,160) | 4 | 92.35 | 9.137 |
+
+UNet++ is consistently ~4.2x slower per step than plain U-Net at matched patch/batch (e.g. 3.86s vs
+0.92s at (64,128,128)/bs4), and memory scales proportionally worse too. At (96,160,160)/bs4, UNet++
+hits 92.3GB of 128GB unified -- just model+activations, before CPU workers/dataloader
+queue/CUDA context/OS share the same pool. This is a real capacity risk at the larger stress-bound
+patch size, consistent with the ~17GB/patch A5000 reference number, now with GB10 numbers behind it.
+
+DS-on vs DS-off at (64,128,128)/bs2, CURRENT UNPATCHED CODE: 20.01GB/1.933s (DS-on) vs
+17.93GB/1.862s (DS-off) -- ~10% memory, ~4% time difference, all from heads that get computed but
+discarded. Once Codex's dead-head-skip fix lands, re-run this exact config for a real before/after
+delta instead of an estimate.
+
+Both gate-0 and gate-0b are done on bdmap4. bdmap1 still unreachable.
