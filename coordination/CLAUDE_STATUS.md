@@ -160,3 +160,24 @@ optimizations. With sparse validation's iteration-count cut (260 avg vs 300): ~1
 ~146h (~6.1 days) to 500 epochs, ~293h (~12.2 days) to 1000, for the bottleneck config (UNet++
 DS-on). Plain U-Net configs will be substantially cheaper per the earlier ~4.2x gate0/gate0b ratio,
 though that ratio was measured at proxy patch sizes and hasn't been reverified at the real one yet.
+
+### 2026-09-17 (night, cont. 2) — full real CLI pipeline validated end-to-end, launch-ready
+
+Created nnUNetPlansBS4 from the real 41-case plans.json (batch_size 4, patch [64,160,224]).
+Wrote nnUNetTrainerUNetPlusPlusQuickSmoke (2 epochs x 3 train / 2 val iterations, save_every=1) to
+smoke-test the REAL nnUNetv2_train CLI end-to-end before trusting it for multi-day runs. One bug
+caught and fixed immediately: nnU-Net's base __init__ does locals()-based introspection for
+checkpoint reproducibility, so a trainer subclass MUST declare the exact named params
+(plans, configuration, fold, dataset_json, device) -- *args/**kwargs breaks it with a KeyError.
+Matches the pattern nnUNetTrainerUNetPlusPlusNoDeepSupervision already used correctly.
+
+Result: full pipeline ran clean end to end on real data -- training, checkpoint_best/final,
+automatic post-training validation (real sliding-window inference on held-out cases, currently
+running). No crashes, no NaNs. Real per-step time: epoch 1 (warmed up, 5 real steps) = 22.7s =
+4.54s/step, essentially matching the 4.8s/step measured with dummy tensors earlier -- strong
+evidence we are NOT meaningfully I/O-bound even with the real augmentation pipeline, so the
+worker/dataloader-tuning lever is probably low-value here (GPU compute is the real bottleneck, not
+data loading). Trust the earlier time estimates.
+
+Full download still running in the background (~23GB / ~350GB total when last checked). Pipeline is
+launch-ready the moment full data finishes preprocessing -- nothing else is blocking.
