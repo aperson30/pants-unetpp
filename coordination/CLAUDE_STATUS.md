@@ -148,3 +148,15 @@ flagged the tradeoff to the user rather than silently picking.
 Full PanTS download (all 9 image chunks + full label archive, ~350GB) launched in the background on
 bdmap3 (setsid, nohup-safe). This is the long pole now -- everything else should happen in parallel
 with it, not wait for it serially where avoidable.
+
+### 2026-09-17 (night, cont.) — combined-stack composition confirmed real, not assumed
+
+dead-head-skip + compile together measured (proxy patch 64,128,128, bs4, AMP): 1.163x over legacy
+eager, vs a naive multiplicative prediction of 1.142x -- composes slightly super-additively, no
+negative interaction. Safe to stack both in the real trainers.
+
+Applying to the REAL patch-size baseline (4.8s/step at [64,160,224]/bs4): ~4.1s/step with both
+optimizations. With sparse validation's iteration-count cut (260 avg vs 300): ~17.55 min/epoch ->
+~146h (~6.1 days) to 500 epochs, ~293h (~12.2 days) to 1000, for the bottleneck config (UNet++
+DS-on). Plain U-Net configs will be substantially cheaper per the earlier ~4.2x gate0/gate0b ratio,
+though that ratio was measured at proxy patch sizes and hasn't been reverified at the real one yet.
