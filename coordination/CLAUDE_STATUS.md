@@ -181,3 +181,37 @@ data loading). Trust the earlier time estimates.
 
 Full download still running in the background (~23GB / ~350GB total when last checked). Pipeline is
 launch-ready the moment full data finishes preprocessing -- nothing else is blocking.
+
+### 2026-09-17 (night, cont. 3) — full stack verified at REAL patch size, both architectures
+
+UNet++ (bdmap2), real patch [64,160,224], bs4, AMP:
+  noskip_eager:   4.816s/step, 39.87GB peak  (clean baseline, first arm run)
+  noskip_compile: 4.151s/step, 42.90GB peak
+  skip_eager:     5.527s/step, 39.55GB peak  (ANOMALY -- slower than noskip_eager, see caveat below)
+  skip_compile:   3.600s/step, 40.81GB peak  (the actual deployed config)
+  -> full-stack speedup (noskip_eager -> skip_compile): 1.337x
+  -> 15.60 min/epoch -> 500 epochs: 130.0h, 1000 epochs: 260.0h (better than the ~146h/293h
+     estimated earlier from the proxy-patch measurement)
+
+Plain U-Net (bdmap4), same patch/batch:
+  noskip_eager:   0.955s/step, 10.88GB peak
+  noskip_compile: 0.758s/step, 11.58GB peak
+  -> full-stack speedup: 1.259x -> 3.28 min/epoch -> 500 epochs: 27.4h, 1000 epochs: 54.7h
+
+CAVEAT on the UNet++ skip_eager anomaly: it ran slower than noskip_eager, which shouldn't happen
+(dead-head-skip only removes computation). Likely cause: real_patch_full_stack_bench.py runs all 4
+arms sequentially in ONE process and only calls torch._dynamo.reset() before compile arms, not
+after -- so compiled/dynamo state from the preceding noskip_compile arm may have leaked into the
+skip_eager timing. Does not affect the trustworthiness of the headline number (compares the clean
+FIRST arm against the actual deployed LAST arm), but don't trust the middle two data points without
+a cleaner isolated-process rerun if precise per-arm numbers matter later.
+
+Both bdmap2 and bdmap4 now free again. bdmap1 still unreachable. Download continuing on bdmap3
+(was at 165GB/~9 image chunks, 4/9 done, when last checked).
+
+Separately: user's PI got them an ACCESS-CI allocation on NCSA Delta (4x A100/node, NVLink) and
+DeltaAI (4x GH200/H100 96GB, node). NCSA account provisioning pending, ETA next day per email.
+Once live, plan is to benchmark there for real and likely migrate the actual 2x2+Paper grid runs
+there given the large expected speedup (order of magnitude compute/bandwidth over GB10) and the
+ability to replicate the original reference run's 4-GPU-DDP-per-run topology, which single-GPU-per-
+node GB10 cannot do without risky multi-node DDP over plain ethernet.
