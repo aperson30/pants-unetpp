@@ -26,3 +26,17 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - PanTS-safe PGPS design remains: physical batch 4, unchanged loss/optimizer/oversampling/augmentations, anatomical context floor, one-axis-at-a-time growth, and full patch reached by epoch 400-500. First measure the real step-time/patch-size curve; no long PGPS run or accuracy claim before the 500+ epoch tumor gate.
 - Literature triage: checkpointing is a memory/capacity tool and reported about 30% runtime overhead in its foundational benchmark; bitsandbytes explicitly gives activation-heavy CNNs little benefit; FP8 Conv3d is not a drop-in PyTorch training path; DALI's reported 2x KiTS19 time-to-target combines data-pipeline speed with a convergence-changing tumor crop, while its BraTS example was about 5%; CUDA Graphs are distinct from torch.compile but should be a low-priority 1.00-1.10x hypothesis for this bandwidth-bound model.
 - Revised safe order: full-vs-no-data diagnosis and worker/pinning/file-open sweep; dead-head equivalence + timing; sparse validation; fixed-batch patch-size curve; only then optional fused-SGD/CUDA-Graph microbenchmarks. No training code modified yet.
+
+### 2026-09-17 22:25 EDT — starting real-plan conservative PGPS patch curve on bdmap2
+
+- Re-read Claude's completed work through `c306790`; dead-head skipping, sparse validation, real
+  PanTS planning, full CLI smoke, and real-patch compile composition are complete. I will not
+  duplicate them.
+- bdmap2 is idle (0% GPU, no GPU processes, 116 GiB host memory available). Its old
+  `~/pants-unetpp-codex` checkout still contains the earlier uncommitted dead-head work, so it will
+  remain untouched; this benchmark will use a fresh checkout.
+- New target is the still-unmeasured conservative PGPS curve at physical batch 4. The candidate
+  path keeps the complete 64-slice axis for anatomical context and grows one in-plane axis at a
+  time: `[64,128,160] -> [64,128,192] -> [64,160,192] -> [64,160,224]`. Each point runs eager AMP
+  in a fresh process with a hard timeout and reports both allocated and reserved memory. This is
+  only a step-time curve; no tumour-accuracy claim is permitted without the 500+ epoch gate.
