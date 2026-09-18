@@ -106,3 +106,8 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   0.37% difference. Together with Claude's max-autotune result, compile-mode tuning is exhausted;
   network mode remains unchanged. Raw logs and a summary are in
   `unetpp_port/loss_optimizer_results/`.
+- UMA safety interaction: full-loss `reduce-overhead` is safe for fixed-shape grid runs, but a future
+  PGPS implementation must not cycle through all patch sizes in one process because CUDA-graph
+  workspaces/compiled shapes can remain cached. Run each PGPS stage as a fresh process resumed from
+  a checkpoint (including optimizer/scheduler state); process exit, not `empty_cache()`, is the
+  verified GB10 reclamation boundary.

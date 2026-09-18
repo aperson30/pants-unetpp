@@ -50,3 +50,13 @@ size of a low-value tuning change, so network compile mode is left unchanged. Th
 compile result above is the meaningful new lever.
 
 Raw logs in this directory contain the warning/header and JSON result for every arm.
+
+## GB10/PGPS interaction
+
+`reduce-overhead` may retain a CUDA-graph workspace for each compiled shape. That is safe for the
+fixed-patch grid, and every isolated benchmark returned the node to 116 GiB `MemAvailable`. It is
+not safe to assume the same for PGPS if four patch sizes are visited in one Python process: compiled
+graphs/workspaces may remain referenced across stage changes and compound in the GB10's unified
+memory pool. If PGPS is promoted to a long run, make each patch-size stage a separate process that
+checkpoints and resumes the exact optimizer/scheduler state. Process exit is the verified memory
+reclamation boundary; `empty_cache()` alone is not an adequate guarantee here.
