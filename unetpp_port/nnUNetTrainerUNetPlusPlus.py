@@ -148,9 +148,6 @@ class nnUNetTrainerUNetPlusPlus(nnUNetTrainerBF16Mixin, nnUNetTrainer):
                                    ignore_label=self.label_manager.ignore_label,
                                    dice_class=MemoryEfficientSoftDiceLoss)
 
-        if self._do_i_compile():
-            loss.dc = torch.compile(loss.dc)
-
         if self.enable_deep_supervision:
             n_outputs_present = len(self._get_deep_supervision_scales())
             conceptual_length = n_outputs_present + (1 if self.skip_shallowest_deep_supervision_head else 0)
@@ -161,6 +158,8 @@ class nnUNetTrainerUNetPlusPlus(nnUNetTrainerBF16Mixin, nnUNetTrainer):
                 weights = weights[:-1]
             loss = DeepSupervisionWrapper(loss, weights)
 
+        if self._do_i_compile():
+            loss = torch.compile(loss, mode="reduce-overhead")
         return loss
 
     # Point 3 (unchanged from before): an EQUAL-weighting override was tried in place of the above

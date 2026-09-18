@@ -14,6 +14,7 @@ import torch
 from torch import nn
 
 from nnunetv2.training.loss.deep_supervision import DeepSupervisionWrapper
+from nnunetv2.training.nnUNetTrainer.nnUNetTrainerBF16 import nnUNetTrainerBF16
 from nnunetv2.training.nnUNetTrainer.nnUNetTrainerUNetPlusPlus import nnUNetTrainerUNetPlusPlus
 from nnunetv2.training.nnUNetTrainer.nnUNetTrainerUNetPlusPlusPaper import (
     nnUNetTrainerUNetPlusPlusPaper,
@@ -73,4 +74,31 @@ if __name__ == "__main__":
     assert default_network.decoder.average_outputs_at_inference is False
     assert paper_network.decoder.skip_shallowest_deep_supervision_head is False
     assert paper_network.decoder.average_outputs_at_inference is True
+
+    # Regression guard for the PyTorch-2.10 full-loss optimization: torch.compile must receive the
+    # final wrapper (CE + Dice + branch weighting), rather than only the Dice child. Monkeypatching
+    # compile keeps this contract check CPU-only and independent of Triton availability.
+    compile_calls = []
+    original_compile = torch.compile
+    original_device = os.environ.get("DEVICE")
+    try:
+        torch.compile = lambda module, **kwargs: compile_calls.append((module, kwargs)) or module
+        os.environ["nnUNet_compile"] = "true"
+        os.environ["DEVICE"] = "cuda"
+        compiled_default = trainer_shell(nnUNetTrainerUNetPlusPlus)._build_loss()
+        compiled_paper = trainer_shell(nnUNetTrainerUNetPlusPlusPaper)._build_loss()
+        compiled_plain = trainer_shell(nnUNetTrainerBF16)._build_loss()
+    finally:
+        torch.compile = original_compile
+        os.environ["nnUNet_compile"] = "false"
+        if original_device is None:
+            os.environ.pop("DEVICE", None)
+        else:
+            os.environ["DEVICE"] = original_device
+
+    assert all(isinstance(loss, DeepSupervisionWrapper)
+               for loss in (compiled_default, compiled_paper, compiled_plain))
+    assert len(compile_calls) == 3
+    assert all(isinstance(module, DeepSupervisionWrapper) for module, _ in compile_calls)
+    assert all(kwargs == {"mode": "reduce-overhead"} for _, kwargs in compile_calls)
     print("Trainer contracts passed: default drops only the zero-weight head; paper retains all heads.")

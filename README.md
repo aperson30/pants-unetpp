@@ -20,11 +20,12 @@ A 2×2 grid — architecture against deep supervision — so the effect of each 
 
 |                  | Deep supervision ON | Deep supervision OFF |
 |------------------|---------------------|----------------------|
-| **Plain U-Net** (nnU-Net default) | `nnUNetTrainer` | `nnUNetTrainerNoDeepSupervision` |
+| **Plain U-Net** (nnU-Net architecture) | `nnUNetTrainerBF16` | `nnUNetTrainerBF16NoDeepSupervision` |
 | **UNet++** (this port)            | `nnUNetTrainerUNetPlusPlus` | `nnUNetTrainerUNetPlusPlusNoDeepSupervision` |
 
-The two plain U-Net runs use stock, unmodified nnU-Net code and act as the control group. Only the
-two UNet++ runs use anything from this repository's `unetpp_port/`.
+The two plain U-Net runs keep the stock nnU-Net architecture and training mathematics and act as
+the control group. All grid arms use the same BF16 autocast and complete-loss compilation execution
+optimizations, so precision/runtime plumbing does not become an architecture confound.
 
 ### A fifth, optional run: `nnUNetTrainerUNetPlusPlusPaper`
 
@@ -88,6 +89,10 @@ nnU-Net discovers trainers by class name, so these files must live inside its ow
 
 ```bash
 cp ~/pants-unetpp/unetpp_port/unet_plusplus.py                            nnUNet/nnunetv2/training/nnUNetTrainer/
+cp ~/pants-unetpp/unetpp_port/nnUNetTrainerBF16Mixin.py                   nnUNet/nnunetv2/training/nnUNetTrainer/
+cp ~/pants-unetpp/unetpp_port/nnUNetTrainerFullLossCompileMixin.py        nnUNet/nnunetv2/training/nnUNetTrainer/
+cp ~/pants-unetpp/unetpp_port/nnUNetTrainerBF16.py                        nnUNet/nnunetv2/training/nnUNetTrainer/
+cp ~/pants-unetpp/unetpp_port/nnUNetTrainerBF16NoDeepSupervision.py       nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerUNetPlusPlus.py                nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerUNetPlusPlusNoDeepSupervision.py nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerUNetPlusPlusPaper.py           nnUNet/nnunetv2/training/nnUNetTrainer/

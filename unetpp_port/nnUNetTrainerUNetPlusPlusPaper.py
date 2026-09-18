@@ -113,9 +113,6 @@ class nnUNetTrainerUNetPlusPlusPaper(nnUNetTrainerUNetPlusPlus):
                                    ignore_label=self.label_manager.ignore_label,
                                    dice_class=MemoryEfficientSoftDiceLoss)
 
-        if self._do_i_compile():
-            loss.dc = torch.compile(loss.dc)
-
         if self.enable_deep_supervision:
             deep_supervision_scales = self._get_deep_supervision_scales()
             # eta_i == 1 for every output, normalised so the total loss stays on a comparable scale
@@ -125,4 +122,6 @@ class nnUNetTrainerUNetPlusPlusPaper(nnUNetTrainerUNetPlusPlus):
             weights = weights / weights.sum()
             loss = DeepSupervisionWrapper(loss, weights)
 
+        if self._do_i_compile():
+            loss = torch.compile(loss, mode="reduce-overhead")
         return loss

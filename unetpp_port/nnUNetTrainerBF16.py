@@ -9,7 +9,8 @@ make precision an unintended second variable in the architecture comparison.
 from nnunetv2.training.nnUNetTrainer.nnUNetTrainer import nnUNetTrainer
 
 from .nnUNetTrainerBF16Mixin import nnUNetTrainerBF16Mixin
+from .nnUNetTrainerFullLossCompileMixin import nnUNetTrainerFullLossCompileMixin
 
 
-class nnUNetTrainerBF16(nnUNetTrainerBF16Mixin, nnUNetTrainer):
+class nnUNetTrainerBF16(nnUNetTrainerFullLossCompileMixin, nnUNetTrainerBF16Mixin, nnUNetTrainer):
     pass

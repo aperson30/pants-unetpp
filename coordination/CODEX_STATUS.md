@@ -79,3 +79,30 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   `torch.compile(..., mode="reduce-overhead")`, while nnU-Net's real trainer still calls bare
   `torch.compile(self.network)` (default mode). Do not count the benchmarked reduce-overhead number
   as the real CLI speed until a trainer override is implemented and end-to-end tested.
+
+### 2026-09-17 23:12 EDT — complete-loss compilation implemented; 3-5% measured gain
+
+- Root cause/opportunity: current nnU-Net compiles only `MemoryEfficientSoftDiceLoss`; CE and the
+  deep-supervision wrapper stay eager because of a source comment that PyTorch 2.2.2 crashed when CE
+  was compiled. On this project's PyTorch 2.10.0+cu130 stack, compiling the complete final loss now
+  works and is materially faster.
+- Real patch/topology, physical BS4, BF16, fresh processes: UNet++ DS-on improved from 3.6995 to
+  3.5105 s/step (5.11% less time, 1.054x). Plain U-Net DS-on improved from 0.8562 to 0.8308 s/step
+  (2.96%, 1.031x). UNet++ allocated memory stayed 40.81 GiB while reserved memory fell from 56.56
+  to 50.53 GiB; plain allocated/reserved fell 11.66->11.10 / 18.57->15.53 GiB.
+- Numerical gates against the exact current loss: FP32 scalar loss was identical, max gradient
+  difference 2.73e-12. BF16 scalar difference was 1.91e-6, max gradient difference 1.19e-7 (0.645%
+  of the maximum reference-gradient magnitude). The target included all 29 classes and a tiny
+  class-28 focus. These are numerical gates, not tumour-accuracy evidence.
+- Implemented symmetrically: new `nnUNetTrainerFullLossCompileMixin` covers both plain-U-Net BF16
+  grid trainers; default UNet++, DS-off (by inheritance), sparse-validation subclasses, and paper
+  UNet++ now compile the final loss after their exact branch weighting is applied. Trainer contract
+  tests confirm all three DS-on schemes pass the final wrapper to compile and preserve weights.
+  Full UNet++ architecture smoke test passes after installation into editable nnU-Net.
+- Fused SGD microbenchmark cut the optimizer call 9.236->4.645 ms and passed five-update parity
+  (2.38e-7 max parameter delta), but its absolute ceiling is only ~0.12% of a UNet++ step. This agrees
+  with Claude's independent end-to-end noise-level result; it remains benchmark-only.
+- Bare/default network compile measured 3.7133 s vs reduce-overhead 3.6995 s with the same loss, a
+  0.37% difference. Together with Claude's max-autotune result, compile-mode tuning is exhausted;
+  network mode remains unchanged. Raw logs and a summary are in
+  `unetpp_port/loss_optimizer_results/`.
