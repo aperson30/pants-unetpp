@@ -236,3 +236,35 @@ was at 1274/9000 last checked, steady progress. Once done: fix_affine_orthonorma
 as the 41-case run needed), then the real nnUNetv2_plan_and_preprocess on the full training set
 (~30h per README's own estimate), then create nnUNetPlansBS4 from the real full-dataset plan (should
 closely match the 41-case sample's [64,160,224] but worth confirming, not assuming, once available).
+
+### 2026-09-17 (very late) — fused SGD ruled out, max-autotune root-caused and ruled out, PGPS lead
+
+fused SGD vs default: 0.9994x (noise-level, no difference). Confirms optimizer step time is
+negligible next to conv-dominated forward/backward. Not worth pursuing.
+
+Root-caused the max_autotune_gemm "not enough SMs" limitation properly instead of leaving it as an
+assumed dead end: Triton's pip-bundled ptxas is CUDA 12.8 (Feb 2025), which only supports
+sm_120/sm_120a -- NOT sm_121a. The SYSTEM's CUDA 13.0 ptxas (/usr/local/cuda-13.0/bin/ptxas)
+explicitly DOES support sm_121a. Setting TRITON_PTXAS_PATH to the system ptxas fixes the underlying
+sm_121a targeting mismatch and lets max-autotune mode actually run (187.8s one-time compile, vs
+crashing before). Real result: max-autotune steady-state 3.612s/step vs reduce-overhead's 3.600s/step
+-- statistically identical, no additional gain. The "not enough SMs" warning persists even with the
+fix -- that's a genuine, separate hardware limit (GB10's actual SM count is too small for
+gemm-specific autotune search), not the naming bug the ptxas fix addressed. Conclusion: stick with
+reduce-overhead, nothing left on the table from compile mode selection. Worth having actually
+verified this rather than assumed it.
+
+New lead from literature, not yet actioned: PGPS has a second, less-studied "Performance mode"
+(vs the "Efficiency mode" Codex already measured) that the original paper reports as *improving*
+accuracy, not just saving time, specifically on severely class-imbalanced/lesion tasks -- ~89% time
+(modest ~1.12x) but better Dice on exactly our kind of problem. Codex's own earlier audit already
+flagged that Performance mode changes more variables (dynamic batch ~399, 50% foreground ratio,
+two-patient split-crop) than fits our isolated architecture-comparison grid -- so this isn't for the
+main 2x2 grid, but could be worth a SEPARATE experiment aimed specifically at maximizing tumor
+sensitivity, separate from the architecture comparison. Not started; flagging for later.
+
+Also found a distinct technique in the literature (two-stage: lesion-centered pretraining on small
+crops with 2:1 neg:pos sampling, then full-image fine-tuning with hybrid patch sampling) explicitly
+designed to preserve small-lesion sensitivity -- a bigger methodology change than PGPS, not
+something to add casually, but worth keeping on record as a real lead if tumor sensitivity ends up
+being the bottleneck after the main grid runs.
