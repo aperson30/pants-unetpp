@@ -58,3 +58,24 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - This is a speed/capacity result only. PGPS must not enter the comparison grid until a 500+ epoch
   run demonstrates tumour-class recall/detection and no increase in whole-lesion misses. Raw JSON,
   full log, runner and `SUMMARY.md` are under `unetpp_port/pgps_patch_curve_results/`.
+
+### 2026-09-17 22:55 EDT — compiled full-loss and fused-SGD audit started
+
+- The exact nnU-Net path currently compiles only `MemoryEfficientSoftDiceLoss`; the surrounding
+  deep-supervision wrapper and cross-entropy remain eager because of an old PyTorch 2.2.2 crash
+  comment. bdmap2 has PyTorch 2.10.0, so full Dice+CE+wrapper compilation is worth a new parity and
+  speed test. This is especially relevant to UNet++ because its four retained outputs are all full
+  resolution.
+- Fused SGD will be measured against the real CUDA default (`foreach=None`, which PyTorch normally
+  dispatches to foreach), not against the slow scalar loop. It must pass parameter/momentum-update
+  parity before being considered.
+- The benchmark uses physical batch 4, real `[64,160,224]` patch/topology, BF16 autocast, tiny class
+  28 voxels in its synthetic target, fresh process per timing arm, hard timeouts, and allocated plus
+  reserved memory reporting. No synthetic result will be treated as tumour-accuracy evidence.
+- No Codex GPU workload is running yet. bdmap2 was initially idle, but another agent started
+  `max_autotune_test.py` between preflight and launch (~64 GiB host memory in use); I detected it and
+  backed off without interference. Codex work will wait until the node fully recovers.
+- Wiring audit found a separate deployment gap to verify: the successful benchmark explicitly used
+  `torch.compile(..., mode="reduce-overhead")`, while nnU-Net's real trainer still calls bare
+  `torch.compile(self.network)` (default mode). Do not count the benchmarked reduce-overhead number
+  as the real CLI speed until a trainer override is implemented and end-to-end tested.
