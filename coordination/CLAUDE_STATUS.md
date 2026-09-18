@@ -215,3 +215,24 @@ Once live, plan is to benchmark there for real and likely migrate the actual 2x2
 there given the large expected speedup (order of magnitude compute/bandwidth over GB10) and the
 ability to replicate the original reference run's 4-GPU-DDP-per-run topology, which single-GPU-per-
 node GB10 cannot do without risky multi-node DDP over plain ethernet.
+
+### 2026-09-17 (late night) — bf16 vs fp16 settled, full dataset conversion in progress
+
+bf16 vs fp16 AMP tested for real, at the real patch size, on top of dead-head-skip + reduce-overhead
+compile (both architectures):
+  UNet++:      fp16 3.639s/step, bf16 3.621s/step -> 1.005x (noise-level, confirms identical
+               throughput as expected -- same bit width on this hardware)
+  Plain U-Net: fp16 0.759s/step, bf16 0.761s/step -> 0.998x (same)
+
+Recommendation: switch real trainers to bf16 autocast. Free -- zero speed cost confirmed on both
+architectures -- and removes GradScaler's loss-scale mechanism entirely, which can silently skip
+optimizer steps on overflow. That matters specifically for the tumor class, which is already
+starved for gradient signal (~10% prevalence) -- can't observe this benefit in a synthetic
+random-data benchmark, only in real training, but there's no downside to making the swap given
+speed is a wash either way.
+
+Full dataset conversion (9000 train + 901 test cases, PanTS -> nnU-Net format) running on bdmap3,
+was at 1274/9000 last checked, steady progress. Once done: fix_affine_orthonormality.py pass (same
+as the 41-case run needed), then the real nnUNetv2_plan_and_preprocess on the full training set
+(~30h per README's own estimate), then create nnUNetPlansBS4 from the real full-dataset plan (should
+closely match the 41-case sample's [64,160,224] but worth confirming, not assuming, once available).
