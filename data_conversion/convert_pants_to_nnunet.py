@@ -62,10 +62,17 @@ def process_case(case_id: str, ct_path: Path, segmentations_folder: Path,
 
 
 def convert_split(pants_root: Path, split: str, out_images_dir: Path, out_labels_dir: Path,
-                   limit: int = None) -> list:
-    """split is 'Tr' (train) or 'Te' (test). Returns the list of case IDs processed.
+                   limit: int = None, resume: bool = False) -> list:
+    """split is 'Tr' (train) or 'Te' (test). Returns the list of case IDs processed (all of them,
+    including any skipped because they were already done -- callers need the full list for
+    numTraining/numTest, not just what ran this invocation).
     limit: if set, only process the first `limit` cases -- for a quick real-data sanity check
-    before committing to the full 9,901-case run."""
+    before committing to the full 9,901-case run.
+    resume: if set, skip any case whose image AND label output already exist -- for recovering
+    from an interrupted run (crash, OOM, a concurrent job on the same node starving it) without
+    redoing already-converted cases. A case with only ONE of the two outputs present (e.g. the
+    label write was interrupted mid-case) is treated as NOT done and gets reprocessed --
+    process_case()'s shutil.copy + nib.save are both idempotent overwrites, so this is safe."""
     image_root = pants_root / f"Image{split}"
     label_root = pants_root / f"Label{split}"
     out_images_dir.mkdir(parents=True, exist_ok=True)
@@ -74,11 +81,21 @@ def convert_split(pants_root: Path, split: str, out_images_dir: Path, out_labels
     case_ids = sorted(p.name for p in image_root.iterdir() if p.is_dir())
     if limit is not None:
         case_ids = case_ids[:limit]
-    for i, case_id in enumerate(case_ids, start=1):
+
+    todo = case_ids
+    if resume:
+        todo = [c for c in case_ids
+                if not ((out_images_dir / f"{c}_0000.nii.gz").is_file()
+                        and (out_labels_dir / f"{c}.nii.gz").is_file())]
+        skipped = len(case_ids) - len(todo)
+        if skipped:
+            print(f"resume: skipping {skipped}/{len(case_ids)} already-converted cases")
+
+    for i, case_id in enumerate(todo, start=1):
         ct_path = image_root / case_id / "ct.nii.gz"
         segmentations_folder = label_root / case_id / "segmentations"
         process_case(case_id, ct_path, segmentations_folder, out_images_dir, out_labels_dir)
-        print(f"[{i}/{len(case_ids)}] done: {case_id}")
+        print(f"[{i}/{len(todo)}] done: {case_id}")
 
     return case_ids
 
@@ -112,17 +129,20 @@ if __name__ == "__main__":
     parser.add_argument("--limit", type=int, default=None,
                          help="only process the first N cases per split -- use this for a quick "
                               "sanity check on real data before running the full conversion")
+    parser.add_argument("--resume", action="store_true",
+                         help="skip cases whose image+label output already exist -- for recovering "
+                              "an interrupted run without redoing completed cases")
     args = parser.parse_args()
 
     train_ids = convert_split(
         args.pants_root, "Tr",
         args.nnunet_dataset_dir / "imagesTr", args.nnunet_dataset_dir / "labelsTr",
-        limit=args.limit
+        limit=args.limit, resume=args.resume
     )
     test_ids = convert_split(
         args.pants_root, "Te",
         args.nnunet_dataset_dir / "imagesTs", args.test_answer_key_dir,
-        limit=args.limit
+        limit=args.limit, resume=args.resume
     )
 
     write_dataset_json(args.nnunet_dataset_dir, num_training=len(train_ids))
