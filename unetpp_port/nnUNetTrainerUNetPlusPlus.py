@@ -70,10 +70,11 @@ from nnunetv2.training.nnUNetTrainer.nnUNetTrainer import nnUNetTrainer
 from nnunetv2.utilities.plans_handling.plans_handler import ConfigurationManager, PlansManager
 from torch import nn
 
+from .nnUNetTrainerBF16Mixin import nnUNetTrainerBF16Mixin
 from .unet_plusplus import UNetPlusPlus
 
 
-class nnUNetTrainerUNetPlusPlus(nnUNetTrainer):
+class nnUNetTrainerUNetPlusPlus(nnUNetTrainerBF16Mixin, nnUNetTrainer):
 
     # nnU-Net's default single-GPU deep-supervision loss assigns EXACTLY ZERO weight to one output
     # (see point 3 below): the shallowest, least-contextualized branch, X[0][1]. Rather than compute
