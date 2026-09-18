@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "arch": "unetpp",
+  "patch": [
+    64,
+    160,
+    192
+  ],
+  "batch_size": 4,
+  "warmup": 5,
+  "steps": 20,
+  "mean_s": 3.5882067643105984,
+  "median_s": 3.556412060279399,
+  "p90_s": 3.676590777002275,
+  "samples_per_s": 1.1147629617627455,
+  "patch_voxels": 1966080,
+  "relative_voxels_vs_full": 0.8571428571428571,
+  "peak_allocated_gib": 33.81527757644653,
+  "peak_reserved_gib": 43.73828125,
+  "wall_s": 91.41166162490845,
+  "torch_version": "2.10.0+cu130",
+  "device": "NVIDIA GB10"
+}

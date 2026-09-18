@@ -40,3 +40,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   time: `[64,128,160] -> [64,128,192] -> [64,160,192] -> [64,160,224]`. Each point runs eager AMP
   in a fresh process with a hard timeout and reports both allocated and reserved memory. This is
   only a step-time curve; no tumour-accuracy claim is permitted without the 500+ epoch gate.
+
+### 2026-09-17 22:41 EDT — real-plan conservative PGPS curve complete
+
+- All eight measurements completed on bdmap2 without OOM, crash, or retained UMA memory. Each
+  point ran in a fresh Python process; host memory returned to ~116 GiB available after every point,
+  and the node was idle again at completion.
+- UNet++ eager AMP, batch 4: `[64,128,160]` 2.279s / 22.69 GiB allocated / 29.25 GiB reserved;
+  `[64,128,192]` 2.816s / 27.14 / 35.05; `[64,160,192]` 3.588s / 33.82 / 43.74; full
+  `[64,160,224]` 4.232s / 39.38 / 50.99.
+- Plain U-Net: 0.565s, 0.673s, 0.844s, and 0.988s respectively; allocated memory 6.34, 7.55,
+  9.37, and 10.88 GiB.
+- A conservative 150/150/150/550-epoch schedule reaches full patch at epoch 450 and keeps it for
+  the final 550 epochs. The measured eager weighted average predicts 14.2% less UNet++ step time
+  (1.166x) and 13.4% less plain-U-Net step time (1.155x). This is close to the published Pancreas
+  task's modest benefit, not the paper's 44% headline.
+- This is a speed/capacity result only. PGPS must not enter the comparison grid until a 500+ epoch
+  run demonstrates tumour-class recall/detection and no increase in whole-lesion misses. Raw JSON,
+  full log, runner and `SUMMARY.md` are under `unetpp_port/pgps_patch_curve_results/`.
