@@ -92,6 +92,24 @@ same four-cell paired benchmark and state comparison. Expected speed range is un
 candidate ranks highly because it tests both correctness and performance. Roll back by deleting the
 isolated environment only.
 
+**Measured 2026-09-21; throughput passes, quality gate still open.** Same-node job 3186493 first
+screened real UNet++ DS-on at 0.43257 s/step on PyTorch 2.10.0/CUDA 12.9/cuDNN 9.10.2 versus
+0.42406 s/step on the isolated PyTorch 2.12.0/CUDA 13.0/cuDNN 9.20 module (+1.97%). Job 3186515
+then covered all four cells in fresh processes. New-stack changes were: UNet++ DS-on +1.99%, UNet++
+DS-off +2.73%, plain U-Net DS-on +0.41%, and plain U-Net DS-off -0.65%. Summing equal-count cell
+step times gives a 1.88% grid-level gain, projecting the 72.35 training-step hours to 70.99 hours
+(1.36 hours saved). Peak allocation was effectively unchanged.
+
+Controlled eight-update comparisons showed small but nonzero cross-version drift. UNet++ final loss
+differed by `1.19e-6`; maximum parameter, gradient, and momentum differences were `7.54e-6`,
+`3.53e-5`, and `1.03e-4`. Plain U-Net final loss differed by `2.86e-6`; corresponding maxima were
+`3.77e-5`, `2.44e-4`, and `5.62e-4`. The strict comparator passed UNet++ parameters but failed other
+groups because near-zero elements exceeded its `2e-5` absolute tolerance. Relative-to-global-max
+differences stayed below 0.051%. This is consistent with a backend/kernel change, but it is not a
+tumor-quality result. Treat the newer stack as a deployment candidate only; retain rollback to the
+validated venv and require the full class-28 detection/recall gate through the delayed-learning
+window. The two jobs used 13m10s total (0.219 GH200-hour).
+
 ### A4. Quantify online validation, plotting, and checkpoint stalls end to end
 
 Stock nnU-Net performs 250 training and 50 validation iterations each epoch. The existing sparse

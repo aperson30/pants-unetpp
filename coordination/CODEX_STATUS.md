@@ -225,3 +225,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Verified the PyTorch 2.12.0 module's documented activation path. It has CUDA 13.0/cuDNN 9.20 and can
   import the existing Python-3.12 nnU-Net packages through an explicit read-only `PYTHONPATH`; the
   validated PyTorch 2.10 venv is not upgraded or edited.
+
+### 2026-09-21 — isolated newer stack saves 1.88% grid time; not deployed pending tumor gate
+
+- Same-node job 3186493 screened real UNet++ DS-on: PyTorch 2.10.0/CUDA 12.9/cuDNN 9.10.2 took
+  0.43257 s/step; the isolated PyTorch 2.12.0/CUDA 13.0/cuDNN 9.20 module took 0.42406 s/step, a
+  1.97% gain. The production venv was not modified.
+- Job 3186515 paired all four real cells in fresh processes. New-stack gains: UNet++ DS-on 1.99%,
+  UNet++ DS-off 2.73%, plain U-Net DS-on 0.41%, plain U-Net DS-off -0.65%. Equal-update aggregation
+  is 1.88% faster, projecting 72.35 -> 70.99 training-step GH200-hours (1.36 hours saved).
+- Eight controlled updates showed small cross-version numerical drift. UNet++ loss differed by
+  `1.19e-6`, with max parameter/gradient/momentum differences `7.54e-6`/`3.53e-5`/`1.03e-4`.
+  Plain U-Net loss differed by `2.86e-6`, with `3.77e-5`/`2.44e-4`/`5.62e-4`. Strict allclose
+  failed on some near-zero values; global-scale relative maxima were <=0.051%.
+- Result: newer stack passes the throughput screen but is not quality-cleared or deployed. It must
+  retain an immediate rollback path and pass class-28 detection/recall beyond the 300-500 epoch
+  delayed-onset window. Jobs 3186493 and 3186515 consumed 3m25s + 9m45s = 0.219 GH200-hour.
+- Final layout screen job 3186557 is queued to test whether PyTorch 2.12 changes the previously
+  regressive `channels_last_3d` result; it remains isolated and kill-fast.
