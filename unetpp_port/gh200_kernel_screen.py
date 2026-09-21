@@ -31,6 +31,16 @@ COMPILE_MODES = (
 )
 
 
+class _NetworkAndLoss(torch.nn.Module):
+    def __init__(self, network, loss_fn):
+        super().__init__()
+        self.network = network
+        self.loss_fn = loss_fn
+
+    def forward(self, data, targets):
+        return self.loss_fn(self.network(data), targets)
+
+
 def make_targets(arch: str, target: torch.Tensor):
     if arch == "unetpp":
         return [target] * 4
@@ -78,8 +88,15 @@ def run(args):
         x = x.to(memory_format=torch.channels_last_3d)
 
     compile_started = time.perf_counter()
-    model = torch.compile(model, mode=args.compile_mode)
-    loss_fn = build_loss("full-compile", args.arch)
+    loss_fn = build_loss("eager", args.arch)
+    if args.compile_boundary == "separate":
+        model = torch.compile(model, mode=args.compile_mode)
+        loss_fn = torch.compile(loss_fn, mode=args.compile_mode)
+        objective = None
+    else:
+        objective = torch.compile(
+            _NetworkAndLoss(model, loss_fn), mode=args.compile_mode, dynamic=False
+        )
     optimizer = torch.optim.SGD(
         model.parameters(), lr=1e-2, weight_decay=3e-5, momentum=0.99, nesterov=True
     )
@@ -97,8 +114,11 @@ def run(args):
         started = time.perf_counter()
         optimizer.zero_grad(set_to_none=True)
         with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
-            output = model(x)
-            loss = loss_fn(output, targets)
+            if objective is None:
+                output = model(x)
+                loss = loss_fn(output, targets)
+            else:
+                loss = objective(x, targets)
         loss.backward()
         grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 12)
         optimizer.step()
@@ -115,6 +135,7 @@ def run(args):
         "ok": True,
         "arch": args.arch,
         "compile_mode": args.compile_mode,
+        "compile_boundary": args.compile_boundary,
         "cudnn_benchmark": args.cudnn_benchmark,
         "cudnn_benchmark_limit": torch.backends.cudnn.benchmark_limit,
         "channels_last_3d": args.channels_last_3d,
@@ -141,12 +162,13 @@ def run(args):
         # This copy/save is deliberately outside the timed region. Loading with map_location='cpu'
         # allows a separate CPU-only comparator to quantify complete parameter, gradient, and
         # momentum drift between otherwise identical arms.
+        state_model = getattr(model, "_orig_mod", model)
         torch.save({
-            "model": model.state_dict(),
+            "model": state_model.state_dict(),
             "optimizer": optimizer.state_dict(),
             "gradients": {
                 name: parameter.grad
-                for name, parameter in model.named_parameters()
+                for name, parameter in state_model.named_parameters()
                 if parameter.grad is not None
             },
             "result": result,
@@ -158,6 +180,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--arch", choices=("unetpp", "plainunet"), required=True)
     parser.add_argument("--compile-mode", choices=COMPILE_MODES, required=True)
+    parser.add_argument("--compile-boundary", choices=("separate", "joint"), default="separate")
     parser.add_argument("--cudnn-benchmark", action="store_true")
     parser.add_argument("--cudnn-benchmark-limit", type=int)
     parser.add_argument("--channels-last-3d", action="store_true")

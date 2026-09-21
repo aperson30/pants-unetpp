@@ -11,6 +11,7 @@ import statistics
 import time
 
 import torch
+from torch import autocast, nn
 
 
 TRAINERS = {
@@ -48,6 +49,30 @@ def summary(values):
     }
 
 
+class _NetworkAndLoss(nn.Module):
+    """Expose the training objective as one compiler region without changing its mathematics."""
+
+    def __init__(self, network: nn.Module, loss: nn.Module):
+        super().__init__()
+        self.network = network
+        self.loss = loss
+
+    def forward(self, data, target):
+        return self.loss(self.network(data), target)
+
+
+def _joint_train_step(trainer, objective, batch):
+    data = batch["data"].to(trainer.device, non_blocking=True)
+    target = trainer._move_target_to_device(batch["target"])
+    trainer.optimizer.zero_grad(set_to_none=True)
+    with autocast(trainer.device.type, enabled=True):
+        loss = objective(data, target)
+    loss.backward()
+    torch.nn.utils.clip_grad_norm_(trainer.network.parameters(), 12)
+    trainer.optimizer.step()
+    return {"loss": loss.detach().clone()}
+
+
 def run(args):
     torch.backends.cudnn.benchmark = args.cudnn_benchmark
     if args.cudnn_benchmark_limit is not None:
@@ -70,8 +95,19 @@ def run(args):
     trainer.initialize()
 
     raw_network = getattr(trainer.network, "_orig_mod", trainer.network)
+    raw_loss = getattr(trainer.loss, "_orig_mod", trainer.loss)
     torch._dynamo.reset()
-    trainer.network = torch.compile(raw_network, mode=args.compile_mode)
+    if args.compile_boundary == "separate":
+        trainer.network = torch.compile(raw_network, mode=args.compile_mode)
+        trainer.loss = torch.compile(raw_loss, mode=args.compile_mode)
+        train_step = trainer.train_step
+    else:
+        trainer.network = raw_network
+        trainer.loss = raw_loss
+        objective = torch.compile(
+            _NetworkAndLoss(raw_network, raw_loss), mode=args.compile_mode, dynamic=False
+        )
+        train_step = lambda batch: _joint_train_step(trainer, objective, batch)
     dl_tr, _ = trainer.get_dataloaders()
 
     loader_samples = []
@@ -86,7 +122,7 @@ def run(args):
         cycle_started = time.perf_counter()
         batch = next(dl_tr)
         batch_ready = time.perf_counter()
-        output = trainer.train_step(batch)
+        output = train_step(batch)
         torch.cuda.synchronize()
         step_finished = time.perf_counter()
 
@@ -109,6 +145,7 @@ def run(args):
         "configuration": args.configuration,
         "fold": args.fold,
         "compile_mode": args.compile_mode,
+        "compile_boundary": args.compile_boundary,
         "cudnn_benchmark": args.cudnn_benchmark,
         "cudnn_benchmark_limit": torch.backends.cudnn.benchmark_limit,
         "warmup": args.warmup,
@@ -138,6 +175,7 @@ def main():
     parser.add_argument("--configuration", default="3d_fullres")
     parser.add_argument("--fold", type=int, default=0)
     parser.add_argument("--compile-mode", default="reduce-overhead")
+    parser.add_argument("--compile-boundary", choices=("separate", "joint"), default="separate")
     parser.add_argument("--cudnn-benchmark", action="store_true")
     parser.add_argument("--cudnn-benchmark-limit", type=int)
     parser.add_argument("--warmup", type=int, default=8)
