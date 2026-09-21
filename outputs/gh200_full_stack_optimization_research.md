@@ -44,6 +44,16 @@ Gate: fresh-process paired timing for all four cells; identical inputs/seeds; co
 parameter, gradient, and momentum buffer over at least eight updates; reject if any cell regresses by
 more than 1% or compilation/memory is operationally unsafe.
 
+**Measured 2026-09-21; rejected.** DeltaAI job 3186346 compared the existing separately compiled
+network and loss with a jointly compiled `loss(network(data), target)` callable in fresh processes.
+After eight identical synthetic updates, strict state comparison failed for both architectures. For
+UNet++, the final loss differed by `2.38e-7`, maximum parameter difference was `7.25e-5`, and maximum
+momentum-buffer difference was `4.28e-4`. For plain U-Net, the corresponding values were `5.60e-6`,
+`2.29e-4`, and `7.01e-4`. The first paired real-trainer result was also below the prespecified payoff
+floor: UNet++ DS-on improved only 0.31%, from 0.43697 to 0.43562 seconds per step, with unchanged
+49.335 GiB peak allocated memory. The job was cancelled before redundant cells, after 7m19s
+(0.122 GH200-hour). Do not deploy this boundary or spend a long tumor-quality run validating it.
+
 ### A2. Profile one actual update with Nsight Systems and PyTorch profiler
 
 The remaining work must be driven by a kernel timeline. DeltaAI explicitly supports GPU-counter jobs

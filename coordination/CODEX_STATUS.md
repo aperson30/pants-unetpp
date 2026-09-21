@@ -186,3 +186,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   compile, full epoch/validation/checkpoint instrumentation, and isolated newer-stack A/B, with a
   combined cap near one GH200-hour. No production run, dataset mutation, or environment change was
   made during this research pass.
+
+### 2026-09-21 — joint model/objective compilation rejected on GH200
+
+- Synchronized DeltaAI to commit `dd427b4` and ran job 3186346 on one GH200 with fresh processes,
+  fixed physical batch 4, full `[64,160,224]` patches, BF16, clipping, SGD, identical seeds, and the
+  real calibration trainer/data path. No production trainer or dataset was modified.
+- Strict eight-update state comparison between separate model/loss compilation and joint
+  `loss(network(data), target)` compilation failed for both architectures. UNet++ maximum parameter,
+  gradient, and momentum differences were `7.25e-5`, `1.88e-5`, and `4.28e-4`; plain U-Net's were
+  `2.29e-4`, `2.15e-5`, and `7.01e-4`. Final-loss differences were `2.38e-7` and `5.60e-6`.
+- The paired real UNet++ DS-on timing was only 0.31% faster: 0.43697 -> 0.43562 s/step, with the same
+  49.335 GiB peak allocation. This is below the predeclared 1% floor and carries numerical drift, so
+  the candidate is rejected and the deployed separate compile boundary remains unchanged.
+- Applied kill-fast discipline: cancelled the remaining redundant timing arms after the rejection
+  was decisive. Slurm accounting was 7m19s on one GPU, or 0.122 GH200-hour.
+- Read-only environment inspection found DeltaAI's isolated PyTorch 2.12.0 module imports the needed
+  nnU-Net packages and provides CUDA 13.0/cuDNN 9.20, versus the live venv's cuDNN 9.10.2. This is a
+  viable later A/B without upgrading the validated environment in place. Next action remains a short
+  profiler run, followed only by profiler-justified work and then the isolated stack comparison.
