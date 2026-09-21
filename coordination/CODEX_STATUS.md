@@ -159,3 +159,12 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Full results and resource accounting are in `unetpp_port/gh200_cudnn_results/SUMMARY.md`.
 - Benchmark jobs plus one 19-second replaced job consumed about 0.45 GH200-hour total. No production
   training was launched and the calibration dataset was not modified.
+- Deployed the custom trainer files explicitly and non-destructively into the DeltaAI venv (no glob
+  copy and no replacement of upstream `nnUNetTrainer.py`). Installed-package checks passed the exact
+  update/count/target contracts, sparse-validation checkpoint invariants, dead-head/full-loss trainer
+  contract, and the focused BF16/cuDNN mixin contract. The broader login-node smoke test did not
+  produce a completion marker and is not counted as a pass; the real four-cell GPU probes exercised
+  forward, loss, backward, clipping, and optimizer paths.
+- Final read-only audit: remote checkout is at `5cf64fa`; installed BF16 and quality-neutral mixins
+  match their repository copies byte-for-byte; no Slurm jobs remain. The pre-existing untracked empty
+  `unetpp_port/__init__.py` was left untouched.
