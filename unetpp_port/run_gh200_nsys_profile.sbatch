@@ -41,14 +41,16 @@ numactl --show
 timeout 12m srun --ntasks=1 --cpu-bind=cores --mem-bind=local \
     nsys profile --force-overwrite=true --sample=none --cpuctxsw=none \
     --trace=cuda,nvtx,cudnn,osrt --cuda-memory-usage=true \
+    --cuda-graph-trace=node \
     --gpu-metrics-devices=cuda-visible --gpu-metrics-frequency=10000 \
     --capture-range=cudaProfilerApi --capture-range-end=stop \
     --output="${report}" \
     python3 "${probe}" --trainer unetpp_ds_on --plans "${plans}" \
-    --dataset-json "${dataset}" --cudnn-benchmark --warmup 8 --steps 5 \
+    --dataset-json "${dataset}" --cudnn-benchmark --warmup 8 --steps 3 \
     --cuda-profiler --output "${run_root}/timing.json"
 
-nsys stats --force-export=true --report cuda_gpu_kern_sum,cuda_api_sum,nvtx_sum \
+nsys stats --force-export=true \
+    --report cuda_gpu_kern_sum,cuda_api_sum,nvtx_sum,nvtx_gpu_proj_sum,cuda_gpu_mem_time_sum \
     --format csv --output . "${report}.nsys-rep"
 
 printf 'PROFILE_COMPLETE run_root=%s report=%s.nsys-rep\n' "${run_root}" "${report}"
