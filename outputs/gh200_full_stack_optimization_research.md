@@ -110,6 +110,15 @@ tumor-quality result. Treat the newer stack as a deployment candidate only; reta
 validated venv and require the full class-28 detection/recall gate through the delayed-learning
 window. The two jobs used 13m10s total (0.219 GH200-hour).
 
+**New-stack layout follow-up; rejected.** Job 3186557 tested full-model `channels_last_3d` on
+PyTorch 2.12/cuDNN 9.20. UNet++ regressed from 0.42593 to 0.46674 s/step (-9.58%) and first-step
+startup rose 22.1%. Plain U-Net improved only 0.39% (0.10841 to 0.10799 s/step) while peak allocation
+increased by 1.55 GiB. Both strict state comparisons failed, with larger drift than the contiguous
+cross-version comparison. The mixed architecture result cannot be applied symmetrically to the grid
+and has negative total value. Keep contiguous NCDHW on both stacks; do not reopen channels-last
+without an upstream PyTorch fix for the still-incomplete CUDA `channels_last_3d` operator surface.
+The screen consumed 4m25s (0.074 GH200-hour).
+
 ### A4. Quantify online validation, plotting, and checkpoint stalls end to end
 
 Stock nnU-Net performs 250 training and 50 validation iterations each epoch. The existing sparse

@@ -243,3 +243,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   delayed-onset window. Jobs 3186493 and 3186515 consumed 3m25s + 9m45s = 0.219 GH200-hour.
 - Final layout screen job 3186557 is queued to test whether PyTorch 2.12 changes the previously
   regressive `channels_last_3d` result; it remains isolated and kill-fast.
+
+### 2026-09-21 — final layout screen rejected; bounded optimization screen complete
+
+- Job 3186557 completed on one GH200 in 4m25s (0.074 GPU-hour). On PyTorch 2.12/cuDNN 9.20,
+  `channels_last_3d` made UNet++ 9.58% slower (0.42593 -> 0.46674 s/step) and increased its first-step
+  startup by 22.1%. Plain U-Net improved only 0.39% (0.10841 -> 0.10799 s/step) while peak allocation
+  increased 1.55 GiB. Both strict state comparisons failed, with larger drift than the contiguous
+  old/new-stack comparison.
+- Reject channels-last on the newer stack as well. It cannot be applied symmetrically, loses heavily
+  on the dominant UNet++ cells, raises memory/startup cost, and adds numerical drift. Keep contiguous
+  NCDHW for every grid cell.
+- The profiler-driven optimization screen is now complete. Production code remains on the validated
+  contiguous path with separate network/loss compilation. PyTorch 2.12 remains an optional 1.88%
+  throughput candidate, not a quality-cleared deployment; adopting it still requires the class-28
+  delayed-onset acceptance gate and a rollback path to the existing PyTorch 2.10 venv.
