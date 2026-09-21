@@ -294,3 +294,37 @@ preprocess job. Both running/queued now.
 4 real grid-cell launch scripts are ready (unetpp_port/delta_deployment/grid_*.sbatch), self-
 requeuing via SIGUSR1 180s before the 48h cap + nnU-Net's --c resume from checkpoint_latest.pth
 (saved every 50 epochs). Not yet submitted -- waiting on preprocessing to finish.
+
+### 2026-09-21 (later) — storage premise corrected; pivoted to node-local /tmp staging
+
+Correction: the "Delta has separate, unblocked storage from DeltaAI" claim was wrong -- Delta and
+DeltaAI share the same underlying taiga Lustre filesystem and the same bdyo group quota (~1TB).
+Found this when a full-dataset download on Delta filled the last of it (confirmed by seeing Codex's
+own DeltaAI job-output dirs sitting under Delta's /projects/bdyo/asanjeev/). Cleaned up the failed
+download's leftover archives; quota reporting has a real sync lag (showed 0 free immediately after
+cleanup, caught up to ~9GB free a few minutes later).
+
+User doesn't want to go through the PI for a quota increase, so pivoted to node-local /tmp staging:
+each of the 4 real grid-cell jobs independently downloads+converts+preprocesses the full dataset
+into its own compute node's /tmp (confirmed 2TB NVMe, 5% used, on a live H200 node) at job start,
+entirely bypassing the shared quota. Checkpoints stay on persistent /projects (tiny, ~366MB each) so
+--c resume still works correctly across a requeue landing on a different node.
+
+Also fixed, independent of Codex's review: the original download job silently lost ALL 9 image
+chunks + the label archive to a swallowed tar failure (`wget -q`/`curl -s` hid the real error, and
+a backgrounded subshell's failure didn't trip `set -e`) -- v2 scripts propagate errors explicitly
+and log real diagnostics instead of silent -q/-s.
+
+Applied Codex's review findings that checked out on inspection: switched all 4 grid scripts to the
+sparse-validation trainer classes (confirmed class names exist: nnUNetTrainerBF16SparseValidation,
+nnUNetTrainerBF16NoDeepSupervisionSparseValidation, nnUNetTrainerUNetPlusPlusSparseValidation,
+nnUNetTrainerUNetPlusPlusNoDeepSupervisionSparseValidation); replaced the reactive SIGUSR1 requeue
+trap (real race condition: could submit a successor before the old trainer process was confirmed
+dead) with a --dependency=afterany chain established before training starts, which Slurm itself
+guarantees can't overlap; added --gpu-bind=closest, cpus-per-task reduced 16->12 to match Delta's
+stated 1-H200-GPU=12-CPU billing equivalence, and commit/dirty-status/version logging at job start.
+Still open, not yet resolved: Codex's PyTorch 2.12.1+cu130 numerical-drift question (Delta has no
+2.10 module, unlike DeltaAI's validated stack) and the H200 vs A100 charge-factor question (3.0x vs
+1.0x per Delta's docs -- real GPU-hours favor H200 decisively, charged ACCESS-allocation units may
+not). Updated unetpp_port/delta_deployment/ with the corrected v2 scripts. Not yet submitted --
+final go/no-go pending with the user.
