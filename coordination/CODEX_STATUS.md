@@ -168,3 +168,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Final read-only audit: remote checkout is at `5cf64fa`; installed BF16 and quality-neutral mixins
   match their repository copies byte-for-byte; no Slurm jobs remain. The pre-existing untracked empty
   `unetpp_port/__init__.py` was left untouched.
+
+### 2026-09-20 — full-stack GH200 research audit (no GPU job launched)
+
+- Audited the complete path: model graph, joint model/loss compilation boundary, backward and
+  clipping, optimizer, loader/augmentation, online/final validation, logging/checkpointing, software
+  stack, storage, NUMA placement, and DeltaAI accounting. Ranked report and primary sources are in
+  `outputs/gh200_full_stack_optimization_research.md`.
+- Highest-upside untested candidate is compiling `loss(network(data), target)` as one graph instead
+  of separate network and loss graphs, allowing AOTAutograd/Inductor to optimize across the very
+  large full-resolution UNet++ logits boundary. This directly targets activation/HBM traffic and can
+  be tested with complete state parity in all four cells.
+- The live stack's cuDNN 9.10.2 has a documented open BF16 Conv3d correctness issue at much larger
+  spatial shapes than PanTS; this does not establish that PanTS is affected. It raises the priority
+  of an isolated newer-stack correctness/performance A/B, never an in-place environment upgrade.
+- Recommended next action is one short `--constraint=nvperf` profile, followed by joint-objective
+  compile, full epoch/validation/checkpoint instrumentation, and isolated newer-stack A/B, with a
+  combined cap near one GH200-hour. No production run, dataset mutation, or environment change was
+  made during this research pass.
