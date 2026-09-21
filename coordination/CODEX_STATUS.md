@@ -205,3 +205,23 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   nnU-Net packages and provides CUDA 13.0/cuDNN 9.20, versus the live venv's cuDNN 9.10.2. This is a
   viable later A/B without upgrading the validated environment in place. Next action remains a short
   profiler run, followed only by profiler-justified work and then the isolated stack comparison.
+
+### 2026-09-21 — real GH200 CUDA-graph node profile identifies layout conversion tax
+
+- Jobs 3186419 and 3186466 profiled only warmed real UNet++ DS-on updates on one GH200. The first run
+  revealed that Nsight's default CUDA-graph-level view hides replayed convolution nodes; the corrected
+  three-update run used `--cuda-graph-trace=node`. Both completed, consumed 1m53s + 1m31s = 0.057
+  GH200-hour, and did not modify training data or production trainers.
+- Corrected trace projected 443.24 ms of GPU kernels per update against 447.50 ms synchronized wall
+  time. Complete 233-row kernel aggregation: convolution 56.24%, cuDNN NCDHW<->NDHWC conversions
+  25.29%, Triton normalization/loss/fusions 14.66%, cat-bearing kernels 2.45%, multi-tensor
+  optimizer/clipping 0.26%, other 1.11%. Loader exposure remained 0.05%.
+- Consequences: do not spend time on optimizer, worker/IO, or invasive split-convolution rewrites.
+  The 25.29% layout tax is the main software soft spot, but forcing `channels_last_3d` already
+  regressed this workload by 10.5% and upstream PyTorch still tracks incomplete CUDA support for
+  common 3D channels-last operators. The safe next probe is a same-node isolated newer-stack A/B,
+  which can change cuDNN convolution plans and compiler layout propagation without changing model
+  math. `unetpp_port/run_gh200_stack_ab.sbatch` stages only that paired one-cell timing screen.
+- Verified the PyTorch 2.12.0 module's documented activation path. It has CUDA 13.0/cuDNN 9.20 and can
+  import the existing Python-3.12 nnU-Net packages through an explicit read-only `PYTHONPATH`; the
+  validated PyTorch 2.10 venv is not upgraded or edited.

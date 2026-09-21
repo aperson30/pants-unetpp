@@ -65,6 +65,18 @@ outside the timed region to verify CUDA-graph coverage and absence of unexpected
 This is diagnostic rather than a speedup, but prevents spending hours on sub-percent components.
 Budget: roughly 1-3 minutes of one GH200.
 
+**Measured 2026-09-21.** Jobs 3186419 and 3186466 captured warmed real UNet++ DS-on trainer
+updates; the second used CUDA-graph node granularity because Nsight's default graph-level view hides
+the replayed convolution nodes. Across three updates, projected GPU work was 443.24 ms/update versus
+447.50 ms synchronized wall time. Aggregating all 233 kernel rows gave: convolution kernels 56.24%,
+cuDNN NCDHW-to-NDHWC and reverse layout conversions 25.29%, Triton normalization/loss/fused kernels
+14.66%, concatenation-bearing kernels 2.45%, multi-tensor optimizer/clipping kernels 0.26%, and other
+work 1.11%. Exposed loader time was 0.05%. This confirms that optimizer, loader, and invasive
+concatenation rewrites have ceilings too small to prioritize. The layout tax is the main software
+soft spot, but the already-measured whole-model `channels_last_3d` regression means it should be
+attacked through a newer stack/layout propagation test rather than forcing that memory format on the
+current stack. Both profiling jobs together consumed 3m24s, or 0.057 GH200-hour.
+
 ### A3. Isolated PyTorch/cuDNN stack A/B
 
 The live venv is PyTorch 2.10.0+cu129 with cuDNN 9.10.2. PyTorch has an open, high-priority silent
@@ -150,6 +162,8 @@ only parity-passing runtime changes applied symmetrically can be deployed, follo
   https://pytorch.org/blog/sota-normalization-performance-with-torch-compile/
 - PyTorch BF16 Conv3d/cuDNN 9.10.2 issue:
   https://github.com/pytorch/pytorch/issues/163539
+- PyTorch tracker for incomplete CUDA `channels_last_3d` operator support:
+  https://github.com/pytorch/pytorch/issues/59168
 - PyTorch release/library matrix:
   https://github.com/pytorch/pytorch/blob/main/RELEASE.md
 - DeltaAI job binding examples:
