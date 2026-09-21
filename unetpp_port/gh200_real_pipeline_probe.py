@@ -118,12 +118,22 @@ def run(args):
     # Synchronization gives a clean boundary while background augmentation workers continue to
     # prefetch exactly as they do during normal training.
     torch.cuda.synchronize()
+    profiler_active = False
     for step in range(args.warmup + args.steps):
+        if args.cuda_profiler and step == args.warmup:
+            # Nsight Systems can use cudaProfilerApi as its capture range, excluding initialization,
+            # compilation, and warmup from the trace while retaining the real trainer/data path.
+            torch.cuda.profiler.start()
+            profiler_active = True
         cycle_started = time.perf_counter()
+        torch.cuda.nvtx.range_push("loader")
         batch = next(dl_tr)
+        torch.cuda.nvtx.range_pop()
         batch_ready = time.perf_counter()
+        torch.cuda.nvtx.range_push("train_step")
         output = train_step(batch)
         torch.cuda.synchronize()
+        torch.cuda.nvtx.range_pop()
         step_finished = time.perf_counter()
 
         loader_s = batch_ready - cycle_started
@@ -138,6 +148,9 @@ def run(args):
             f"cycle={cycle_s:.6f}s loss={float(output['loss']):.6f}",
             flush=True,
         )
+
+    if profiler_active:
+        torch.cuda.profiler.stop()
 
     result = {
         "ok": True,
@@ -180,6 +193,10 @@ def main():
     parser.add_argument("--cudnn-benchmark-limit", type=int)
     parser.add_argument("--warmup", type=int, default=8)
     parser.add_argument("--steps", type=int, default=40)
+    parser.add_argument(
+        "--cuda-profiler", action="store_true",
+        help="bracket measured steps with cudaProfilerStart/Stop for an external profiler",
+    )
     parser.add_argument("--output")
     args = parser.parse_args()
     if args.warmup < 1 or args.steps < 2:
