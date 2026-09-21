@@ -111,3 +111,29 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   workspaces/compiled shapes can remain cached. Run each PGPS stage as a fresh process resumed from
   a checkpoint (including optimizer/scheduler state); process exit, not `empty_cache()`, is the
   verified GB10 reclamation boundary.
+
+### 2026-09-20 — quality-neutral trainer plumbing implemented and GH200 microbenchmarked
+
+- Added a shared trainer mixin that preserves samples/model/loss/optimizer/LR while (1) deferring
+  the scalar training-loss CPU copy from every step to once per epoch, (2) replacing exclusive-label
+  validation's dense class-expanded confusion tensors with exact `bincount` counts, and (3) moving
+  one verified-identical full-resolution UNet++ deep-supervision target instead of duplicate copies.
+- Safety gates: target reuse is enabled only for UNet++, requires every configured DS scale to be
+  exactly one, and checks the first target list for tensor equality before reusing it. Region tasks
+  retain nnU-Net's original multi-label validation path. The paper trainer inherits the same safe
+  reuse because all of its branches are also full-resolution.
+- CPU parity on DeltaAI's PyTorch 2.10 module passed: five SGD+momentum steps had bit-identical
+  losses, gradients, momentum buffers, and final weights; exact confusion counts matched an
+  independent class-by-class reference including class 28 and ignore labels; invalid target reuse
+  was rejected.
+- Refactored sparse validation into a generic mixin and added explicit sparse variants for all four
+  grid cells plus the paper configuration. Existing UNet++ sparse trainer name remains available.
+- One-GH200 real-shape component benchmark (job 3180511, 15 seconds, 0.0042 GPU-hour): validation
+  count kernel 6.989 -> 0.715 ms (9.78x) and peak allocated 2.121 -> 0.150 GiB; four identical target
+  transfers 0.256 -> 0.060 ms (4.24x), 0.070 -> 0.018 GiB. These are component results, not an
+  end-to-end epoch speedup. The first staging attempt failed in four seconds because DeltaAI `/tmp`
+  is node-local; total usage across both attempts was about 0.0053 GPU-hour.
+- Full CPU integration against current upstream nnU-Net passed: quality-neutral update/count/target
+  and five-variant MRO contracts, the existing sparse logger/checkpoint self-test, and the existing
+  dead-head/full-loss trainer contract test. End-to-end real-data timing remains required before
+  claiming an epoch-level speedup. No training job or dataset mutation was run.

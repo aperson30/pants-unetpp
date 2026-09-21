@@ -91,12 +91,19 @@ nnU-Net discovers trainers by class name, so these files must live inside its ow
 cp ~/pants-unetpp/unetpp_port/unet_plusplus.py                            nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerBF16Mixin.py                   nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerFullLossCompileMixin.py        nnUNet/nnunetv2/training/nnUNetTrainer/
+cp ~/pants-unetpp/unetpp_port/nnUNetTrainerQualityNeutralOptimizationMixin.py nnUNet/nnunetv2/training/nnUNetTrainer/
+cp ~/pants-unetpp/unetpp_port/nnUNetTrainerSparseValidationMixin.py       nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerBF16.py                        nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerBF16NoDeepSupervision.py       nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerUNetPlusPlus.py                nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerUNetPlusPlusNoDeepSupervision.py nnUNet/nnunetv2/training/nnUNetTrainer/
 cp ~/pants-unetpp/unetpp_port/nnUNetTrainerUNetPlusPlusPaper.py           nnUNet/nnunetv2/training/nnUNetTrainer/
+cp ~/pants-unetpp/unetpp_port/nnUNetTrainer*SparseValidation.py           nnUNet/nnunetv2/training/nnUNetTrainer/
 ```
+
+For final fixed-epoch comparisons, the `...SparseValidation` variants run the same training steps
+but perform online validation every five epochs (and always on the final epoch). Use the final
+checkpoint for comparisons. The variants exist for all four grid cells and the paper configuration.
 
 ### 4. Verify the port before touching real data
 

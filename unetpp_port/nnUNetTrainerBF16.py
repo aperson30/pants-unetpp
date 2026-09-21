@@ -10,7 +10,11 @@ from nnunetv2.training.nnUNetTrainer.nnUNetTrainer import nnUNetTrainer
 
 from .nnUNetTrainerBF16Mixin import nnUNetTrainerBF16Mixin
 from .nnUNetTrainerFullLossCompileMixin import nnUNetTrainerFullLossCompileMixin
+from .nnUNetTrainerQualityNeutralOptimizationMixin import nnUNetTrainerQualityNeutralOptimizationMixin
 
 
-class nnUNetTrainerBF16(nnUNetTrainerFullLossCompileMixin, nnUNetTrainerBF16Mixin, nnUNetTrainer):
+class nnUNetTrainerBF16(nnUNetTrainerQualityNeutralOptimizationMixin,
+                       nnUNetTrainerFullLossCompileMixin,
+                       nnUNetTrainerBF16Mixin,
+                       nnUNetTrainer):
     pass

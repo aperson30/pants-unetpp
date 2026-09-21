@@ -1,10 +1,17 @@
 # UNet++ ported to nnU-Net v2
 
-Two files, both meant to be copied into your nnU-Net v2 checkout on the GPU server:
+The architecture and `nnUNetTrainer*.py` files are meant to be copied into the nnU-Net v2 trainer
+directory on the GPU server. The important pieces are:
 
 - `unet_plusplus.py` — the network architecture itself (encoder + UNet++'s nested decoder).
 - `nnUNetTrainerUNetPlusPlus.py` — the custom trainer that tells nnU-Net v2 to use this network
   instead of its default one.
+- `nnUNetTrainerQualityNeutralOptimizationMixin.py` — defers per-step scalar synchronization,
+  avoids dense one-hot validation tensors for exclusive labels, and safely reuses verified-identical
+  full-resolution UNet++ targets.
+- `nnUNetTrainerSparseValidationMixin.py` and the `*SparseValidation.py` trainers — validate every
+  five epochs without changing optimizer steps; variants cover all four grid cells plus the paper
+  configuration.
 - `smoke_test.py` — a fast (~seconds) sanity check you should run before starting any real
   preprocessing/training, to catch shape bugs early.
 
