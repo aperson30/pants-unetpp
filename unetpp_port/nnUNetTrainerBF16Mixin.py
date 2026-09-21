@@ -15,6 +15,13 @@ one -- otherwise a precision difference becomes an unintended second variable co
 architecture comparison. nnUNetTrainerUNetPlusPlus uses this mixin directly (covering all of its
 subclasses); nnUNetTrainerBF16 gives the plain-U-Net side of the grid the identical change on top
 of otherwise-stock nnU-Net, keeping it the "control group" the project's README describes it as.
+
+On DeltaAI GH200, the same shared mixin also enables cuDNN's fixed-shape convolution autotuner.
+Paired real-trainer tests at batch 4 / patch [64,160,224] reduced step time by 7.18% and 6.65% for
+UNet++ DS-on/off, and 0.74% and 1.54% for plain U-Net DS-on/off. Apply it symmetrically so backend
+algorithm selection is not an architecture-side confound. The flag does not change the model,
+data, loss, or optimizer, but selected BF16 kernels are not bit-identical; see
+gh200_cudnn_results/SUMMARY.md and retain the long tumor-class acceptance gate.
 """
 import torch
 
@@ -24,5 +31,9 @@ class nnUNetTrainerBF16Mixin:
                  device: torch.device = torch.device("cuda")):
         super().__init__(plans, configuration, fold, dataset_json, device)
         if self.device.type == "cuda":
+            # Training and sliding-window inference both use a fixed planned patch, so the one-time
+            # search is amortized over 250,000 updates. Leave benchmark_limit at PyTorch 2.10's
+            # default: exhaustive search was inconsistent and regressed plain U-Net.
+            torch.backends.cudnn.benchmark = True
             torch.set_autocast_dtype("cuda", torch.bfloat16)
             self.grad_scaler = None

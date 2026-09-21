@@ -12,8 +12,14 @@ directory on the GPU server. The important pieces are:
 - `nnUNetTrainerSparseValidationMixin.py` and the `*SparseValidation.py` trainers — validate every
   five epochs without changing optimizer steps; variants cover all four grid cells plus the paper
   configuration.
+- `nnUNetTrainerBF16Mixin.py` — applies the common BF16 policy and the GH200-validated cuDNN
+  fixed-shape autotuner symmetrically to plain U-Net, UNet++, and their DS variants.
 - `smoke_test.py` — a fast (~seconds) sanity check you should run before starting any real
   preprocessing/training, to catch shape bugs early.
+
+GH200 throughput evidence and rejected alternatives are recorded in
+`gh200_cudnn_results/SUMMARY.md`. In particular, do not add `channels_last_3d` or exhaustive cuDNN
+plan search: both were measured on the real target stack and rejected.
 
 ## Why this isn't just a copy-paste of the original UNet++ code
 

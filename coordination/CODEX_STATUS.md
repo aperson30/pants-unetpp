@@ -137,3 +137,25 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   and five-variant MRO contracts, the existing sparse logger/checkpoint self-test, and the existing
   dead-head/full-loss trainer contract test. End-to-end real-data timing remains required before
   claiming an epoch-level speedup. No training job or dataset mutation was run.
+
+### 2026-09-20 — GH200 real-pipeline optimization screen; cuDNN autotuner adopted
+
+- Ran short, hard-capped, single-GH200 jobs through the actual four trainer classes and real PanTS
+  calibration dataloader. Mean exposed loader/augmentation wait was only 0.03-0.17% of the cycle,
+  so worker tuning, DALI, file caching, and NVMe staging have no meaningful measured ceiling.
+- `torch.backends.cudnn.benchmark=True` reproduced across all four real cells: UNet++ DS-on
+  0.457499 -> 0.424652 s/update (7.18%), UNet++ DS-off 0.439721 -> 0.410493 (6.65%), plain DS-on
+  0.112168 -> 0.111339 (0.74%), and plain DS-off 0.096867 -> 0.095378 (1.54%). The paired
+  1,000-epoch training-only projection falls 76.82 -> 72.35 GH200-hours, a 4.47-hour saving.
+- Peak allocation rose by 8.56 GiB on both UNet++ cells (to 49.34/43.08 GiB), still safely inside
+  GH200 capacity. Plain-U-Net memory was effectively unchanged.
+- Eight-update complete-state comparison found loss delta 7.63e-6, parameter max delta 4.91e-6,
+  gradient 6.10e-5, and momentum 9.35e-5. Kernel order is not bit-identical; the flag is applied
+  symmetrically and the full class-28 tumor gate remains mandatory.
+- Rejected on GH200: max-autotune (0.44% with 154 s compile), max-autotune-no-cudagraphs (no gain),
+  channels_last_3d (10.5% slower), and exhaustive cuDNN plan search (inconsistent, 2% plain-U-Net
+  regression, minutes of startup). Default cuDNN benchmark limit 10 is retained.
+- Wired the robust flag into the shared BF16 mixin, covering all four grid cells plus paper UNet++.
+  Full results and resource accounting are in `unetpp_port/gh200_cudnn_results/SUMMARY.md`.
+- Benchmark jobs plus one 19-second replaced job consumed about 0.45 GH200-hour total. No production
+  training was launched and the calibration dataset was not modified.
