@@ -268,3 +268,29 @@ crops with 2:1 neg:pos sampling, then full-image fine-tuning with hybrid patch s
 designed to preserve small-lesion sensitivity -- a bigger methodology change than PGPS, not
 something to add casually, but worth keeping on record as a real lead if tumor sensitivity ends up
 being the bottleneck after the main grid runs.
+
+### 2026-09-21 — Delta pivot: storage blocker, real calibration, H200 chosen, priority-stall fixed
+
+DeltaAI's shared /projects/bdyo allocation is at 989/1000GB (12GB free) -- not enough room for the
+full ~1.1TB PanTS dataset, so pivoted to NCSA Delta (separate resource, same project, account
+bdyo-delta-gpu, 5.3PB free on /projects). Environment set up (pytorch-conda/2.12 module -> venv,
+torch 2.12.1+cu130 -- no 2.10 module exists on Delta, unlike DeltaAI's validated 2.10/cu129).
+
+Real calibration on both A100 and H200 (10-case matched sample, same technique as the DeltaAI
+calibration, real trainer classes, dead-head-skip+bf16+cuDNN-autotune+reduce-overhead-compile):
+A100 0.6894s/0.1790s (UNet++/Plain), H200 0.3168s/0.0829s. H200 is ~1.4x faster than GH200; A100 is
+~1.5-1.6x slower. Chose H200 for the real grid: ~55.5 GH200-hours total vs A100's ~120.6h, and H200's
+~22h bottleneck wall-clock comfortably fits one 48h job while A100's ~47.9h would almost certainly
+need a checkpoint/requeue cycle. Full details, and an open item about Delta's calibration running on
+PyTorch 2.12 (not separately numerical-drift-checked the way DeltaAI's own 2.12 candidate was) are in
+unetpp_port/delta_deployment/SUMMARY.md -- worth Codex's eyes given the drift work already done there.
+
+Also hit and fixed a real infra issue: a combined download+convert+preprocess job sat PENDING for
+12+ hours on pure fairshare priority (626 vs 3000-5555 for other queued/running jobs), not resource
+scarcity. Fixed by splitting into a small interactive-partition download+convert job (priority jumps
+to 1355 from the partition's own priority weight) followed by a dependent, reduced-footprint
+preprocess job. Both running/queued now.
+
+4 real grid-cell launch scripts are ready (unetpp_port/delta_deployment/grid_*.sbatch), self-
+requeuing via SIGUSR1 180s before the 48h cap + nnU-Net's --c resume from checkpoint_latest.pth
+(saved every 50 epochs). Not yet submitted -- waiting on preprocessing to finish.
