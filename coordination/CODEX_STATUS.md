@@ -439,3 +439,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   preprocessed cases, runs the two architecture pairs concurrently without DDP, resumes cells
   independently, and refuses to call a cell complete until its final checkpoint plus 1,800 readable
   fold-validation predictions and summary exist. Delta job 22293168 remains untouched.
+
+### 2026-09-22 20:57 UTC — Bridges-2 production grid submitted; both races pending
+
+- The user restored WSL SSH masters for Bridges-2 and Delta. Verified the Bridges-2 checkout clean at
+  `b2ca075b078dec56ee340f0bd89bc0d2dc6f5b05`, with no other active PSC jobs. The first H100
+  gate log shows UNet++ DS-on finished all four updates before the harness reached cell two; the
+  three retry arms have retained JSON with finite loss/parameters/momentum and finite, nonzero
+  class-28 gradients. Wrote the reviewed gate marker to
+  `/ocean/projects/cis260296p/asanjeev/pants_unetpp/calibration/H100_GATE_APPROVED.json`.
+- Rechecked JSON parsing, Bash syntax for both launch scripts, and a PSC `sbatch --test-only` for the
+  two-H100 request. Submitted the real 1,000-epoch, physical-batch-4 grid through `submit_grid.sh`:
+  PSC job **46810860**, run ID `20260922T205728Z_b2ca075b078d`. Immediately after submission it was
+  `PENDING (Priority)`, not training yet. The calibrated gate is a short runtime check, not a claim
+  of tumor-recall equivalence; full class-28 evaluation remains required.
+- Delta job **22293168** was independently checked and remains `PENDING (None)`. Do not cancel it
+  while Bridges-2 is queued or staging. Apply the user's race rule only after a Bridges-2 trainer
+  is visibly executing real epochs, and confirm Delta is still pending at that time.
