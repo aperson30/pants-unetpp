@@ -373,3 +373,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   and the user's prior Delta ControlMaster socket was absent at review time. Do not call this revision
   runtime-cleared until the same isolated Delta contract suite is rerun after authenticated access is
   restored.
+
+### 2026-09-21 — literal eta_i=1 runtime contracts cleared; Paper remains unsubmitted
+
+- After the user restored an authenticated session, cloned commit `01a4925` into a disposable `/tmp`
+  directory, copied the installed nnU-Net package into that directory, overlaid only the explicit
+  trainer sources, and ran everything with the temporary package first on `PYTHONPATH`. The shared
+  checkout, shared Python environment, scheduler, and live/queued jobs were not modified.
+- `paper_inference_contract_test.py` passed: downstream softmax exactly recovers the arithmetic mean
+  of branch probabilities. `trainer_dead_head_contract_test.py` passed and directly required Paper
+  factors `[1.0, 1.0, 1.0]` with sum `3.0`. `trainer_quality_neutral_optimization_test.py` passed its
+  update, count, target-reuse, and sparse-variant contracts. Temporary directories cleaned up.
+- The restored socket lands on `gh-login03.delta.ncsa.illinois.edu`, whose scheduler showed no jobs
+  for `asanjeev` and did not recognize Delta job `22293168`. This is not evidence that the 2x2 job
+  vanished: it indicates the authenticated socket is attached to a different scheduler from the one
+  holding that 22-million-series job ID. No Paper job exists or was submitted. The Paper launch also
+  refuses to write shared trainer files or train until the reference UNet++ cell has a final
+  checkpoint and exactly 1,800 readable validation outputs, mechanically preserving grid-first order.
