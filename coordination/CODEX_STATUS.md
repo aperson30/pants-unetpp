@@ -413,3 +413,12 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   the standalone uv Python did not inherit Bridges-2's system CA bundle. The retry uses the installed
   certifi CA store explicitly (TLS verification remains enabled); this was an environment packaging
   issue, not a dataset or model failure. No GPU time was consumed.
+- Retry 46754596 completed successfully in 9m51s: nine real matched cases (one tumor-positive) passed
+  nnU-Net integrity checking, planning and preprocessing; the launch plans assert class 28, physical
+  batch 4 and patch [64,160,224]. Bounded H100 gate 46755946 is submitted but still pending for an
+  H100; its six-minute wall cap mechanically limits it to at most 0.1 H100 GPU-hour.
+- Added an opt-in `--workers` path to the otherwise unchanged PanTS converter to reduce paid GPU-idle
+  staging time for the full dataset. CPU-only job 46755622 compared six-worker output against the
+  serial converter on all nine real cases: CT files were byte-identical, and case lists, dataset.json,
+  label voxels, affines and NIfTI headers all matched exactly. `PARALLEL_CONVERSION_PARITY_PASS` and
+  `BRIDGES2_PARALLEL_CONVERSION_VERIFIED` both passed; the temporary duplicate output was removed.
