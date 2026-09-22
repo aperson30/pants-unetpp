@@ -390,3 +390,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   holding that 22-million-series job ID. No Paper job exists or was submitted. The Paper launch also
   refuses to write shared trainer files or train until the reference UNet++ cell has a final
   checkpoint and exactly 1,800 readable validation outputs, mechanically preserving grid-first order.
+
+### 2026-09-22 — Bridges-2 environment ready; bounded H100 calibration staged, not submitted yet
+
+- Verified the user's WSL SSH state rather than killing processes by name: only the intended
+  `bridges2-work.sock` master remains (PID 5598 and `ssh -O check` healthy). The other live sockets
+  are the separate Delta and DeltaAI masters and were deliberately left untouched.
+- Created `/ocean/projects/cis260296p/asanjeev/pants_unetpp/venv` with PyTorch 2.10.0+cu126,
+  cuDNN 9.10.2 and nnU-Net v2 2.8.1. This preserves the validated PyTorch/cuDNN versions while
+  changing only the CUDA wheel backend required on Bridges-2; the backend change remains gated.
+- Added a CPU-only calibration-data preparation path that streams bounded prefixes of the public
+  image/label archives, selects nine matched real cases with both tumor-positive and tumor-negative
+  examples, converts/preprocesses them, and writes physical-batch-4 plans at patch [64,160,224].
+  It refuses to delete an existing staging directory unless the calibration-only marker is present.
+- Added a one-H100, six-minute hard-capped gate (at most 0.1 H100 GPU-hour) covering all four real
+  trainer paths. It checks finite losses/parameters/momentum, nonzero finite class-28 output-head
+  gradients, peak memory, stack provenance, and real synchronized step time. No GPU job has been
+  submitted yet. Scheduler probes used `sbatch --test-only` only; they found that CPU preparation
+  needs `RM-shared` plus `qos=low`, at most 2,000MB/core, and that 12 CPUs backfill much earlier than
+  24. Delta job 22293168 has not been touched.
