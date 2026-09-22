@@ -429,3 +429,13 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   bug, not a model/stack failure. The fix deep-copies plans per cell and checkpoints each completed
   cell's JSON incrementally. No retry has been submitted because only 1m51s remains under the user's
   original 0.1-H100-hour authorization, insufficient for another cold Python/compile startup.
+- With explicit user authorization for one additional <=0.1 H100-hour retry, job 46756922 completed
+  successfully in 2m21s. The three remaining paths passed finite loss/parameter/momentum and nonzero
+  finite class-28 head-gradient checks. Median synchronized steps were 0.4012s UNet++ DS-off,
+  0.1403s plain DS-on and 0.0942s plain DS-off; peak allocations were 43.08/10.97/10.82GiB.
+- Prepared (not yet submitted at this log entry) the guarded two-H100 production launcher. It pins
+  immutable source, installs an explicit trainer-file list, stages/preprocesses once in `$LOCAL`,
+  uses the now real-case-verified parallel converter, asserts 9,000 cases/class 28/batch 4/9,000
+  preprocessed cases, runs the two architecture pairs concurrently without DDP, resumes cells
+  independently, and refuses to call a cell complete until its final checkpoint plus 1,800 readable
+  fold-validation predictions and summary exist. Delta job 22293168 remains untouched.
