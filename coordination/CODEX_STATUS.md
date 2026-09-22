@@ -258,3 +258,34 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   contiguous path with separate network/loss compilation. PyTorch 2.12 remains an optional 1.88%
   throughput candidate, not a quality-cleared deployment; adopting it still requires the class-28
   delayed-onset acceptance gate and a rollback path to the existing PyTorch 2.10 venv.
+
+### 2026-09-21 — Delta PyTorch 2.12.1 class-28 numerical gate fails; real grid not launched
+
+- Built an isolated PyTorch 2.10.0+cu129/cuDNN 9.10.2 reference beside Delta's required
+  PyTorch 2.12.1+cu130/cuDNN 9.20 stack and ran both on the same H200. Production environments and
+  the real grid were not modified or launched.
+- Job 22292497 replayed eight identical updates from one serialized initialization through the real
+  UNet++ DS-on trainer, physical batch 4, explicit `[64,160,224]` patches, BF16, separate
+  reduce-overhead network/loss compilation, and fixed real PanTS batches. Every batch came from the
+  real tumor-positive calibration case and was cropped by nnU-Net around genuine class-28 voxels
+  (103,981 class-28 target voxels across the eight full-resolution batches).
+- No NaN or Inf occurred in either stack. Maximum global-scale-relative differences were loss
+  `0.00120%`, model state `0.00237%`, all gradients `0.08342%`, and momentum `0.02010%`.
+  However, the explicitly isolated class-28 output-head gradient reached `0.22526%`
+  (`3.05176e-5` absolute on scale `0.0135478`), with the worst tensor the deepest UNet++ head
+  `decoder.seg_layers.0_5.weight` at update 5. Its relative L2 difference was `0.05845%`.
+- The predeclared launch bar was well below roughly `0.1%` relative to global tensor scale, with
+  class 28 taking precedence over aggregate metrics. The candidate therefore fails the deployment
+  gate on the most important quantity despite small aggregate/model drift. Kill-fast discipline
+  stopped the remaining cells once they could not reverse the go/no-go decision. Exact use was
+  5m44s on one H200 = `0.0956` GPU-hour, within the authorized 0.1 GPU-hour cap.
+- Complete result JSON is preserved at
+  `/work/hdd/bdyo/asanjeev/pytorch_drift_gate_20260921/results/22292497/unetpp_ds_on.json`; the
+  working isolated 2.10 reference remains under `/work/nvme/bdyo/asanjeev/pytorch_drift_gate_20260921`
+  for a fallback launch or a separately authorized 2.8 comparison. The redundant HDD environment
+  copy is being removed; logs and results remain.
+- Two unrelated launch-provenance issues surfaced and remain blockers: the staged Delta checkout at
+  `/projects/bdyo/asanjeev/delta_work/pants-unetpp-fork` was still `75b33c3` while reviewed main was
+  `4970713`, and Delta's saved calibration plan is actually `[64,160,192]` despite its SUMMARY
+  claiming `[64,160,224]`. The gate avoided both by using a frozen `4970713` source snapshot and
+  explicitly forcing the real-grid patch and batch. Do not submit the real grid on 2.12.1 as-is.
