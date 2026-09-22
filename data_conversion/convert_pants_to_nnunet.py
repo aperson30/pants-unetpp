@@ -4,6 +4,7 @@ Converts PanTS's raw downloaded format into the folder/file layout nnU-Net v2 re
 Run this once, after `download_PanTS_data.sh` and `download_PanTS_label.sh` (from the PanTS repo)
 have finished downloading, and before any nnU-Net preprocessing/training commands.
 """
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 import json
 import shutil
@@ -61,8 +62,14 @@ def process_case(case_id: str, ct_path: Path, segmentations_folder: Path,
     nib.save(nib.Nifti1Image(combined, reference_img.affine, reference_img.header), str(out_label_path))
 
 
+def _process_case_job(arguments: tuple) -> str:
+    """Pickle-friendly worker entrypoint for independent case conversion."""
+    process_case(*arguments)
+    return arguments[0]
+
+
 def convert_split(pants_root: Path, split: str, out_images_dir: Path, out_labels_dir: Path,
-                   limit: int = None, resume: bool = False) -> list:
+                   limit: int = None, resume: bool = False, workers: int = 1) -> list:
     """split is 'Tr' (train) or 'Te' (test). Returns the list of case IDs processed (all of them,
     including any skipped because they were already done -- callers need the full list for
     numTraining/numTest, not just what ran this invocation).
@@ -73,6 +80,8 @@ def convert_split(pants_root: Path, split: str, out_images_dir: Path, out_labels
     redoing already-converted cases. A case with only ONE of the two outputs present (e.g. the
     label write was interrupted mid-case) is treated as NOT done and gets reprocessed --
     process_case()'s shutil.copy + nib.save are both idempotent overwrites, so this is safe."""
+    if workers < 1:
+        raise ValueError(f"workers must be at least 1, got {workers}")
     image_root = pants_root / f"Image{split}"
     label_root = pants_root / f"Label{split}"
     out_images_dir.mkdir(parents=True, exist_ok=True)
@@ -91,11 +100,28 @@ def convert_split(pants_root: Path, split: str, out_images_dir: Path, out_labels
         if skipped:
             print(f"resume: skipping {skipped}/{len(case_ids)} already-converted cases")
 
-    for i, case_id in enumerate(todo, start=1):
-        ct_path = image_root / case_id / "ct.nii.gz"
-        segmentations_folder = label_root / case_id / "segmentations"
-        process_case(case_id, ct_path, segmentations_folder, out_images_dir, out_labels_dir)
-        print(f"[{i}/{len(todo)}] done: {case_id}")
+    jobs = [
+        (
+            case_id,
+            image_root / case_id / "ct.nii.gz",
+            label_root / case_id / "segmentations",
+            out_images_dir,
+            out_labels_dir,
+        )
+        for case_id in todo
+    ]
+    if workers == 1:
+        completed = map(_process_case_job, jobs)
+        executor = None
+    else:
+        executor = ProcessPoolExecutor(max_workers=workers)
+        completed = executor.map(_process_case_job, jobs, chunksize=1)
+    try:
+        for i, case_id in enumerate(completed, start=1):
+            print(f"[{i}/{len(todo)}] done: {case_id}", flush=True)
+    finally:
+        if executor is not None:
+            executor.shutdown(wait=True, cancel_futures=True)
 
     return case_ids
 
@@ -132,17 +158,19 @@ if __name__ == "__main__":
     parser.add_argument("--resume", action="store_true",
                          help="skip cases whose image+label output already exist -- for recovering "
                               "an interrupted run without redoing completed cases")
+    parser.add_argument("--workers", type=int, default=1,
+                        help="independent case-conversion processes (default 1 preserves the original path)")
     args = parser.parse_args()
 
     train_ids = convert_split(
         args.pants_root, "Tr",
         args.nnunet_dataset_dir / "imagesTr", args.nnunet_dataset_dir / "labelsTr",
-        limit=args.limit, resume=args.resume
+        limit=args.limit, resume=args.resume, workers=args.workers
     )
     test_ids = convert_split(
         args.pants_root, "Te",
         args.nnunet_dataset_dir / "imagesTs", args.test_answer_key_dir,
-        limit=args.limit, resume=args.resume
+        limit=args.limit, resume=args.resume, workers=args.workers
     )
 
     write_dataset_json(args.nnunet_dataset_dir, num_training=len(train_ids))
