@@ -289,3 +289,35 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   `4970713`, and Delta's saved calibration plan is actually `[64,160,192]` despite its SUMMARY
   claiming `[64,160,224]`. The gate avoided both by using a frozen `4970713` source snapshot and
   explicitly forcing the real-grid patch and batch. Do not submit the real grid on 2.12.1 as-is.
+
+### 2026-09-21 20:20 PDT — Delta evaluation prepared and fail-closed; nothing submitted
+
+- Reviewed the existing `evaluation/post_train_scheduler.sh`, `post_train_one_run.sh`, probability
+  extractors, repair tool, and metric scorer. They were UCSD-specific (`/Scratch`, direct
+  `nvidia-smi` GPU claiming, `nohup`) and unsafe to deploy on Delta unchanged. More importantly,
+  failed prediction batches and missing cases were warnings rather than fatal errors, duplicate
+  probability rows were possible on resume, and the scorer could report metrics from fewer than
+  901 cases.
+- Added `unetpp_port/delta_deployment/delta_evaluate_grid.sbatch` (prepared only, not submitted).
+  It requests two H200s, uses the same validated 2.10/cu129 stack as training, audits all four
+  checkpoints plus exactly 1,800 readable final-validation outputs per cell, stages only the 901
+  test cases and answer key once into node-local `/tmp`, evaluates two cells concurrently, and
+  persists a job-specific result directory under `/work/hdd`.
+- Added test-only conversion so evaluation never re-downloads or preprocesses the 9,000 training
+  cases. Prediction now extracts the class-28 maximum probability immediately and can rewrite each
+  output to labels `{0,28}`; this preserves the five tumor metrics while making the retained masks
+  small. Resume is pairwise-safe (valid mask + unique CSV score); partial pairs are recomputed.
+- Reworked `compute_tumor_metrics.py` to require an exact case-ID match across 901 predictions,
+  answer keys, and probabilities; reject duplicates/non-finite values/shape or affine mismatches;
+  emit a per-case audit CSV; and record the exact metric conventions in JSON. The default remains
+  the project's prior 6-connected, positive-case tumor DSC, argmax-mask, max-softmax AUC protocol.
+- Primary-source audit found that public PanTS material does not fully specify component
+  connectivity, DSC averaging, or AUC aggregation. R-Super's released instructions use a different
+  confidence-plus-volume threshold sweep. Added `evaluation/DELTA_EVALUATION_PROTOCOL.md` to make
+  this limitation explicit; no metric definition was silently changed. PI confirmation remains
+  advisable before claiming bit-for-bit leaderboard equivalence.
+- Validation: Python and Bash syntax checks pass. A CPU-only synthetic end-to-end test in Delta's
+  existing venv passed exact expected DSC=0.5, P-Sen=1, T-Sen=0.5, Spe=1, AUC=1 and tumor-only mask
+  compaction. Temporary test data was removed. The live grid job 22293168 remains untouched and
+  pending; `squeue --start` reports no estimated start. Accounting visibility exposes only this
+  user's jobs, so there is no defensible evidence for a recurring time-of-day H200 clearing window.

@@ -1,183 +1,203 @@
+"""Compute the project's five tumor metrics with fail-closed input auditing.
+
+The public PanTS materials do not fully specify connectivity, DSC averaging, or
+the continuous AUC score. The output therefore records every such choice.
 """
-Computes the 5 PanTS benchmark metrics (P-Sen, T-Sen, Spe, AUC, DSC) for one trainer's validation
-output, matching the definitions used in PanTS's own leaderboard table:
+from __future__ import annotations
 
-  - DSC:   Dice score on the tumor class ONLY (class 28), averaged over cases that actually HAVE a
-           tumor in the ground truth (Dice on an empty-vs-empty mask is undefined/trivially 1.0 and
-           not meaningful, so tumor-negative cases are excluded from this average, same convention
-           used by segmentation benchmarks generally).
-  - P-Sen: patient-wise sensitivity. Among ground-truth-positive cases (has >=1 tumor voxel), the
-           fraction where the prediction ALSO has >=1 predicted tumor voxel anywhere in the volume.
-           Location doesn't matter here -- just "did we notice something was wrong".
-  - T-Sen: tumor-wise sensitivity. Stricter than P-Sen: each ground-truth tumor is a SEPARATE connected
-           component (a patient can have multiple tumors). A given true tumor only counts as detected
-           if a predicted tumor voxel actually overlaps that specific component -- finding a different,
-           unrelated tumor elsewhere in the same patient does not count as detecting this one.
-  - Spe:   specificity. Among ground-truth-NEGATIVE cases (no tumor at all), the fraction where the
-           prediction correctly predicts zero tumor voxels (no false alarm).
-  - AUC:   needs a continuous per-case confidence score (max tumor-class probability), not just the
-           binary segmentation -- see extract_val_probabilities.py, which produces the CSV this script
-           reads for the AUC calculation. If that CSV isn't available yet, AUC is skipped (reported as
-           None) rather than silently computed wrong.
-
-Ground truth convention: labelsTr/<case_id>.nii.gz is the same merged, multi-label volume nnU-Net was
-trained on, where class 28 = pancreatic_lesion (matches class_map_abdomenatlas_pants).
-
-Run with:
-    python3 compute_tumor_metrics.py \
-        --pred-dir /Scratch/enl014/nnUNet_results/Dataset001_PanTS/nnUNetTrainer__nnUNetPlansBS2__3d_fullres/fold_0/validation \
-        --labels-dir /Scratch/enl014/nnUNet_raw/Dataset001_PanTS/labelsTr \
-        --tumor-class 28 \
-        --probs-csv max_tumor_probs_default_ds.csv \
-        --out-json metrics_default_ds.json
-"""
 import argparse
+import csv
 import json
 from pathlib import Path
 
 import nibabel as nib
 import numpy as np
-from scipy.ndimage import label as cc_label
+from scipy.ndimage import generate_binary_structure, label as cc_label
+from sklearn.metrics import roc_auc_score
 
 TUMOR_CLASS_DEFAULT = 28
 
 
+def case_id(path: Path) -> str:
+    if not path.name.endswith(".nii.gz"):
+        raise ValueError(f"not a .nii.gz file: {path}")
+    return path.name[:-7]
+
+
+def load_label(path: Path) -> tuple[np.ndarray, nib.spatialimages.SpatialImage]:
+    image = nib.load(str(path))
+    data = np.asanyarray(image.dataobj)
+    if not np.isfinite(data).all():
+        raise ValueError(f"non-finite label values in {path}")
+    return data, image
+
+
 def dice(pred_mask: np.ndarray, gt_mask: np.ndarray) -> float:
-    inter = np.logical_and(pred_mask, gt_mask).sum()
-    denom = pred_mask.sum() + gt_mask.sum()
-    if denom == 0:
-        return np.nan  # both empty -- undefined, caller should exclude this case
-    return 2.0 * inter / denom
+    denominator = int(pred_mask.sum()) + int(gt_mask.sum())
+    if denominator == 0:
+        return float("nan")
+    return 2.0 * int(np.logical_and(pred_mask, gt_mask).sum()) / denominator
 
 
-def tumor_wise_detection(pred_mask: np.ndarray, gt_mask: np.ndarray) -> tuple:
-    """Returns (num_true_tumors, num_detected) for one case, using connected components of the
-    ground-truth tumor mask. A true tumor component counts as detected if the prediction has ANY
-    voxel overlapping that specific component (voxel-level overlap, not a distance/IoU threshold --
-    simple and matches how sensitivity is usually reported for lesion detection benchmarks)."""
-    gt_components, n_components = cc_label(gt_mask)
-    if n_components == 0:
-        return 0, 0
-    detected = 0
-    for comp_id in range(1, n_components + 1):
-        comp_mask = gt_components == comp_id
-        if np.logical_and(comp_mask, pred_mask).any():
-            detected += 1
-    return n_components, detected
+def tumor_wise_detection(
+    pred_mask: np.ndarray, gt_mask: np.ndarray, connectivity: int
+) -> tuple[int, int]:
+    structure = generate_binary_structure(rank=3, connectivity=connectivity)
+    components, n_components = cc_label(gt_mask, structure=structure)
+    detected = sum(
+        bool(np.logical_and(components == component_id, pred_mask).any())
+        for component_id in range(1, n_components + 1)
+    )
+    return int(n_components), int(detected)
 
 
-def main():
+def read_probabilities(path: Path) -> dict[str, float]:
+    probabilities: dict[str, float] = {}
+    with path.open(newline="") as handle:
+        reader = csv.DictReader(handle)
+        expected = {"case_id", "max_tumor_probability"}
+        if not reader.fieldnames or not expected.issubset(reader.fieldnames):
+            raise ValueError(f"{path} must contain columns {sorted(expected)}")
+        for row_number, row in enumerate(reader, start=2):
+            cid = row["case_id"]
+            if cid in probabilities:
+                raise ValueError(f"duplicate probability for {cid} at {path}:{row_number}")
+            value = float(row["max_tumor_probability"])
+            if not np.isfinite(value) or not 0.0 <= value <= 1.0:
+                raise ValueError(f"invalid probability for {cid}: {value}")
+            probabilities[cid] = value
+    return probabilities
+
+
+def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--pred-dir", type=Path, required=True)
     parser.add_argument("--labels-dir", type=Path, required=True)
     parser.add_argument("--tumor-class", type=int, default=TUMOR_CLASS_DEFAULT)
-    parser.add_argument("--probs-csv", type=Path, default=None,
-                         help="CSV with columns case_id,max_tumor_probability -- from "
-                              "extract_val_probabilities.py. If omitted or missing, AUC is skipped.")
+    parser.add_argument("--probs-csv", type=Path, required=True)
     parser.add_argument("--out-json", type=Path, required=True)
-    args = parser.parse_args()
+    parser.add_argument("--per-case-csv", type=Path, required=True)
+    parser.add_argument("--expected-cases", type=int, default=901)
+    parser.add_argument(
+        "--connectivity", type=int, choices=(1, 2, 3), default=1,
+        help="1=6-neighbor, 2=18-neighbor, 3=26-neighbor; default preserves prior scoring",
+    )
+    parser.add_argument("--affine-atol", type=float, default=1e-4)
+    return parser.parse_args()
 
-    pred_files = sorted(args.pred_dir.glob("*.nii.gz"))
-    print(f"Found {len(pred_files)} predicted cases in {args.pred_dir}", flush=True)
 
-    dice_scores = []
-    p_sen_hits, p_sen_total = 0, 0
-    spe_hits, spe_total = 0, 0
-    t_sen_detected_total, t_sen_true_total = 0, 0
-    skipped = []
+def main() -> None:
+    args = parse_args()
+    pred_paths = sorted(args.pred_dir.glob("*.nii.gz"))
+    gt_paths = sorted(args.labels_dir.glob("*.nii.gz"))
+    predictions = {case_id(path): path for path in pred_paths}
+    ground_truth = {case_id(path): path for path in gt_paths}
 
-    for i, pred_path in enumerate(pred_files, start=1):
-        case_id = pred_path.name.removesuffix(".nii.gz")
-        gt_path = args.labels_dir / f"{case_id}.nii.gz"
-        if not gt_path.is_file():
-            skipped.append(case_id)
-            continue
+    if len(predictions) != len(pred_paths) or len(ground_truth) != len(gt_paths):
+        raise RuntimeError("duplicate case IDs after stripping .nii.gz")
+    if len(predictions) != args.expected_cases:
+        raise RuntimeError(f"expected {args.expected_cases} predictions, found {len(predictions)}")
+    missing_gt = sorted(predictions.keys() - ground_truth.keys())
+    missing_predictions = sorted(ground_truth.keys() - predictions.keys())
+    if missing_gt or missing_predictions:
+        raise RuntimeError(
+            f"prediction/GT ID mismatch: missing_gt={missing_gt[:10]}, "
+            f"missing_predictions={missing_predictions[:10]}"
+        )
 
-        pred_vol = nib.load(str(pred_path)).get_fdata(dtype=np.float32)
-        gt_vol = nib.load(str(gt_path)).get_fdata(dtype=np.float32)
+    probabilities = read_probabilities(args.probs_csv)
+    missing_probs = sorted(predictions.keys() - probabilities.keys())
+    extra_probs = sorted(probabilities.keys() - predictions.keys())
+    if missing_probs or extra_probs:
+        raise RuntimeError(
+            f"probability/prediction ID mismatch: missing={missing_probs[:10]}, extra={extra_probs[:10]}"
+        )
 
-        pred_mask = pred_vol == args.tumor_class
-        gt_mask = gt_vol == args.tumor_class
-        gt_has_tumor = gt_mask.any()
-        pred_has_tumor = pred_mask.any()
+    rows: list[dict[str, object]] = []
+    positive_dice: list[float] = []
+    p_hits = p_total = spe_hits = spe_total = 0
+    detected_tumors = true_tumors = 0
 
-        if gt_has_tumor:
-            p_sen_total += 1
-            if pred_has_tumor:
-                p_sen_hits += 1
+    for index, cid in enumerate(sorted(predictions), start=1):
+        pred, pred_image = load_label(predictions[cid])
+        gt, gt_image = load_label(ground_truth[cid])
+        if pred.shape != gt.shape:
+            raise RuntimeError(f"shape mismatch for {cid}: prediction {pred.shape}, GT {gt.shape}")
+        if not np.allclose(pred_image.affine, gt_image.affine, rtol=0, atol=args.affine_atol):
+            raise RuntimeError(f"affine mismatch for {cid}")
 
-            d = dice(pred_mask, gt_mask)
-            if not np.isnan(d):
-                dice_scores.append(d)
+        pred_mask = pred == args.tumor_class
+        gt_mask = gt == args.tumor_class
+        gt_positive = bool(gt_mask.any())
+        pred_positive = bool(pred_mask.any())
+        case_dice = dice(pred_mask, gt_mask)
+        n_true, n_detected = (
+            tumor_wise_detection(pred_mask, gt_mask, args.connectivity)
+            if gt_positive else (0, 0)
+        )
 
-            n_true, n_detected = tumor_wise_detection(pred_mask, gt_mask)
-            t_sen_true_total += n_true
-            t_sen_detected_total += n_detected
+        if gt_positive:
+            p_total += 1
+            p_hits += pred_positive
+            positive_dice.append(case_dice)
+            true_tumors += n_true
+            detected_tumors += n_detected
         else:
             spe_total += 1
-            if not pred_has_tumor:
-                spe_hits += 1
+            spe_hits += not pred_positive
 
-        if i % 200 == 0:
-            print(f"  ...{i}/{len(pred_files)} cases processed", flush=True)
+        rows.append({
+            "case_id": cid,
+            "gt_positive": int(gt_positive),
+            "pred_positive": int(pred_positive),
+            "gt_tumor_voxels": int(gt_mask.sum()),
+            "pred_tumor_voxels": int(pred_mask.sum()),
+            "true_tumors": n_true,
+            "detected_tumors": n_detected,
+            "dice": "" if np.isnan(case_dice) else case_dice,
+            "max_tumor_probability": probabilities[cid],
+        })
+        if index % 200 == 0:
+            print(f"processed {index}/{len(predictions)}", flush=True)
 
-    if skipped:
-        print(f"WARNING: {len(skipped)} case(s) had no matching ground truth, skipped: "
-              f"{skipped[:10]}{'...' if len(skipped) > 10 else ''}", flush=True)
+    y_true = [int(row["gt_positive"]) for row in rows]
+    y_score = [float(row["max_tumor_probability"]) for row in rows]
+    if len(set(y_true)) != 2:
+        raise RuntimeError("AUC requires both tumor-positive and tumor-negative cases")
 
     results = {
-        "n_cases_evaluated": len(pred_files) - len(skipped),
-        "n_skipped_no_gt": len(skipped),
-        "DSC_tumor_mean": float(np.mean(dice_scores)) if dice_scores else None,
-        "DSC_tumor_n_positive_cases": len(dice_scores),
-        "P_Sen": p_sen_hits / p_sen_total if p_sen_total else None,
-        "P_Sen_n_positive_cases": p_sen_total,
-        "T_Sen": t_sen_detected_total / t_sen_true_total if t_sen_true_total else None,
-        "T_Sen_n_true_tumors": t_sen_true_total,
-        "Spe": spe_hits / spe_total if spe_total else None,
+        "protocol": {
+            "tumor_class": args.tumor_class,
+            "prediction_mask": "nnU-Net argmax label equals tumor_class",
+            "DSC": "tumor-only mean over GT-positive cases",
+            "P_Sen": "GT-positive patient detected if any tumor voxel is predicted anywhere",
+            "T_Sen": "GT component detected by at least one overlapping predicted voxel",
+            "T_Sen_connectivity": {1: "6-neighbor", 2: "18-neighbor", 3: "26-neighbor"}[args.connectivity],
+            "Spe": "GT-negative patient is negative only if zero tumor voxels are predicted",
+            "AUC_score": "maximum softmax tumor-class probability over the full volume",
+            "note": "Project protocol; public PanTS materials do not fully specify all choices.",
+        },
+        "n_cases_evaluated": len(rows),
+        "DSC_tumor_mean": float(np.mean(positive_dice)),
+        "DSC_tumor_n_positive_cases": len(positive_dice),
+        "P_Sen": p_hits / p_total,
+        "P_Sen_n_positive_cases": p_total,
+        "T_Sen": detected_tumors / true_tumors,
+        "T_Sen_n_true_tumors": true_tumors,
+        "Spe": spe_hits / spe_total,
         "Spe_n_negative_cases": spe_total,
-        "AUC": None,
+        "AUC": float(roc_auc_score(y_true, y_score)),
+        "AUC_n_cases": len(y_true),
     }
 
-    if args.probs_csv is not None and args.probs_csv.is_file():
-        import csv
-        from sklearn.metrics import roc_auc_score
-
-        probs = {}
-        with open(args.probs_csv, newline="") as f:
-            for row in csv.DictReader(f):
-                probs[row["case_id"]] = float(row["max_tumor_probability"])
-
-        y_true, y_score = [], []
-        missing = 0
-        for pred_path in pred_files:
-            case_id = pred_path.name.removesuffix(".nii.gz")
-            gt_path = args.labels_dir / f"{case_id}.nii.gz"
-            if not gt_path.is_file() or case_id not in probs:
-                missing += 1
-                continue
-            gt_vol = nib.load(str(gt_path)).get_fdata(dtype=np.float32)
-            y_true.append(int((gt_vol == args.tumor_class).any()))
-            y_score.append(probs[case_id])
-
-        if missing:
-            print(f"WARNING: {missing} case(s) missing from probs CSV or GT, excluded from AUC",
-                  flush=True)
-
-        if len(set(y_true)) < 2:
-            print("WARNING: AUC undefined -- need both tumor-positive and tumor-negative cases",
-                  flush=True)
-        else:
-            results["AUC"] = float(roc_auc_score(y_true, y_score))
-            results["AUC_n_cases"] = len(y_true)
-    else:
-        print(f"No probs CSV found at {args.probs_csv} -- AUC left as None. "
-              f"Run extract_val_probabilities.py first if you need it.", flush=True)
-
-    with open(args.out_json, "w") as f:
-        json.dump(results, f, indent=2)
-
-    print(f"\nResults written to {args.out_json}:", flush=True)
+    args.out_json.parent.mkdir(parents=True, exist_ok=True)
+    args.per_case_csv.parent.mkdir(parents=True, exist_ok=True)
+    with args.per_case_csv.open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+    with args.out_json.open("w") as handle:
+        json.dump(results, handle, indent=2)
     print(json.dumps(results, indent=2), flush=True)
 
 
