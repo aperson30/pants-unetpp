@@ -456,3 +456,23 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Delta job **22293168** was independently checked and remains `PENDING (None)`. Do not cancel it
   while Bridges-2 is queued or staging. Apply the user's race rule only after a Bridges-2 trainer
   is visibly executing real epochs, and confirm Delta is still pending at that time.
+
+### 2026-09-22 21:26 UTC — prepared Bridges-2 evaluation while both grid jobs remain queued
+
+- Checked whether splitting or changing the queued two-H100 allocation would reliably improve
+  completion. Hypothetical one-, two-, and four-GPU Slurm `--test-only` start estimates conflicted
+  with the actual queued job's estimate; they do not justify canceling its accrued queue position.
+  Current two-GPU phase scheduling already attains the ~39.4-hour training-only makespan implied by
+  measured per-cell times. Full-dataset staging and final validation are additional unknowns.
+- Added `unetpp_port/bridges2_deployment/evaluate_grid.sbatch`, `submit_evaluation.sh`, and
+  `EVALUATION_PROTOCOL.md` as **prepared, not submitted** post-training artifacts. They require all
+  four final checkpoints plus 1,800 fold-validation outputs each; freeze evaluation code at
+  submission, reinstall the exact training trainer sources, stage only the 901-case test split in
+  `$LOCAL`, save tumor-only predictions and class-28 probability scores persistently per case, and
+  compute the five explicitly defined project-protocol metrics. The wrapper refuses premature or
+  duplicate submission; a source-hash manifest prevents mixed scorer versions on resume.
+- No GPU job or extra CPU job was submitted for this preparation. Shell syntax and PSC Slurm
+  `--test-only` passed; both public test-data endpoints returned HTTP 200 without download; the
+  CPU-only evaluation contract passed in the Bridges-2 venv (known positive/negative cases, class-28
+  mask compaction and all five metric expectations). The full 901-case evaluator has not yet run and
+  must receive a final prelaunch review when training is complete.
