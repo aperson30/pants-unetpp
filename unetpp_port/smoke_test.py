@@ -25,7 +25,7 @@ def build(n_stages, deep_supervision, average_outputs_at_inference=False):
     model = UNetPlusPlus(
         input_channels=1, n_stages=n_stages, features_per_stage=features_per_stage,
         conv_op=nn.Conv3d, kernel_sizes=kernel_sizes, strides=strides,
-        n_conv_per_stage=[2] * n_stages, num_classes=28,
+        n_conv_per_stage=[2] * n_stages, num_classes=29,
         n_conv_per_stage_decoder=[2] * (n_stages - 1),
         conv_bias=True, norm_op=nn.InstanceNorm3d, norm_op_kwargs={'eps': 1e-5, 'affine': True},
         nonlin=nn.LeakyReLU, nonlin_kwargs={'inplace': True}, deep_supervision=deep_supervision,
@@ -46,9 +46,9 @@ def check(n_stages, patch_size, deep_supervision):
     if deep_supervision:
         assert isinstance(out, list) and len(out) == n_stages - 1
         for o in out:
-            assert list(o.shape) == [1, 28, *patch_size]
+            assert list(o.shape) == [1, 29, *patch_size]
     else:
-        assert list(out.shape) == [1, 28, *patch_size]
+        assert list(out.shape) == [1, 29, *patch_size]
 
     print(f"n_stages={n_stages} patch={patch_size} deep_supervision={deep_supervision}: OK "
           f"({sum(p.numel() for p in model.parameters()):,} params)")
@@ -59,8 +59,8 @@ def check_branch_averaging(n_stages, patch_size):
 
     Two things have to hold. First, with deep supervision off and averaging on, the network must
     still return a single tensor of the right shape -- nnU-Net's inference path cannot cope with a
-    list. Second, that tensor must actually be the mean of all branches, not just the deepest one,
-    which is checked by comparing against the branches collected with deep supervision on.
+    list. Second, applying nnU-Net's downstream softmax must produce the arithmetic mean of the
+    branches' softmax probabilities, not softmax(mean logits).
     """
     model = build(n_stages, deep_supervision=True, average_outputs_at_inference=True)
     x = torch.rand((1, 1, *patch_size))
@@ -71,18 +71,21 @@ def check_branch_averaging(n_stages, patch_size):
         averaged = model(x)
 
     assert isinstance(branches, list) and len(branches) == n_stages - 1
-    assert list(averaged.shape) == [1, 28, *patch_size], "averaged output has the wrong shape"
+    assert list(averaged.shape) == [1, 29, *patch_size], "averaged output has the wrong shape"
 
-    expected = torch.stack(branches, dim=0).mean(dim=0)
-    assert torch.allclose(averaged, expected, atol=1e-5), \
-        "averaged output is not the mean of all branches"
+    expected_probabilities = torch.stack(
+        [torch.softmax(branch.float(), dim=1) for branch in branches], dim=0
+    ).mean(dim=0)
+    actual_probabilities = torch.softmax(averaged, dim=1)
+    assert torch.allclose(actual_probabilities, expected_probabilities, rtol=1e-5, atol=1e-6), \
+        "downstream softmax does not recover the mean branch probability"
 
-    deepest = branches[0]   # index 0 is the most-nested output
-    assert not torch.allclose(averaged, deepest, atol=1e-5), \
+    deepest_probability = torch.softmax(branches[0].float(), dim=1)
+    assert not torch.allclose(actual_probabilities, deepest_probability, atol=1e-5), \
         "averaging produced the deepest branch alone -- the flag is not taking effect"
 
     print(f"n_stages={n_stages} patch={patch_size} branch-averaging inference: OK "
-          f"(mean of {len(branches)} branches, and distinct from the deepest alone)")
+          f"(probability mean of {len(branches)} branches, distinct from deepest alone)")
 
 
 if __name__ == "__main__":

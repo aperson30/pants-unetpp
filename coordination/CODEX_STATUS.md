@@ -321,3 +321,34 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   compaction. Temporary test data was removed. The live grid job 22293168 remains untouched and
   pending; `squeue --start` reports no estimated start. Accounting visibility exposes only this
   user's jobs, so there is no defensible evidence for a recurring time-of-day H200 clearing window.
+
+### 2026-09-21 — fifth Paper configuration prepared and audited; nothing submitted
+
+- Prepared `unetpp_port/delta_deployment/paper_config.sbatch` for one H200, physical batch four,
+  1,000 epochs, the validated PyTorch 2.10/cu129 overlay, bounded 48-hour continuation, and mandatory
+  1,800-case final validation. It will not begin meaningful work until the reference UNet++ DS-on
+  cell is complete, then requires exact plan equality and reuses its exact fold-0 validation IDs.
+- Added a training-only PanTS converter. This omits only the 901 held-out test images from the
+  training allocation: all 9,000 training images and labels are converted and preprocessed. A
+  read-only search of the installed nnU-Net training entry point/package found no `imagesTs`
+  consumer. The held-out set is not omitted from the experiment: the separately prepared
+  `delta_evaluate_paper.sbatch` stages all 901 test cases, validates the Paper completion marker and
+  checkpoint hash, pins the trained commit and exact inference sources, and computes the same
+  class-28 metrics as the four-cell grid.
+- Corrected a paper-fidelity defect in inference. The old port averaged raw branch logits. The
+  paper averages post-nonlinearity branch predictions, so the network now returns
+  `log(mean(softmax(branch_logits)))`; nnU-Net's downstream softmax recovers the arithmetic branch
+  probability mean. Training logits/losses are unchanged. A CPU contract test verifies the exact
+  identity and distinguishes it from the old logit average.
+- Isolated Delta review passed the Paper inference contract, dead-head contract, and all
+  quality-neutral trainer contracts. Local Python compile, both Slurm-script Bash syntax checks,
+  and `git diff --check` pass. A non-submitting `sbatch --test-only` accepted the training script;
+  its provisional H200 forecast was 2026-10-14 and is not a guaranteed start time.
+- One scientific gate remains intentionally unresolved: the paper writes equal coefficients
+  `eta_i=1`, while the existing trainer normalizes equal weights to sum one to avoid silently
+  multiplying the gradient/LR scale by the number of branches. The prepared run is a controlled
+  equal-relative-weight comparison. If the PI requires literal unnormalized coefficients, that is
+  a different optimization trajectory and must be chosen explicitly before submission.
+- New PSC Bridges-2 access is a credible H100-80GB fallback, but no port or duplicate was launched.
+  Official charging is 2 allocation units per H100 GPU-hour; performance and queue benefit require
+  a short real-data calibration before moving work. Live Delta grid job 22293168 was not modified.

@@ -26,6 +26,7 @@ match. The custom trainer handles this by telling nnU-Net "don't downsample the 
 these outputs" -- see the comment in nnUNetTrainerUNetPlusPlus.py's _get_deep_supervision_scales
 override for details.
 """
+import math
 from typing import Union, Type, List, Tuple
 
 import numpy as np
@@ -154,15 +155,20 @@ class UNetPlusPlusDecoder(nn.Module):
         elif self.average_outputs_at_inference:
             seg_outputs = [self.seg_layers[f"0_{j}"](nodes[(0, j)])
                            for j in range(1, self.L + 1)]
-            # UNet++ paper's inference rule: average every nested branch rather than trusting only
-            # the deepest one. NOTE: the paper applies its final nonlinearity per branch and averages
-            # the resulting probability maps, whereas this averages the raw logits, because nnU-Net
-            # v2 requires the network to return logits and applies softmax itself downstream.
-            # Averaging logits is not mathematically identical to averaging probabilities. It is the
-            # closest faithful option that stays compatible with nnU-Net's inference path; if the
-            # comparison against the default configuration turns out close, this is the first
-            # approximation to revisit.
-            return torch.stack(seg_outputs, dim=0).mean(dim=0)
+            # The paper averages branch PREDICTIONS after the output nonlinearity, not raw logits.
+            # PanTS is an exclusive 29-class nnU-Net task, so that nonlinearity is softmax. Return
+            # log(mean(softmax(branch_logits))) as an equivalent logit representation: nnU-Net's
+            # downstream softmax then recovers the arithmetic mean of branch probabilities exactly.
+            # log_softmax/logsumexp is stable even when a rare class probability is extremely small.
+            #
+            # nnU-Net subsequently averages these returned values across mirror augmentations and
+            # overlapping windows before its final softmax. Standard nnU-Net does the same with raw
+            # logits (a normalized geometric aggregation of per-window distributions), so this keeps
+            # the framework's TTA/window semantics while making the branch ensemble paper-faithful.
+            log_probabilities = torch.stack(
+                [torch.log_softmax(output.float(), dim=1) for output in seg_outputs], dim=0
+            )
+            return torch.logsumexp(log_probabilities, dim=0) - math.log(len(seg_outputs))
         else:
             # Validation/inference without branch averaging needs only the deepest head. Computing
             # every other 1x1x1 head produced large full-resolution tensors that were discarded.

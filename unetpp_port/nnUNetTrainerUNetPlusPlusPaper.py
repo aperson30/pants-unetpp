@@ -31,14 +31,13 @@ organs and a great deal for the pancreatic tumour, which appears in only ~10% of
 
 So this class exists to test the paper's COMPLETE design, not to re-run the half that already failed.
 
-=== KNOWN APPROXIMATION ===
+=== INFERENCE REPRESENTATION ===
 
-The paper applies its final nonlinearity per branch and averages the resulting probability maps.
-This implementation averages raw LOGITS, because nnU-Net v2 requires the network to return logits and
-applies softmax itself downstream. Averaging logits is not mathematically identical to averaging
-probabilities. It is the closest faithful option that remains compatible with nnU-Net's inference
-path; if results come out close to the default configuration, this is the first approximation to
-revisit.
+The paper applies its final nonlinearity per branch and averages the resulting predictions. PanTS is
+an exclusive semantic task, so this implementation computes each branch's softmax, averages those
+probabilities, and returns their logarithm. nnU-Net v2 requires logits and applies softmax downstream;
+softmax(log(mean_probability)) recovers the paper's arithmetic probability average exactly. This also
+retains nnU-Net's standard mirror/sliding-window aggregation around the branch ensemble.
 
 === HOW TO EVALUATE THIS FAIRLY ===
 
