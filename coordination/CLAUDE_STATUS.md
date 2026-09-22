@@ -361,3 +361,22 @@ the phase-done marker.
 
 Uploaded as unetpp_port/delta_deployment/grid_coordinated.sbatch, replacing the four per-cell
 scripts. Not yet submitted -- still holding for final confirmation given how much this changed.
+
+### 2026-09-21 (later still) — PyTorch 2.12.1 gate failed; swapped to validated 2.10 stack; launching
+
+Codex's class-28 numerical parity gate on PyTorch 2.12.1+cu130 failed (0.22526% relative diff on
+the tumor-class gradient, over the agreed ~0.1% bar) -- correctly held the launch. Verified Codex's
+two other findings myself: Delta's checkout was stale (75b33c3, pulled to 19cc861+), and my own
+grid script had a live bug (`assert patch == [64,160,224]` based on a false assumption -- my Delta
+calibration actually produced [64,160,192] on its small sample; softened to trust the real
+full-dataset planner instead of a prior guess).
+
+Switched the launch script to Codex's isolated PyTorch 2.10.0+cu129/cuDNN-9.10.2 environment
+(matches DeltaAI's validated stack) via a PYTHONPATH shadow over the base pants_venv's 2.12.1,
+verified working end to end on a live H200 (real CUDA tensor op, nnunetv2 still importable) before
+trusting it in the real launch script. Added a hard version-assert at script start so a broken
+shadow fails loudly immediately rather than silently running on the failed-gate 2.12.1 stack.
+
+Submitting the real 4-cell 1000-epoch grid now (grid_coordinated.sbatch): one coordinated 2-GPU
+H200 job, dataset staged once into node-local /tmp, two UNet++ cells concurrent then two
+Plain-U-Net cells concurrent, checkpoints to /work/hdd, bounded self-resubmission on the 48h cap.
