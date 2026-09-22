@@ -409,3 +409,7 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   submitted yet. Scheduler probes used `sbatch --test-only` only; they found that CPU preparation
   needs `RM-shared` plus `qos=low`, at most 2,000MB/core, and that 12 CPUs backfill much earlier than
   24. Delta job 22293168 has not been touched.
+- CPU prep job 46754422 then failed safely after 15 seconds, before downloading any case, because
+  the standalone uv Python did not inherit Bridges-2's system CA bundle. The retry uses the installed
+  certifi CA store explicitly (TLS verification remains enabled); this was an environment packaging
+  issue, not a dataset or model failure. No GPU time was consumed.

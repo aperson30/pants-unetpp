@@ -11,10 +11,12 @@ import argparse
 import os
 import re
 import shutil
+import ssl
 import tarfile
 import urllib.request
 from pathlib import Path, PurePosixPath
 
+import certifi
 import pandas as pd
 
 
@@ -32,7 +34,10 @@ def _stream_cases(url: str, destination: Path, limit: int, kind: str) -> list[st
     seen: list[str] = []
     seen_set: set[str] = set()
     request = urllib.request.Request(url, headers={"User-Agent": "pants-unetpp-calibration/1"})
-    with urllib.request.urlopen(request, timeout=120) as response:
+    # The standalone uv Python on Bridges-2 does not inherit the host CA path. Use certifi's
+    # maintained bundle explicitly; do not weaken TLS verification to work around that packaging gap.
+    tls_context = ssl.create_default_context(cafile=certifi.where())
+    with urllib.request.urlopen(request, timeout=120, context=tls_context) as response:
         with tarfile.open(fileobj=response, mode="r|gz") as archive:
             for member in archive:
                 match = CASE_RE.search(member.name)
