@@ -328,3 +328,36 @@ Still open, not yet resolved: Codex's PyTorch 2.12.1+cu130 numerical-drift quest
 1.0x per Delta's docs -- real GPU-hours favor H200 decisively, charged ACCESS-allocation units may
 not). Updated unetpp_port/delta_deployment/ with the corrected v2 scripts. Not yet submitted --
 final go/no-go pending with the user.
+
+### 2026-09-21 (later still) — adopted Codex's coordinated 2-GPU design; verified /work/hdd quota
+
+Confirmed sj84's usage (960GiB) via independent check -- matches Codex's number exactly. Not
+touching another lab member's data; leaving that outreach decision to the user.
+
+Verified /work/hdd myself: `lfs quota -g delta_bdyo /work/hdd` shows blimit=0 (no enforced Lustre
+quota for this group there, unlike /projects' hard 1TB cap) and live usage ~2.34TiB, close to
+Codex's number but sourced differently -- Codex's soft/hard figures may come from a documented
+policy rather than an actively enforced Lustre limit. Practical conclusion is the same either way:
+the underlying filesystem's live free space (88GB system-wide, shared, not reserved for us) is
+comfortably enough for checkpoints (a few GB total across the grid).
+
+Agreed the 4-independent-/tmp-pipeline design was a real flaw (Codex's review): duplicates ~1.4TB
+of downloads and 4x preprocessing, and two single-GPU jobs could land on the same 8-GPU H200 node
+and collide on /tmp capacity (2TB/node, not a Slurm-reservable resource). Replaced with Codex's
+proposed design: one coordinated 2-GPU job, stage the dataset once into a job-specific /tmp path
+(downloading 2 chunks at a time with a live free-space check before each phase, deleting the source
+tree after conversion succeeds), run the two UNet++ cells concurrently then the two Plain-U-Net
+cells concurrently, checkpoints to /work/hdd. Kept the dependency-chain resume approach from the
+per-cell design, extended to check all four cells' checkpoint state independently (skip a cell if
+checkpoint_final.pth exists, --c resume if checkpoint_latest.pth exists but not final).
+
+Caught and fixed a real bug in my own first draft of this before it ever ran: launching a
+background trainer inside a function called via $(...) command substitution orphans the background
+job from the script's job table the moment the subshell exits (command substitution always forks
+one), making a later `wait` on that PID fail. Fixed by using a plain global variable instead.
+Also added explicit exit-status checking after each wait -- the earlier draft ran trainers
+backgrounded, which `set -e` does not cover, so a crashed trainer would have silently still printed
+the phase-done marker.
+
+Uploaded as unetpp_port/delta_deployment/grid_coordinated.sbatch, replacing the four per-cell
+scripts. Not yet submitted -- still holding for final confirmation given how much this changed.
