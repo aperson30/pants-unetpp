@@ -7,7 +7,8 @@ before using either one on its own:
   1. LOSS WEIGHTING. The paper defines the overall loss as a weighted sum over the nested decoders,
      L = sum_i eta_i * L(Y, P_i), and states "we give same balanced weights eta_i to each loss,
      i.e. eta_i == 1". This class overrides _build_loss() to weight every deep-supervision output
-     equally, replacing nnU-Net's exponential decay (1, 1/2, 1/4, ...) with its last entry zeroed.
+     with the literal, unnormalized coefficient 1, replacing nnU-Net's normalized exponential decay
+     (1, 1/2, 1/4, ...) with its last entry zeroed.
 
   2. INFERENCE. The paper collects "the segmentation results from all segmentation branches" and
      averages them. nnU-Net switches deep supervision off for validation and inference, at which
@@ -30,6 +31,16 @@ starving the branch that actually produces the prediction. That matters little f
 organs and a great deal for the pancreatic tumour, which appears in only ~10% of cases.
 
 So this class exists to test the paper's COMPLETE design, not to re-run the half that already failed.
+
+=== IMPORTANT OPTIMIZATION-SCALE CONFOUND ===
+
+Literal eta_i == 1 means this trainer SUMS the branch losses; it does not average them. With N
+branches, the total loss and gradient can therefore be roughly N times the scale of a normalized
+equal-weight objective. The optimizer learning rate is intentionally left unchanged to reproduce the
+paper rule literally, so the effective SGD step scale is not controlled to match the four main grid
+cells. A difference in the fifth configuration can consequently reflect both the paper's matched
+supervision/ensemble design and this optimization-scale shift. Do not describe it as a clean
+single-variable ablation against the normalized nnU-Net objectives.
 
 === INFERENCE REPRESENTATION ===
 
@@ -97,8 +108,11 @@ class nnUNetTrainerUNetPlusPlusPaper(nnUNetTrainerUNetPlusPlus):
         )
 
     def _build_loss(self):
-        """Identical to nnU-Net's default except for the weights: every deep-supervision output is
-        weighted equally, per the paper's eta_i == 1."""
+        """Use the paper's literal loss sum: every deep-supervision output has eta_i == 1.
+
+        These coefficients are intentionally not normalized; see the optimization-scale warning in
+        the module docstring.
+        """
         if self.label_manager.has_regions:
             loss = DC_and_BCE_loss({},
                                     {'batch_dice': self.configuration_manager.batch_dice,
@@ -114,11 +128,10 @@ class nnUNetTrainerUNetPlusPlusPaper(nnUNetTrainerUNetPlusPlus):
 
         if self.enable_deep_supervision:
             deep_supervision_scales = self._get_deep_supervision_scales()
-            # eta_i == 1 for every output, normalised so the total loss stays on a comparable scale
-            # to the default trainer's. Note no entry is zeroed: under this scheme the shallowest
-            # branch IS supervised, unlike nnU-Net's default where it is dropped.
+            # Literal paper rule: eta_i == 1 for every output, with no normalization. This sums the
+            # branch losses and changes the total loss/gradient scale relative to the main grid.
+            # Note no entry is zeroed: the shallowest branch IS supervised, unlike nnU-Net's default.
             weights = np.ones(len(deep_supervision_scales), dtype=float)
-            weights = weights / weights.sum()
             loss = DeepSupervisionWrapper(loss, weights)
 
         if self._do_i_compile():

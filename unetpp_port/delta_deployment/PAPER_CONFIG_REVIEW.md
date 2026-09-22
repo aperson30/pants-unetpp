@@ -10,14 +10,19 @@ ways specified by the UNet++ paper:
 1. every full-resolution decoder branch receives the same relative loss weight;
 2. inference ensembles every decoder branch after the output nonlinearity.
 
-The loss weights are normalized to sum to one. Their relative weights are equal,
-while keeping the total loss scale comparable to the four grid cells. This is a
-deliberate nnU-Net comparison control: the paper writes `eta_i = 1`, but using an
-unnormalized sum would also multiply the SGD gradient scale by the number of
-branches and introduce a learning-rate-scale change. If the PI interprets
-"exact" as literal unnormalized coefficients rather than equal relative
-weighting, that is a separate scientific choice and must be settled before
-submission.
+The loss weights are the paper's literal, unnormalized `eta_i = 1` for every
+branch. The branch losses are summed, not averaged. This is a resolved design
+decision based on the paper's explicit text; it intentionally does not copy the
+official nnU-Net integration's fallback to nnU-Net's default decaying weights.
+
+This choice introduces a real interpretation limitation. With N branches, the
+total loss and gradient can be roughly N times the scale of a normalized
+equal-weight objective. Because the learning rate is otherwise unchanged, the
+effective SGD step scale differs from the four main grid cells. The fifth
+configuration is therefore a reproduction of the paper's coupled supervision
+and ensemble rules, not a clean isolated ablation of those rules at matched
+optimization scale. Any performance difference may be partly attributable to
+the loss/LR-scale shift and must be reported that way.
 
 The previous implementation averaged raw logits. That is not the paper's
 ensemble: softmax(mean(logits)) is a normalized geometric mean, not the
@@ -77,9 +82,9 @@ bit-for-bit reproduction of the original 2D architecture.
    readable.
 6. Confirm at least 300 GB free under `/tmp` and adequate checkpoint space under
    `/work/hdd`.
-7. Resolve with the PI whether equal weights means normalized equal relative
-   weights (current controlled-comparison implementation) or literal
-   unnormalized `eta_i = 1`.
+7. Confirm the launch commit retains literal unnormalized `eta_i = 1` for every
+   branch and that the report identifies the resulting loss/gradient-scale
+   confound. This decision is resolved; do not renormalize the weights.
 8. Submit only after an explicit final go-ahead. Record the job ID and frozen
    commit; do not submit a PSC duplicate simultaneously.
 9. After verified training completion, submit `delta_evaluate_paper.sbatch` to

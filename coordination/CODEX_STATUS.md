@@ -352,3 +352,24 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - New PSC Bridges-2 access is a credible H100-80GB fallback, but no port or duplicate was launched.
   Official charging is 2 allocation units per H100 GPU-hour; performance and queue benefit require
   a short real-data calibration before moving work. Live Delta grid job 22293168 was not modified.
+
+### 2026-09-21 — Paper loss weighting resolved to literal unnormalized eta_i=1
+
+- Source review resolved the fifth configuration's weighting rule: the paper explicitly specifies
+  `eta_i = 1`, while the authors' official nnU-Net integration falls back to nnU-Net's default
+  decaying deep-supervision weights. Because this fifth trainer exists to test the paper design that
+  the official integration did not implement, it now assigns every full-resolution branch the
+  literal coefficient 1.0 and does not divide by the number of branches.
+- This is not optimization-scale neutral. Summing N branch losses can make the total gradient about
+  N times the corresponding normalized equal-weight objective while retaining the same optimizer
+  learning rate. The trainer docstring and launch review now state plainly that results may reflect
+  both the coupled paper supervision/ensemble design and the effective SGD-step-scale shift; the
+  fifth run is not a clean single-variable ablation against the four normalized grid cells.
+- Updated the trainer contract to require exact factors `[1.0, 1.0, 1.0]` in the test architecture
+  and a total factor of 3.0, preventing an accidental return to averaging. Nothing was submitted and
+  the live four-cell grid job was not modified.
+- Bash syntax, Python byte-compilation, and `git diff --check` pass locally. Runtime execution of the
+  PyTorch trainer contracts is still pending: the local WSL/Windows environments have no PyTorch,
+  and the user's prior Delta ControlMaster socket was absent at review time. Do not call this revision
+  runtime-cleared until the same isolated Delta contract suite is rerun after authenticated access is
+  restored.
