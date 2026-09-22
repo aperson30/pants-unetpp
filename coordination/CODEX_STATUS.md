@@ -422,3 +422,10 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   serial converter on all nine real cases: CT files were byte-identical, and case lists, dataset.json,
   label voxels, affines and NIfTI headers all matched exactly. `PARALLEL_CONVERSION_PARITY_PASS` and
   `BRIDGES2_PARALLEL_CONVERSION_VERIFIED` both passed; the temporary duplicate output was removed.
+- H100 gate 46755946 ran for 4m09s (0.0692 H100-hours) and completed the UNet++ DS-on arm: finite
+  losses, class-28/state checks passed, steady measured updates were 0.7302/0.4274/0.4138s. It then
+  failed before cell two because nnUNetTrainer mutates its input plans by popping
+  `continue_training`; the harness had reused the same dictionary. This is a calibration-harness
+  bug, not a model/stack failure. The fix deep-copies plans per cell and checkpoints each completed
+  cell's JSON incrementally. No retry has been submitted because only 1m51s remains under the user's
+  original 0.1-H100-hour authorization, insufficient for another cold Python/compile startup.

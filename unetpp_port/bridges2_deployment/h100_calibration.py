@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import gc
 import importlib
 import json
@@ -66,8 +67,13 @@ def run_one(name: str, plans: dict, dataset_json: dict, warmup: int, steps: int)
     torch.cuda.manual_seed_all(20260922)
     module_name, class_name = TRAINERS[name]
     trainer_class = getattr(importlib.import_module(module_name), class_name)
+    # nnUNetTrainer.__init__ deliberately pops continue_training from the plans dictionary. Each
+    # independent cell therefore needs its own copy; sharing one object makes cell two fail even
+    # though the model/stack is healthy.
+    trainer_plans = copy.deepcopy(plans)
+    trainer_plans.setdefault("continue_training", False)
     trainer = trainer_class(
-        plans=plans,
+        plans=trainer_plans,
         configuration="3d_fullres",
         fold=0,
         dataset_json=dataset_json,
@@ -142,6 +148,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--warmup", type=int, default=1)
     parser.add_argument("--steps", type=int, default=3)
+    parser.add_argument("--trainers", nargs="+", choices=tuple(TRAINERS))
     args = parser.parse_args()
 
     plans = json.loads(args.plans.read_text(encoding="utf-8"))
@@ -152,23 +159,33 @@ def main() -> None:
     if dataset_json["labels"].get("pancreatic_lesion") != 28:
         raise RuntimeError("Calibration dataset does not map pancreatic_lesion to class 28")
 
+    selected_trainers = args.trainers or list(TRAINERS)
     started = time.time()
-    results = [run_one(name, plans, dataset_json, args.warmup, args.steps) for name in TRAINERS]
-    payload = {
-        "ok": True,
-        "gpu": torch.cuda.get_device_name(0),
-        "gpu_capability": list(torch.cuda.get_device_capability(0)),
-        "torch": torch.__version__,
-        "cuda": torch.version.cuda,
-        "cudnn": torch.backends.cudnn.version(),
-        "elapsed_s": time.time() - started,
-        "physical_batch_size": 4,
-        "patch_size": plans["configurations"]["3d_fullres"]["patch_size"],
-        "results": results,
-    }
+    results = []
+
+    def payload(ok: bool) -> dict:
+        return {
+            "ok": ok,
+            "gpu": torch.cuda.get_device_name(0),
+            "gpu_capability": list(torch.cuda.get_device_capability(0)),
+            "torch": torch.__version__,
+            "cuda": torch.version.cuda,
+            "cudnn": torch.backends.cudnn.version(),
+            "elapsed_s": time.time() - started,
+            "physical_batch_size": 4,
+            "patch_size": plans["configurations"]["3d_fullres"]["patch_size"],
+            "requested_trainers": selected_trainers,
+            "results": results,
+        }
+
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    print("RESULT_JSON:" + json.dumps(payload), flush=True)
+    for name in selected_trainers:
+        results.append(run_one(name, plans, dataset_json, args.warmup, args.steps))
+        # Preserve every completed cell even if a later cell or the scheduler wall limit fails.
+        args.output.write_text(json.dumps(payload(False), indent=2), encoding="utf-8")
+    final_payload = payload(True)
+    args.output.write_text(json.dumps(final_payload, indent=2), encoding="utf-8")
+    print("RESULT_JSON:" + json.dumps(final_payload), flush=True)
     print("BRIDGES2_H100_CALIBRATION_PASS", flush=True)
 
 
