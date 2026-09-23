@@ -21,9 +21,9 @@ guard falsely reported zero and stopped before training. Its two retries were ca
 approval. The guard now compares exact case IDs across raw CTs, raw labels, preprocessed image
 `.b2nd`, preprocessed `_seg.b2nd`, and metadata `.pkl`; the case-ID version passed on the existing
 real nine-case Bridges-2 calibration, and the final nonempty-file version passed six synthetic
-positive/negative tests. A final real-data recheck is still pending because the Bridges-2 SSH
-master expired. This corrected launcher has **not** been submitted; job `46842964` and its frozen
-retries remain unusable.
+positive/negative tests. After the Bridges-2 SSH master was restored, the exact final guard also
+passed on the real nine-case calibration from the corrected remote checkout. This corrected
+launcher has **not** been submitted; job `46842964` and its frozen retries remain unusable.
 
 Target: PSC Bridges-2 `GPU-shared`, H100-80GB, account `cis260296p`. The production comparison is
 the unchanged 1,000-epoch, physical-batch-4 2x2 grid. Each cell uses one GPU; two cells run in

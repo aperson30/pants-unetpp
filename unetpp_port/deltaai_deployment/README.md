@@ -39,9 +39,9 @@ sampling, or loss change is introduced.
   the real Bridges-2 calibration uses `.b2nd`. The fallback now shares an exact
   case-ID guard across raw images/labels and preprocessed image, segmentation,
   and metadata files. Its case-ID version passed against the Bridges-2 nine-case
-  real calibration; the final nonempty-file version passed synthetic tests but
-  awaits a real-data recheck because the Bridges-2 SSH master expired. The DeltaAI
-  calibration also could not be rechecked because its own master was unavailable.
+  real calibration; after the Bridges-2 SSH master was restored, the final
+  nonempty-file version passed there too. The DeltaAI calibration could not be
+  rechecked because its own master was unavailable.
 - A cell is complete only when its final checkpoint, readable validation summary,
   and all 1,800 fold-0 validation NIfTIs exist. A final checkpoint with incomplete
   validation runs `--val`. A timeout successor is bounded; a failed trainer or failed

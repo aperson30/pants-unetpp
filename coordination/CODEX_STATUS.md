@@ -568,3 +568,13 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   so its nine-case calibration could not be rechecked directly; that remains a launch gate for
   DeltaAI. The failed Bridges-2 frozen jobs cannot be repaired by this new commit and remain
   canceled. Delta `22293168` remains the only queued grid job unless separately authorized.
+
+### 2026-09-23 21:43 UTC — exact Bridges-2 checkout passed final guard gate, no job submitted
+
+- User restored a new Bridges-2 SSH master. Fast-forwarded its previously clean checkout to
+  `00d9425f750478933345ec0c43537d3ab2cb365f`, then reran the exact committed guard on
+  the real nine-case calibration. The final version, including nonempty-file checks, returned
+  `PREPROCESSED_CASES_VERIFIED count=9 data_identifier=nnUNetPlans_3d_fullres`.
+- All six unit tests passed under the Bridges-2 venv, the corrected launcher passed `bash -n`,
+  and `sbatch --test-only` parsed it without submission. This is a staging-contract gate, not a
+  full 9,000-case rerun or a tumor-recall result. **No Bridges-2 GPU job was submitted.**
