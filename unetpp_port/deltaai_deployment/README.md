@@ -35,6 +35,13 @@ sampling, or loss change is introduced.
   DeltaAI compute node has not yet been tested; a denied connection would consume
   an allocation without reaching training. Also confirm the installed trainer
   overlay will not conflict with anyone else's active use of the shared venv.
+- The previous `*.npz` staging assertion was wrong for this nnU-Net 2.8.1 stack:
+  the real Bridges-2 calibration uses `.b2nd`. The fallback now shares an exact
+  case-ID guard across raw images/labels and preprocessed image, segmentation,
+  and metadata files. Its case-ID version passed against the Bridges-2 nine-case
+  real calibration; the final nonempty-file version passed synthetic tests but
+  awaits a real-data recheck because the Bridges-2 SSH master expired. The DeltaAI
+  calibration also could not be rechecked because its own master was unavailable.
 - A cell is complete only when its final checkpoint, readable validation summary,
   and all 1,800 fold-0 validation NIfTIs exist. A final checkpoint with incomplete
   validation runs `--val`. A timeout successor is bounded; a failed trainer or failed

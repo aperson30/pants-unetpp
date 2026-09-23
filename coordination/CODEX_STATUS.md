@@ -549,3 +549,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Both assert `*.npz` after preprocessing, while the installed nnU-Net stack emits `.b2nd`.
   A future fix must verify the real image, `_seg`, and metadata file counts against 9,000 cases,
   test the guard against the real calibration output, and receive a fresh launch review.
+
+### 2026-09-23 21:41 UTC — preprocessing-format guard fixed and tested; no GPU job submitted
+
+- Replaced both erroneous `*.npz` assertions in the Bridges-2 and unsubmitted DeltaAI launchers
+  with a shared, standard-library-only guard. It checks the expected count and exact PanTS case-ID
+  sets across raw CTs, raw labels, preprocessed image `.b2nd`, label `_seg.b2nd`, and `.pkl`
+  metadata, using the full-resolution `data_identifier` from the actual plans. It runs before
+  committing the stage marker and again on reuse/resume.
+- Six synthetic tests passed, including missing image, segmentation, metadata, empty file, and same-count
+  wrong-case rejection. The case-ID guard passed read-only against Bridges-2's existing nine-case
+  real calibration before the final nonempty-file check was added:
+  `PREPROCESSED_CASES_VERIFIED count=9 data_identifier=nnUNetPlans_3d_fullres`.
+  Both Bash launchers passed syntax and diff checks. A repo-wide deployment scan found no other
+  active `*.npz` assertions in Delta's queued launcher. The final nonempty-file version still
+  needs the same real-data recheck because the Bridges-2 SSH master expired during that attempt.
+- No new Bridges-2, DeltaAI, or Delta GPU job was submitted. DeltaAI's SSH master had expired,
+  so its nine-case calibration could not be rechecked directly; that remains a launch gate for
+  DeltaAI. The failed Bridges-2 frozen jobs cannot be repaired by this new commit and remain
+  canceled. Delta `22293168` remains the only queued grid job unless separately authorized.

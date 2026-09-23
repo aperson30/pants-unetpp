@@ -224,11 +224,9 @@ plans['configurations']['3d_fullres']['batch_size'] = 4
 (pre / 'nnUNetPlansBS4.json.tmp').write_text(json.dumps(plans, indent=2))
 print('full-dataset patch:', plans['configurations']['3d_fullres']['patch_size'])
 PY
-    data_id=$("$VENV/bin/python" -c "import json; p=json.load(open('$STAGE_MARKER.tmp')); print(p['configurations']['3d_fullres']['data_identifier'])")
-    n_preprocessed=$(find "$LOCAL_PREPROCESSED/Dataset001_PanTS/$data_id" -maxdepth 1 -type f -name '*.npz' | wc -l)
-    [ "$n_preprocessed" -eq 9000 ] || {
-        echo "ERROR: expected 9000 preprocessed npz files, got $n_preprocessed" >&2; exit 1;
-    }
+    "$VENV/bin/python" "$FROZEN/unetpp_port/verify_preprocessed_cases.py" \
+      "$LOCAL_RAW/Dataset001_PanTS" "$LOCAL_PREPROCESSED/Dataset001_PanTS" \
+      "$STAGE_MARKER.tmp" --expected 9000
     mv "$STAGE_MARKER.tmp" "$STAGE_MARKER"
     echo "FULL_DATASET_STAGE_DONE"
 else
@@ -245,8 +243,9 @@ assert d['numTraining'] == 9000
 assert d['labels']['pancreatic_lesion'] == 28
 print('staged dataset contract passed: 9000 cases, class 28, physical batch 4')
 PY
-data_id=$("$VENV/bin/python" -c "import json; p=json.load(open('$STAGE_MARKER')); print(p['configurations']['3d_fullres']['data_identifier'])")
-[ "$(find "$LOCAL_PREPROCESSED/Dataset001_PanTS/$data_id" -maxdepth 1 -type f -name '*.npz' | wc -l)" -eq 9000 ]
+"$VENV/bin/python" "$FROZEN/unetpp_port/verify_preprocessed_cases.py" \
+  "$LOCAL_RAW/Dataset001_PanTS" "$LOCAL_PREPROCESSED/Dataset001_PanTS" \
+  "$STAGE_MARKER" --expected 9000
 
 export nnUNet_raw=$LOCAL_RAW
 export nnUNet_preprocessed=$LOCAL_PREPROCESSED

@@ -1,6 +1,6 @@
 # Bridges-2 deployment status
 
-## September 23 incident — old frozen retry must stay held
+## September 23 staging incidents — old frozen jobs must not be reused
 
 Production job `46810860` reached full-data conversion, then failed before preprocessing or any
 training epoch. The script was still in `$SOURCE/PanTS/data` when it removed `$SOURCE`; the next
@@ -11,10 +11,19 @@ failed with the same oneMKL message and exit 2; repeating the cleanup after `cd 
 passed with exit 0. The launch script now makes that directory change before cleanup. The
 unsubmitted DeltaAI fallback had the same bug and received the same fix.
 
-The automatic successor `46835559` is **held** (`JobHeldUser`). It points to the original
-commit-frozen script, which still contains the bug. Do not simply release it: that would rerun
-the old code and risk another wasted allocation. Decide separately how to launch the corrected
-commit-pinned version, while Delta job `22293168` remains queued and untouched.
+The automatic successor `46835559` was held, then canceled after a new corrected job was safely
+queued. It pointed to the original commit-frozen script, which still contained the bug. Delta job
+`22293168` remained queued and untouched.
+
+Later on September 23, corrected job `46842964` finished preprocessing 9,000 cases but its
+launcher then looked for `*.npz` files. The validated nnU-Net 2.8.1 output uses `.b2nd`, so the
+guard falsely reported zero and stopped before training. Its two retries were canceled with user
+approval. The guard now compares exact case IDs across raw CTs, raw labels, preprocessed image
+`.b2nd`, preprocessed `_seg.b2nd`, and metadata `.pkl`; the case-ID version passed on the existing
+real nine-case Bridges-2 calibration, and the final nonempty-file version passed six synthetic
+positive/negative tests. A final real-data recheck is still pending because the Bridges-2 SSH
+master expired. This corrected launcher has **not** been submitted; job `46842964` and its frozen
+retries remain unusable.
 
 Target: PSC Bridges-2 `GPU-shared`, H100-80GB, account `cis260296p`. The production comparison is
 the unchanged 1,000-epoch, physical-batch-4 2x2 grid. Each cell uses one GPU; two cells run in
