@@ -533,3 +533,19 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Keep the established race rule: do not cancel Delta merely because Bridges-2 is queued or
   staging. Check for real nnU-Net epochs first, then verify Delta remains pending before any
   cancellation. The recurring monitor remains paused; no automatic cross-cluster action is active.
+
+### 2026-09-23 21:29 UTC — full Bridges-2 preprocessing completed, then wrong format guard failed
+
+- Corrected Bridges-2 job **46842964** reached all 9,000 preprocessed cases in about 7h05m of
+  allocation but failed before training: its launcher asserted 9,000 `*.npz` files and found 0.
+  The existing nine-case calibration's actual nnU-Net 2.8.1 outputs are `.b2nd` image arrays,
+  matching the observed full-run preprocessor progress through 9,000/9,000. This is a launcher
+  guard mismatch, not evidence that 9,000 cases were lost or that a model epoch ran.
+- The commit-frozen automatic retry **46846139** had already begun staging on another node;
+  dependent **46882170** was queued. With explicit user approval, canceled only those two
+  Bridges-2 jobs. Slurm accounting confirmed both `CANCELLED`; neither is still queued. Delta
+  **22293168** remains pending and untouched, with a volatile Sep 23 18:41 CDT start estimate.
+- **Do not resubmit the current frozen Bridges-2 script or the unsubmitted DeltaAI fallback as-is.**
+  Both assert `*.npz` after preprocessing, while the installed nnU-Net stack emits `.b2nd`.
+  A future fix must verify the real image, `_seg`, and metadata file counts against 9,000 cases,
+  test the guard against the real calibration output, and receive a fresh launch review.
