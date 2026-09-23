@@ -497,3 +497,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   not only the login node; verify frozen-source trainer imports and the installed venv
   are not in concurrent use; and make a fresh cross-cluster queue/completion comparison.
   No full-dataset staging or tumor-recall run has occurred on DeltaAI.
+
+### 2026-09-23 09:06 UTC — Bridges-2 staging failure reproduced and launcher fixed; retry held
+
+- Bridges-2 production job `46810860` ran on w005 for 2h10m49s and failed before any training
+  epoch. The log reached full-data conversion and affine repair, then the next PyTorch import
+  emitted `Intel oneMKL FATAL ERROR: Cannot load .../libtorch_cpu.so`. Delta `22293168` remained
+  pending and was not touched.
+- With the user's approval, held automatic successor `46835559`; verified `JobHeldUser`. It
+  points to the old commit-frozen launcher and **must not simply be released**.
+- Found the exact sequence in both Bridges-2 and the unsubmitted DeltaAI fallback: the shell
+  stayed in `$SOURCE/PanTS/data` while `rm -rf "$SOURCE"` removed that cwd. CPU-only Bridges-2
+  compute job `46842686` loaded the preprocessor successfully from a valid cwd. A separate
+  disposable deleted-cwd test produced the same oneMKL error with exit 2; leaving the source
+  directory before deletion made the same import pass with exit 0.
+- Added `cd "$LOCAL_ROOT"` immediately before source deletion in both launchers. Bash syntax
+  and diff checks passed. This changes staging control flow only, not data conversion, model,
+  batch size, optimizer, loss, or epochs. The corrected source still needs a new reviewed launch
+  path because the held retry is pinned to the old script; no GPU retry was released or submitted.

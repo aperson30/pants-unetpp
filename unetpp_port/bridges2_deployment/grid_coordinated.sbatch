@@ -198,6 +198,9 @@ if [ ! -f "$STAGE_MARKER" ]; then
       --test-answer-key-dir "$LOCAL_ROOT/empty_test_answer_key" --workers 24
     "$VENV/bin/python" "$FROZEN/data_conversion/fix_affine_orthonormality.py" \
       "$LOCAL_RAW/Dataset001_PanTS"
+    # We are still inside $SOURCE/PanTS/data. Deleting the process's cwd makes
+    # the following PyTorch import fail with a misleading oneMKL/libtorch_cpu.so error.
+    cd "$LOCAL_ROOT"
     rm -rf "$SOURCE"
     check_space
 

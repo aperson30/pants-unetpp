@@ -1,5 +1,21 @@
 # Bridges-2 deployment status
 
+## September 23 incident — old frozen retry must stay held
+
+Production job `46810860` reached full-data conversion, then failed before preprocessing or any
+training epoch. The script was still in `$SOURCE/PanTS/data` when it removed `$SOURCE`; the next
+nnU-Net/PyTorch import therefore ran from a deleted working directory and emitted a misleading
+`Intel oneMKL FATAL ERROR: Cannot load .../libtorch_cpu.so`. A bounded zero-GPU compute-node
+import test (`46842686`) passed from a valid directory. A disposable deleted-cwd reproduction
+failed with the same oneMKL message and exit 2; repeating the cleanup after `cd "$LOCAL_ROOT"`
+passed with exit 0. The launch script now makes that directory change before cleanup. The
+unsubmitted DeltaAI fallback had the same bug and received the same fix.
+
+The automatic successor `46835559` is **held** (`JobHeldUser`). It points to the original
+commit-frozen script, which still contains the bug. Do not simply release it: that would rerun
+the old code and risk another wasted allocation. Decide separately how to launch the corrected
+commit-pinned version, while Delta job `22293168` remains queued and untouched.
+
 Target: PSC Bridges-2 `GPU-shared`, H100-80GB, account `cis260296p`. The production comparison is
 the unchanged 1,000-epoch, physical-batch-4 2x2 grid. Each cell uses one GPU; two cells run in
 parallel, so there is no DDP or gradient-accumulation change to the experiment.

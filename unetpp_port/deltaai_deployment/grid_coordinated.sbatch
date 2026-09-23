@@ -200,6 +200,8 @@ if [ ! -f "$STAGE_MARKER" ]; then
       --test-answer-key-dir "$LOCAL_ROOT/empty_test_answer_key" --workers 24
     "$VENV/bin/python" "$FROZEN/data_conversion/fix_affine_orthonormality.py" \
       "$LOCAL_RAW/Dataset001_PanTS"
+    # Leave $SOURCE before removing it; a deleted cwd breaks the next PyTorch import.
+    cd "$LOCAL_ROOT"
     rm -rf "$SOURCE"
     check_space 500
 
