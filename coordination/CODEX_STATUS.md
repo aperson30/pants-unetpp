@@ -515,3 +515,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   and diff checks passed. This changes staging control flow only, not data conversion, model,
   batch size, optimizer, loss, or epochs. The corrected source still needs a new reviewed launch
   path because the held retry is pinned to the old script; no GPU retry was released or submitted.
+
+### 2026-09-23 09:13 UTC — corrected Bridges-2 job submitted; old broken retry removed
+
+- User approved one fresh two-H100 launch after the deleted-cwd fix. Verified the Bridges-2
+  checkout was clean on `main` at the authorized fork, then fast-forwarded it from `b2ca075b`
+  to `10207a29a1aedc6c522c7b4b6474b3f89bc4018c`. The diff from the original training
+  commit contains no trainer, model, or data-conversion changes; the only production-launcher
+  change is leaving `$SOURCE` before its deletion.
+- The actual remote launcher and submit wrapper passed `bash -n`; `sbatch --test-only` passed.
+  The existing four-cell real-H100 gate JSON was present. Submitted through the guarded wrapper:
+  corrected Bridges-2 job **46842964**, run ID `20260923T091244Z_10207a29a1ae`.
+- Verified 46842964 was `PENDING (Priority)` and pointed at the corrected repo script. Only
+  then canceled the old held successor **46835559**; accounting confirmed `CANCELLED` and the
+  Bridges-2 user queue showed only 46842964. Delta **22293168** remained `PENDING` and untouched.
+  No training epoch has started yet, and Bridges-2 currently reports no reliable start estimate.
+- Keep the established race rule: do not cancel Delta merely because Bridges-2 is queued or
+  staging. Check for real nnU-Net epochs first, then verify Delta remains pending before any
+  cancellation. The recurring monitor remains paused; no automatic cross-cluster action is active.
