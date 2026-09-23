@@ -476,3 +476,24 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   CPU-only evaluation contract passed in the Bridges-2 venv (known positive/negative cases, class-28
   mask compaction and all five metric expectations). The full 901-case evaluator has not yet run and
   must receive a final prelaunch review when training is complete.
+
+### 2026-09-22 23:59 UTC — DeltaAI two-GH200 fallback prepared, not submitted
+
+- Added `unetpp_port/deltaai_deployment/grid_coordinated.sbatch`, `submit_grid.sh`, and
+  `README.md` as an isolated fallback for the unchanged four 1,000-epoch cells. It runs
+  one physical-batch-4 trainer per GH200, two at a time, using the validated 2.10/cu129
+  stack, pinned trainer sources, 9,000-case node-local staging, separate persistent
+  `/work/nvme` results, sparse validation, and a bounded timeout-recovery chain.
+- The submission wrapper is deliberately gated by a commit-matched approval JSON that
+  does not exist; neither this preparation nor the Slurm `--test-only` check submitted
+  a DeltaAI job. `squeue -u asanjeev` was empty immediately afterward. Existing Delta
+  22293168 and Bridges-2 46810860 remain untouched.
+- Bash syntax and the explicit 13-file trainer overlay list passed static checks. The
+  non-submitting two-GH200 `sbatch --test-only` parsed the script and predicted Sep 24
+  08:28 CDT, a volatile estimate later than an earlier Sep 23 prediction. Live
+  `/work/nvme` group quota query reported no enforced block limit, but use remains
+  subject to site policy.
+- Launch gates still open: confirm dataset-host egress from a DeltaAI **compute node**,
+  not only the login node; verify frozen-source trainer imports and the installed venv
+  are not in concurrent use; and make a fresh cross-cluster queue/completion comparison.
+  No full-dataset staging or tumor-recall run has occurred on DeltaAI.
