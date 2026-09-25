@@ -56,10 +56,22 @@ exactly equal. The parallel path is therefore allowed only as a data-staging opt
 `submit_grid.sh` refuses to launch without a reviewed `H100_GATE_APPROVED.json`, a clean checkout,
 and a pinned commit. `grid_coordinated.sbatch` freezes that source revision, asserts 9,000 training
 cases, class 28 and physical batch 4, and requires 9,000 preprocessed cases. It stages only into the
-job's node-local `$LOCAL`, preserves checkpoints/validation on Ocean, and uses a bounded `afterany`
-successor chain for 48-hour recovery. A cell is complete only when both `checkpoint_final.pth` and
+job's node-local `$LOCAL` and preserves checkpoints/validation on Ocean. Automatic `afterany`
+retries are disabled for this backup launch: an unexpected failure stops for diagnosis, while a
+time-limit continuation can be reviewed and submitted manually from persistent checkpoints.
+A cell is complete only when both `checkpoint_final.pth` and
 all 1,800 fold-validation predictions plus a readable summary exist; a final checkpoint with an
 incomplete validation triggers `--val`, not a false done marker.
+
+The original launcher backgrounded two separate `srun --exclusive --exact` steps. That pattern
+serialized on Delta, so the Bridges-2 backup now launches one two-task `srun` step per model pair.
+Bridges-2 H100 probe `47030369` completed in 22 seconds: ranks 0 and 1 both started at
+08:51:05 UTC, both ended at 08:51:25 UTC, and reported distinct GPU UUIDs. This verifies the
+task/GPU-binding pattern, not the complete training run. The production launcher rechecks distinct
+physical GPU UUIDs on its assigned node before any dataset staging. Before starting either trainer, the
+launcher generates nnU-Net's exact default five-fold split once with seed 12345, avoiding a
+concurrent write to `splits_final.json`; the same recipe exactly matched the existing real
+nine-case calibration split (`EXACT_SPLIT_PARITY=True`).
 
 Delta job 22293168 must remain queued while Bridges-2 is queued or merely staging. Cancel it only
 after a Bridges-2 trainer is visibly executing real epochs, per the user's explicit race rule.

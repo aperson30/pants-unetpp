@@ -1,7 +1,7 @@
 #!/bin/bash
 # Four quality-matched 1,000-epoch cells on one Bridges-2 node, two H100s at a time.
 # The full dataset is staged once per allocation into node-local $LOCAL. Checkpoints and validation
-# outputs remain on persistent Ocean so a successor job can safely resume on a different node.
+# outputs remain on persistent Ocean so a reviewed manual continuation can resume on a different node.
 #SBATCH --account=cis260296p
 #SBATCH --partition=GPU-shared
 #SBATCH --gres=gpu:h100-80:2
@@ -18,8 +18,12 @@ ROOT=/ocean/projects/cis260296p/asanjeev/pants_unetpp
 REPO=$ROOT/repo
 VENV=$ROOT/venv
 RESULTS_ROOT=$ROOT/results
-MAX_RETRIES=4
+# Do not automatically restage the full dataset after an unknown failure. A past
+# launcher bug caused two costly retries before it was diagnosed. A time-limit
+# continuation can be submitted manually after checking logs and checkpoints.
+MAX_RETRIES=0
 RETRY_COUNT=${GRID_RETRY_COUNT:-0}
+export GRID_RETRY_COUNT=$RETRY_COUNT
 : "${GRID_COMMIT:?submit through submit_grid.sh so GRID_COMMIT is pinned}"
 : "${GRID_RUN_ID:?submit through submit_grid.sh so GRID_RUN_ID is stable}"
 [[ "$GRID_COMMIT" =~ ^[0-9a-f]{40}$ ]] || { echo "ERROR: invalid GRID_COMMIT" >&2; exit 1; }
@@ -33,6 +37,26 @@ echo "job=$SLURM_JOB_ID retry=$RETRY_COUNT/$MAX_RETRIES commit=$GRID_COMMIT run=
 nvidia-smi -L
 "$VENV/bin/python" -c "import torch; assert torch.__version__.startswith('2.10.0+cu126'), torch.__version__; print('torch', torch.__version__, 'cuda', torch.version.cuda, 'cudnn', torch.backends.cudnn.version())"
 git -C "$REPO" cat-file -e "$GRID_COMMIT^{commit}"
+
+# Recheck physical binding on the actual assigned H100 node before paying for
+# full-dataset staging. Rank-local CUDA_VISIBLE_DEVICES may be 0 for both tasks;
+# UUIDs, not ordinal device numbers, must differ.
+gpu_map=$(srun --nodes=1 --ntasks=2 --ntasks-per-node=2 \
+  --gpus-per-task=1 --gpu-bind=single:1 --cpus-per-task=12 --mem=200G \
+  bash -c '
+    set -euo pipefail
+    mapfile -t ids < <(nvidia-smi --query-gpu=uuid --format=csv,noheader)
+    [ "${#ids[@]}" -eq 1 ]
+    printf "%s %s\n" "$SLURM_PROCID" "${ids[0]}"
+  ')
+echo "physical GPU map by rank:"
+printf '%s\n' "$gpu_map"
+ranks=$(printf '%s\n' "$gpu_map" | awk '{print $1}' | sort)
+unique_uuids=$(printf '%s\n' "$gpu_map" | awk '{print $2}' | sort -u | wc -l)
+if [ "$ranks" != "$(printf '0\n1')" ] || [ "$unique_uuids" -ne 2 ]; then
+    echo "ERROR: paired trainers would not see distinct physical H100s" >&2
+    exit 1
+fi
 
 if [ "$RETRY_COUNT" -gt "$MAX_RETRIES" ]; then
     echo "ERROR: retry count exceeded $MAX_RETRIES; refusing an unbounded resubmission chain" >&2
@@ -117,8 +141,8 @@ if cell_done "$D1" && cell_done "$D2" && cell_done "$D3" && cell_done "$D4"; the
     exit 0
 fi
 
-# Establish a non-overlapping recovery job before expensive staging/training. Slurm's afterany
-# dependency prevents concurrent chains. A successful run cancels this pending successor.
+# Kept as an explicitly disabled recovery path for a future reviewed policy.
+# With MAX_RETRIES=0, no successor is created after a crash or time limit.
 SUCCESSOR=""
 if [ "$RETRY_COUNT" -lt "$MAX_RETRIES" ]; then
     SUCCESSOR=$(sbatch --parsable --dependency="afterany:$SLURM_JOB_ID" \
@@ -247,6 +271,39 @@ PY
   "$LOCAL_RAW/Dataset001_PanTS" "$LOCAL_PREPROCESSED/Dataset001_PanTS" \
   "$STAGE_MARKER" --expected 9000
 
+# nnU-Net normally creates this file in do_split(). Both trainers in a pair
+# enter do_split() independently, so create the exact seeded default once
+# before launching them. The recipe was checked against the existing real
+# nine-case calibration split (EXACT_SPLIT_PARITY=True).
+"$VENV/bin/python" - <<PY
+import json
+import os
+from pathlib import Path
+import numpy as np
+from batchgenerators.utilities.file_and_folder_operations import save_json
+from nnunetv2.training.dataloading.nnunet_dataset import infer_dataset_class
+from nnunetv2.utilities.crossval_split import generate_crossval_split
+
+base = Path('$LOCAL_PREPROCESSED/Dataset001_PanTS')
+plans = json.loads((base / 'nnUNetPlans.json').read_text())
+folder = base / plans['configurations']['3d_fullres']['data_identifier']
+dataset_class = infer_dataset_class(str(folder))
+dataset = dataset_class(str(folder), identifiers=None,
+                        folder_with_segs_from_previous_stage=None)
+keys = list(np.sort(list(dataset.identifiers)))
+assert len(keys) == 9000, len(keys)
+expected = generate_crossval_split(keys, seed=12345, n_splits=5)
+split_file = base / 'splits_final.json'
+if split_file.exists():
+    assert json.loads(split_file.read_text()) == expected, 'existing fold split changed'
+else:
+    temporary = base / 'splits_final.json.incomplete'
+    save_json(expected, str(temporary))
+    os.replace(temporary, split_file)
+assert json.loads(split_file.read_text()) == expected
+print('DEFAULT_FOLD_SPLIT_VERIFIED cases=9000 folds=5 seed=12345')
+PY
+
 export nnUNet_raw=$LOCAL_RAW
 export nnUNet_preprocessed=$LOCAL_PREPROCESSED
 export nnUNet_results=$RESULTS_ROOT
@@ -256,42 +313,53 @@ export nnUNet_n_proc_DA=10
 export nnUNet_compile=true
 mkdir -p "$LOCAL_ROOT/torchinductor_cache"
 
-LAST_PID=""
-run_cell() {
-    local trainer=$1 log_name=$2 folder=$3
-    LAST_PID=""
-    if cell_done "$folder"; then
-        echo "[$trainer] final checkpoint and validation complete; skipping"
-        return 0
-    fi
-    local args=(1 3d_fullres 0 -tr "$trainer" -p nnUNetPlansBS4)
-    if [ -s "$folder/checkpoint_final.pth" ]; then
-        echo "[$trainer] final checkpoint exists but validation is incomplete; running --val"
-        args+=(--val)
-    elif [ -s "$folder/checkpoint_latest.pth" ]; then
-        echo "[$trainer] resuming checkpoint_latest.pth"
-        args+=(--c)
+mode_for_cell() {
+    if cell_done "$1"; then
+        echo skip
+    elif [ -s "$1/checkpoint_final.pth" ]; then
+        echo validate
+    elif [ -s "$1/checkpoint_latest.pth" ]; then
+        echo resume
     else
-        echo "[$trainer] starting from epoch 0"
+        echo fresh
     fi
-    {
-      echo "=== job $SLURM_JOB_ID retry $RETRY_COUNT $(date -u) ==="
-      export TORCHINDUCTOR_CACHE_DIR="$LOCAL_ROOT/torchinductor_cache/$trainer"
-      mkdir -p "$TORCHINDUCTOR_CACHE_DIR"
-      srun --exclusive --exact --nodes=1 --ntasks=1 --gpus-per-task=1 \
-        --cpus-per-task=12 --mem=100G "$VENV/bin/nnUNetv2_train" "${args[@]}"
-    } >> "$ROOT/grid_logs/${log_name}.log" 2>&1 &
-    LAST_PID=$!
 }
 
 run_phase() {
     local t_a=$1 log_a=$2 dir_a=$3 t_b=$4 log_b=$5 dir_b=$6
-    local failed=0
-    run_cell "$t_a" "$log_a" "$dir_a"; local pid_a=$LAST_PID
-    run_cell "$t_b" "$log_b" "$dir_b"; local pid_b=$LAST_PID
-    if [ -n "$pid_a" ]; then wait "$pid_a" || failed=1; fi
-    if [ -n "$pid_b" ]; then wait "$pid_b" || failed=1; fi
-    [ "$failed" -eq 0 ] || return 1
+    TRAINER_A=$t_a LOG_A=$log_a MODE_A=$(mode_for_cell "$dir_a")
+    TRAINER_B=$t_b LOG_B=$log_b MODE_B=$(mode_for_cell "$dir_b")
+    export TRAINER_A LOG_A MODE_A TRAINER_B LOG_B MODE_B ROOT LOCAL_ROOT VENV
+    echo "pair modes: $TRAINER_A=$MODE_A, $TRAINER_B=$MODE_B"
+    if [ "$MODE_A" = skip ] && [ "$MODE_B" = skip ]; then
+        return 0
+    fi
+    # A single two-task step allows both trainers to run at once. Two separate
+    # --exclusive --exact srun steps serialized on Delta despite backgrounding.
+    if ! srun --nodes=1 --ntasks=2 --ntasks-per-node=2 \
+      --gpus-per-task=1 --gpu-bind=single:1 --cpus-per-task=12 --mem=200G \
+      --kill-on-bad-exit=0 --wait=0 --export=ALL bash -c '
+        set -euo pipefail
+        if [ "$SLURM_PROCID" -eq 0 ]; then
+            trainer=$TRAINER_A; log_name=$LOG_A; mode=$MODE_A
+        else
+            trainer=$TRAINER_B; log_name=$LOG_B; mode=$MODE_B
+        fi
+        if [ "$mode" = skip ]; then exit 0; fi
+        args=(1 3d_fullres 0 -tr "$trainer" -p nnUNetPlansBS4)
+        if [ "$mode" = validate ]; then args+=(--val); fi
+        if [ "$mode" = resume ]; then args+=(--c); fi
+        export TORCHINDUCTOR_CACHE_DIR="$LOCAL_ROOT/torchinductor_cache/$trainer"
+        mkdir -p "$TORCHINDUCTOR_CACHE_DIR"
+        {
+            echo "=== job $SLURM_JOB_ID retry $GRID_RETRY_COUNT rank $SLURM_PROCID $(date -u) ==="
+            echo "trainer=$trainer mode=$mode visible_gpu=$CUDA_VISIBLE_DEVICES"
+            "$VENV/bin/nnUNetv2_train" "${args[@]}"
+        } >> "$ROOT/grid_logs/${log_name}.log" 2>&1
+      '; then
+        echo "ERROR: at least one trainer in pair failed; see $ROOT/grid_logs/${log_a}.log and ${log_b}.log" >&2
+        return 1
+    fi
     cell_done "$dir_a" && cell_done "$dir_b"
 }
 
