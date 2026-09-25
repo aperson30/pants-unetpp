@@ -578,3 +578,26 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - All six unit tests passed under the Bridges-2 venv, the corrected launcher passed `bash -n`,
   and `sbatch --test-only` parsed it without submission. This is a staging-contract gate, not a
   full 9,000-case rerun or a tumor-recall result. **No Bridges-2 GPU job was submitted.**
+
+### 2026-09-25 23:53 UTC — fail-closed H100 backup queued; Delta remains pending
+
+- Delta production grid `22367938` was submitted on two H200s from the reviewed fail-closed
+  script; Slurm's stored batch script hash matched the reviewed source. It remains `PENDING
+  (Priority)`, with no training epoch or staging yet. Old broken continuation `22343101`
+  remains `PENDING (JobHeldUser)` and was not released.
+- Bridges-2 two-H100 probe `47030369` completed 0:0 in 22 seconds. Its two ranks started and
+  ended together and reported distinct physical H100 UUIDs. This proves one two-task `srun`
+  overlaps correctly there; it is not a training result.
+- Committed and pushed launcher-only fix `e35d3a77349a68963a25510b01eccf345b3022e8` to
+  `main`: one two-task step per model pair, physical UUID guard before full staging, and exact
+  nnU-Net default seed-12345 fold-split precreation before the paired trainers. The split
+  generator matched the existing real nine-case split exactly. Automatic `afterany` retries are
+  disabled (`MAX_RETRIES=0`) so unknown failures cannot repeatedly consume staging hours; a
+  time-cap continuation will require log/checkpoint review. Models, dataset, 1000 epochs,
+  physical batch 4, losses, and optimizer are unchanged. Local Bash syntax and diff checks passed.
+- Fast-forwarded the clean Bridges-2 checkout, passed `bash -n`, the approved H100 gate, and
+  `sbatch --test-only`. Submitted through the guarded wrapper as **Bridges-2 job `47104601`**,
+  run ID `20260925T235316Z_e35d3a77349a`. Verified `PENDING (Priority)`, no dependency,
+  and Slurm's stored script SHA-256 `dbc0b4fbbb27efa6c26298ef89aaba0ebb92096ce0b1c3c469792b0023b7ec9c`
+  matches the committed file. Delta `22367938` remains pending; do not cancel either merely
+  because the other starts staging. Recheck real epoch logs before choosing a winner.
