@@ -601,3 +601,26 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   and Slurm's stored script SHA-256 `dbc0b4fbbb27efa6c26298ef89aaba0ebb92096ce0b1c3c469792b0023b7ec9c`
   matches the committed file. Delta `22367938` remains pending; do not cancel either merely
   because the other starts staging. Recheck real epoch logs before choosing a winner.
+
+### 2026-09-28 03:40 UTC — H100 rate-limit recovery queued; trained weights preserved
+
+- Bridges-2 `47104601` reached epoch 999 in both UNet++ cells and saved both final checkpoints,
+  then timed out at 48 hours during full validation (1,590/1,800 DS-off and 1,452/1,800 DS-on
+  predictions; no summaries). Separate persistent Ocean checkpoint copies were made and verified
+  byte-identical. The plain U-Net pair had not started.
+- Dependent continuation `47231765` began on w004 but its node-local dataset had been cleared.
+  The new download completed image shards 1 and 2, then Hugging Face returned HTTP 429 for shards
+  3 and 4. It failed after 17m30s, before validation or training; no successor was auto-submitted.
+- Committed/pushed `61be5315e8cc5f4ec35637c9b748e5ebc33da1b7` on `main`: image URLs are
+  pinned to dataset revision `3b1cd61108116b58ea5c1ddb3512c1847d965f96` (last updated
+  July 12, before the original run). The new helper preserves partial downloads within an
+  allocation, retries HTTP failures with a 5-10 minute staggered cooldown, and stops after six
+  attempts. The two-download concurrency and all model/training/validation settings are unchanged.
+  Offline success/failure tests and `bash -n` passed both locally and on Bridges-2. A HEAD request
+  for pinned shard 3 returned 200; the large-file CDN advertises byte ranges. Real multi-GB retry
+  behavior remains unproven until the next compute job runs.
+- Fast-forwarded the clean Bridges-2 checkout and submitted guarded replacement `47233546`,
+  run ID `20260928T033509Z_61be5315e8cc`, pinned to commit `61be5315e8cc5f4ec35637c9b748e5ebc33da1b7`.
+  Verified `PENDING`, no dependency, 48h, 2 H100s, 0 elapsed GPU time at 2026-09-28 03:35 UTC.
+  Its mode gate should choose `validate` for both completed UNet++ cells, then train both plain
+  U-Net cells. `MAX_RETRIES=0` remains intentional; inspect its staging/validation logs on start.
