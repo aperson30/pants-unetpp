@@ -180,17 +180,15 @@ if [ ! -f "$STAGE_MARKER" ]; then
       "$LOCAL_RAW" "$LOCAL_PREPROCESSED" "$LOCAL_ROOT/empty_test_answer_key"
     check_space
 
+    # Pin the image source to the same public dataset revision used by the
+    # original run; a moving main branch must not change training data midway.
+    HF_DATASET_REVISION=3b1cd61108116b58ea5c1ddb3512c1847d965f96
     cd "$DATA"
     for pair in "1 2" "3 4" "5 6" "7 8" "9"; do
         PIDS=()
         for index in $pair; do
-            start=$(printf '%08d' $(( (index - 1) * 1000 + 1 )))
-            end=$(printf '%08d' $(( index * 1000 )))
-            archive="PanTSMini_ImageTr_${start}_${end}.tar.gz"
-            url="https://huggingface.co/datasets/BodyMaps/PanTSMini/resolve/main/${archive}?download=true"
-            ( wget --tries=5 --retry-connrefused -O "$archive" "$url" && \
-              tar -xzf "$archive" -C ImageTr && rm "$archive" && \
-              echo "image archive $index/9 complete" ) &
+            ( bash "$FROZEN/unetpp_port/bridges2_deployment/download_image_archive.sh" \
+                "$index" "$DATA" "$HF_DATASET_REVISION" ) &
             PIDS+=($!)
         done
         failed=0
