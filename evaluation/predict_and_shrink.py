@@ -158,6 +158,10 @@ def main() -> None:
                 score = float(tumor.max())
             if not 0 <= score <= 1:
                 raise RuntimeError(f"out-of-range tumor probability for {cid}: {score}")
+            # Closing NpzFile does not release the arrays assigned above. Drop
+            # these before loading the next 29-channel volume, avoiding overlap
+            # between consecutive cases' large allocations.
+            del tumor, probabilities
             if args.shrink_segmentations_to_tumor:
                 shrink_segmentation(segmentation, args.tumor_class)
             scores[cid] = score

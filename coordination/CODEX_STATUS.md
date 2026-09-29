@@ -668,3 +668,40 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   StartTime was Unknown / N/A at the initial scheduler check; no firm ETA or completed
   validation is claimed. This runs the validation-only recovery branch, one exporter,
   checkpoint/plan guards and audited case reuse; none of the four cells are retrained.
+
+### 2026-09-29 21:56 UTC — remaining-work cost/failure audit; independent model backup
+
+- Recovery **47272328** is RUNNING on H100 node w002, started 21:40:38 UTC.
+  Latest log shows image archives 1 and 2 downloaded, still staging; no new validation
+  predictions or completion claimed. Its pinned eafd574 source/environment were untouched.
+- Independently copied all four final checkpoint backups to the user's Windows machine at
+  `work/checkpoint_backups_20260929/47233546_all_four_final` (outside the Git checkout).
+  Every SHA-256 exactly matches `progress_20260929/checkpoint_manifest.json`; Ocean originals
+  and backups remain. No model binaries added to GitHub.
+- Audited staging, cache/restart design, model-load overhead, export IO/RAM, GPU binding,
+  CPU scoring, provenance, precision and scientific metrics in
+  `unetpp_port/bridges2_deployment/REMAINING_WORK_AUDIT_20260929.md`.
+- Implemented exact vectorized component-detection scoring, explicit probability-array release
+  in the fallback predictor, and a `--workers` option for test-only conversion (default 1).
+  Local isolated CPU test suite: **5 passed, 1 skipped**. Scoring matched the original on
+  196,608 exhaustive GT/prediction/connectivity combinations plus 60 larger random cases;
+  the existing five-metric fixture remained identical. Serial/two-worker conversion had exact
+  decoded image/label/affine equality and preserved tumor-over-pancreas priority.
+- Synthetic 96x160x224 scoring on local i7-1185G7: median function speedup 1.10x/1.45x/4.42x
+  for 1/5/20 components. The 900-component stress result is NOT representative PanTS evidence.
+  No end-to-end GPU-hour saving claimed.
+- Prepared **candidate only** `evaluation/predict_persistent.py`: one model load per cell
+  instead of 181 five-case CLI starts, no full probability NPZ disk round-trip, full nnU-Net
+  probability-space export/TTA/overlap retained, strong resume hashes/geometry guards.
+  Not connected to the production launcher. The installed-stack CPU exporter parity attempt
+  used a 120s timeout in a separate audit directory, captured no final parity result, and is
+  NOT a pass. Actual real-case GPU parity/end-to-end memory/timing gate remains open.
+- Identified a real precision decision: trainer validation uses BF16, ordinary test predictor
+  initialization defaults FP16. Candidate defaults explicitly FP16 to match the prepared CLI;
+  do not silently change all four cells to BF16. Prepared evaluation also still needs distinct-
+  UUID paired-step binding, correct per-cell provenance/checkpoint hashes and CPU-scoring
+  separation before submission. No test-evaluation or GPU calibration job submitted here.
+- Test image archive measured 27,994,666,473 bytes (~26.1 GiB); a persistent converted 901-case
+  cache is worth building after checking complete peak staging footprint. Do not confuse this
+  with the full ~1.1TB training dataset. CPU RM-shared test-only rejected this GPU account's QoS;
+  no undocumented-QoS workaround attempted. Local CPU scoring is an available alternative.

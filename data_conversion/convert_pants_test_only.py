@@ -14,6 +14,8 @@ def main() -> None:
     parser.add_argument("--test-answer-key-dir", type=Path, required=True)
     parser.add_argument("--expected-cases", type=int, default=901)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--workers", type=int, default=1,
+                        help="Bounded CPU conversion workers; default preserves serial conversion")
     args = parser.parse_args()
 
     case_ids = convert_split(
@@ -22,6 +24,7 @@ def main() -> None:
         args.images_ts_dir,
         args.test_answer_key_dir,
         resume=args.resume,
+        workers=args.workers,
     )
     if len(case_ids) != args.expected_cases:
         raise RuntimeError(f"expected {args.expected_cases} test cases, found {len(case_ids)}")

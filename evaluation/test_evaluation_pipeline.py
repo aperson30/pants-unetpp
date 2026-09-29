@@ -12,9 +12,38 @@ import nibabel as nib
 import numpy as np
 
 from evaluation.predict_and_shrink import shrink_segmentation
+from evaluation.compute_tumor_metrics import tumor_wise_detection
+from scipy.ndimage import generate_binary_structure, label as cc_label
 
 
 class EvaluationPipelineTest(unittest.TestCase):
+    def test_vectorized_detection_matches_original(self) -> None:
+        # Exhaust all 256 possible GT and prediction masks on a 2x2x2 volume,
+        # including empty masks and disconnected lesions, for all connectivities.
+        masks = [np.array([(bits >> i) & 1 for i in range(8)], dtype=bool)
+                 .reshape(2, 2, 2) for bits in range(256)]
+        for connectivity in (1, 2, 3):
+            structure = generate_binary_structure(3, connectivity)
+            for gt in masks:
+                components, count = cc_label(gt, structure=structure)
+                for pred in masks:
+                    reference = sum(bool(((components == i) & pred).any())
+                                    for i in range(1, count + 1))
+                    self.assertEqual(tumor_wise_detection(pred, gt, connectivity),
+                                     (count, reference))
+
+    def test_detection_matches_original_on_larger_random_masks(self) -> None:
+        rng = np.random.default_rng(20260929)
+        for connectivity in (1, 2, 3):
+            for _ in range(20):
+                gt = rng.random((19, 23, 17)) < 0.03
+                pred = rng.random(gt.shape) < 0.02
+                components, count = cc_label(gt, generate_binary_structure(3, connectivity))
+                reference = sum(bool(((components == i) & pred).any())
+                                for i in range(1, count + 1))
+                self.assertEqual(tumor_wise_detection(pred, gt, connectivity),
+                                 (count, reference))
+
     def test_metrics_and_tumor_only_shrink(self) -> None:
         with tempfile.TemporaryDirectory() as temp_name:
             root = Path(temp_name)

@@ -44,10 +44,11 @@ def tumor_wise_detection(
 ) -> tuple[int, int]:
     structure = generate_binary_structure(rank=3, connectivity=connectivity)
     components, n_components = cc_label(gt_mask, structure=structure)
-    detected = sum(
-        bool(np.logical_and(components == component_id, pred_mask).any())
-        for component_id in range(1, n_components + 1)
-    )
+    # A component is detected iff its positive ID occurs under a predicted voxel.
+    # This is the same any-overlap rule, without scanning the entire CT once
+    # per lesion. Background ID 0 is not a tumor and must not count as a hit.
+    overlapping_ids = np.unique(components[pred_mask])
+    detected = np.count_nonzero(overlapping_ids > 0)
     return int(n_components), int(detected)
 
 
