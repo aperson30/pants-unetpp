@@ -653,3 +653,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   After its validation completes, run the reviewed 901-case test evaluation and five tumor
   metrics; the 2x2 scientific results table is not yet complete. Repository policy excludes
   model/data binaries from Git; GitHub preserves evidence/code, and weights remain on Ocean.
+
+### 2026-09-29 21:20 UTC — approved single-H100 validation recovery submitted
+
+- User explicitly approved queuing the recovery. Checked the clean Bridges-2 checkout at
+  `eafd5741eb5bdfa0f68dc3898981b24664bc8e2e`, no active user jobs, missing DS-off validation
+  summary, saved final checkpoint and both script syntax checks before submitting once.
+- Submitted **47272328**, run ID `20260929T211924Z_eafd5741eb5b`, via
+  `submit_validation_recovery.sh`. Slurm confirms account/user `cis260296p` / `asanjeev`,
+  **one H100-80**, 12 CPUs, 220 GiB, 48h, no dependency, initial state PENDING and 0 runtime.
+  The source is pinned to `eafd574`; stdout is `grid_logs/grid_47272328.log`.
+- Slurm's stored batch-script SHA-256 and the reviewed source both equal
+  `43defea9f05da6441e8abf218479de34756c2b32d63d62eba68afa2350f21627`.
+  StartTime was Unknown / N/A at the initial scheduler check; no firm ETA or completed
+  validation is claimed. This runs the validation-only recovery branch, one exporter,
+  checkpoint/plan guards and audited case reuse; none of the four cells are retrained.

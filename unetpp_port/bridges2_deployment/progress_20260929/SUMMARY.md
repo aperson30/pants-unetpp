@@ -81,3 +81,14 @@ Aggregate organ Dice does not establish tumor detection validity. After the
 remaining validation finishes, the next stage is the audited 901-case test
 prediction and the five tumor metrics. No scientific quality acceptance is
 claimed from the current three summaries.
+
+## Subsequent recovery submission
+
+With explicit user approval, the prepared recovery was submitted at 2026-09-29
+14:19:24 PDT (21:19:24 UTC) as Bridges-2 **47272328**, pinned to
+`eafd5741eb5bdfa0f68dc3898981b24664bc8e2e`, run ID
+`20260929T211924Z_eafd5741eb5b`. Slurm confirmed one H100-80, 12 CPUs, 220 GiB,
+48h and no dependency. Initial state was PENDING with no start estimate yet.
+Its stored batch script matched the reviewed source SHA-256:
+`43defea9f05da6441e8abf218479de34756c2b32d63d62eba68afa2350f21627`.
+Follow `grid_logs/grid_47272328.log` for staging, prediction auditing and recovery.
