@@ -1,0 +1,118 @@
+{
+  "observed_at_utc": "2026-09-29T21:00:55.558781+00:00",
+  "root": "/ocean/projects/cis260296p/asanjeev/pants_unetpp",
+  "cells": {
+    "unetpp_ds_on": {
+      "trainer": "nnUNetTrainerUNetPlusPlusSparseValidation",
+      "checkpoint": {
+        "source": "/ocean/projects/cis260296p/asanjeev/pants_unetpp/results/Dataset001_PanTS/nnUNetTrainerUNetPlusPlusSparseValidation__nnUNetPlansBS4__3d_fullres/fold_0/checkpoint_final.pth",
+        "backup": "/ocean/projects/cis260296p/asanjeev/pants_unetpp/checkpoint_safety/47233546_all_four_final/unetpp_ds_on/checkpoint_final.pth",
+        "bytes": 365271751,
+        "sha256": "81f9598fb86d90e18676c89eb3cc9a91379a7cb932e35cfad116e54bbf52d4a5",
+        "backup_verified": true
+      },
+      "completion_log_evidence": [
+        "2026-09-27 10:30:13.139046: Epoch 999 ",
+        "2026-09-27 10:32:07.886111: Training done. ",
+        "2026-09-28 23:52:39.793741: Validation complete "
+      ],
+      "training_complete_from_logs": true,
+      "validation_prediction_count": 1800,
+      "validation_prediction_count_is_not_a_readability_audit": true,
+      "validation_summary_present": true,
+      "validation_summary_sha256": "81b60ffecc09ceab9c4df71e1fbda4c12255867fc5575232d3afd29de85c9e0f",
+      "validation_summary_case_count": 1800,
+      "class_28_validation_mean": {
+        "Dice": 0.13554640181599986,
+        "FN": 812.5583333333333,
+        "FP": 261.4527777777778,
+        "IoU": 0.10152906333402578,
+        "TN": 30174294.17,
+        "TP": 400.8466666666667,
+        "n_pred": 662.2994444444445,
+        "n_ref": 1213.405
+      }
+    },
+    "unetpp_ds_off": {
+      "trainer": "nnUNetTrainerUNetPlusPlusNoDeepSupervisionSparseValidation",
+      "checkpoint": {
+        "source": "/ocean/projects/cis260296p/asanjeev/pants_unetpp/results/Dataset001_PanTS/nnUNetTrainerUNetPlusPlusNoDeepSupervisionSparseValidation__nnUNetPlansBS4__3d_fullres/fold_0/checkpoint_final.pth",
+        "backup": "/ocean/projects/cis260296p/asanjeev/pants_unetpp/checkpoint_safety/47233546_all_four_final/unetpp_ds_off/checkpoint_final.pth",
+        "bytes": 365258909,
+        "sha256": "6f1eac58af27784c7eb94539216d72670f0135c884df8ea2bc2bb3ecaff5e27a",
+        "backup_verified": true
+      },
+      "completion_log_evidence": [
+        "2026-09-27 09:24:05.969945: Epoch 999 ",
+        "2026-09-27 09:25:55.222855: Training done. ",
+        "2026-09-28 23:52:58.597932: Validation complete "
+      ],
+      "training_complete_from_logs": true,
+      "validation_prediction_count": 1800,
+      "validation_prediction_count_is_not_a_readability_audit": true,
+      "validation_summary_present": true,
+      "validation_summary_sha256": "fc2c1fe59d28fc7434a4a018b7d7045fe22b6d7b813c2b5b2acb2c3b8c3c0770",
+      "validation_summary_case_count": 1800,
+      "class_28_validation_mean": {
+        "Dice": 0.1303624874259057,
+        "FN": 787.2966666666666,
+        "FP": 283.845,
+        "IoU": 0.09640111529513265,
+        "TN": 30174271.777777776,
+        "TP": 426.10833333333335,
+        "n_pred": 709.9533333333334,
+        "n_ref": 1213.405
+      }
+    },
+    "plain_ds_on": {
+      "trainer": "nnUNetTrainerBF16SparseValidation",
+      "checkpoint": {
+        "source": "/ocean/projects/cis260296p/asanjeev/pants_unetpp/results/Dataset001_PanTS/nnUNetTrainerBF16SparseValidation__nnUNetPlansBS4__3d_fullres/fold_0/checkpoint_final.pth",
+        "backup": "/ocean/projects/cis260296p/asanjeev/pants_unetpp/checkpoint_safety/47233546_all_four_final/plain_ds_on/checkpoint_final.pth",
+        "bytes": 247146973,
+        "sha256": "9b27d6ee87771eddb254300916bd1b836c6640a7f21cb98fd84723d0d0cc8df2",
+        "backup_verified": true
+      },
+      "completion_log_evidence": [
+        "2026-09-29 07:51:34.849344: Epoch 999 ",
+        "2026-09-29 07:52:05.662416: Training done. ",
+        "2026-09-29 12:12:01.166894: Validation complete "
+      ],
+      "training_complete_from_logs": true,
+      "validation_prediction_count": 1800,
+      "validation_prediction_count_is_not_a_readability_audit": true,
+      "validation_summary_present": true,
+      "validation_summary_sha256": "b4f44ae5cb1c133eee2dc9d951703a2aca97db68004ba84daa57925dc2d25ff3",
+      "validation_summary_case_count": 1800,
+      "class_28_validation_mean": {
+        "Dice": 0.14644915901763875,
+        "FN": 763.1322222222223,
+        "FP": 291.40555555555557,
+        "IoU": 0.10965403713523632,
+        "TN": 30174264.21722222,
+        "TP": 450.2727777777778,
+        "n_pred": 741.6783333333333,
+        "n_ref": 1213.405
+      }
+    },
+    "plain_ds_off": {
+      "trainer": "nnUNetTrainerBF16NoDeepSupervisionSparseValidation",
+      "checkpoint": {
+        "source": "/ocean/projects/cis260296p/asanjeev/pants_unetpp/results/Dataset001_PanTS/nnUNetTrainerBF16NoDeepSupervisionSparseValidation__nnUNetPlansBS4__3d_fullres/fold_0/checkpoint_final.pth",
+        "backup": "/ocean/projects/cis260296p/asanjeev/pants_unetpp/checkpoint_safety/47233546_all_four_final/plain_ds_off/checkpoint_final.pth",
+        "bytes": 247055333,
+        "sha256": "e453225ad7cfe0a58d7ab47c6af9279dbf51f2e319651874fcf62c1bff8b8bf4",
+        "backup_verified": true
+      },
+      "completion_log_evidence": [
+        "2026-09-29 06:51:03.958061: Epoch 999 ",
+        "2026-09-29 06:51:31.977362: Training done. "
+      ],
+      "training_complete_from_logs": true,
+      "validation_prediction_count": 428,
+      "validation_prediction_count_is_not_a_readability_audit": true,
+      "validation_summary_present": false
+    }
+  },
+  "note": "Validation summaries are not the 901-case test results or the five project tumor metrics."
+}

@@ -18,6 +18,24 @@ ROOT=/ocean/projects/cis260296p/asanjeev/pants_unetpp
 REPO=$ROOT/repo
 VENV=$ROOT/venv
 RESULTS_ROOT=$ROOT/results
+# Optional recovery is strictly validation-only for the one interrupted cell.
+# Submit with one GPU; the normal four-cell launcher still requests two.
+RECOVERY_TRAINER=${GRID_RECOVERY_TRAINER:-}
+GPU_COUNT=2
+TASK_CPUS=12
+if [ -n "$RECOVERY_TRAINER" ]; then
+    [ "$RECOVERY_TRAINER" = nnUNetTrainerBF16NoDeepSupervisionSparseValidation ] || {
+        echo 'ERROR: unsupported validation recovery trainer' >&2; exit 1;
+    }
+    GPU_COUNT=1
+fi
+STAGING_WORKERS=${SLURM_CPUS_PER_TASK:-24}
+# Validation export is CPU RAM intensive (29 resampled logits per volume).
+# The failed job used eight exporters in each concurrent model. Limit recovery
+# to one exporter; model, checkpoint, TTA, tile overlap and resampling stay fixed.
+export nnUNet_def_n_proc=2
+if [ -n "$RECOVERY_TRAINER" ]; then export nnUNet_def_n_proc=1; fi
+export PYTHONUNBUFFERED=1
 # Do not automatically restage the full dataset after an unknown failure. A past
 # launcher bug caused two costly retries before it was diagnosed. A time-limit
 # continuation can be submitted manually after checking logs and checkpoints.
@@ -41,8 +59,8 @@ git -C "$REPO" cat-file -e "$GRID_COMMIT^{commit}"
 # Recheck physical binding on the actual assigned H100 node before paying for
 # full-dataset staging. Rank-local CUDA_VISIBLE_DEVICES may be 0 for both tasks;
 # UUIDs, not ordinal device numbers, must differ.
-gpu_map=$(srun --nodes=1 --ntasks=2 --ntasks-per-node=2 \
-  --gpus-per-task=1 --gpu-bind=single:1 --cpus-per-task=12 --mem=200G \
+gpu_map=$(srun --nodes=1 --ntasks="$GPU_COUNT" --ntasks-per-node="$GPU_COUNT" \
+  --gpus-per-task=1 --gpu-bind=single:1 --cpus-per-task="$TASK_CPUS" --mem=200G \
   bash -c '
     set -euo pipefail
     mapfile -t ids < <(nvidia-smi --query-gpu=uuid --format=csv,noheader)
@@ -53,7 +71,9 @@ echo "physical GPU map by rank:"
 printf '%s\n' "$gpu_map"
 ranks=$(printf '%s\n' "$gpu_map" | awk '{print $1}' | sort)
 unique_uuids=$(printf '%s\n' "$gpu_map" | awk '{print $2}' | sort -u | wc -l)
-if [ "$ranks" != "$(printf '0\n1')" ] || [ "$unique_uuids" -ne 2 ]; then
+expected_ranks=0
+if [ "$GPU_COUNT" -eq 2 ]; then expected_ranks=$(printf '0\n1'); fi
+if [ "$ranks" != "$expected_ranks" ] || [ "$unique_uuids" -ne "$GPU_COUNT" ]; then
     echo "ERROR: paired trainers would not see distinct physical H100s" >&2
     exit 1
 fi
@@ -136,6 +156,18 @@ D2=$(fold_dir "$T2")
 D3=$(fold_dir "$T3")
 D4=$(fold_dir "$T4")
 
+if [ -n "$RECOVERY_TRAINER" ]; then
+    for folder in "$D1" "$D2" "$D3" "$D4"; do
+        test -s "$folder/checkpoint_final.pth" || {
+            echo "ERROR: recovery requires all four final checkpoints: $folder" >&2; exit 1;
+        }
+    done
+    # Completed cells must not be reevaluated or retrained in this job.
+    cell_done "$D1" && cell_done "$D2" && cell_done "$D3" || {
+        echo 'ERROR: the other three cells are not validation-complete' >&2; exit 1;
+    }
+fi
+
 if cell_done "$D1" && cell_done "$D2" && cell_done "$D3" && cell_done "$D4"; then
     echo "all four cells already have final checkpoints and complete 1,800-case validation"
     exit 0
@@ -217,7 +249,7 @@ if [ ! -f "$STAGE_MARKER" ]; then
 
     "$VENV/bin/python" "$FROZEN/data_conversion/convert_pants_to_nnunet.py" \
       --pants-root "$DATA" --nnunet-dataset-dir "$LOCAL_RAW/Dataset001_PanTS" \
-      --test-answer-key-dir "$LOCAL_ROOT/empty_test_answer_key" --workers 24
+      --test-answer-key-dir "$LOCAL_ROOT/empty_test_answer_key" --workers "$STAGING_WORKERS"
     "$VENV/bin/python" "$FROZEN/data_conversion/fix_affine_orthonormality.py" \
       "$LOCAL_RAW/Dataset001_PanTS"
     # We are still inside $SOURCE/PanTS/data. Deleting the process's cwd makes
@@ -230,7 +262,7 @@ if [ ! -f "$STAGE_MARKER" ]; then
     export nnUNet_preprocessed=$LOCAL_PREPROCESSED
     export nnUNet_results=$LOCAL_ROOT/preprocess_results_scratch
     "$VENV/bin/nnUNetv2_plan_and_preprocess" -d 1 -c 3d_fullres \
-      --verify_dataset_integrity -npfp 24 -np 24
+      --verify_dataset_integrity -npfp "$STAGING_WORKERS" -np "$STAGING_WORKERS"
     "$VENV/bin/python" - <<PY
 import json
 from pathlib import Path
@@ -310,6 +342,20 @@ export nnUNet_results=$RESULTS_ROOT
 export nnUNet_n_proc_DA=10
 export nnUNet_compile=true
 mkdir -p "$LOCAL_ROOT/torchinductor_cache"
+
+if [ -n "$RECOVERY_TRAINER" ]; then
+    export TORCHINDUCTOR_CACHE_DIR="$LOCAL_ROOT/torchinductor_cache/$RECOVERY_TRAINER"
+    mkdir -p "$TORCHINDUCTOR_CACHE_DIR"
+    echo "VALIDATION_ONLY_RECOVERY trainer=$RECOVERY_TRAINER exporters=$nnUNet_def_n_proc"
+    # This branch cannot choose fresh/resume or reach the training phases.
+    srun --nodes=1 --ntasks=1 --gpus-per-task=1 --gpu-bind=single:1 \
+      --cpus-per-task="$TASK_CPUS" --mem=200G --export=ALL \
+      "$VENV/bin/python" -u "$FROZEN/unetpp_port/bridges2_deployment/recover_validation.py" \
+      --checkpoint-manifest "$ROOT/progress_20260929/checkpoint_manifest.json"
+    cell_done "$D4"
+    echo GRID_2X2_ALL_TRAINING_AND_VALIDATION_DONE
+    exit 0
+fi
 
 mode_for_cell() {
     if cell_done "$1"; then

@@ -624,3 +624,32 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Verified `PENDING`, no dependency, 48h, 2 H100s, 0 elapsed GPU time at 2026-09-28 03:35 UTC.
   Its mode gate should choose `validate` for both completed UNet++ cells, then train both plain
   U-Net cells. `MAX_RETRIES=0` remains intentional; inspect its staging/validation logs on start.
+
+### 2026-09-29 21:12 UTC — all four training cells complete; one validation needs recovery
+
+- Read live Bridges-2 accounting and internal logs: `47233546` ran 34h50m27s and ended FAILED
+  at Sep 29 12:12:31 EDT. Both UNet++ validations completed Sep 28; both plain U-Net trainers
+  reached epoch 999 / `Training done.` Sep 29 and saved final weights. Plain DS-on validation
+  completed; plain DS-off stopped at 428/1800 predictions after a step-2 cgroup OOM and dead
+  export worker. No retraining is required. No Bridges job is currently queued or running.
+- All four final checkpoints and saved plans/dataset/debug metadata now have separate backups
+  under Ocean `checkpoint_safety/47233546_all_four_final/`. Streaming SHA-256 comparisons passed
+  for every checkpoint copy; source checkpoints were unchanged. Older UNet++ backups remain.
+  Saved `unetpp_port/bridges2_deployment/progress_20260929/checkpoint_manifest.json` records
+  hashes, paths, completion evidence and the three class-28 native validation summaries. Native
+  summary Dice is not positive-case-only project Dice and is not a test-set quality acceptance.
+- Prepared one-H100 validation-only recovery using the same installed nnU-Net validator. It
+  checks the backed-up checkpoint hash and epoch 1000, requires restaged plans/dataset metadata
+  equal training, fully decompresses and audits existing outputs, filters only readable completed
+  cases from prediction, and still scores the original full 1800-case fold. No training method is
+  called. One exporter replaces the failed run's eight-per-model default; model/TTA/overlap and
+  resampling functions are unchanged. Normal future paired launches use two exporters per model.
+- Four CPU tests passed on the cluster (backup overwrite refusal, stale-checkpoint refusal,
+  corrupt/invalid/geometry-mismatched NIfTI rejection, and mocked partial resume/full-fold scoring).
+  Bash syntax and Slurm single-H100 `--test-only` passed. The Slurm test's printed job ID is
+  NOT a submitted job. GPU inference resume remains unexecuted; no GPU parity result claimed.
+- `submit_validation_recovery.sh` is prepared, NOT submitted. The conservative recovery still
+  stages all 9000 cases locally but allocates only one GPU and never repeats trained cells.
+  After its validation completes, run the reviewed 901-case test evaluation and five tumor
+  metrics; the 2x2 scientific results table is not yet complete. Repository policy excludes
+  model/data binaries from Git; GitHub preserves evidence/code, and weights remain on Ocean.
