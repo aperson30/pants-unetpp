@@ -16,12 +16,21 @@ def main():
     expected = {f'PanTS_{i:08d}.nii.gz' for i in range(9001, 9902)}
     labels = root / 'test_ground_truth'
     assert {p.name for p in labels.glob('*.nii.gz')} == expected
+    checked = json.loads((root / 'checkpoint_validation_provenance.json').read_text())
+    identities = {'unetpp_ds': 'unetpp_ds_on', 'unetpp_nods': 'unetpp_ds_off',
+                  'default_ds': 'plain_ds_on', 'default_nods': 'plain_ds_off'}
     results = {}
+    common_inputs = None
     for tag in ('unetpp_ds', 'unetpp_nods', 'default_ds', 'default_nods'):
         out = root / tag
         assert {p.name for p in out.glob('PanTS_*.nii.gz')} == expected, tag
         provenance = json.loads((out / 'prediction_provenance.json').read_text())
         assert set(provenance['inputs']) == {name[:-7] for name in expected}, tag
+        assert provenance['checkpoint_sha256'] == checked[identities[tag]]['checkpoint_sha256'], tag
+        assert provenance['tumor_class'] == 28, tag
+        if common_inputs is None:
+            common_inputs = provenance['inputs']
+        assert provenance['inputs'] == common_inputs, f'{tag}: models saw different test inputs'
         subprocess.run([
             sys.executable, str(Path(__file__).with_name('compute_tumor_metrics.py')),
             '--pred-dir', str(out), '--labels-dir', str(labels), '--tumor-class', '28',
