@@ -9,12 +9,12 @@ from types import SimpleNamespace
 from unittest.mock import patch
 import nibabel as nib
 import numpy as np
-from evaluation.predict_and_shrink import valid_segmentation, verify_provenance, main, read_scores
+from evaluation.predict_and_shrink import valid_segmentation, verify_provenance, main, read_scores, write_scores
 
 
 class PredictionGuardTest(unittest.TestCase):
     def test_failed_prediction_never_commits_success_and_retry_recovers(self):
-        for failure in ('crash', 'timeout', 'missing_archive', 'nan', 'save_failure'):
+        for failure in ('crash', 'timeout', 'missing_archive', 'nan', 'save_failure', 'old_score'):
             with self.subTest(failure=failure), tempfile.TemporaryDirectory() as temporary:
                 root = Path(temporary)
                 images, output = root / 'images', root / 'out'
@@ -28,6 +28,10 @@ class PredictionGuardTest(unittest.TestCase):
                                        expected_cases=1, dataset='1', config='C', tr='T', p='P', f='0',
                                        tumor_class=28, shrink_segmentations_to_tumor=True)
                 broken = True
+                if failure == 'old_score':
+                    output.mkdir()
+                    write_scores(args.max_probs_csv, {cid: 0.1})
+                    (output / f'{cid}.nii.gz').write_bytes(b'invalid old mask')
                 def fake_cli(command, **kwargs):
                     if broken and failure == 'crash':
                         raise subprocess.CalledProcessError(1, command)
@@ -41,16 +45,15 @@ class PredictionGuardTest(unittest.TestCase):
                     probabilities = np.zeros((29, 3, 4, 5), dtype=np.float32)
                     probabilities[28, 0, 0, 0] = np.nan if broken and failure == 'nan' else 0.875
                     np.savez_compressed(out / f'{cid}.npz', probabilities=probabilities)
-                from evaluation.predict_and_shrink import write_scores
                 def save_scores(path, scores):
-                    if broken and failure == 'save_failure':
+                    if broken and failure in ('save_failure', 'old_score') and scores:
                         raise OSError('injected disk failure')
                     write_scores(path, scores)
                 with patch('evaluation.predict_and_shrink.parse_args', return_value=args), \
                      patch('evaluation.predict_and_shrink.verify_provenance'), \
                      patch.object(Path, 'symlink_to', autospec=True,
                                   side_effect=lambda path, target: shutil.copyfile(target, path)), \
-                     patch('evaluation.predict_and_shrink.subprocess.run', side_effect=fake_cli) as cli, \
+                     patch('evaluation.predict_and_shrink.run_prediction_command', side_effect=fake_cli) as cli, \
                      patch('evaluation.predict_and_shrink.write_scores', side_effect=save_scores):
                     with self.assertRaises((RuntimeError, OSError, subprocess.SubprocessError)):
                         main()
@@ -86,7 +89,7 @@ class PredictionGuardTest(unittest.TestCase):
                  patch('evaluation.predict_and_shrink.verify_provenance'), \
                  patch.object(Path, 'symlink_to', autospec=True,
                               side_effect=lambda path, target: shutil.copyfile(target, path)), \
-                 patch('evaluation.predict_and_shrink.subprocess.run', side_effect=fake_cli) as cli:
+                 patch('evaluation.predict_and_shrink.run_prediction_command', side_effect=fake_cli) as cli:
                 main()
                 main()
                 self.assertEqual(cli.call_count, 1)

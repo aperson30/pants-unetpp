@@ -68,6 +68,8 @@ paths = (
     'data_conversion/fix_affine_orthonormality.py',
     'evaluation/verify_grid_ready.py',
     'evaluation/score_grid_cpu.py',
+    'evaluation/safe_artifacts.py',
+    'evaluation/audit_test_artifacts.py',
     'unetpp_port/bridges2_deployment/progress_20260929/checkpoint_manifest.json',
 )
 hashes = {name: hashlib.sha256((repo / name).read_bytes()).hexdigest() for name in paths}
@@ -207,7 +209,8 @@ echo TEST_CONVERSION_COMPLETE
 
 # Retain the compact answer key for CPU-only scoring after GPUs are released.
 mkdir -p "$EVAL_RUN/test_ground_truth"
-cp -n "$LOCAL_GT"/*.nii.gz "$EVAL_RUN/test_ground_truth/"
+"$VENV/bin/python" -m evaluation.safe_artifacts \
+  --source "$LOCAL_GT" --destination "$EVAL_RUN/test_ground_truth"
 "$VENV/bin/python" - "$LOCAL_GT" "$EVAL_RUN/test_ground_truth" <<'PY'
 import hashlib, sys
 from pathlib import Path

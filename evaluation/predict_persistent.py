@@ -17,7 +17,9 @@ from pathlib import Path
 import nibabel as nib
 import numpy as np
 
-from evaluation.predict_and_shrink import read_scores, shrink_segmentation, write_scores
+from evaluation.predict_and_shrink import (
+    read_scores, shrink_segmentation, write_scores, invalidate_pending_scores,
+)
 
 
 def sha256(path: Path) -> str:
@@ -126,6 +128,7 @@ def main() -> None:
     pending = [cid for cid, source in cases.items()
                if cid not in scores or not valid_case(
                    args.output_dir / f"{cid}.nii.gz", source, args.tumor_class)]
+    scores = invalidate_pending_scores(scores_path, scores, pending)
     if not pending:
         print(f"all {len(cases)} cases already audited", flush=True)
         return

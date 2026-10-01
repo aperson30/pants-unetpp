@@ -10,6 +10,7 @@ from pathlib import Path
 import nibabel as nib
 import numpy as np
 from evaluation.predict_and_shrink import file_hash, read_scores
+from evaluation.safe_artifacts import retire_report
 
 TAGS = {'unetpp_ds': 'unetpp_ds_on', 'unetpp_nods': 'unetpp_ds_off',
         'default_ds': 'plain_ds_on', 'default_nods': 'plain_ds_off'}
@@ -79,14 +80,47 @@ def audit(root: Path, expected_cases: int = 901) -> dict:
             'artifact_sha256': fingerprints}
 
 
+def verify_grid_report(root: Path, expected_cases: int = 901) -> None:
+    report = json.loads((root / 'grid_metrics.json').read_text())
+    if report.get('artifact_audit') != audit(root, expected_cases):
+        raise RuntimeError('grid report is stale or lacks a current artifact snapshot')
+    if set(report.get('metrics', {})) != set(TAGS):
+        raise RuntimeError('grid report lacks four metric cells')
+    if report.get('project_protocol') is not True:
+        raise RuntimeError('grid report lacks the declared project protocol')
+    for tag, metrics in report['metrics'].items():
+        if metrics.get('n_cases_evaluated') != expected_cases:
+            raise RuntimeError(f'{tag}: wrong scored case count')
+        protocol = metrics.get('protocol', {})
+        if protocol.get('tumor_class') != 28 or protocol.get('T_Sen_connectivity') != '6-neighbor':
+            raise RuntimeError(f'{tag}: wrong metric protocol')
+        for name in ('DSC_tumor_mean', 'P_Sen', 'T_Sen', 'Spe', 'AUC'):
+            value = metrics.get(name)
+            if (isinstance(value, bool) or not isinstance(value, (int, float))
+                    or not np.isfinite(value) or not 0 <= value <= 1):
+                raise RuntimeError(f'{tag}: invalid or missing metric {name}')
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--evaluation-dir', type=Path, required=True)
-    parser.add_argument('--out-manifest', type=Path, required=True)
+    parser.add_argument('--out-manifest', type=Path)
     parser.add_argument('--reference-manifest', type=Path)
+    parser.add_argument('--verify-grid-report', action='store_true')
     args = parser.parse_args()
+    if args.verify_grid_report:
+        verify_grid_report(args.evaluation_dir)
+        print('CURRENT_GRID_REPORT_VERIFIED')
+        return
+    if not args.out_manifest:
+        parser.error('--out-manifest is required unless verifying the grid report')
+    # Load reference first: callers may deliberately use the same path for both.
+    try:
+        reference = json.loads(args.reference_manifest.read_text()) if args.reference_manifest else None
+    finally:
+        retire_report(args.out_manifest)
     result = audit(args.evaluation_dir)
-    if args.reference_manifest and json.loads(args.reference_manifest.read_text()) != result:
+    if reference is not None and reference != result:
         raise RuntimeError('artifacts differ from the independent saved snapshot')
     temporary = args.out_manifest.with_suffix('.json.tmp')
     temporary.write_text(json.dumps(result, indent=2))

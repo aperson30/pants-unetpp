@@ -21,9 +21,15 @@ for trainer in \
     n=$(find "$fold/validation" -maxdepth 1 -type f -name 'PanTS_*.nii.gz' | wc -l)
     [ "$n" -eq 1800 ] || { echo "$trainer has $n/1800 validation outputs" >&2; exit 1; }
 done
-test ! -s "$RESULTS/evaluation_grid/$TRAIN_COMMIT/grid_metrics.json" || {
-    echo 'complete evaluation summary already exists; refusing duplicate submission' >&2; exit 1;
-}
+if test -s "$RESULTS/evaluation_grid/$TRAIN_COMMIT/grid_metrics.json"; then
+    cd "$REPO"
+    "$ROOT/venv/bin/python" -m evaluation.audit_test_artifacts \
+      --evaluation-dir "$RESULTS/evaluation_grid/$TRAIN_COMMIT" --verify-grid-report || {
+        echo 'stale/unverified summary: investigate before any submission' >&2; exit 1;
+      }
+    echo 'verified complete evaluation already exists; refusing duplicate submission' >&2
+    exit 1
+fi
 mkdir -p "$ROOT/grid_logs" "$ROOT/eval_frozen"
 FROZEN=$ROOT/eval_frozen/$EVAL_COMMIT
 if [ ! -f "$FROZEN/.frozen_commit" ]; then

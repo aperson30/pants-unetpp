@@ -13,6 +13,7 @@ import csv
 import hashlib
 import json
 import os
+import signal
 import subprocess
 import shutil
 import tempfile
@@ -82,6 +83,34 @@ def write_scores(path: Path, scores: dict[str, float]) -> None:
         handle.flush()
         os.fsync(handle.fileno())
     os.replace(temporary, path)
+
+
+def invalidate_pending_scores(path: Path, scores: dict, pending: list[str]) -> dict:
+    """Commit score invalidation BEFORE any replacement mask can be published."""
+    invalid = set(pending)
+    remaining = {cid: value for cid, value in scores.items() if cid not in invalid}
+    if remaining != scores:
+        write_scores(path, remaining)
+    return remaining
+
+
+def run_prediction_command(command: list[str], *, timeout: int) -> None:
+    """On POSIX contain nnU-Net workers in a dedicated process group."""
+    process = subprocess.Popen(command, start_new_session=os.name == 'posix')
+    try:
+        code = process.wait(timeout=timeout)
+        if code:
+            raise subprocess.CalledProcessError(code, command)
+    except BaseException:
+        if os.name == 'posix':
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        elif process.poll() is None:
+            process.kill()
+        process.wait()
+        raise
 
 
 def valid_segmentation(path: Path, reference: Path | None = None) -> bool:
@@ -162,13 +191,16 @@ def main() -> None:
         segmentation = args.output_dir / f"{cid}.nii.gz"
         if cid in scores and valid_segmentation(segmentation, args.images_dir / f"{cid}_0000.nii.gz"):
             continue
+        pending.append(cid)
+
+    scores = invalidate_pending_scores(args.max_probs_csv, scores, pending)
+    for cid in pending:
         # A partial segmentation without its score makes --continue_prediction skip
         # the case, so remove all partial artifacts and recompute it atomically.
         for suffix in (".nii.gz", ".npz", ".pkl"):
             path = args.output_dir / f"{cid}{suffix}"
             if path.exists():
                 path.unlink()
-        pending.append(cid)
 
     for start in range(0, len(pending), args.batch_size):
         batch = pending[start:start + args.batch_size]
@@ -195,7 +227,7 @@ def main() -> None:
                 "-chk", "checkpoint_final.pth",
                 "-npp", str(args.preprocess_workers), "-nps", str(args.export_workers),
             ]
-            subprocess.run(command, check=True, timeout=args.batch_timeout)
+            run_prediction_command(command, timeout=args.batch_timeout)
 
             for cid in batch:
                 segmentation = temp_output / f"{cid}.nii.gz"

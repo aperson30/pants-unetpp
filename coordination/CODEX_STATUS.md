@@ -769,3 +769,26 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   unetpp_port/bridges2_deployment/EVALUATION_LAYER_AUDIT_20261001.md.
   Current reference path has 724 model starts across the grid; eliminating these
   is the strongest remaining candidate, not permission to alter the frozen job.
+
+## 2026-10-01 21:43 UTC — reviewer recovery fixes tested; NOT migrated to queued job
+
+- Fixed confirmed old-score/new-mask retry corruption in both predictor paths:
+  pending scores atomically invalidated before any mask replacement. Exact .1
+  stale score / .875 recomputation / failed CSV / retry regression passes.
+- Added dedicated POSIX CLI process-group timeout/error cleanup; real WSL child
+  plus grandchild timeout test passed in 2.054s. Atomic GT copying preserves
+  verified files, repairs unreadable partial copies, rejects readable changed GT.
+- Retire old reports as timestamped history before reruns. CPU scoring enforces
+  independent artifact audit and embeds its snapshot; submission verifies the
+  snapshot before calling an existing report complete.
+- Local full suite: 16 tests in 56.443s OK, one installed-stack test skipped;
+  additional safety suite with failed scoring/audit markers: 6 tests in 2.889s OK.
+  Bash syntax checks passed. No GPU allocation or additional GPU-hours.
+- Live recheck: 47319378 PENDING (Priority), runtime zero. Its original frozen
+  revision remains unchanged; new repository fixes are NOT active in that job.
+  No hold/cancel/resubmit/migration authorized or executed in this turn.
+- Affine upper bound remains unresolved until actual source deviations and
+  dataset conventions are measured; no experiment geometry change guessed.
+- Sol follow-up review confirmed score invalidation and flagged direct-file CLI
+  compatibility; fixed and --help verified. Added post-scoring artifact recheck
+  and completion metric/count/protocol validation (reject empty/NaN metrics).

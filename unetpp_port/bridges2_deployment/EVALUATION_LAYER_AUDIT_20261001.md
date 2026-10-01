@@ -99,3 +99,51 @@ memory and throughput measurements rather than assumption-based deployment.
 
 Potential storage/startup improvements remain optional follow-ups; protecting
 completed scientific work takes precedence over speculative throughput gains.
+
+## Follow-up: independent reviewer findings and fixes (21:43 UTC)
+
+The independent Sol review found a missing regression: an invalid mask with an
+existing score could be replaced, followed by a score-write failure; a retry
+then accepted the replacement mask with the old score. Both predictor paths now
+atomically invalidate pending scores **before** publishing or deleting masks.
+The exact old-score 0.1 / new-score 0.875 interruption test passes. Invalidation
+failure aborts rather than proceeding. Scientific probabilities are unchanged.
+
+Additional repository fixes, NOT installed into the already-frozen queued job:
+
+- CLI runs in a dedicated POSIX process group; timeout, nonzero exit, or Python
+  interruption kills the group and reaps its leader before temporary cleanup.
+  A real WSL process/grandchild test passed (2.054 seconds). This is not a test
+  of every Slurm cancellation or uncatchable SIGKILL scenario.
+- GT copies use a checksum-verified temporary file and atomic rename. Unreadable
+  partial destinations can recover; readable but changed GT is rejected, not
+  silently overwritten. Matching completed copies are retained.
+- Old scoring/audit success markers are moved to timestamped history before a
+  rerun. Failure leaves no current success marker. CPU scoring now invokes the
+  independent artifact auditor itself and embeds its snapshot in grid output.
+  Submission checks the report against current artifacts rather than merely
+  treating nonempty JSON as scientific completion.
+- Follow-up review confirmed the stale-score fix. Its direct-file scorer CLI
+  compatibility finding was fixed and `--help` verified. Scoring also repeats
+  the input audit before publication to detect concurrent changes. Completion
+  verification checks five finite [0,1] metrics, case count and tumor/connectivity
+  protocol; empty metric dictionaries and NaN cannot pass.
+- Candidate predictor remains undeployed. Its pending-score bug is fixed via
+  the shared tested helper, but its full GPU/runtime gates still remain open.
+
+Validation: full local suite before the last additional stale-marker test:
+16 tests, 56.443 seconds, OK (one installed-stack test skipped). Additional safety
+suite including failed scoring/audit publication: 6 tests, 2.889 seconds, OK.
+Both shell scripts pass bash syntax checks. No extra GPU-hours were spent.
+
+**Deployment boundary:** 47319378 is still PENDING (Priority) with its original
+frozen script. A repository push cannot patch that job. Do not silently edit its
+snapshot. Applying these job-side fixes needs an explicit replacement/migration
+decision, a new pinned revision and appropriate provenance handling; cancelling
+and resubmitting may lose accumulated queue position. No such action was taken.
+
+**Open:** affine correction has no evidence-backed upper limit yet. Do not pick
+an arbitrary threshold or change GT construction only for the test set. Measure
+the source deviations and review dataset mask/geometry conventions first.
+Mutable label-source provenance and persistent-storage capacity gates remain
+follow-up risks; do not claim all possible failure modes have been eliminated.

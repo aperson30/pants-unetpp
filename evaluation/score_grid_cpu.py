@@ -5,6 +5,11 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+if __package__ in (None, ''):
+    # Preserve the previously documented direct-file CLI as well as python -m.
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from evaluation.audit_test_artifacts import audit
+from evaluation.safe_artifacts import retire_report
 
 
 def main():
@@ -12,6 +17,9 @@ def main():
     parser.add_argument('--evaluation-dir', type=Path, required=True)
     args = parser.parse_args()
     root = args.evaluation_dir
+    retire_report(root / 'grid_metrics.json')
+    # Mandatory independent validation, not merely a documented manual step.
+    audited = audit(root)
     manifest = json.loads((root / 'evaluation_manifest.json').read_text())
     expected = {f'PanTS_{i:08d}.nii.gz' for i in range(9001, 9902)}
     labels = root / 'test_ground_truth'
@@ -39,8 +47,11 @@ def main():
         ], check=True)
         results[tag] = json.loads((out / 'metrics.json').read_text())
         assert results[tag]['n_cases_evaluated'] == 901
+    if audit(root) != audited:
+        raise RuntimeError('evaluation artifacts changed during scoring; no grid summary published')
     temporary = root / 'grid_metrics.json.tmp'
     temporary.write_text(json.dumps({'provenance': manifest, 'project_protocol': True,
+                                     'artifact_audit': audited,
                                      'metrics': results}, indent=2))
     temporary.replace(root / 'grid_metrics.json')
     print('GRID_EVALUATION_ALL_DONE')
