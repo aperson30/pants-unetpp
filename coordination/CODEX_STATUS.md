@@ -725,3 +725,28 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   remain mandatory before submission. No evaluation job submitted in this preparation commit.
 - SSH master reopened. Classic SCP cannot work on this login node because remote scp is absent;
   deploy through the authorized Git fork instead. No checkpoints/data modified or removed.
+
+### 2026-10-01 21:04 UTC — reference-path 901-case grid test prediction submitted
+
+- Cluster CPU preflight finished PREFLIGHT_PASS: torch 2.10.0+cu126, torchvision
+  0.25.0+cu128 imports, cuDNN 91002, nnunetv2 2.8.1; four trainer imports,
+  epoch-1000 finite weights and strict CPU predictor initialization all passed.
+  Required installed CLI flags were present. No GPU calibration/inference claimed.
+- Read-only identity gate matched every final checkpoint SHA-256 to the independent
+  backup manifest, checked each summary's 1800 unique class-28-scored cases, and
+  verified all cells use the same validation identities. Custom trainer sources
+  were unchanged between older training revision b2ca075 and continuation 61be531.
+- Bash syntax and Slurm --test-only passed. Confirmed no active user jobs, deployed
+  clean authorized fork, and submitted once via submit_evaluation.sh: **47319378**.
+  Two H100-80, 24 CPUs, 220 GiB, 48h; frozen evaluation source
+  28d2733ee7525c14874c4eca27c9fe18f7c7ab8b. Actual Slurm state PENDING (Priority),
+  runtime zero, StartTime Unknown / squeue --start N/A. The test-only candidate
+  time is not a promised start time and is not the actual job's estimate.
+- Stored Slurm script and reviewed script SHA-256 both
+  65f8b95e875fd8b391f29b8b3f36973d4b7bb15f841d8371b9ac8ad283158dcb.
+  Stdout is grid_logs/evaluate_47319378.log. No retraining or test predictions yet.
+- Six local tests passed; final CPU scorer additionally rejects mismatched expected
+  checkpoints and differing per-cell input hashes. Prediction ends with
+  GRID_TEST_PREDICTIONS_DONE_CPU_SCORING_REQUIRED; download GT/masks/score CSVs and
+  provenance for local CPU scoring, then construct the final five-metric table.
+  Scientific 2x2 test results remain incomplete until that scoring succeeds.
