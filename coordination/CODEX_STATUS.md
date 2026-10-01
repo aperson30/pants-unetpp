@@ -792,3 +792,23 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Sol follow-up review confirmed score invalidation and flagged direct-file CLI
   compatibility; fixed and --help verified. Added post-scoring artifact recheck
   and completion metric/count/protocol validation (reject empty/NaN metrics).
+
+## 2026-10-01 22:15 UTC — approved evaluation replacement verified and released
+
+- User explicitly approved preparing/verifying replacement, then switching jobs.
+  Actual Bridges-2 CPU preflight: 15 tests in 140.909s, OK, including installed
+  exporter parity and real POSIX descendant cleanup; no GPU used.
+- Pinned evaluation revision: 5e99901263f4a9f2092d6674c7c566ba4d9d43cc.
+  Prepared frozen source and submitted 47320183 ON HOLD via reviewed submission
+  helper. Slurm-stored script byte-matches frozen source; SHA-256
+  4cb01b3746c60ff8ce336fc3c053494664f8e30cb0da093fc6c0a810d59aa712.
+  Resources verified: two H100-80, 24 CPUs, 220 GiB, 48h, account cis260296p.
+- Reverified all four final checkpoint hashes and 1800-case validations. No
+  existing test-evaluation directory, so no mixed-provenance outputs to migrate.
+- New WSL master bridges2-switch.sock restored access. Rechecked old job pending,
+  held it to prevent a start race, cancelled ONLY 47319378, verified CANCELLED,
+  then released 47320183. Accounting: old job elapsed 00:00:00, no AllocTRES.
+- Final live state: 47320183 PENDING (Priority), runtime zero, squeue --start N/A.
+  No promised start time. Frozen training revision/checkpoints/inference settings
+  unchanged. Log: grid_logs/evaluate_47320183.log. Evaluation now queued with
+  the tested recovery fixes; no retraining and no duplicate evaluation allocation.
