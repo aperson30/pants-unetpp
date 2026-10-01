@@ -750,3 +750,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   GRID_TEST_PREDICTIONS_DONE_CPU_SCORING_REQUIRED; download GT/masks/score CSVs and
   provenance for local CPU scoring, then construct the final five-metric table.
   Scientific 2x2 test results remain incomplete until that scoring succeeds.
+
+## 2026-10-01 21:27 UTC — layered evaluation safety audit; queued job unchanged
+
+- Rechecked Bridges-2 47319378: PENDING (Priority), runtime zero. No cancellation,
+  source replacement, experiment change, or additional GPU job.
+- Added independent CPU artifact auditor: exact 901 IDs, expected checkpoints,
+  identical CT hashes, full decoded mask/GT label and geometry checks, complete
+  probability CSVs, portable SHA-256 snapshot for transfer verification.
+- Added crash/timeout/missing-NPZ/NaN/score-write fault injection; all five fail
+  without successful scores and recover on retry. Full local suite: 11 tests in
+  29.894s, OK, one installed-stack test skipped locally.
+- Separately ran installed-stack compact-export parity on Bridges-2 CPU:
+  2 tests in 45.246s, OK. Persistent predictor remains NOT deployed: needs real
+  GPU forward/output parity, end-to-end timing, peak memory and cleanup gate.
+  No additional GPU-hours consumed; no new speedup claimed.
+- Layer-by-layer findings and recovery commands are in
+  unetpp_port/bridges2_deployment/EVALUATION_LAYER_AUDIT_20261001.md.
+  Current reference path has 724 model starts across the grid; eliminating these
+  is the strongest remaining candidate, not permission to alter the frozen job.

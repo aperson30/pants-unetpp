@@ -1,6 +1,7 @@
 import json
 import os
 import shutil
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -12,6 +13,53 @@ from evaluation.predict_and_shrink import valid_segmentation, verify_provenance,
 
 
 class PredictionGuardTest(unittest.TestCase):
+    def test_failed_prediction_never_commits_success_and_retry_recovers(self):
+        for failure in ('crash', 'timeout', 'missing_archive', 'nan', 'save_failure'):
+            with self.subTest(failure=failure), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                images, output = root / 'images', root / 'out'
+                images.mkdir()
+                cid = 'PanTS_00009001'
+                nib.save(nib.Nifti1Image(np.zeros((3, 4, 5), dtype=np.float32), np.eye(4)),
+                         images / f'{cid}_0000.nii.gz')
+                args = SimpleNamespace(batch_size=5, num_parts=1, part_id=0, preprocess_workers=1,
+                                       export_workers=1, batch_timeout=7200, images_dir=images,
+                                       output_dir=output, max_probs_csv=output / 'scores.csv',
+                                       expected_cases=1, dataset='1', config='C', tr='T', p='P', f='0',
+                                       tumor_class=28, shrink_segmentations_to_tumor=True)
+                broken = True
+                def fake_cli(command, **kwargs):
+                    if broken and failure == 'crash':
+                        raise subprocess.CalledProcessError(1, command)
+                    if broken and failure == 'timeout':
+                        raise subprocess.TimeoutExpired(command, 7200)
+                    out = Path(command[command.index('-o') + 1])
+                    nib.save(nib.Nifti1Image(np.zeros((3, 4, 5), dtype=np.uint8), np.eye(4)),
+                             out / f'{cid}.nii.gz')
+                    if broken and failure == 'missing_archive':
+                        return
+                    probabilities = np.zeros((29, 3, 4, 5), dtype=np.float32)
+                    probabilities[28, 0, 0, 0] = np.nan if broken and failure == 'nan' else 0.875
+                    np.savez_compressed(out / f'{cid}.npz', probabilities=probabilities)
+                from evaluation.predict_and_shrink import write_scores
+                def save_scores(path, scores):
+                    if broken and failure == 'save_failure':
+                        raise OSError('injected disk failure')
+                    write_scores(path, scores)
+                with patch('evaluation.predict_and_shrink.parse_args', return_value=args), \
+                     patch('evaluation.predict_and_shrink.verify_provenance'), \
+                     patch.object(Path, 'symlink_to', autospec=True,
+                                  side_effect=lambda path, target: shutil.copyfile(target, path)), \
+                     patch('evaluation.predict_and_shrink.subprocess.run', side_effect=fake_cli) as cli, \
+                     patch('evaluation.predict_and_shrink.write_scores', side_effect=save_scores):
+                    with self.assertRaises((RuntimeError, OSError, subprocess.SubprocessError)):
+                        main()
+                    self.assertEqual(read_scores(args.max_probs_csv), {})
+                    broken = False
+                    main()
+                    self.assertEqual(cli.call_count, 2)
+                    self.assertEqual(read_scores(args.max_probs_csv)[cid], 0.875)
+
     def test_local_probabilities_persistent_mask_and_resume(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
