@@ -705,3 +705,23 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   cache is worth building after checking complete peak staging footprint. Do not confuse this
   with the full ~1.1TB training dataset. CPU RM-shared test-only rejected this GPU account's QoS;
   no undocumented-QoS workaround attempted. Local CPU scoring is an available alternative.
+
+### 2026-10-01 20:56 UTC — completed validation confirmed; guarded test evaluation preparation
+
+- Read live Slurm/logs: recovery 47272328 COMPLETED, exit 0, all 1800 cases scored,
+  checkpoint unchanged, GRID_2X2_ALL_TRAINING_AND_VALIDATION_DONE. No active jobs.
+- User approved finishing evaluation. Prepared actual continuation provenance (61be531),
+  expected checkpoint hashes/full validation case identities, distinct-GPU paired step,
+  one preprocessing/export worker per model and bounded CLI batch timeout.
+- Retained the reference CLI (FP16 default/full mirroring/step 0.5), not the unverified
+  persistent predictor. Full probabilities remain temporary on node-local storage; identical
+  compact masks and class-28 maximum scores are persisted per case. Resume checks checkpoint,
+  plans, dataset, predictor and every input hash, plus decoded mask geometry/labels.
+- CPU-only scoring now uses score_grid_cpu.py after GPU prediction, retaining test GT on Ocean.
+  No GPU held for final CPU scoring. Exact 901 IDs and original five project metrics retained.
+- Six local CPU tests passed, including exhaustive metric parity and mocked CLI storage/resume;
+  Bash syntax passed. These do not prove real-case GPU inference passed. Cluster imports,
+  four CPU predictor/checkpoint loads, live summary identity/hash gate and Slurm preflight
+  remain mandatory before submission. No evaluation job submitted in this preparation commit.
+- SSH master reopened. Classic SCP cannot work on this login node because remote scp is absent;
+  deploy through the authorized Git fork instead. No checkpoints/data modified or removed.

@@ -4,10 +4,12 @@ set -euo pipefail
 ROOT=/ocean/projects/cis260296p/asanjeev/pants_unetpp
 REPO=$ROOT/repo
 RESULTS=$ROOT/results
-TRAIN_COMMIT=b2ca075b078dec56ee340f0bd89bc0d2dc6f5b05
+TRAIN_COMMIT=61be5315e8cc5f4ec35637c9b748e5ebc33da1b7
 test "$(cat "$ROOT/frozen/$TRAIN_COMMIT/.frozen_commit")" = "$TRAIN_COMMIT"
 test -z "$(git -C "$REPO" status --porcelain)" || { echo 'dirty evaluation checkout' >&2; exit 1; }
 EVAL_COMMIT=$(git -C "$REPO" rev-parse HEAD)
+"$ROOT/venv/bin/python" "$REPO/evaluation/verify_grid_ready.py" --root "$ROOT" \
+  --manifest "$REPO/unetpp_port/bridges2_deployment/progress_20260929/checkpoint_manifest.json"
 for trainer in \
   nnUNetTrainerUNetPlusPlusSparseValidation \
   nnUNetTrainerUNetPlusPlusNoDeepSupervisionSparseValidation \

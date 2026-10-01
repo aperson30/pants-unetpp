@@ -10,13 +10,51 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
+import json
 import os
 import subprocess
+import shutil
 import tempfile
 from pathlib import Path
 
 import nibabel as nib
 import numpy as np
+
+
+def file_hash(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open('rb') as handle:
+        for block in iter(lambda: handle.read(8 * 1024 * 1024), b''):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def verify_provenance(args, case_ids: list[str]) -> None:
+    results = Path(os.environ['nnUNet_results'])
+    datasets = sorted(results.glob(f'Dataset{int(args.dataset):03d}_*'))
+    if len(datasets) != 1:
+        raise RuntimeError('dataset model folder is ambiguous or absent')
+    model = datasets[0] / f'{args.tr}__{args.p}__{args.config}'
+    fingerprint = {
+        'checkpoint_sha256': file_hash(model / f'fold_{args.f}/checkpoint_final.pth'),
+        'plans_sha256': file_hash(model / 'plans.json'),
+        'dataset_sha256': file_hash(model / 'dataset.json'),
+        'predictor_sha256': file_hash(Path(__file__)),
+        'inputs': {cid: file_hash(args.images_dir / f'{cid}_0000.nii.gz') for cid in case_ids},
+        'protocol': 'nnUNetv2_predict default fp16, full mirroring, step 0.5, final checkpoint',
+        'tumor_class': args.tumor_class,
+    }
+    path = args.output_dir / 'prediction_provenance.json'
+    if path.exists():
+        if json.loads(path.read_text()) != fingerprint:
+            raise RuntimeError('prediction provenance changed; refusing mixed resume')
+    else:
+        if any(args.output_dir.glob('PanTS_*.nii.gz')) or args.max_probs_csv.exists():
+            raise RuntimeError('unprovenanced existing predictions; refusing reuse')
+        temporary = path.with_suffix('.json.tmp')
+        temporary.write_text(json.dumps(fingerprint, indent=2))
+        os.replace(temporary, path)
 
 
 def read_scores(path: Path) -> dict[str, float]:
@@ -46,12 +84,19 @@ def write_scores(path: Path, scores: dict[str, float]) -> None:
     os.replace(temporary, path)
 
 
-def valid_segmentation(path: Path) -> bool:
+def valid_segmentation(path: Path, reference: Path | None = None) -> bool:
     if not path.is_file():
         return False
     try:
-        data = np.asanyarray(nib.load(str(path)).dataobj)
-        return data.ndim == 3 and bool(np.isfinite(data).all())
+        image = nib.load(str(path))
+        data = np.asanyarray(image.dataobj)
+        valid = (data.ndim == 3 and bool(np.isfinite(data).all())
+                 and bool(((data >= 0) & (data <= 28) & (data == np.floor(data))).all()))
+        if reference is not None:
+            source = nib.load(str(reference))
+            valid = valid and image.shape == source.shape and np.allclose(
+                image.affine, source.affine, rtol=0, atol=1e-4)
+        return bool(valid)
     except Exception:
         return False
 
@@ -80,6 +125,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--part-id", type=int, default=0)
     parser.add_argument("--tumor-class", type=int, default=28)
     parser.add_argument("--expected-cases", type=int, default=901)
+    parser.add_argument("--preprocess-workers", type=int, default=1)
+    parser.add_argument("--export-workers", type=int, default=1)
+    parser.add_argument("--batch-timeout", type=int, default=7200)
     parser.add_argument("--shrink-segmentations-to-tumor", action="store_true")
     return parser.parse_args()
 
@@ -88,6 +136,8 @@ def main() -> None:
     args = parse_args()
     if args.batch_size < 1 or args.num_parts < 1 or not 0 <= args.part_id < args.num_parts:
         raise ValueError("invalid batch/partition arguments")
+    if min(args.preprocess_workers, args.export_workers, args.batch_timeout) < 1:
+        raise ValueError("workers and timeout must be positive")
 
     all_cases = sorted(
         path.name[:-12] for path in args.images_dir.glob("*_0000.nii.gz")
@@ -101,6 +151,7 @@ def main() -> None:
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     args.max_probs_csv.parent.mkdir(parents=True, exist_ok=True)
+    verify_provenance(args, all_cases)
     scores = read_scores(args.max_probs_csv)
     extra_scores = scores.keys() - set(all_cases)
     if extra_scores:
@@ -109,7 +160,7 @@ def main() -> None:
     pending: list[str] = []
     for cid in case_ids:
         segmentation = args.output_dir / f"{cid}.nii.gz"
-        if cid in scores and valid_segmentation(segmentation):
+        if cid in scores and valid_segmentation(segmentation, args.images_dir / f"{cid}_0000.nii.gz"):
             continue
         # A partial segmentation without its score makes --continue_prediction skip
         # the case, so remove all partial artifacts and recompute it atomically.
@@ -126,7 +177,10 @@ def main() -> None:
         with tempfile.TemporaryDirectory(
             prefix=f"pants_predict_{args.part_id}_", dir=os.environ.get("TMPDIR")
         ) as temp_name:
-            temp_input = Path(temp_name)
+            temp_input = Path(temp_name) / 'input'
+            temp_output = Path(temp_name) / 'output'
+            temp_input.mkdir()
+            temp_output.mkdir()
             for cid in batch:
                 source = args.images_dir / f"{cid}_0000.nii.gz"
                 if not source.is_file():
@@ -134,43 +188,47 @@ def main() -> None:
                 (temp_input / source.name).symlink_to(source.resolve())
 
             command = [
-                "nnUNetv2_predict", "-i", str(temp_input), "-o", str(args.output_dir),
+                "nnUNetv2_predict", "-i", str(temp_input), "-o", str(temp_output),
                 "-d", args.dataset, "-c", args.config, "-tr", args.tr,
                 "-p", args.p, "-f", args.f, "--save_probabilities",
                 "--continue_prediction",
+                "-chk", "checkpoint_final.pth",
+                "-npp", str(args.preprocess_workers), "-nps", str(args.export_workers),
             ]
-            subprocess.run(command, check=True)
+            subprocess.run(command, check=True, timeout=args.batch_timeout)
 
-        for cid in batch:
-            segmentation = args.output_dir / f"{cid}.nii.gz"
-            probability_path = args.output_dir / f"{cid}.npz"
-            if not valid_segmentation(segmentation):
-                raise RuntimeError(f"missing or corrupt segmentation for {cid}")
-            if not probability_path.is_file():
-                raise RuntimeError(f"missing probability archive for {cid}")
-            with np.load(probability_path, allow_pickle=False) as archive:
-                probabilities = archive["probabilities"]
-                if probabilities.ndim != 4 or args.tumor_class >= probabilities.shape[0]:
-                    raise RuntimeError(f"unexpected probability shape for {cid}: {probabilities.shape}")
-                tumor = probabilities[args.tumor_class]
-                if not np.isfinite(tumor).all():
-                    raise RuntimeError(f"non-finite tumor probabilities for {cid}")
-                score = float(tumor.max())
-            if not 0 <= score <= 1:
-                raise RuntimeError(f"out-of-range tumor probability for {cid}: {score}")
-            # Closing NpzFile does not release the arrays assigned above. Drop
-            # these before loading the next 29-channel volume, avoiding overlap
-            # between consecutive cases' large allocations.
-            del tumor, probabilities
-            if args.shrink_segmentations_to_tumor:
-                shrink_segmentation(segmentation, args.tumor_class)
-            scores[cid] = score
-            write_scores(args.max_probs_csv, scores)
-            probability_path.unlink()
+            for cid in batch:
+                segmentation = temp_output / f"{cid}.nii.gz"
+                probability_path = temp_output / f"{cid}.npz"
+                if not valid_segmentation(segmentation, args.images_dir / f"{cid}_0000.nii.gz"):
+                    raise RuntimeError(f"missing or corrupt segmentation for {cid}")
+                if not probability_path.is_file():
+                    raise RuntimeError(f"missing probability archive for {cid}")
+                with np.load(probability_path, allow_pickle=False) as archive:
+                    probabilities = archive["probabilities"]
+                    if probabilities.ndim != 4 or args.tumor_class >= probabilities.shape[0]:
+                        raise RuntimeError(f"unexpected probability shape for {cid}: {probabilities.shape}")
+                    tumor = probabilities[args.tumor_class]
+                    if not np.isfinite(tumor).all():
+                        raise RuntimeError(f"non-finite tumor probabilities for {cid}")
+                    score = float(tumor.max())
+                if not 0 <= score <= 1:
+                    raise RuntimeError(f"out-of-range tumor probability for {cid}: {score}")
+                del tumor, probabilities
+                if args.shrink_segmentations_to_tumor:
+                    shrink_segmentation(segmentation, args.tumor_class)
+                destination = args.output_dir / f"{cid}.nii.gz"
+                temporary = destination.with_name(destination.name + '.copy.tmp')
+                shutil.copyfile(segmentation, temporary)
+                os.replace(temporary, destination)
+                scores[cid] = score
+                write_scores(args.max_probs_csv, scores)
+                probability_path.unlink()
 
     missing = [
         cid for cid in case_ids
-        if cid not in scores or not valid_segmentation(args.output_dir / f"{cid}.nii.gz")
+        if cid not in scores or not valid_segmentation(
+            args.output_dir / f"{cid}.nii.gz", args.images_dir / f"{cid}_0000.nii.gz")
     ]
     if missing:
         raise RuntimeError(f"inference incomplete for {len(missing)} cases: {missing[:10]}")
