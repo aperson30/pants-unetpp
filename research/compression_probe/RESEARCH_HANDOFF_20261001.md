@@ -1547,3 +1547,17 @@ Campaignestimate0.854722/2, posteddebitunknown. No more GPU submitted here;
 conversion from GTcandidate presence to absence. Need independent/task and
 posterior controls before claiming clinical harm/irreversible erasure/new
 method. Larger patient blocked, no scientific outcome-driven replacement.
+
+## 43. Cheap image-by-window control released
+
+3296871 released after source/hash/resource checks, last PENDING. One GPU,
+2CPU/32G/3min/no-requeue,150s process timeout. Max0.1charge-equivalentGPUh;
+campaignestimate0.854722, worst-case0.954722/2, posteddebitunknown.
+No VAE rerun/training/newpatient. Frozen100430 native/reconstruction each
+tested in BOTH saved publisher windows; GT scoring only. Own-window replay
+first must pass maxrawprobabilitydrift<=1e-4 before cross-window interpretation.
+Two CPU exact-voxel/physical-grid/rejection tests pass; transitive staging
+imports fixed before GPU submission. See FIXED_CROP_CONTROL_20261002.md.
+Posthoc mechanism diagnostic only, not clinical recall or proof of erasure.
+No protected47320183change, no large-case rescue/replacement. Latest prior
+commits confirmed on origin/main; push blocker resolved independently.

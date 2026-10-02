@@ -1483,3 +1483,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Two patients have weakened scores but no GTcandidate-present->absent switch.
   Large100259blocked; clinical/independentjudge/posterior controls remain next
   scientific priorities. No case replacement or protected47320183change.
+
+### 2026-10-02 17:14 cluster time — Fixed-window mechanism control released
+
+-3296871 PENDING after held/source/resource checks;1GPU/2CPU/32G/3min,
+  no-requeue,150s timeout, max0.1charge-equivalentGPUh. Campaignworst0.954722/2.
+- Same100430 saved native/reconstruction x two publisher windows. Replay own
+  windows first must match savedrawmaps<=1e-4 engineeringtolerance. No VAE,
+  training/newpatient/GT-drivenwindow. Tests2passed; missing transitive helper
+  imports caught and staged before GPU use. Full control protocol committed.
+- Posthoc mechanism only, no clinicalrecall/irreversibleloss claim. Largecase
+  blocked;47320183untouched. Prior2b3284a/6fd2d1f nowverifiedonorigin/main.
