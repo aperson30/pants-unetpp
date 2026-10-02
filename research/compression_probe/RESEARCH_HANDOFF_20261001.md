@@ -1561,3 +1561,17 @@ imports fixed before GPU submission. See FIXED_CROP_CONTROL_20261002.md.
 Posthoc mechanism diagnostic only, not clinical recall or proof of erasure.
 No protected47320183change, no large-case rescue/replacement. Latest prior
 commits confirmed on origin/main; push blocker resolved independently.
+
+## 44. Fixed-window control stopped at native replay gate
+
+3296871 FAILED1:0 in39s, cost0.021667chargedh-equivalent. Cumulativeestimate
+0.876389/2, posteddebitunknown. Native replay maxrawprobability drift exceeded
+locked1e-4; exactdriftnotlogged, no invented number/no threshold relaxation.
+Cross-window comparison not reached; no new scientific result/no retry.
+CPU native segmentation audit equalphysicalgrid,4/4164942 labels differ;
+this does NOT establish probability parity. Helper source matches producer.
+Installed predictor sets cudnn.benchmark=True on CUDA, overriding earlier
+False; possible algorithm/history confound, not proven rootcause. Futurelocal
+code saves failure diagnostics before raising, not yet GPU-validated.
+Need runtime/repeatability audit before further inference. See controlprotocol
+and fixed_crop_failure_3296871.json. Protected47320183untouched.

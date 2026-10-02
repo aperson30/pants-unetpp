@@ -1494,3 +1494,17 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   imports caught and staged before GPU use. Full control protocol committed.
 - Posthoc mechanism only, no clinicalrecall/irreversibleloss claim. Largecase
   blocked;47320183untouched. Prior2b3284a/6fd2d1f nowverifiedonorigin/main.
+
+### 2026-10-02 — Control fail-closed at replay; no automatic retry
+
+-3296871 FAILED1:0,39s,billing2000 =>0.021667charge-equivalentGPUh.
+  Campaignestimate0.876389/2. Native replay probability drift >locked1e-4;
+  exactdriftnotlogged, no completion/cross-window result. Thresholdunchanged.
+- CPUaudit equalgeometry,4/4164942 native segmentation labels differ; not
+  probability parity. Helper source identical. nnUNetPredictor constructor
+  overrides cudnn.benchmark=False with True onCUDA: plausible replayconfound,
+  not proven rootcause. No claim old paired scores are thereby invalidated.
+- Localfuturecode saves failed drift/metrics/backendflags before raising;
+  not GPUvalidated/resubmitted. Scalarfailureaudit committed, imagesprivate.
+  No GPUjobrunning/automaticretry. Need runtime/repeatability audit next,
+  not more patients/remedytraining.47320183untouched.

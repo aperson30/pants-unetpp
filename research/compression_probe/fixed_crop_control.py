@@ -102,6 +102,11 @@ def main():
                 delta = float(np.max(np.abs(raw_full-saved['raw_pdac'])))
             row['own_window_max_raw_probability_drift'] = delta
             if delta > 1e-4:
+                save_json(folder/'replay_failure.json', dict(completed=False,
+                    scientific_result=False, reason='own-window replay tolerance exceeded',
+                    locked_tolerance=1e-4, diagnostic=row,
+                    cudnn_benchmark=torch.backends.cudnn.benchmark,
+                    cudnn_deterministic=torch.backends.cudnn.deterministic))
                 raise ValueError('Own-window replay exceeds prespecified 1e-4 engineering tolerance')
         row.update(image_arm=arm, crop_arm=crop_arm, crop_bounds=window,
                    detector_seconds=time.monotonic()-started,

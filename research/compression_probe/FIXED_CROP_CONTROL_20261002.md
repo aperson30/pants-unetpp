@@ -50,3 +50,29 @@ Two CPU geometry tests pass. Missing transitive staging helpers were caught
 and staged before submission (zero GPU cost). Source checksums frozen remotely.
 No automatic continuation. Prior commits2b3284a/6fd2d1f independently verified
 on origin/main; earlier reported push blocker is resolved.
+
+## Outcome: replay gate failed; no cross-window evidence
+
+3296871 FAILED1:0 after39 allocation seconds at billing2000:
+0.021667charge-equivalentGPUh, cumulative estimate0.876389/2.
+Native own-window maximum probability drift exceeded locked1e-4 before
+cross-window inference. Exact drift was not logged in this version; do NOT
+invent it or change the threshold after seeing the failure. No completion.json.
+
+CPU audit of saved native segmentations: equal shape, spacing, origin and
+direction;4 of4164942 labels differ. This does NOT bound probability drift.
+Scalar failure_audit is preserved; private maps/images remain remote.
+Copied detector helper source is identical to the producer's.
+
+Installed nnUNetPredictor.__init__ sets cudnn.benchmark=True on CUDA,
+overriding the harness's earlier False. Autotuning/algorithm and execution
+history is a plausible replay confound, NOT a diagnosed cause. The paired
+producer did this too; original score decreases are not automatically
+invalidated, but inter-run reproducibility remains unquantified.
+
+Local follow-up code now writes failed replay drift/metrics/backend flags
+BEFORE raising. This patch has NOT been GPU-validated or resubmitted.
+Keep completed observations separate from this failed control. No retry or
+protected evaluation change. Next: audit actual runtime policy and establish
+same-process repeatability before any new cross-window/posterior claim; don't
+spend on a larger cohort or remedy training while this gate is unresolved.

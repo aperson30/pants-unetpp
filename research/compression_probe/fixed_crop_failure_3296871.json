@@ -1,0 +1,12 @@
+{
+  "completed": false,
+  "scientific_result": false,
+  "failure": "native own-window probability replay exceeded locked1e-4 tolerance; exact drift not logged",
+  "shape_equal": true,
+  "spacing_equal": true,
+  "origin_equal": true,
+  "direction_equal": true,
+  "segmentation_voxels_different": 4,
+  "segmentation_voxels": 4164942,
+  "caveat": "segmentation equality would not imply probability equality; no cross-window result"
+}
