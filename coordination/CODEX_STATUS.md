@@ -1063,3 +1063,23 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Existing new-campaign charge estimate.16111/.25 allocation-hours unchanged.
 - Reader packet remains LOCAL pending explicit image-egress permission;
   qualified reader ratings still missing. No clinical-harm/detection claim.
+
+## 2026-10-01 22:31 -07:00 — Consolidated research handoff for Claude review
+
+- User requested findings/work/future plans in the document for Claude to
+  improve. Added research/compression_probe/RESEARCH_HANDOFF_20261001.md with
+  all three completed reconstructions, failed job, measured costs, preprocessing
+  and execution contracts, metric caveats, protected reader packet and sources.
+- Updated local work/diffusion_idea_screen_20261001.md with prominent current
+  evidence notice; historical no-experiment statement is outdated. Corrected
+  categorical compression->impossible-denoiser-repair framing; patient-specific
+  preservation differs from synthesizing/inferencing plausible detail.
+- Verified primary-source PANORAMA alternative:482 manualPDAC outlines under
+  expert supervision vs194 automatic annotations; released two-stage detector
+  weights/folds exist. Exact checkpoint/patient exclusions and model-selection
+  exposures still UNVERIFIED; no detector job/weights/download launched.
+- LIDC-IDRI four-reader lung-nodule annotations are alternative task evidence,
+  not pancreatic validation. Planned paired detection/false-positive screen
+  is conditional on exclusions/runtime checks and a new bounded GPU cap.
+- Documentation only. No change to PanTS evaluation, environments, reader
+  key or data-egress restrictions. No new GPU time; no message sent to Claude.
