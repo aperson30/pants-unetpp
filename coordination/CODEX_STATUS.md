@@ -812,3 +812,34 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   No promised start time. Frozen training revision/checkpoints/inference settings
   unchanged. Log: grid_logs/evaluate_47320183.log. Evaluation now queued with
   the tested recovery fixes; no retraining and no duplicate evaluation allocation.
+
+## 2026-10-02 02:24 UTC — compression-only research probe: positive-data gate
+
+- User authorized starting compression-only lesion-preservation screening.
+  New bridges2-compression.sock works; live 47320183 remains PENDING. No job,
+  checkpoint, frozen environment, or evaluation output changed.
+- Bounded CPU inventory of all nine cached calibration labels found ZERO
+  class-28 voxels in every case. Do not claim previous calibration demonstrated
+  positive-tumor target behavior. Existing timing results remain timing results;
+  why metadata-based selection did not produce positive voxel targets is not
+  diagnosed. Nine cases are usable only as negative controls for this probe.
+- Read existing development validation reference counts: 174/1800 cases have
+  positive class-28 ground truth. Small candidates include 3548 (36 voxels),
+  6854 (66), 133/5782 (126); choose by physical volume after acquiring masks,
+  not by model Dice. Reserved 901-case test data not opened for research.
+- Official MAISI source now NVIDIA-Medtech/NV-Generate-CTMR; examined revision
+  5cb04e82fed71f2fe64a2617ab695be1f5a37fea. Pin public autoencoder only:
+  nvidia/NV-Generate-CT @430f2c82a96dce44b455de5876d43a5a9f753cb2,
+  models/autoencoder_v1.pt, 83831868 bytes, SHA256
+  1f8a7a056d0ebc00486edc43c26768bf1c12eaa6df9dd172e34598003be95eb3.
+- MONAI absent in existing evaluation venv; no install performed. Use isolated
+  dependencies. Official CT transform has HU clipping/normalization and RAS;
+  include preprocessing-only control and avoid attributing tile seams to VAE.
+- Prepared local work/compression_probe/PROTOCOL.md and region_metrics.py:
+  component size, HU error, boundary error, signed local contrast/CNR; same-grid
+  and unit checks, no implicit alignment, no clinical realism assertion.
+  Five CPU tests pass (0.064s), including synthetic lesion erasure. No GPU used.
+- Positive CT/masks not located in own persistent cache. Public PanTSMini API
+  lists archives, not individual cases. Do not fetch the full corpus merely for
+  this screen. Need a bounded acquisition route and explicit initial GPU cap
+  before submitting; no compression result or speedup claimed.
