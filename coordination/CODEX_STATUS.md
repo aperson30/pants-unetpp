@@ -1521,3 +1521,15 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Strictopsraise,no warn-onlyfallback; partialfailurepreserved. Fourcalls in
   oneprocess cannot prove crossprocess/device reproducibility. No47320183
   change/automaticretry. Protocol/code/handoff45 committed for Claude.
+
+### 2026-10-02 — Repeatability completed; separate fresh-control study prepared
+
+-3296939 COMPLETED46s,0.025556chargedh-equivalent. Estimatecampaign0.901944/2.
+  Both default/deterministic withinpolicy repeats identical. Historicalmax
+  drift0.001598/0.001856 stillfailsold1e-4gate. Mean tumorpolicyshift~3.14e-6;
+  does not identifycause or establishcrossprocessreproducibility. ScalarJSONsaved.
+- Separate same-process image-by-window study prepared with fresh repeated
+  controls, all7classrepeatdrift<=1e-4 and exactsegmentation, not relaxedoldgate.
+ 8calls/4cells; no VAE/training/newpatient/GT-drivenwindow. Max0.1additional
+  chargedh, worstcampaign1.001944/2. CPUpreflight before heldsubmission.
+ 47320183untouched,largecaseblocked,no automaticretry.

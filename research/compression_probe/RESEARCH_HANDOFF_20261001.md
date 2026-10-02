@@ -1590,3 +1590,16 @@ pass claim. Unsupported deterministic ops preservefailure,no silentfallback.
 See JUDGE_REPEATABILITY_20261002.md. Need result/accounting before claims;
 oneprocess study doesn't establish crossprocess/device repeatability.
 47320183untouched,no automaticretry.
+
+## 46. Repeats stable within process; historical gate still failed
+
+3296939 COMPLETED0:0,46s,0.025556charge-equivalentGPUh. Campaignestimate
+0.901944/2,posteddebitunknown. Default repeats identical; deterministicrepeats
+identical. Historical maxdrift0.001598/default,0.001856/deterministic, old1e-4
+gate stillFAILED. Default/deterministic mean tumor0.030070854/0.030073991,
+~3.14e-6 difference; both identicalrepeats ONLY withinoneprocess. Rootcause
+historicaldrift NOT proven. Scalarresult/updatedrepeatabilityprotocolpreserved.
+New separate same-process study planned:4image/windowcells eachrepeated,
+freshnativecontrol, allclassmaxrepeatdrift<=1e-4 plus identicalsegmentation.
+No relaxation/retroactivepass. Max0.1additionalchargedh if preflightpasses;
+worstcampaign1.001944/2. See SAME_PROCESS_WINDOW_20261002.md. No47320183change.

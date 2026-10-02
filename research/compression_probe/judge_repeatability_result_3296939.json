@@ -1,0 +1,170 @@
+{
+  "completed": true,
+  "clinical_recall": false,
+  "scope": "same-input engineering diagnostic only",
+  "torch": "2.10.0+cu129",
+  "cudnn_version": 91002,
+  "cuda_version": "12.9",
+  "device": "NVIDIA GH200 120GB",
+  "input_crop_array_sha256": "68d30c136bfadd07b144f30493211d397a015c6e5d1b958791a9dac247eea490",
+  "producer_sha256": "79bd127faaafcbc84dcb220eee3b0db7be61645f53a76a8a1ccf98f35b9322de",
+  "historical_gate_unchanged": 0.0001,
+  "calls": [
+    {
+      "policy": "publisher_default",
+      "repeat": 1,
+      "seconds": 6.98766665533185,
+      "backend_before": {
+        "benchmark": true,
+        "cudnn_deterministic": false,
+        "deterministic_algorithms": false,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cublas_workspace": ":4096:8"
+      },
+      "backend_after": {
+        "benchmark": true,
+        "cudnn_deterministic": false,
+        "deterministic_algorithms": false,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cublas_workspace": ":4096:8"
+      },
+      "tumor_mean_raw_probability": 0.030070854350924492,
+      "tumor_max_raw_probability": 0.2338290959596634,
+      "vs_historical": {
+        "global_max_abs_probability_drift": 0.0015983283519744873,
+        "global_mean_abs_probability_drift": 1.0788632209823845e-07,
+        "tumor_max_abs_probability_drift": 0.0011000484228134155,
+        "tumor_mean_abs_probability_drift": 1.8400998669676483e-05,
+        "tumor_mean_signed_probability_change": -4.294889333067431e-09,
+        "engineering_gate_max_drift_1e4": false
+      }
+    },
+    {
+      "policy": "publisher_default",
+      "repeat": 2,
+      "seconds": 6.188971368595958,
+      "backend_before": {
+        "benchmark": true,
+        "cudnn_deterministic": false,
+        "deterministic_algorithms": false,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cublas_workspace": ":4096:8"
+      },
+      "backend_after": {
+        "benchmark": true,
+        "cudnn_deterministic": false,
+        "deterministic_algorithms": false,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cublas_workspace": ":4096:8"
+      },
+      "tumor_mean_raw_probability": 0.030070854350924492,
+      "tumor_max_raw_probability": 0.2338290959596634,
+      "vs_historical": {
+        "global_max_abs_probability_drift": 0.0015983283519744873,
+        "global_mean_abs_probability_drift": 1.0788632209823845e-07,
+        "tumor_max_abs_probability_drift": 0.0011000484228134155,
+        "tumor_mean_abs_probability_drift": 1.8400998669676483e-05,
+        "tumor_mean_signed_probability_change": -4.294889333067431e-09,
+        "engineering_gate_max_drift_1e4": false
+      }
+    },
+    {
+      "policy": "deterministic_diagnostic",
+      "repeat": 1,
+      "seconds": 6.404308434575796,
+      "backend_before": {
+        "benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cublas_workspace": ":4096:8"
+      },
+      "backend_after": {
+        "benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cublas_workspace": ":4096:8"
+      },
+      "tumor_mean_raw_probability": 0.030073991045355797,
+      "tumor_max_raw_probability": 0.23382924497127533,
+      "vs_historical": {
+        "global_max_abs_probability_drift": 0.0018564164638519287,
+        "global_mean_abs_probability_drift": 1.2119699022150598e-07,
+        "tumor_max_abs_probability_drift": 0.0012674480676651,
+        "tumor_mean_abs_probability_drift": 2.345731991226785e-05,
+        "tumor_mean_signed_probability_change": 3.134645112368162e-06,
+        "engineering_gate_max_drift_1e4": false
+      }
+    },
+    {
+      "policy": "deterministic_diagnostic",
+      "repeat": 2,
+      "seconds": 6.358867016620934,
+      "backend_before": {
+        "benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cublas_workspace": ":4096:8"
+      },
+      "backend_after": {
+        "benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cublas_workspace": ":4096:8"
+      },
+      "tumor_mean_raw_probability": 0.030073991045355797,
+      "tumor_max_raw_probability": 0.23382924497127533,
+      "vs_historical": {
+        "global_max_abs_probability_drift": 0.0018564164638519287,
+        "global_mean_abs_probability_drift": 1.2119699022150598e-07,
+        "tumor_max_abs_probability_drift": 0.0012674480676651,
+        "tumor_mean_abs_probability_drift": 2.345731991226785e-05,
+        "tumor_mean_signed_probability_change": 3.134645112368162e-06,
+        "engineering_gate_max_drift_1e4": false
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "policy": "publisher_default",
+      "comparison": "same_policy_repeat2_vs1",
+      "global_max_abs_probability_drift": 0.0,
+      "global_mean_abs_probability_drift": 0.0,
+      "tumor_max_abs_probability_drift": 0.0,
+      "tumor_mean_abs_probability_drift": 0.0,
+      "tumor_mean_signed_probability_change": 0.0,
+      "engineering_gate_max_drift_1e4": true
+    },
+    {
+      "policy": "deterministic_diagnostic",
+      "comparison": "deterministic_vs_default",
+      "global_max_abs_probability_drift": 0.0017563104629516602,
+      "global_mean_abs_probability_drift": 1.207854154472443e-07,
+      "tumor_max_abs_probability_drift": 0.001339152455329895,
+      "tumor_mean_abs_probability_drift": 2.2684682335238904e-05,
+      "tumor_mean_signed_probability_change": 3.1389402010972844e-06,
+      "engineering_gate_max_drift_1e4": false
+    },
+    {
+      "policy": "deterministic_diagnostic",
+      "comparison": "same_policy_repeat2_vs1",
+      "global_max_abs_probability_drift": 0.0,
+      "global_mean_abs_probability_drift": 0.0,
+      "tumor_max_abs_probability_drift": 0.0,
+      "tumor_mean_abs_probability_drift": 0.0,
+      "tumor_mean_signed_probability_change": 0.0,
+      "engineering_gate_max_drift_1e4": true
+    }
+  ]
+}

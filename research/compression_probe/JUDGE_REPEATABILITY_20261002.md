@@ -46,3 +46,18 @@ and frozen hashes before release. No automatic retry or main47320183change.
 
 3296939 released after held/source/resource checks; last PENDING.
 Four CPU comparison/geometry tests passed. Frozen source manifests retained.
+
+## Completed result
+
+3296939 COMPLETED0:0,46s,billing2000 =>0.025556charge-equivalentGPUh;
+campaignestimate0.901944/2, posteddebitunknown. Both within-default repeats
+match exactly; both within-deterministic repeats match exactly. Historical
+maxprobabilitydrift0.001598/0.001856 respectively; neither passes old1e-4gate.
+Default/deterministic tumor means0.030070854/0.030073991; signed meanchange
+~3.14e-6, globalpolicymaxdrift0.001756. Stable within THIS process, not a
+crossprocess/device claim or proof of historicaldrift cause. Scalarcompletion
+preserved. Timing default6.99/6.19s,deterministic6.40/6.36s; singlechecks,
+not a controlled speedbenchmark. No unsupporteddeterministic operation arose.
+
+Prepare separate same-process image-by-window comparison with fresh repeated
+controls, not a rerun relabeling oldhistoricalgate. See SAME_PROCESS_WINDOW_20261002.md.
