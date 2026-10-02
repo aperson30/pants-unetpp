@@ -293,3 +293,205 @@ Remote isolated root:/projects/bdyo/asanjeev/compression_probe_20261001.
 Original/decoded volumes, input manifests, CPU raw audits and private reader
 key stay there. Recheck access/live state before remote work; this document
 does not authorize MFA bypass, data publishing or new GPU jobs.
+
+## 12. Independent review (Claude, October 1, 2026)
+
+Research-only review. No GPU job, environment change, image upload, PanTS
+evaluation change or data download beyond public metadata/fold files and two
+ZIP central directories (HTTP range reads, no weights downloaded).
+Labels: **[measured]** = read from committed metrics/fold/metadata files or
+verified at a primary source in this review; **[hypothesis]** = untested;
+**[estimate]** = not measured.
+
+### 12.1 Verification of Sections 4-8
+
+- [measured] Section 4 table matches committed `*/metrics.json` exactly
+  (tumor MAE 36.21/18.27/42.12 HU; contrast 43.67->43.32, -65.55->-58.58,
+  11.79->11.20 HU). Preprocessing control tumor/boundary MAE is 0 in all three.
+- [measured] PANORAMA README: 676 PDAC, 482 manual, 194 automatic; public set
+  includes 194 MSD Task07 patients (98 PDAC) and 80 NIH Pancreas-CT patients.
+  Correction: the `manual_labels/` folder holds 482 files, of which 3 are
+  labelled non-PDAC in `clinical_information.xlsx` (479 PDAC).
+- [measured] MAISI data README: CT VAE v1 trained on 37,243 volumes, of which
+  NLST chest CT is 31,801 (~85%); abdominal sources are TCIA Colon (1,522) and
+  MSD Task03 Liver (104). MSD Task07 is listed for the diffusion model (224),
+  not the VAE. PANORAMA/Dutch cohorts are not listed for either model.
+- [measured] Section 6 compute figures are internally consistent
+  (597 allocation-seconds = 0.1658 physical GPU-h).
+
+### 12.2 Confounds in the current evidence
+
+1. **Lesion error is not shown to be lesion-specific.** [measured] Tumor MAE
+   is below whole-image MAE in all three cases (36.2 vs 63.1; 18.3 vs 21.9;
+   42.1 vs 69.2 HU). Whole-image MAE mixes air, bone and soft tissue, so it is
+   not the right reference either. Needed: *excess* error = lesion MAE minus
+   MAE in volume-matched non-lesion pancreas (or matched soft tissue) in the
+   same reconstruction.
+2. **Global intensity bias masquerades as lesion change.** [measured] Case 165
+   tumor and ring both shift about -32 HU (Section 4). MAE counts this as
+   damage; contrast cancels it. Report bias-corrected error (subtract the
+   local or organ-level mean shift) alongside raw MAE.
+3. **Latent grid vs lesion size, driven by slice thickness.** [hypothesis,
+   based on the probe's 4-divisible padding, consistent with 4x per-axis
+   compression] At native spacing a 4x latent cell is 16 mm along z for case
+   120 (4 mm slices) and 10 mm for case 165 (2.5 mm). Both lesions span three
+   slices (12 mm and 7.5 mm), i.e. about one latent cell or less along z. Any
+   size effect is confounded with slice thickness. Stratify by lesion extent
+   *in latent cells*, and add a fixed-spacing condition (resample to one
+   isotropic spacing before encoding) so thickness is held constant.
+4. **Domain shift vs compression.** [measured + hypothesis] The VAE is ~85%
+   chest CT. Abdominal low-contrast lesion loss could reflect training-domain
+   mismatch rather than compression capacity. Control: an abdomen-trained
+   autoencoder (e.g. DiffTumor's, trained on abdominal CT) on the same cases.
+   If it preserves what MAISI loses, the cause is domain, not latent size.
+5. **Generic smoothing.** Already noted (Section 9, step 6). Make it the
+   primary control, not optional: Gaussian blur matched to the VAE's measured
+   global error or noise power, prespecified.
+6. **Noise reduction inflates CNR.** [measured] Case 165 CNR rose 17% while
+   contrast fell; ring variance dropped. CNR is not a detectability measure
+   when noise texture changes. Prefer a model-observer statistic or detector
+   output.
+7. **Selection and n.** [measured] n = 3, two chosen as the smallest of 120
+   inspected masks. Results cannot separate case idiosyncrasy from a size
+   effect. Section 4's caveats are correct.
+8. **In-sample risk for MSD cases.** [measured] All 194 MSD-sourced PANORAMA
+   studies sit in the PANORAMA folds (30-46 per fold) and the metadata gives
+   no mapping to original MSD IDs. Any PANORAMA detector run on our MSD cases
+   005/120/165 is therefore of unknown exposure. Do not use MSD cases with the
+   PANORAMA detector.
+
+### 12.3 Can PANORAMA's released folds give patient-disjoint tests?
+
+Short answer: **yes, with two exclusions and one residual caveat.**
+
+- [measured] Per-fold weights are released separately for BOTH stages
+  (Zenodo record 11160381, ZIP central directories read via range request):
+  `Dataset103_.../fold_{0..4}/checkpoint_final.pth` (pancreas localization)
+  and `Dataset104_.../fold_{0..4}/checkpoint_best_panorama.pth` (detection).
+  The default `process.py` ensembles folds 0-4; out-of-fold use requires
+  running `-f k` for both stages.
+- [measured] The two stages use **identical** validation folds (all five
+  folds equal, 448/448/448/447/447 studies, union 2,238, no overlap). Study k
+  in fold k is unseen by both fold-k checkpoints, including the localization
+  stage.
+- [measured] **Folds are split by study, not by patient.** Using
+  `PANORAMA_patient_id` from `clinical_information.xlsx`: 2,224 patients,
+  11 of whom have studies in more than one validation fold (25 studies).
+  Exclude those 11 patients to be patient-disjoint.
+- [measured] Excluding those 11 patients and MSD/NIH-sourced studies leaves
+  **380 manually annotated PDAC studies** (fold 0-4: 74/81/84/58/83) with
+  reference standard histopathology 167, pathology 109, cytology 85,
+  radiology 19; and 265-284 clean negatives per fold.
+- Residual caveat (selection exposure): the detection checkpoint was chosen
+  per fold by AUROC/AP on that fold's validation set, so absolute fold-k
+  performance is optimistic. For a **paired** original-vs-reconstruction
+  comparison the same checkpoint sees both arms, so this bias largely cancels
+  in the difference [hypothesis; standard paired-design reasoning]. Report
+  it anyway. The pancreas stage uses `checkpoint_final` (no selection).
+- Unverified: the ZIPs contain no `splits_final.json`, so the
+  checkpoint-to-fold mapping rests on the README and directory names. Cheap
+  CPU check: load one `.pth` and read its stored `init_args` (fold, dataset).
+- Unverified: whether the PANORAMA imaging release lets you download
+  selected cases without the full corpus.
+- [measured] PANORAMA/Dutch cohorts are not in MAISI VAE or diffusion
+  training lists, so Dutch-sourced cases are also clean with respect to MAISI.
+
+### 12.4 Cheapest decisive experiment
+
+Run two tiers; stop after Tier A if it is negative.
+
+**Tier A — controlled lesion-insertion dose-response (no detector, no reader).**
+- [estimate] Cost: about 8 MAISI VAE passes. Measured passes in Section 6 were
+  0.036-0.057 physical GPU-h each, so roughly 0.3-0.5 GPU-h including one
+  calibration. Needs a new bounded cap.
+- Hosts: 4 PANORAMA-native negative studies from one fold (clean of MAISI and
+  of patient leakage), at native spacing AND resampled to one fixed isotropic
+  spacing (2 conditions x 4 hosts = 8 passes).
+- Inserts: ellipsoidal low-contrast lesions in GT pancreas parenchyma,
+  diameters 3/5/8/12/20 mm and contrasts -10/-20/-40/-60 HU, with background
+  noise preserved (add the contrast to existing texture, do not paint flat
+  values), placed >= 30 mm apart so several fit per volume. Prespecify all
+  positions before any reconstruction.
+- Arms per host: preprocessing control, MAISI reconstruction, and a
+  prespecified Gaussian-blur control matched to the VAE's measured noise power
+  in parenchyma away from inserts.
+- Outcomes: contrast retention (bias-corrected) and a non-prewhitening
+  matched-filter SNR per insert; plot vs diameter in latent cells.
+- Limitation: inserts are not real PDAC (no infiltrative margin or desmoplastic
+  texture). Tier A tests a necessary condition: can the VAE carry a small,
+  faint, known signal at all.
+- **GO to Tier B** if, at fixed spacing, inserts <= 8 mm with |contrast|
+  <= 40 HU keep < 0.5 of their matched-filter SNR in >= 3 of 4 hosts AND are
+  worse than the Gaussian control by more than the host-to-host spread.
+- **NO-GO** (compression is not the bottleneck at that scale) if inserts
+  >= 5 mm keep >= 0.8 of SNR in >= 3 of 4 hosts. Record the negative result
+  and return to the noise/depth probes.
+- In between: report as inconclusive; do not tune sizes or contrasts on the
+  outcome.
+
+**Tier B — real-lesion paired detector test (only after Tier A GO).**
+- Cases: from one PANORAMA fold, ~30 clean manually annotated PDAC with
+  small lesions (smallest physical diameter; prespecify cut-off before
+  outputs) plus ~30 clean negatives. Out-of-fold checkpoints for both stages.
+- Arms: original, preprocessing control, MAISI reconstruction, Gaussian
+  control. Same runtime, thresholds from the released protocol
+  (`extract_lesion_candidates`, picai_eval matching), full probabilities saved.
+- Primary outcome: paired lesion-level detection lost vs gained at a fixed
+  threshold, exact McNemar on discordant pairs; false positives on negatives.
+- **GO** (bring to PI): losses minus gains >= 5 with one-sided exact McNemar
+  p < 0.05 for MAISI vs control, and MAISI loses more than the Gaussian arm.
+  (For reference, 7 losses and 0 gains gives p = 0.0078.)
+- **NO-GO**: losses minus gains <= 2, or MAISI no worse than the Gaussian
+  arm. Then compression damage is either absent or generic smoothing; stop
+  the representation-repair idea.
+- [estimate] Cost unknown until a one-case calibration of the two-stage
+  detector plus VAE; calibrate first under a new cap, as Section 9 says.
+
+### 12.5 Changes to the Section 9 plan
+
+- Step 1: add the patient-ID leakage exclusion (11 patients) and the
+  `.pth` `init_args` check; drop MSD cases for any PANORAMA detector use.
+- Step 3: add the fixed-spacing condition and bias-corrected error; make the
+  Gaussian control mandatory, not "consider".
+- New step before 4: Tier A insertion dose-response, which is cheaper than
+  any detector run and has exact ground truth.
+- Step 5: report lesion size in latent cells as well as mm.
+- Add an abdomen-trained-autoencoder arm if Tier A is GO, to separate domain
+  shift from compression.
+
+### 12.6 Answers to Section 10
+
+- Out-of-fold PANORAMA inference: possible for both stages with released
+  per-fold weights; patient-disjoint after excluding 11 patients; detection
+  checkpoint has fold-level selection exposure (largely cancels in paired
+  deltas).
+- Cheaper cohort: for the *preservation* question, controlled insertion
+  (Tier A) is cheaper and more decisive than any new cohort. LIDC remains a
+  different anatomy/task.
+- Posterior mean / native spacing: mean is right for a reconstruction bound;
+  native spacing confounds size with slice thickness, so add fixed spacing.
+- Generic smoothing vs specific failure: the matched Gaussian arm is the
+  decisive control.
+- Smallest pilot / stopping rule: Tier A with the GO/NO-GO above.
+- Novelty: "VAEs blur small low-contrast detail" alone is expected and not
+  novel. A quantified size x contrast x latent-cell transfer curve for a
+  widely used 3D CT foundation VAE, tied to real-lesion detection loss, would
+  be a useful measurement; a repair method would need to beat region-aware
+  prior work (e.g. MAISI-v2's region-specific contrastive loss).
+
+### 12.7 Sources checked in this review
+
+- PANORAMA baseline repo, README, `src/process.py`, both fold JSONs:
+  https://github.com/DIAGNijmegen/PANORAMA_baseline
+- PANORAMA baseline weights (ZIP directories read by range request):
+  https://zenodo.org/records/11160381
+- PANORAMA labels README, `clinical_information.xlsx`, `manual_labels/`:
+  https://github.com/DIAGNijmegen/panorama_labels
+- MAISI CT training-data README:
+  https://github.com/NVIDIA-Medtech/NV-Generate-CTMR/blob/main/data/README.md
+- MAISI paper (VAE training corpus, small-organ synthetic-data gap):
+  https://arxiv.org/abs/2409.11169
+- MAISI-v2 (region-specific contrastive loss, closest repair prior work):
+  https://arxiv.org/abs/2508.05772
+- Committed probe outputs: `results_20261001/`, `small_results_20261001/`,
+  `second_results_20261001/` (`metrics.json`, `contrast_sensitivity.json`).
