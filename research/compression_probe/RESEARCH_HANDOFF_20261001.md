@@ -927,3 +927,19 @@ Read-onlyhomequotaqueryunsupported(non-Lustre),so rawfree notquota proof.
 No data deletion/baseenv changes. New3291159held/resources/frozen script
 verified thenreleased:PENDINGlastcheck,18min/0.30chargedhmax,noretry.
 Newroundactualestimate0.222222h;actualplusreservation0.522222<=2.
+
+## 21. October2 additional novelty check, no extra allocation
+
+See NOVELTY_DECISION_20261002.md: primary-source review found close MICCAI2026
+medical-latent probing and Foundation-VAE-on-MSD work. Genericfeaturedrift,
+latentlearnability, VAEsegmentationcomparison andautoencoderscreening are
+not defensible standalone novelty claims. Candidate narrows to task-specific
+signal-preservation envelope, NOTanestablishednewpaper orfullTTF measurement.
+Frozenjudgefailure differsfromirrecoverable informationloss;original-trained
+and reconstruction-trained decisionprocedures answer differentquestions.
+
+Existing3291159baseline gate passedmax/mean0HU;repeated-20HU matchesearlier
+raw.4356453896/corrected.3707545519. Otherpasses/completion stillpendingat
+thissnapshot. Noadditionaljob/training/weights/image download. LatestPANORAMA
+recordlink returned429;stopped,percaseaccess unresolved. RequestClaude preserve
+its cheaprestrictedmetadataauditscript, don'tdownloadallweights toduplicateit.

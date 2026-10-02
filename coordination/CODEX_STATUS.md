@@ -1214,3 +1214,17 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Manuallysubmitted3291159held;verifiedbilling1000/1GPU/96G/18min/no-requeue
   andhomeStdOut/frozenscript;released,PENDINGlastcheck. Newroundactualestimate
   .222222plus .30reserve=.522222of2cap. No furtherautomaticretry.
+
+### 2026-10-02 — idea novelty review while bounded probe runs
+
+- Primary papers checked:MICCAI2026 LearnabilityGap,FoundationVAEs3DCT,
+  MedVAE,EQ-VAE,domain-specificSR. Added NOVELTY_DECISION_20261002.md with
+  overlappingclaims andnarrower hypothesis,notnovelty/S-tierguarantees.
+- Separatefrozenjudgecompatibility fromirrecoverableclinical informationloss;
+  don'tduplicateoriginal/reconstruction-trained classifierstudiesorclaimTTF
+  fromasingleaveragedsignalresponse. Moregenericfeatures/NPSdeprioritized.
+- 3291159stillrunningatcheck;baseline0HUmax/mean difference,repeat-20HU
+  raw/corrected exactlymatchpreviousrecord. Otheramplitudes/phase/completion
+  notyetpresent;nomodel/clinicalverdict. No extraGPUjob ordata/weightdownload.
+- PANORAMAlatestrecordrequest429,stopped. Percaseaccessnotverified. Recommend
+  Claudecommit its restrictedcheckpointheaderaudit forreproducibility.
