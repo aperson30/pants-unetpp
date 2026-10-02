@@ -63,7 +63,9 @@ def detector(models, dataset, trainer, checkpoint_name, heads):
     predictor = nnUNetPredictor(tile_step_size=.5, use_gaussian=True, use_mirroring=True,
                                perform_everything_on_device=True, device=torch.device('cuda:0'),
                                verbose=False, verbose_preprocessing=False, allow_tqdm=False)
-    predictor.manual_initialization(network.eval(), pm, cm, None, dataset_json,
+    # nnU-Net's exported prediction path iterates and reloads these states,
+    # even for one fold. None is accepted at initialization but fails later.
+    predictor.manual_initialization(network.eval(), pm, cm, [checkpoint['network_weights']], dataset_json,
                                     checkpoint['trainer_name'], checkpoint['inference_allowed_mirroring_axes'])
     del checkpoint
     return predictor

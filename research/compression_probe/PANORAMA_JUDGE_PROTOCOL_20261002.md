@@ -332,3 +332,10 @@ Transport-selected validation case is not a cohort or external test; frozen
 judge response loss alone cannot prove irreversible information loss.
 Private inputs/maps stay under home paired_judge_pilot_v1; last snapshot
 PENDING. Next check completion JSON and accounting, not just allocation state.
+
+Correction:3295187 failed before detector outputs (parameters=None API bug),
+105s/0.058333 charge-equivalenth. Fixed single-fold parameter list; real-state
+CPU regression passes both checkpoints and installed prediction weight loop
+(neural sliding-window calculation mocked), plus four geometry tests. No
+clinical results yet. Replacement3295395 released PENDING with identical
+20min/no-requeue cap, v2 private folder; campaign worst-case1.181389/2 chargedh.

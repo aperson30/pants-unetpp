@@ -12,9 +12,9 @@
 #SBATCH --time=00:20:00
 #SBATCH --no-requeue
 #SBATCH --job-name=paired_judge_pilot
-#SBATCH --output=/u/asanjeev/compression_probe_smalloutputs/paired_judge_pilot_v1/pilot_%j.log
+#SBATCH --output=/u/asanjeev/compression_probe_smalloutputs/paired_judge_pilot_v2/pilot_%j.log
 set -euo pipefail
-CODE=/u/asanjeev/compression_probe_smalloutputs/paired_judge_pilot_v1
+CODE=/u/asanjeev/compression_probe_smalloutputs/paired_judge_pilot_v2
 ROOT=/projects/bdyo/asanjeev/compression_probe_20261001
 PYTHON=/projects/bdyo/asanjeev/pants_venv/bin/python
 export PYTHONPATH=$CODE/deps:$ROOT/wheels/monai-1.5.1-py3-none-any.whl:$CODE

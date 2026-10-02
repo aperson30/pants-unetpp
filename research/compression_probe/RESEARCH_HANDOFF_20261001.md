@@ -1412,3 +1412,24 @@ One transport-selected OOF/validation-selected case is NOT clinical recall,
 external test or cohort evidence. A frozen-detector response drop alone cannot
 distinguish information loss from domain shift. Next require completion.json
 and Slurm accounting before interpreting results. Evaluation47320183 untouched.
+
+## 37. Pilot API bug fixed; one bounded replacement released
+
+3295187 FAILED1:0 after105 allocation seconds, billing2000: charge-equivalent
+0.058333 GPUh. No completion.json. First detector prediction failed because
+manual_initialization received parameters=None; installed nnU-Net2.8.1 later
+iterates list_of_parameters. This is a harness failure, not scientific evidence.
+
+Fix passes [checkpoint['network_weights']] for the single held-out fold.
+CPU regression loads both real checkpoints and executes the installed weight
+loop with only sliding-window neural compute mocked: list length1, exactly
+one call, returned tensor exact, all loaded weights bit-identical. This test
+and four geometry tests passed in1.515s. No GPU cost for regression; full CT
+inference remains unverified until replacement completion.
+
+Replacement3295395 verified held then released, last PENDING. Separate private
+paired_judge_pilot_v2 preserves failed v1 artifacts, reuses unchanged inputs.
+One GPU/32GB/20min interactive/no requeue, frozen SHA and bash syntax pass.
+Campaign estimate now0.514722; worst-case with replacement1.181389/2 chargedh.
+No threshold/model/geometry changes or protected evaluation changes. No retries
+automatically. Next read3295395 logs, completion and actual accounting.

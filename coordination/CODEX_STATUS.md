@@ -1411,3 +1411,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   chargedh; campaign worst-case1.123056/2, posted debit unverified.
 - Handoff36/protocol and source recorded. No duplicate or automatic retry;
   protected evaluation47320183 untouched. Next results+actual accounting.
+
+### 2026-10-02 — Pilot weight-list API regression fixed
+
+-3295187 FAILED before first detector output: None weight list,105s allocation,
+  billing2000 =>0.058333 charge-equivalent GPUh. No scientific result.
+- Fixed single-fold checkpoint list. CPU test with both actual checkpoints
+  traverses installed nnU-Net weight loop, checks one call and bit-identical
+  weights; mocked neural calculation. Five tests pass1.515s, zero GPUh.
+- Released replacement3295395 after held checks/SHA/bash syntax, PENDING.
+  Same1GPU/32GB/20min/no retry, separate private v2; worst-case campaign
+  1.181389/2 chargedh. No changes to models/experiment/evaluation47320183.
