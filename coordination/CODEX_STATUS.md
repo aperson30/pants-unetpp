@@ -1458,3 +1458,17 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Five CPUtests pass1.408s, hashes/bash pass; separate small_v2 preservesv1.
 - Estimate0.669167/2 used, worst-case1.002500. Handoff40/plan/protocol updated.
   Larger case blocked, no substitution/automaticretry/protected47320183change.
+
+### 2026-10-02 — Replication completed; no new-miss claim; split gate queued
+
+-3296011 COMPLETED0:0,220s,0.122222chargedh-equivalent. GPU50.029GB and
+  producerCPUpeak38.45GiB;96Ghost fix worked. Estimatecampaign0.791389/2.
+- Second patient's tumor mean0.030071 to0.007681, but original/reconstructed
+  GTcandidateoverlap0. No newmiss/clinicalrecall claim. Crop differs; allGT
+  retained does not rule out context effect. CPU map audits match reports;
+  remote patientmax is not tumor detection. Scalar JSONs/report preserved.
+-3296141 split1vs4 runtime gate released PENDING after topology/hash/held
+  checks: samepilot, unchanged scientific factors except internal convolution
+  partition;1GPU/96G/5min/norequeue. Maxcampaign0.958056/2. Prespecified
+  maxHUdrift0.1 is engineering-only, no automatic rollout/threshold relaxation.
+  Largecaseblocked and47320183untouched. Handoff41/results report updated.

@@ -109,3 +109,10 @@ v1 artifacts. Frozen hashes/bash syntax and five CPU weight-loop/geometry
 tests pass1.408s. Larger patient remains blocked, no new case or method.
 Campaign estimate0.669167 used; max with new job1.002500/2 charged GPUh.
 Posted debit unknown. Further failure requires fresh diagnosis, not auto-retry.
+
+Outcome:3296011 completed220s, producer hostpeak38.45GiB confirms old32G
+was insufficient. Raw tumor score decreased74.46%, but no GT-overlapping
+candidate on original OR reconstruction; cannot claim newly missed lesion.
+Crop changed although allGT retained. Full results/limits in
+JUDGE_RESULTS_20261002.md. Large locked case remains blocked. Next3296141
+is runtime-only split parity on prior pilot, not another clinical patient.

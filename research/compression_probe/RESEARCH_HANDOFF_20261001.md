@@ -1509,3 +1509,26 @@ Frozen hashes/bash syntax pass, five CPU contract/geometry tests pass1.408s.
 New private small_v2 preserves OOM artifacts. No case substitution or47320183
 changes. Cumulative estimate0.669167/2, worst-case1.002500 with new job;
 posted debit unverified. Do not automatically retry if it fails again.
+
+## 41. Second patient completed; interpretation narrowed; split gate queued
+
+3296011 COMPLETED0:0,220s =>0.122222charge-equivalentGPUh. Scalar result and
+two CPU saved-map audits preserved. Mean tumor PDAC0.030071 native/control to
+0.007681 reconstructed (~74.46% lower). Native AND reconstructed GT candidate
+overlap0: no newly missed lesion demonstrated. Patientmax0.732969 native is
+elsewhere; dynamic cutoff0.293187 exceeds GTmax0.233829. Posthoc explanation,
+not a clinical threshold. Reconstruction crop differs by3 starting slices;
+100%GT inclusion does not remove context confound. Pilot still has candidate
+overlap after reconstruction too. No clinical recall/irreversible-loss claim.
+
+VAE153.53s/GPUpeak50.029GB; producer CPUpeak40314496KiB (~38.45GiB), above
+old32G.96G host fix succeeded. Campaignestimate0.791389/2, posteddebitunknown.
+See JUDGE_RESULTS_20261002.md for table/caveats. No additional clinical cases
+selected; locked large100259 blocked, protected47320183 untouched.
+
+3296141 released PENDING after CPUtopology/hash/held checks: same pilot,
+MaisiConvolution split1to4 only, full-volumeFP32/mean/spacing/context retained.
+1GPU/96G/5min/no retry,270s timeout; max0.166667 =>campaignmax0.958056/2.
+Compare frozen split1 with maxHUdrift<=0.1 engineering tolerance before any
+larger-case rollout, measure memory. Not clinical/detector parity. If drift
+fails or memory benefit weak, stop this lever; no automatic pipeline changes.

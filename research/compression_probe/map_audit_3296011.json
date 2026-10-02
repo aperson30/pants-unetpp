@@ -1,0 +1,44 @@
+{
+  "completed": true,
+  "clinical_recall": false,
+  "arms": [
+    {
+      "arm": "native",
+      "tumor_mean_raw_probability": 0.03007085621356964,
+      "tumor_max_raw_probability": 0.23382924497127533,
+      "candidate_confidence_on_tumor": 0.0,
+      "tumor_voxels_with_candidate": 0,
+      "patient_max_candidate_score": 0.7329686284065247,
+      "masked_global_max": 0.7329686284065247,
+      "dynamic_fast_cutoff": 0.2931874394416809,
+      "tumor_max_below_dynamic_cutoff": true
+    },
+    {
+      "arm": "control",
+      "tumor_mean_raw_probability": 0.03007085621356964,
+      "tumor_max_raw_probability": 0.23382924497127533,
+      "candidate_confidence_on_tumor": 0.0,
+      "tumor_voxels_with_candidate": 0,
+      "patient_max_candidate_score": 0.7329686284065247,
+      "masked_global_max": 0.7329686284065247,
+      "dynamic_fast_cutoff": 0.2931874394416809,
+      "tumor_max_below_dynamic_cutoff": true
+    },
+    {
+      "arm": "reconstruction",
+      "tumor_mean_raw_probability": 0.007681296672672033,
+      "tumor_max_raw_probability": 0.10391402989625931,
+      "candidate_confidence_on_tumor": 0.0,
+      "tumor_voxels_with_candidate": 0,
+      "patient_max_candidate_score": 0.5544679164886475,
+      "masked_global_max": 0.5544679164886475,
+      "dynamic_fast_cutoff": 0.22178716957569122,
+      "tumor_max_below_dynamic_cutoff": true
+    }
+  ],
+  "native_control_tumor_scores_identical": true,
+  "reconstructed_to_control_mean_ratio": 0.25543990560554125,
+  "original_has_gt_overlapping_candidate": false,
+  "native_reconstruction_crop_identical": false,
+  "caveat": "Nonzero candidate overlap is not clinical detection; dynamic cutoff explanation is posthoc"
+}
