@@ -13,6 +13,12 @@ class Response(io.BytesIO):
 
 
 class ZipRangeTests(unittest.TestCase):
+    def test_request_and_time_limits_cannot_be_unbounded(self):
+        for kwargs in [dict(max_calls=513), dict(max_calls=0),
+                       dict(total_timeout=0), dict(total_timeout=601)]:
+            with self.assertRaises(ValueError):
+                RangeReader('https://zenodo.org/test', **kwargs)
+
     def test_directory_only_matches_standard_parser(self):
         stream = io.BytesIO()
         with zipfile.ZipFile(stream, 'w', compression=zipfile.ZIP_DEFLATED) as archive:

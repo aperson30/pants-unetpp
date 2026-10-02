@@ -209,3 +209,24 @@ Expected total two checkpoints378,590,434 uncompressed bytes (~361MiB).
 User requested pause here. Next: review/launch bounded transfer, then isolated
 actual network-load/preprocessor tests; GPU inference only after those pass.
 No new GPU spending or protected evaluation modifications.
+
+## Bounded transfer launched; compute connection needs reopening
+
+After user resumed, reviewed downloader and re-ran three transfer/six range
+tests successfully. Streaming uses4MiB blocks to reduce HTTP overhead; default
+metadata timeout remains180s, transfer opts into300s per archive and660s total
+watchdog. Existing range-call default32 preserved; bounds remain explicit.
+
+Launched a frozen local snapshot detached/hidden, PID22644 at launch. Source
+SHA25615b5db7fa92cdcda97aad84af03845b6b07ef0c8651d754485ca622969ec9483.
+Outputs `work/judge_weights_fold4_v1`, logs `work/judge_transfer_v1.*.log`.
+Last inspection: stage1 partial exists, zero bytes, no success/error output yet;
+NOT completed. No retry or duplicate transfer. Partial is not usable weights.
+
+DeltaAI compression socket and Bridges2 progress socket subsequently absent;
+requested user reopen DeltaAI. No model-load attempt or GPU job submitted.
+User explicitly requested allocation resources: actual model load/inference must
+run on allocated compute, not HPC login nodes. Do not reserve a GPU simply for
+this local download. Remaining screening cap applies, including failed jobs.
+Restore authenticated access, verify transfer completion/hash and staging space,
+then prepare one bounded compute check. Protected evaluation untouched.

@@ -1352,3 +1352,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - User requested pause. No checkpoint download/GPU submission/CT upload or
   protected evaluation changes. Next transfer review/launch then actual-load
   checks. Screening estimate .448611of2 unchanged; handoff31 records state.
+
+### 2026-10-02 — Resumed bounded local transfer; SSH masters absent
+
+- Three transfer+six range tests pass. Changed to4MiB streaming for fewer HTTP
+  requests;300s/archive and660s overall cap. Frozen detached local launch PID22644,
+  outputswork/judge_weights_fold4_v1. Last check zero-byte stage1partial, no
+  completion/error yet; NOT completed, no duplicate/retry/model-load.
+- DeltaAI compression and Bridges2 progress sockets absent; user asked to reopen
+  DeltaAI. User requested allocation resources: actual load/inference on compute
+  allocation, not login; don't idle GPU for download. No GPU job/evalchange/spend.
+- Handoff32/protocol record restart state. Screening estimate .448611of2 unchanged.

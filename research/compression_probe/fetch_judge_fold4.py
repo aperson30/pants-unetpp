@@ -33,7 +33,7 @@ def stream_member(archive, member, destination):
         raise ValueError('Unexpected compression')
     digest, written = hashlib.sha256(), 0
     with archive.open(member) as source, destination.open('xb') as target:
-        while chunk := source.read(1024**2):
+        while chunk := source.read(4*1024**2):
             written += len(chunk)
             if written > member.file_size:
                 raise ValueError('Checkpoint exceeds declared size')
@@ -53,14 +53,15 @@ def main():
     args.output.mkdir(exist_ok=False)
     if shutil.disk_usage(args.output).free < 2_000_000_000:
         raise ValueError('Require 2GB free local space')
-    watchdog = threading.Timer(420, lambda: os._exit(124))
+    watchdog = threading.Timer(660, lambda: os._exit(124))
     watchdog.daemon = True
     watchdog.start()
     results = []
     try:
         for dataset, trainer, checkpoint, expected_size in SOURCES:
             url = f'https://zenodo.org/records/11160381/files/{dataset}.zip?download=1'
-            reader = RangeReader(url, byte_limit=320*1024**2, max_calls=512)
+            reader = RangeReader(url, byte_limit=320*1024**2, max_calls=512,
+                                 total_timeout=300)
             folder = args.output / dataset / trainer
             (folder / 'fold_4').mkdir(parents=True)
             with zipfile.ZipFile(reader) as archive:

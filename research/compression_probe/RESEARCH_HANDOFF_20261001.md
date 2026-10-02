@@ -1330,3 +1330,17 @@ no overwrite/pickle execution/retries, watchdog. Three new+five existing range
 tests pass. NOT launched: no weights downloaded or new GPU job. User asked to
 pause; next restart at transfer review/launch, then actual-load checks.
 Protected PanTS evaluation untouched; .448611of2 screening estimate unchanged.
+
+## 32. Transfer resumed, allocation connection unavailable
+
+User resumed/authorized normal public downloads. Frozen local two-fold4 transfer
+launched detached, bounded/no retries. PID22644 at launch, source15b5db7f...
+Outputswork/judge_weights_fold4_v1/logsjudge_transfer_v1.*. Last check zero-byte
+stage1 partial/no completion. Never treat partial as model. Three transfer/six
+range tests pass;4MiB blocks reduce requests,300s/archive+660s overall limits.
+
+Both DeltaAI compression and Bridges2 progress SSH sockets now absent. Asked
+user reopen DeltaAI. User requests allocation resources: actual load/inference
+on scheduled compute, not login; no GPU reserved for waiting on local download.
+No GPU job/eval modification/new spending. Restart by inspecting current local
+transfer (do not duplicate), then authenticated staging and capped compute check.

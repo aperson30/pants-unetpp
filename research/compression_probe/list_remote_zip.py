@@ -14,14 +14,16 @@ import zipfile
 
 class RangeReader(io.RawIOBase):
     def __init__(self, url, opener=urllib.request.urlopen, byte_limit=8*1024**2,
-                 max_calls=32):
+                 max_calls=32, total_timeout=180):
         if not isinstance(max_calls, int) or not 1 <= max_calls <= 512:
             raise ValueError('Invalid bounded request limit')
         self.max_calls = max_calls
+        if not isinstance(total_timeout, (int, float)) or not 0 < total_timeout <= 600:
+            raise ValueError('Invalid bounded total timeout')
         self.url, self.opener, self.byte_limit = url, opener, byte_limit
         self.used, self.calls, self.position, self.total = 0, 0, 0, None
         self.etag = None
-        self.deadline = time.monotonic() + 180
+        self.deadline = time.monotonic() + total_timeout
         self._fetch(0, 1)
 
     def _fetch(self, start, count):
