@@ -631,3 +631,38 @@ interactive probe RUNNING at last check, regular probes pendingPriority.
 No completion/quality result yet. CONTROL_ROUND_20261001.md records bounds,
 scientific limits and actual scheduler restriction(one interactive submit/user).
 PANORAMA detector/radiomics still NOT launch-ready; no blind larger campaign.
+
+## 15. Completed controls, efficiency audit and Claude's next review
+
+All3short jobs now COMPLETED0:0 with actual output artifacts verified.
+Actual new-round spending.143333physical/.212222chargedGPU-hours; NEW2hour
+cap remainder1.787778. CONTROL_ROUND_20261001.md now contains complete results,
+CPU Gaussian reference and prioritized next actions; running snapshots above
+are historical,not current status.
+
+Measured matched insertion response retains43.5645%raw/37.0755%ring-corrected
+of nominal-20HU signal. Single8mm rasterized sphere,111voxels,cached tumor-
+positive host;NOT truePDAC,detector recall or matched-filterSNR. Real-image
+split4 versus cachedsplits1result had0HUdifferences at reported precision,
+but memory peak unchanged and timing is not controlled enough for a speedup
+claim. Single posterior sample differs from mean by21.0671HUwhole-imageMAE,
+21.1752HUtumorMAE;not comparison to originalCTor evidence of clinical harm.
+
+Post-hoc CPU Gaussian insertion references at.5/1/2mmsigma give corrected
+retention.90154/.79077/.44995. VAE.37075is lower than these references,
+but controls are not noise-matched or preregistered and cannot establish a
+VAE-specific medical failure. Ordinary smoothing remains a plausible account.
+
+Verified efficient decisions:reuse cached data/dependencies,CPU preflight,
+regular-partition billing for2jobs,parallel short allocations,no retry,
+metrics-only output,unchanged fullvolumeFP32scientific control. Audit also
+found redundant syntheticROI/modifiedCT preparation in non-insertion modes
+and a metrics-only retention tradeoff. Fix CPU waste in next runner version;
+do not spendGPUtime repeating completed diagnostics to optimize seconds.
+
+Next:validated CPU paired texture extraction on existing saved reconstructions;
+PANORAMA identity/exclusions/data access audit;only then a calibrated real-
+lesion detector test or one new prespecified insertion host. Not a40caseAUC
+experiment within an unmeasured cost. AskClaude to challenge controls,endpoint
+definitions,rasterization/location effects and what truly requires additional
+GPU inference. No blanket claim that the stack is maximally optimized.

@@ -1127,3 +1127,25 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - CONTROL_ROUND_20261001.md explainsprobes/cost/gates. PANORAMApatient/
   checkpointmapping and isolatedradiomics remainnotready; notsubmitted.
   PanTSevaluation/frozenruntimeuntouched. No newmonitorautomation.
+
+## 2026-10-01 23:21 -07:00 — Three probes completed; efficiency and next steps
+
+- User requested document update AFTERoptimization review. All3290857/
+  3290863/3290864COMPLETED0:0,metrics/provenance/completion verified.
+  Allocation248/126/142s,billing2000/1000/1000=>.143333physical/
+  .212222chargedGPUh. NEW2hour round remaining1.787778;no newjob/retry.
+- Matched artificial-20HUinsertresponse-8.71291HU(rawretention.435645),
+  ring-1.29782HU=>correctedretention.370755. ONEsyntheticplacement,notPDAC.
+- RealCTsplit4results0HUdifferencefromcachedbaseline;installedsource
+  confirmsactualchunkbranch. PeakGPUunchanged;92vs107snotcontrolledtiming.
+  SampledlatentmeancomparisonwholeMAE21.0671HU,tumor21.1752,max544.043HU;
+  singleseedNOToriginalerror/distribution/detectionquality.
+- CPUlinearGaussianreferencesexact111voxels:.5/1/2mmsigma,corrected
+  .901541/.790769/.449950. Posthocillustrative,notnoise-matched/preregistered.
+  Rawrecord/logstaysremote. NoGPUcost orclinicalharmclaim.
+- Auditrecords cache reuse/CPUgates/oneGPU/billing/shortparallel/no-retry/
+  metrics-onlyefficiency. FoundunnecessaryROI/insertionprepinnoninsertion
+  modesandretentiontradeoff;fixfutureversion,don'trerunGPUforCPUseconds.
+- UpdatedCONTROL_ROUNDandhandoffwithcompleteevidence/plans. NextCPUtexture
+  onalready-savedreconstructions,PANORAMAfold/dataaudit,thenboundedcalibration.
+  NoPanTSjob/runtime/image-egresschanges. Noall-optimizations-exhaustedclaim.

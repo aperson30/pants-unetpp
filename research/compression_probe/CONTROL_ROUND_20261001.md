@@ -1,5 +1,108 @@
 # Approved bounded control round
 
+## Completed results — supersedes queued/running snapshots below
+
+All three jobs COMPLETED,ExitCode0:0,metrics+completion artifacts verified.
+Torch2.10.0+cu129,MONAI1.5.1,GH200120GB; identical cached-baseline hash
+a2d31659c02f2d2b51eea9d0bf97656ed6cb477a204187977d47131fcd1ac1c1.
+
+| Job | Allocation elapsed | Actual physical GPU-hours | Approx charged hours |
+|---|---:|---:|---:|
+|3290857|248s|.068889|.137778|
+|3290863|126s|.035000|.035000|
+|3290864|142s|.039444|.039444|
+|Total|516 GPU-allocation seconds|.143333|.212222|
+
+Remaining NEW2hour cap:1.787778charged hours. Values calculated from actual
+Slurm allocation elapsed/billing multiplier, not posted account debits. No
+failedGPU allocation or retries in this round. Prior campaigns are separate.
+
+### Observations, not clinical conclusions
+
+- Insertion:-20HU input signal; paired output response-8.71291HU inside
+  inserted region(43.5645% raw retention). Surrounding2-5mmring response
+  -1.29782HU; ring-corrected response-7.41509HU(37.0755% retention).
+  Baseline/insert forwards107.53/105.59s,peakCUDA39.098GiB,
+  RSS~35.266GiB. Strong attenuation for this ONE synthetic placement.
+- Split4:whole-image mean/max and tumor mean differences from cached
+  splits1baseline all0HU. Forward92.02s,peakCUDA39.098GiB,RSS~40.886GiB.
+  Installed source inspection confirms num_splits>1 takes the actual chunk
+  branch;36layers changed. Not proof of general parity or a timing speedup:
+  baseline/current measurements are separate jobs/nodes,not paired timing.
+  Splitting did not lower measured peakCUDA allocation here.
+- Posterior:single seed20261001 versus cached posterior mean yields
+  whole-imageMAE21.0671HU,max544.043HU,tumor-regionMAE21.1752HU.
+  Forward108.03s,peakCUDA39.105GiB,RSS~34.935GiB. Difference is NOT error
+  against originalCT,not loss of detection,not a distribution estimate.
+
+### CPU Gaussian reference (post-hoc, illustrative)
+
+Computed linear Gaussian response to the EXACT same rasterized111voxel/-20HU
+signal; measurement halo covers insert+5mmring+4sigma,maxsigma2mm. This is
+CPU measurement cropping only; model passes remained whole volume. Because
+Gaussian filtering is linear, G(host+signal)-G(host)=G(signal); no full host
+filter orGPU inference needed for this particular insertion-response statistic.
+
+| Gaussian sigma mm | Raw response retention | Ring-corrected retention |
+|---|---:|---:|
+|.5|.901545|.901541|
+|1|.792653|.790769|
+|2|.480010|.449950|
+|VAE measured|.435645|.370755|
+
+Sigma choices.5/1/2mm were selected for this descriptive check AFTER the VAE
+result,not preregistered. No noise-power matching,scannerPSF matching,matched-
+filter observer,clinical threshold or statistical superiority established.
+The VAE response is below these particular references; do not call this a
+VAE-specific clinical failure. A stronger blur could also attenuate more.
+Raw JSON/log stay remote:gaussian_response_v1.json/.log.
+
+### Efficiency audit and next steps
+
+Efficiencies verified:shared cache/runtime,no new CT/weight downloads;
+CPU preflight/analysis offGPU;exact oneGPU perjob;regular partition1x for
+two probes;short independent requests ran on three separate nodes;no auto
+retry;metrics-only output and hash/source/job identity gates. This is an
+audited bounded workflow,NOT proof every possible optimization is exhausted.
+
+Remaining avoidable work in future runners:split/posterior modes unnecessarily
+construct synthetic masks and modifiedCTs before selecting their branch;
+prepare() computes anROI merely to validate labels and insertion repeats that
+work. Remove those CPU-only allocations in a FUTURE version,with tests; do
+not mutate historical frozen scripts/results or rerunGPU jobs just for this.
+Unused model tensors can be released before decode where compatible; peak
+memory changes require measurement,not a blanket claim. Full FP32 and whole
+volume were deliberate quality/control choices,not accidental slow defaults.
+
+Metrics-only retention is a tradeoff:these new altered volumes cannot now be
+used for arbitrary retrospective texture/spatial metrics without recomputing.
+Original mean reconstructions for005/120/165 ARE saved already and should be
+used first. For future runs,define needed endpoints beforehand and either
+compute them online or retain small same-grid measurement patches privately,
+with indices/affine/source hashes. Output patches do NOT justify model cropping.
+
+Prioritized next plan:
+1. CPU extraction implementation/config tests then descriptive paired texture
+   measurements on already saved005/120/165;no new VAE inference required.
+   No duct diameter,diagnosticAUC or early-cancer conclusion from these scans.
+2. CPU PANORAMA checkpoint->fold/patient-exclusion and single-case access
+   audit in parallel;no data-independent claim until actual verification.
+3. If useful,prepare a NEW prespecified insertion position/host(case165cached)
+   before outcomes to check location/slice-thickness dependence.8mm sphere on
+   4mmslices is coarsely rasterized; report actual voxel mask/physical burden,
+   not nominal diameter alone. One current result does not define a response
+   curve. Lower slice thickness still confounds cases;not causal isolation.
+4. Real-lesion detector calibration only after metadata/runtime gates;count
+   negative cases and both automatic localization/detection stages. Start one
+   case with explicit walltime/billing reserve,not30+30blindly. Fixed-setting
+   paired effects,not independently retuned classifiers or thresholds.
+5. Additional posterior seeds/precision/spacing controls only if needed by
+   the selected question. One seed proves paths differ,not a variance estimate.
+   Do not rerun chunking simply because it looks faster in this one timing.
+
+No newGPU job submitted during this audit. PanTS evaluation untouched. Further
+probes must fit actual remaining cap and preserve source/runtime/data gates.
+
 User approved2 charged GPU-hours TOTAL for this new screening round, including
 calibration, failures and evaluation. This is separate from prior campaigns.
 No automatic retry, campaign expansion or environment mutation.
