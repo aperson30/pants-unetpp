@@ -1072,3 +1072,152 @@ Checkpoint-header evidence should be preserved as runnable code, not only prose.
 Use Claude as a critical second reviewer, not a vote that establishes truth.
 Resolve disagreements with primary sources, runnable contracts or measured
 controls. Prefer one discriminating experiment over another descriptive sweep.
+
+## 25. Claude review of Section 24 (October 2, 2026)
+
+Research only: no job, no environment change, no image upload, PanTS 2x2
+evaluation untouched. Labels: [measured] = from committed results or a primary
+source read in this review; [hypothesis]; [estimate].
+
+### 25.1 Attacking the strongest claim
+
+Claim: the seven-pass curve "rejects a fixed linear response" and is a lead.
+
+- The rejection itself holds: corrected retention rises from 0.314 (-10 HU)
+  to 0.720 (-80 HU), and the half-cell-ish shift moved -20 HU by only 0.004.
+- But amplitude-dependent shrinkage is the generic signature of **any
+  denoiser** that separates signal from noise by amplitude (wavelet shrinkage,
+  total variation, non-local means, learned denoisers). CT physics already
+  documents the clinical version: deep-learning and iterative reconstruction
+  lower noise yet lose small low-contrast lesions. [measured, literature]
+  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12417284/ (DLIR, small liver
+  lesions <= 5 mm), https://pmc.ncbi.nlm.nih.gov/articles/PMC4401802/ (IR
+  resolution depends on contrast and noise).
+- Of Section 24's listed alternatives, two are already largely excluded:
+  clipping (CPU preflight passed for every amplitude) and intensity
+  normalization (an affine map cannot create amplitude dependence without
+  clipping). "Encoder/decoder nonlinearity" is the mechanism, not an
+  alternative. The alternative that matters, and is cheapest to test, is
+  **generic denoising**: would any denoiser with the same noise reduction show
+  the same curve?
+- The sign asymmetry is the most VAE-specific-looking feature: +20 HU kept
+  0.236 vs -20 HU 0.371 (difference 0.135). A classical denoiser acting around
+  a local mean treats small bright and dark perturbations nearly alike, so an
+  asymmetry it does not reproduce would point to a learned, data-dependent
+  prior. [hypothesis]
+- Clinical relevance [measured, literature]: isoattenuating PDAC differs from
+  parenchyma by about 10-15 HU or less and is reported in 5-45% of cases;
+  small tumours are more often isoattenuating. The probe's worst retention
+  (31% at -10 HU) is in exactly that range.
+  https://pmc.ncbi.nlm.nih.gov/articles/PMC3473757
+  One host, one synthetic sphere: relevance, not evidence of PDAC harm.
+
+### 25.2 Novelty against primary sources (exact overlap)
+
+- **Foundation VAEs for 3D CT Reconstruction, Augmentation, and Generation**
+  (Chen, Ding, Gu, Liu, Bian, Yuille, Zhou, Fu; arXiv 2605.30893, 2026).
+  [measured] Evaluates 7 video VAEs plus MedVAE and MAISI on MSD Task06/07,
+  LiTS, KiTS19, CT-RATE, ReXGroundingCT with PSNR/SSIM/MSE and nnU-Net
+  Dice/NSD trained on reconstructions. States "the reconstruction gap is
+  dominated by CT noise, not structural distortion". No lesion size or
+  contrast stratification, no controlled insertions, no remedy; limitations
+  mention over-smoothed small findings and subtle textures (for conditional
+  generation). https://arxiv.org/html/2605.30893v1
+  Overlap: dataset, MAISI, downstream segmentation. Gap: whether the "noise"
+  being removed includes faint lesion signal. The contrast curve tests that
+  paper's central interpretive claim directly. Prof. Zhou is a coauthor, so
+  this is PI-relevant; frame it as an extension of that result, not a rebuttal.
+- **MAISI-v2** (arXiv 2508.05772). [measured] The region-specific contrastive
+  loss trains the **ControlNet**; the VAE is reused frozen "without
+  fine-tuning". Reports +6.4% pancreatic-tumour Dice in augmentation; no size
+  analysis. https://arxiv.org/html/2508.05772v2
+  Implication [hypothesis]: if faint-signal loss happens in the frozen VAE,
+  a ControlNet-side loss cannot restore it at decode. Complementary, not
+  overlapping.
+- **The Learnability Gap in Medical Latent Diffusion** (MICCAI 2026).
+  [measured] Studies classifiers on latents (MedVAE, SD, Flux; not MAISI);
+  reviewers flagged limited novelty vs prior latent-misalignment work.
+  Different question (latent learnability, not reconstruction signal).
+  https://papers.miccai.org/miccai-2026/1053-Paper3049.html
+- Net: "denoising erases faint lesions" is known for CT reconstruction.
+  What is not found: a quantified faint-signal envelope for the frozen VAEs
+  used in 3D CT synthesis, shown to be beyond matched generic denoising and
+  linked to lesion evidence. Novelty therefore depends on 25.3 coming out GO.
+
+### 25.3 ONE next experiment: matched classical-denoiser control (CPU, 0 GPU-h)
+
+Question: is the VAE's curve explained by generic denoising at the same noise
+reduction?
+
+- Inputs: cached case-120 original, its saved MAISI baseline reconstruction,
+  and the same reproducible 111-voxel insert at the same location and the
+  same five contrasts plus the +2-voxel shift (all already CPU-validated).
+- Two prespecified denoiser families, pinned implementations and defaults:
+  (a) 3D total variation (Chambolle; implementable in NumPy), (b) 3D non-local
+  means or, if unavailable in the isolated imaging runtime, a 3D bilateral
+  filter. No installs into shared runtimes.
+- Matching rule, fixed before any insert is processed and using the baseline
+  only: choose each family's single strength parameter by bisection so that
+  the standard deviation of the high-pass residual (image minus 2 mm Gaussian)
+  in the verified parenchymal calibration ROI (case 120, 30.2 mL, minus the
+  insert, its ring and a 5 mm margin) equals that of the VAE baseline
+  reconstruction. Report NPS-band agreement descriptively; do not re-match on it.
+- Then apply each matched denoiser to host and host+insert and compute raw and
+  ring-corrected retention with the same metric code as job 3291159. Local
+  crops with a halo larger than the filter support are exact for these local
+  filters and allowed here (they are not the VAE path).
+- [estimate] Cost: 0 GPU-hours; minutes to about one CPU-hour, plus about a
+  day of engineering. Fits Section 16's resource-minimal rule.
+
+Stop criteria (prespecified; heuristics, not calibrated statistics):
+- **STOP the VAE-specific lead** if, for at least one family, the absolute
+  retention difference to the VAE is <= 0.05 at -10, -20 and -40 HU AND the
+  +20/-20 asymmetry differs by <= 0.05. Record "consistent with generic
+  denoising" and return to adaptive-depth (25.4).
+- **GO** to the single-case PANORAMA paired judge calibration if the VAE's
+  retention at -10 and -20 HU is lower than BOTH matched families by >= 0.10,
+  or its sign asymmetry exceeds both by >= 0.10.
+- Otherwise: inconclusive. Do not tune parameters or add families after seeing
+  outcomes; decide on the real-lesion judge test on its own merits.
+
+Confounds to report, not hide: choice of matching metric; one host with a real
+tumour; binary insert; one location; classical filters' secondary parameters;
+ring correction assumes the ring is a fair local background.
+
+Why this one: it is free, reuses only already-validated assets, and is the
+only cheap result that would change the next action either way (generic ->
+stop and pivot; VAE-specific -> spend on the real-lesion judge).
+
+### 25.4 Pursue this or return to adaptive-depth diffusion?
+
+| | Faint-signal VAE lead | Adaptive-depth diffusion |
+|---|---|---|
+| Scientific payoff | High only if VAE-specific (25.3 GO); otherwise "known denoising" | Premise published (ASE, multi-decoder, TDC); realistic ~1.2-1.5x [estimate] |
+| PI alignment | Tests the PI-coauthored Foundation-VAE claim; not the literal "faster training" ask | Literal PI ask (UNet++ backbone, faster training) |
+| Next decisive test cost | 0 GPU-h (25.3) | Timing probe < 1 GPU-h, then tens-hundreds GPU-h of training pilots [estimate]; no diffusion code yet |
+
+Bridge that makes the lead serve the PI objective [hypothesis]: if frozen
+latent VAEs erase faint lesions, faithful lesion synthesis needs pixel space
+near the lesion; 3D pixel-space diffusion is expensive; an efficient
+nested/depth-adaptive UNet++ for pixel-space lesion-patch diffusion is then a
+motivated remedy, reconnecting to UNet++ and faster training with a reason.
+
+Recommendation: run 25.3 first because it is free. GO -> pursue the faint-
+signal lead with the pixel-space bridge. STOP -> return to adaptive depth,
+starting with the Gate 1 timing probe.
+
+### 25.5 Other insights for the real-lesion judge pilot
+
+- PANORAMA's stage 1 localizes the pancreas at 4.5 x 4.5 x 9 mm and crops a
+  fixed-margin ROI. The VAE shifts parenchymal mean HU by -9 to -40 HU
+  (Section 18). Report stage-1 pancreas overlap per arm separately; otherwise
+  a localization failure masquerades as a detection loss.
+- Add one cheap arm: VAE reconstruction with the measured parenchymal mean
+  shift added back. It separates global intensity bias from structural loss in
+  the detector's response.
+- Checkpoint-header audit is now runnable code:
+  `audit_checkpoint_headers.py` (range reads, restricted unpickler, nothing
+  saved) with offline safety tests `test_checkpoint_headers.py` (2 pass; a
+  pickled `os.system` payload is neutralized). Re-run on fold_2 detection and
+  fold_4 pancreas reproduces fold 2 / epoch 750 and fold 4 / epoch 1000,
+  numTraining 2238.
