@@ -843,3 +843,37 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   lists archives, not individual cases. Do not fetch the full corpus merely for
   this screen. Need a bounded acquisition route and explicit initial GPU cap
   before submitting; no compression result or speedup claimed.
+
+## 2026-10-02 — authorized MSD compression screen on DeltaAI
+
+- User chose MSD instead of PanTS for this quick diagnostic and approved the
+  proposed 0.25-hour cap. DeltaAI access restored via deltaai-compression.sock.
+  No segmentation jobs, frozen source, checkpoints or base venv modified.
+- New isolated directory /projects/bdyo/asanjeev/compression_probe_20261001.
+  Pin official VAE weight/hash already recorded above; download ONLY ~84MB VAE
+  plus four tiny masks and two selected CTs (~137MiB total). Dataset mirror
+  Angelou0516/msd-pancreas @327dd551a9e51295c34e14f311d8330ef44b6cac;
+  mirror hashes verified, NOT independently byte-matched to original MSD archive.
+  MSD tumor label TWO; do not use PanTS label 28. Selected physical burdens:
+  pancreas_005 7602.96mm3, pancreas_006 13615.86mm3. Not voxel-tiny cases.
+- MONAI absent in base env. Isolated target installation interrupted before
+  complete; CPU import gate caught missing monai.utils. Switched to pinned
+  MONAI 1.5.1 wheel import to avoid many Lustre file operations. No GPU used
+  on this setup failure. CPU strict state load + actual 8^3 encode/decode passed
+  after consistent FP32 normalization (norm_float16=False); original default
+  norm_float16=True without AMP failed before allocation. Not a bit-parity
+  claim against official mixed-precision generation. Six metric tests pass.
+- Job 3289813 submitted held, inspected and released with enforced 7min limit:
+  Slurm rounded submitted 7m30s to 8min, corrected BEFORE release. One GPU,
+  8CPU/32G; interactive billing=2000 (2x). Failed at 1m43s with step host OOM,
+  MaxRSS=33839296K. No complete reconstruction; exact operation unconfirmed.
+  Actual cost ~0.02861 physical GPU-h / ~0.05722 charge-equivalent h.
+- Authorized-budget retry 3289833 prepared/verified held then released: one GPU,
+  8CPU/96G RAM, still billing=2000, FIVE-minute limit, process timeout 260s,
+  max-cases=1, no auto-requeue. Stored script cmp verified; source/wheel/input
+  manifest hashes pass. Same model, case, whole-volume geometry, FP32 math;
+  added stage/RSS/CUDA-memory logs. Both attempts worst-case combined <=0.11195
+  physical GPU-h / <=0.2239 charge-equivalent h, below approved 0.25 cap.
+- Current submission snapshot: retry PENDING, no quality result yet. Source and
+  protocol in research/compression_probe/. Preserve failed-attempt files/logs;
+  never treat a partial directory/provenance file as a completed reconstruction.
