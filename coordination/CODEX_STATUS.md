@@ -1548,3 +1548,16 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   jobsqueued/running/no automaticretry/47320183change. ScalarJSONs/audit/
   protocol/handoff47 saved; imagesprivate. Next posterior/independentjudge
   protocols, not remedytraining. Largerlockedcase stillblocked/unreplaced.
+
+### 2026-10-02 18:07 cluster time — Posterior sampling control released
+
+-3297185 released after6CPUtests/sourcehash/bashsyntax/heldchecks, lastPENDING.
+ 1GPU/2CPU/96G/6min/no-requeue,330sprocess timeout,max0.2chargedh-equivalent.
+  Campaignprior0.947500/2,worst1.147500/2. Actualhomequota7.364/102.4GBsoft.
+- Encodecompletedsmallpilot100226 once, samewholevolumeFP32VAE, decodefresh
+  mean+fixedseeds0/1/2 viaofficialMONAI.sampling. Native/clip/mean/allseeds
+  fixedpublisherwindow, eachdetectorarmtwice/all7classrepeatgate/exactlabels.
+  Sigma=std sourceverified; no bestseed/cropping/training/clinicalrecallclaim.
+- CPUmocktest1encode4decodes12predictions + pinnedformulaseed/geometry tests.
+  No47320183change/automaticretry; largerpatientblocked. Full embeddingAMP/
+  resizingnotreplicated,onlysamplingisolated. Protocol/code/handoff48 committed.

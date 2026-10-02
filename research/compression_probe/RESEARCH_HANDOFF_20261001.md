@@ -1620,3 +1620,20 @@ Scalarresult/audit and SAME_PROCESS_WINDOW_20261002.md preserved; imagesprivate.
 Campaignestimate0.947500/2, posteddebitunknown. Turncost0.071111; no moreGPU
 queued/running,47320183untouched,large100259blocked/unreplaced. Next prepare
 posteriorcontrol/independentjudge, no remedytraining or automaticsubmission.
+
+## 48. Mean-versus-three-seed posterior control released
+
+3297185 released after6CPUtests/sourcehash/bashsyntax/heldchecks, lastPENDING.
+1GPU/2CPU/96G/6min/no-requeue,330sprocess timeout, max0.2chargedh-equivalent;
+priorcampaign0.947500/2,worst1.147500/2, posteddebitunknown. Actualhomequota
+7.364GB/102.4GBsoft, not inferred fromdfglobalcapacity; outputprivatefreshdir.
+Same completed smallpilot100226, wholevolumeFP32encode ONCE, meandecodeplus
+MONAIofficialsamples0/1/2, allreported/no bestseed. Sigma=std verifiedsource.
+Native/clip/mean/3samples fixedsavedpublisherview, eachdetectorarmtwice with
+strictdeterministicflags/all7class1e-4 repeatgate and exactsegmentation.
+No VAEcropping,16Mpaddedcap/40GBactualfreeCUDA;96Ghost fromoffloadevidence.
+No training/diffusiongeneratedsample/GT-drivenwindow/clinicalrecallclaim.
+This differs fromofficial embeddingpipeline's AMP/resizing: isolate sampling,
+not claim exactMAISIdiffusiontrainingreproduction. Selectionbias/independent
+judge remainsopen. See POSTERIOR_CONTROL_20261002.md. No47320183change,
+large100259blocked/unreplaced; requirecompletion/accounting before results.
