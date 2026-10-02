@@ -1221,3 +1221,25 @@ starting with the Gate 1 timing probe.
   pickled `os.system` payload is neutralized). Re-run on fold_2 detection and
   fold_4 pancreas reproduces fold 2 / epoch 750 and fold 4 / epoch 1000,
   numTraining 2238.
+
+## 26. Corrected CPU-only denoiser control prepared and launched
+
+User authorized the proposed next step. See DENOISER_CONTROL_20261002.md and
+denoiser_control.py/test_denoiser_control.py. Established pinnedTV/NLM instead
+of an unvalidated newTV solver; task-local wheels only, no trainingenv change.
+HF-texture matching is NOT pure noise matching. Source-mask spatial fit/holdout
+exclude inserts/rings; native anisotropic kernels explicitly documented.
+
+Four tests passed (constant,analyticresponse,NLMcrop,globalsign). Boundedtoy
+timingsTV.375s/NLM.391s at96x96x32,notfullrunguarantees. Finalrealpreflight
+passedinputhashes,geometry,original111voxelinsert;fit6570/holdout6386. Baseline
+only strengths,8bisections,2%fit tolerance;unmatchedfamilies stayunavailable.
+TV empirical24/40mmcrop and200/400iterationgates beforecurve interpretation;
+perpass cropresponse checks andweak/opposite-signTViterationresponse checks.
+
+Localworkstation detachedhidden,oneCPUaffinity,1800swatchdog,noretry. PID11052
+atlaunch; frozenrunner acd6617b4b84887d598cee8966371bc510ab1577edb469ff296a4b2991070395.
+Metrics-only uniqueoutput. Noheavydenoising onHPC login,nonewGPUallocation.
+Statusatlaunch:running,NOTcompleted. Estimate .448611chargedGPUh unchanged.
+ProtectedPanTSeval untouched. No auto scientificGO; numerical/matching failure
+meansinconclusive,anddoesnotautomaticallyblockreal-lesiontest.

@@ -1273,3 +1273,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   gating, stimulus changes and NPS confounds. Request runnable header audit.
 - Updated stale novelty/access snapshot to reflect verified single-case Range
   retrieval. No GPU job, data mutation or protected evaluation change.
+
+### 2026-10-02 — corrected CPU-only classical control launched
+
+- User authorizedCPUcontrol. AddedpinnedTV/NLM runner,4tests andprotocol;
+  HFtexturematching explicitly NOT pure-noise matching. Native anisotropic
+  kernels documented,source-mask fit/holdout separatedfrominsert/rings.
+- Fourtests+finalrealhash/geometry/insertpreflight passed. Fit6570/holdout6386,
+  target18.168314HU;24/40mmhalos,empiricalcrop andTViterationchecks. Task-local
+  wheels only,existing analysisvenv/trainingenvsunchanged. CachedCT/VAEcopied
+  locally;noheavyfilteringonHPClogin. Reusedbaselines toavoidduplicatework.
+- Launcheddetached/hiddenlocalPID11052,oneCPUaffinity,1800swatchdog,noretry,
+  frozenrunner acd6617b4b84887d598cee8966371bc510ab1577edb469ff296a4b2991070395.
+  Uniqueoutputswork/denoiser_control_20261002_v1*. TVpassesnowpresent;NLM/final
+  completionnotyetverified. No prematureverdict ornewGPUspend. PanTSeval
+  untouched; .448611chargedGPUhestimate unchanged. Handoff26/protocolsaved.
