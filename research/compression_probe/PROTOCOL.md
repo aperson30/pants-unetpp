@@ -150,3 +150,12 @@ Original cap accounting: 0.17056 allocation-equivalent hours spent, leaving
 0.07944 of 0.25. Another allocation comparable to the completed pilot would
 exceed that remainder. Additional GPU work requires explicit budget approval;
 the CPU mask inventory is not itself a GPU submission authorization.
+
+User subsequently approved a NEW additional 0.25 allocation-hour cap for the
+selected case120 follow-up. `probe_small_deltaai.sbatch` requests one GPU,
+eight CPUs, 96G host memory, seven-minute limit, no requeue/retry. Interactive
+2x accounting => maximum ~0.23334 allocation-equivalent hours for this job,
+excluding the already-recorded earlier campaign. Process watchdog 380s with
+10s termination grace. Uses unchanged whole-volume runner, posterior mean,
+FP32 and native spacing/control. Launch while held first; verify billing=2000,
+one GPU, correct time cap and stored-script parity before release.

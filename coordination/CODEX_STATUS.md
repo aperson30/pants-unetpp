@@ -932,3 +932,16 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   still ~0.17056 charge-equivalent hours. Waiting for explicit additional
   <=0.25 charged-hour cap approval before any next GPU submission.
   PanTS evaluation untouched; no changes to shared base environment.
+
+## 2026-10-01 — Authorized small-case reconstruction submitted/released
+
+- User explicitly approved additional <=0.25 allocation-hours. Submitted
+  DeltaAI job3290494 held, then verified stored script byte-parity, account,
+  one GH200 / 8 CPUs / 96G RAM / billing2000, seven-minute cap, Requeue=0.
+  Released only after these checks. Worst-case new charge ~0.23334 hours.
+- Case120 full native volume, posterior-mean FP32, unchanged runner/weights,
+  preprocessing-only control; no crops/tiles, no training/diffusion/segmenter.
+  All baseline source hashes passed; separate small input/script hash manifest.
+- No automatic retries. Pending/running is not a quality result. PanTS test
+  evaluation and shared environments untouched. Completion and actual charged
+  time still need checking; new budget is separate from prior ~0.17056 usage.
