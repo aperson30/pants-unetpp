@@ -1228,3 +1228,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   notyetpresent;nomodel/clinicalverdict. No extraGPUjob ordata/weightdownload.
 - PANORAMAlatestrecordrequest429,stopped. Percaseaccessnotverified. Recommend
   Claudecommit its restrictedcheckpointheaderaudit forreproducibility.
+
+### 2026-10-02 — completed bounded contrast probe and CPU selective-data gate
+
+- 3291159 COMPLETED0:0,815s allocation;all7passes andcompletionverified.
+  Baseline0HUdiff;repeatparitypassed. Correctedretentions -10/-20/-40/-80/+20:
+  .313566/.370755/.517142/.720277/.235942;shifted-20 .374746 (+.003991).
+  Amplitude dependence inonehost,notclinicalharm oruniquelearned-priorproof.
+  Fullmeasuredtable/caveats inCONTRAST_PROBE_20261001.md. Noimagespublished.
+- NEWroundtotal .448611charged-equivalenth of2cap,incl36sfailedattempt,
+  notverifiedposteddebit. No furtherGPUsubmission orprotected47320183change.
+- PublicZenodov1 batch1ZIPdirectory:554members,49,683bytes/5requests from
+  48,238,512,666bytearchive,CPUonly. Metadataaccessverified,actualmemberfetch
+  NOTtested. Newboundedtool/test andSELECTIVE_DATA_ACCESS_20261002.md.
+  Threeunit tests passedlocal/remote;finalbudgettighteninglocallyretested.
+- Next:version/clinicalmanual-label/foldeligible-casejoin,thenboundedmember
+  integritytest andjudgeprotocolcheck beforeanynewGPUspend. NoXLSXanalysis
+  orweightsdownload yet. Handoffsection22 updated;Claude's logunchanged.

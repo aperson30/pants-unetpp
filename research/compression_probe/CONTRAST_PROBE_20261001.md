@@ -93,3 +93,36 @@ Do not make a syntheticNO-GO a mandatory barrier to a realistic lesion test.
 Use the outcome to choose mechanism work versus a provenance-cleared judge
 test, not more uncontrolled contrasts. Do not allocate further GPU work merely
 because unused budget remains.
+
+## October 2 measured response (job 3291159)
+
+Same-allocation baseline matched the frozen reconstruction exactly: maximum
+and mean difference 0 HU. Repeated -20 HU response matched the earlier probe.
+
+| Inserted contrast | Raw signed retention | Ring-corrected retention |
+|---|---:|---:|
+| -10 HU | 0.37717044 | 0.31356637 |
+| -20 HU | 0.43564539 | 0.37075455 |
+| -40 HU | 0.58170099 | 0.51714212 |
+| -80 HU | 0.76969829 | 0.72027682 |
+| +20 HU | 0.29573705 | 0.23594213 |
+
+These are retention of an inserted regional signal, not segmentation accuracy,
+tumor recall or clinical detectability. The -10/-80 corrected-retention ratio
+is approximately 0.4353, crossing the predeclared amplitude-prioritization
+heuristic. The opposite-sign difference at 20 HU is 0.1348, below the proposed
+0.15 heuristic. This does not make sign dependence absent or clinically safe.
+Amplitude dependence is clear in this construction; its mechanism is unresolved.
+The +2-x-voxel shifted -20 HU insert retained 0.43730130 raw and 0.37474595
+ring-corrected, versus 0.43564539 and 0.37075455 unshifted: a corrected change
+of 0.00399140 (0.399 percentage points). This single phase control does not
+explain the observed amplitude curve, but does not exclude other phase effects.
+All seven passes completed; completion marker true, no volumes saved.
+Slurm verified COMPLETED, exit 0:0, allocation elapsed 815 seconds (13:35).
+Inference-stage elapsed was 770.527 seconds; allocation time includes setup.
+At regular one-GPU billing equivalence this is approximately 0.226389 charged
+hours, not a verified posted allocation debit. Including the failed 36-second
+attempt and earlier three controls, NEW-round total estimate is 0.448611 of
+the authorized 2 hours. No automatic retry or additional GPU job submitted.
+Peak CUDA allocation was 41,980,169,728 bytes per pass; each measured altered
+volume pass took approximately 108-110 seconds. No images were saved/published.

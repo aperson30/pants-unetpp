@@ -943,3 +943,23 @@ raw.4356453896/corrected.3707545519. Otherpasses/completion stillpendingat
 thissnapshot. Noadditionaljob/training/weights/image download. LatestPANORAMA
 recordlink returned429;stopped,percaseaccess unresolved. RequestClaude preserve
 its cheaprestrictedmetadataauditscript, don'tdownloadallweights toduplicateit.
+
+## 22. October2 completed contrast curve and selective-access feasibility
+
+3291159 COMPLETED0:0,815s allocation,sevenpasses/completionverified. Corrected
+retention -10/-20/-40/-80/+20HU: .313566/.370755/.517142/.720277/.235942.
+Shifted-20HU .374746,only+.003991 versusunshifted. Baseline0HUdiff/repeat
+parity passed. See CONTRAST_PROBE_20261001.md forraw/corrected values/caveats.
+Amplitude heuristic crossed;sign-difference heuristicnotcrossed. One-host
+nonlinearresponse NOTlearned-prior proof orrealPDAC endpoint. Noimages saved.
+Newroundcharge-equivalentestimate .448611of2 includingfailedattempt,notposted
+debit. No furtherGPUjob;prior .522222figurewas reservation ceiling,notspent.
+
+CPU-only ZIPdirectoryprobe on publicZenodo10998332v1 batch1:48,238,512,666byte
+archive,554members,49,683bytes/5requests. Tests3pass locally/remotely;final
+oversize-byte-budgettightening locallyretested. See SELECTIVE_DATA_ACCESS_20261002.md.
+NoindividualCT extractiontested. Publiclabelsrepo hasclinical_information.xlsx.
+Nextcheapgate:clinical/manualmask/fold/versionjoin andsingle-member transfer
+integrity beforeboundedreal-lesionjudge. No workbookanalysis/checkpointdownload
+yet;no largearchive justifiedbydirectorysuccess. Preserveoriginaljudgemisses;
+frozenjudge failure doesnotproveirrecoverableinformationloss. PanTSevaluntouched.
