@@ -1316,3 +1316,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   accepted as reproducible runtime; external candidate extraction still open.
 - No detector inference/weights/GPU allocation or protected PanTS eval changes.
   Charge estimate .448611of2 unchanged. Handoff28 and standalone protocol saved.
+
+### 2026-10-02 — Eight offline judge-guard tests pass
+
+- Added judge_contracts.py/test_judge_contracts.py: geometry/bounds/axis checks,
+  mask/dilation, invalid-output rejection, GT-only crop scoring, existing-arm
+  refusal. Eight tests pass in 0.026s on local isolated CPU runtime.
+- Not upstream execution parity or real runner integration. No SimpleITK in
+  local runtime; image IO/resample/physical crop still need actual runtime tests.
+  Plans/label schema and pinned candidate extractor remain gates, no launch.
+- No packages installed, GPU hours used, patient data committed, or PanTS eval
+  touched. Screening estimate .448611of2 unchanged. Handoff29 updated.

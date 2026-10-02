@@ -1283,3 +1283,14 @@ extractor/defaults and actual model plans remain unverified. No weights/GPU
 jobs/trainer-env changes or protected evaluation changes. Screening budget
 estimate unchanged. Next CPU geometry and dependency contracts, then priced
 single-case calibration only after remaining gates pass.
+
+## 29. CPU judge guards tested; actual wrapper parity still open
+
+Added judge_contracts.py and eight passing offline tests (0.026s). Covers
+physical-grid agreement, XYZ crop bounds vs ZYX arrays, exclusive endings,
+invalid/nonfinite outputs, exact audited pancreas-mask dilation, scoring-only
+crop coverage, and refusal of existing per-arm output without overwriting.
+No new packages or GPU spend. These are helper tests, not upstream-wrapper
+execution: local environment lacks SimpleITK, actual resample/read/crop parity
+still open. Helpers not yet wired into inference; no claim of launch readiness.
+Need actual plans and pinned candidate extractor before detector calibration.

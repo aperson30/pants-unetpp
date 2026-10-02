@@ -103,3 +103,20 @@ Actual plans/label schema; pinned candidate-extraction code; isolated runtime;
 safe bounded checkpoint acquisition; CPU geometry contracts; then one-case
 cost/runtime calibration. Detector weights and real inference remain untested.
 This audit does not claim that the judge is ready or the idea is proven.
+
+## CPU guard implementation (2026-10-02)
+
+Added `judge_contracts.py` and eight passing tests in `test_judge_contracts.py`.
+Local isolated Python3.12.14/NumPy2.5.3/SciPy1.18.1; test runtime 0.026s.
+No new dependencies or GPU hours. Tests cover XYZ bounds versus ZYX arrays,
+exclusive crop endings, shape/bounds rejection, affine geometry agreement,
+nonfinite/singular grids, exact audited label1/4/5 plus 5-voxel-cube dilation,
+GT-only crop-exclusion scoring, invalid probabilities, and atomic refusal of
+an existing per-arm output directory without overwriting its sentinel.
+
+These are helper unit tests, NOT execution parity with the official wrapper.
+The local audit environment has no SimpleITK. Actual image reader/orientation,
+B-spline resampling, physical-coordinate crop behavior and NIfTI export must
+still be tested in the isolated inference runtime. Candidate extraction and
+released model-plan label validation remain open. Helpers are not yet wired
+into a real detector runner, so they cannot be claimed to protect a GPU job.
