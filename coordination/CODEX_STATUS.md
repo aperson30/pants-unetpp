@@ -899,3 +899,19 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Source published in 6574fbd; final evidence and cautious interpretation in
   results_20261001/SUMMARY.md. Next: truly small lesion cases, paired controls
   and independent quality validation, not premature adaptive-depth training.
+
+## 2026-10-01 — CPU small-lesion screen; SSH interruption, no GPU submission
+
+- Verified DeltaAI master working and user queue empty, then ran detached,
+  single-thread, timeout-600 CPU inventory over 24 pinned MSD masks only.
+  COMPLETE and inventory JSON read over SSH: smallest total tumor burden
+  case029 1780.7007mm3, case028 1981.2305mm3, case041 2021.5837mm3.
+  None meets exploratory <=1mL cutoff. No new CT download/reconstruction.
+- Six local region-metric tests pass. Added bounded-window inventory tool
+  and documented observed findings, with no detection/clinical quality claim.
+- SSH master disappeared before inventory retrieval or next-window upload:
+  `ssh -O check` reports socket missing. Next 48-mask screen NOT launched.
+  Requires user reopening DeltaAI master. PanTS evaluation untouched.
+- Original cap remaining ~0.07944 charged hours; asked user to approve an
+  additional <=0.25 charged-hour cap before a comparable next GPU probe.
+  No additional GPU time spent. Prior results commit 2f66f48 verified on origin.

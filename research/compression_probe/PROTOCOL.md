@@ -128,3 +128,25 @@ environment. Verify code, wheel and input-manifest hashes before submission.
 Published runtime guidance, not a measurement of this probe:
 https://docs.ncsa.illinois.edu/systems/deltaai/en/latest/user-guide/running-jobs.html
 https://docs.ncsa.illinois.edu/systems/deltaai/en/latest/user-guide/job-accounting.html
+
+## Follow-up: small-lesion candidate search (CPU only)
+
+`inventory_small_msd.py` defaults to the first 24 lexicographically sorted masks
+at the SAME pinned dataset revision, sequentially and with download/volume
+bounds. It downloads no CTs, starts no GPU job, and writes into an exclusive
+new directory. Remote execution is detached with a ten-minute timeout and
+one-thread CPU-library limits. Original pilot artifacts are not overwritten.
+An optional bounded window (`--start`, `--count`, maximum 48 masks per run)
+supports a separate follow-up without silently changing the original inventory.
+
+Rank positive cases by total physical GT tumor burden before inspecting any
+new reconstruction. <=1000mm3 (1mL) is an exploratory screening cutoff, not
+a clinical-stage definition. This bounded subset is not a representative
+benchmark and the smallest case here is not necessarily the dataset's smallest.
+Use whole-volume reconstruction with the same preprocessing-only control;
+do not substitute cropped/tiling results for native whole-volume fidelity.
+
+Original cap accounting: 0.17056 allocation-equivalent hours spent, leaving
+0.07944 of 0.25. Another allocation comparable to the completed pilot would
+exceed that remainder. Additional GPU work requires explicit budget approval;
+the CPU mask inventory is not itself a GPU submission authorization.
