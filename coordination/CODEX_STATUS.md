@@ -1013,3 +1013,34 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   This is not proof of AE patient-level exclusion. Keep AE/diffusion corpora
   separate for any future held-out claims. Sources/production-parity caveat
   recorded in second_results_20261001/SUMMARY.md; no extra compute.
+
+## 2026-10-01 — Official input parity verified; blinded packet prepared, judge held
+
+- Inspected pinned MAISI transforms.py/diffusion embedding script/network
+  config. CPU reproduction of original-spacing CT VAE validation operations
+  on BOTH real cases exactly equals probe input tensors: maxdifference0.
+  Case120512x512x104, case165padded512x512x88. This rules out basic input
+  transform mismatch, NOT posterior/precision/chunking/full official GPU parity.
+- Official VAE validation default supports native spacing+k4; diffusion
+  embedding creation separately resizes dimensions to multiples128. Config
+  norm_float16true/num_splits4 differ from diagnostic false/1; preserve caveat.
+- Prepared6blinded pages (all3tumor axial slices percase, full-context+detail),
+  randomized condition/order once, noGToutline, fixed HUwindow. Key remains
+  remote, NOT downloaded/committed/inZIP. Known-location visualfidelity review,
+  not unprompted detection or clinical study. Two representative pages visually
+  inspected; form page count/files validated; actual reader ratings missing.
+- Nine local metric tests pass. No new GPU job/hour; PanTS evaluation untouched.
+- MONAI DiNTS candidate labels matchMSD but trainedTask07 and release lacks
+  dataset_0.json; patient-level split unknown. PANORAMA candidate publishes
+  PDAC folds/weights but histology/domain/ROI compatibility not established.
+  Neither run; noweights downloaded. Independent judge inference gated on
+  these checks, correct fixed thresholds and separate measured compute cap.
+- Reports/code and reviewer ZIP in research/compression_probe/. Share only
+  blinded_review_20261001.zip, not unblinded result folders/repository. Need
+  qualified reader feedback before claiming harm or starting method training.
+
+- Publication safety gate blocked uploading the image-derived reader packet
+  toGitHub without explicit data-egress approval. Keeping sixPNG/form/ZIP and
+  raw input-audit JSON local/remote; commit only tooling and written audit.
+  No attempt to bypass the restriction. User can share the local blinded ZIP
+  with their qualified reviewer; public image upload needs explicit approval.
