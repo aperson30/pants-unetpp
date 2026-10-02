@@ -90,10 +90,12 @@ before the mechanism and scientific objective justify it.
 
 ## Access check / blockers
 
-Official PANORAMA image record exposes a large ZIP, not a verified individual-
-case endpoint. Following its latest-version link returnedHTTP429 in this session;
-stopped rather than retrying repeatedly. No48GB archive or image downloaded.
-Per-case access remains unresolved. Automatic duct masks in PANORAMA are not
+Initial snapshot: the latest-version link returned HTTP429, so we stopped.
+Subsequent CPU-only HTTP Range checks resolved selective access on the public
+version-1 archive: directory metadata and one 21.5 MB CT were fetched without
+downloading the 48 GB archive. ZIP CRC, pinned manual mask, finite data and
+matching geometry passed. See SELECTIVE_DATA_ACCESS_20261002.md. A finalized
+cohort and judge-protocol review remain open. Automatic duct masks are not
 manual radiologist duct truth. MSD label2 is not necessarily histologically
 confirmed PDAC; maintain the original engineering-host wording.
 
@@ -106,3 +108,9 @@ Do not label any current idea S-tier or publishable yet. The cheapest useful
 next evidence is already being collected. Larger studies, a second VAE and
 any method/fine-tuning proposal need a new outcome-based plan, PI alignment,
 known implementation/data provenance and calibrated charge—not unused budget.
+
+Update: contrast job completed; amplitude dependence was observed on one host,
+with a small effect for the one shifted control. This is a lead, not a method,
+unique mechanism or clinical endpoint. RESEARCH_HANDOFF_20261001.md section24
+now gives the evidence, claim limits, PI-alignment gate and focused Claude review
+questions. No additional GPU spending is authorized by this document update.

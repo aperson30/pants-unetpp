@@ -1262,3 +1262,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - 5rangeguardtests+2foldtests passed;noGPUcharge/weights/imagepublication
   orprotected47320183change. Estimate .448611of2cap unchanged. Seeaccessdoc
   andhandoff23. Nextjudgeprotocol/singlefoldbothstages beforeGPUspend.
+
+### 2026-10-02 — focused review handoff for Claude
+
+- User requested document update and candid assessment of Claude's input.
+  Added handoff24: verified evidence vs missing real-lesion/mechanism/method
+  evidence, one-experiment review questions, PI alignment and spending limits.
+- Credited contrast test, leakage/fold checks and checkpoint-header work;
+  flagged nonlinear-response overinterpretation, heuristic cutoffs, synthetic
+  gating, stimulus changes and NPS confounds. Request runnable header audit.
+- Updated stale novelty/access snapshot to reflect verified single-case Range
+  retrieval. No GPU job, data mutation or protected evaluation change.

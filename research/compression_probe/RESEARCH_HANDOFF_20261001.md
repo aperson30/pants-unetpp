@@ -983,3 +983,92 @@ Noimages/workbook/readerkeypublished;noGPUjob,PanTSeval47320183untouched.
 Chargeestimateunchanged .448611of2. Next:judgepreprocessing/singlefoldboth
 stages andprespecifiedpairedprotocol beforeanynewGPUcalibration. Access
 resolvedforonecase,notunbiasedcohortorindependentcheckpointselectionexposure.
+
+## 24. Review brief for Claude: how close is this to a strong idea?
+
+**Status: a promising measurement lead, not a validated method or S-tier idea.**
+We have moved from speculation to one controlled observation and feasible
+real-data access. We have not demonstrated real-lesion detection damage,
+identified a unique mechanism, implemented a repair or established novelty.
+
+### Evidence to critique, not embellish
+
+- Seven-pass MAISI mean/FP32 probe completed. One synthetic 8 mm insert in
+  one MSD host: ring-corrected retention is 31.4% at -10 HU and 72.0% at
+  -80 HU. Repeated -20 HU matches; its one shifted-position control changes
+  retention by only 0.399 percentage points. See CONTRAST_PROBE_20261001.md.
+- This rejects a fixed linear response for this construction. It does not
+  uniquely establish a learned-prior explanation: normalization, clipping,
+  encoder/decoder nonlinearities, sampling and context remain alternatives.
+- Generic texture drift was deprioritized, not because it proves safety, but
+  because it was less discriminating and overlaps prior work. Novelty review
+  already found close medical-latent probing and foundation-VAE comparisons.
+- CPU metadata audit independently reproduced 380 manually masked PDAC
+  candidates after source/patient exclusions; 81 are in batch 1. Individual
+  range retrieval, ZIP CRC, pinned mask and geometry were verified on one
+  21.5 MB CT. This transport case was chosen by file size, NOT clinical cohort
+  criteria. Do not generalize from it or silently use it as a selected cohort.
+- Screening-round spending estimate: 0.448611 charged-equivalent GPU-hours
+  out of the authorized 2-hour total. Posted accounting debit not verified.
+  No further GPU jobs submitted. Protected PanTS evaluation unchanged.
+
+### Cheapest decisive next questions
+
+1. **Judge feasibility before inference:** inspect actual preprocessing,
+   intensity conventions, weights/runtime, single-fold execution for BOTH
+   pancreas and detector stages, probability outputs and thresholds. Preserve
+   full original context under the judge's released protocol. Calibrate cost
+   only after code/data provenance and output contracts pass. No default
+   five-fold ensemble on cases seen by four folds during training.
+2. **Prespecify a tiny paired feasibility pilot:** patient-disjoint eligible
+   cases and negatives, original/preprocessing-control/reconstruction/blur
+   arms, original misses retained. Define any blur matching on separate
+   calibration data; an arbitrarily strong Gaussian is not a fair comparator.
+   Do not choose cases, thresholds or lesion sizes after seeing outcomes.
+   A tiny screen can prioritize or kill a direction, not establish clinical
+   equivalence or provide a powered safety conclusion.
+3. **If frozen-detector losses appear:** separate downstream domain shift
+   from irrecoverable task information. Do not turn an original-trained
+   detector's failures into a claim that no observer can recover the signal.
+   A real effect beyond controls is a reason to investigate, not sufficient
+   novelty or a guarantee of a top-conference paper.
+4. **Method/PI fit before more training:** a useful direction would pair a
+   specific failure with a convincing explanation and an efficient remedy.
+   Explain how that remedy serves the PI's UNet++/diffusion/faster-training
+   objective. A standalone VAE audit is a possible tangent, not automatically
+   a contribution to that objective. Do not propose expensive fine-tuning
+   merely because a synthetic response curve looks interesting.
+
+### Specific input requested from Claude
+
+- Attack the strongest claim above. Which alternative explanation is cheapest
+  to distinguish, and what exact result would change our next action?
+- Check primary-source novelty of the narrow measurement-plus-remedy direction,
+  especially medical VAE lesion preservation and MAISI-v2 region-aware losses.
+  State exact overlap; do not certify novelty from a title-level search.
+- Propose ONE highest-information next experiment, including a pessimistic
+  charged-hour estimate, confounds, paired outcomes and explicit stop criteria.
+  Stay within the remaining authorization; no job submissions for this review.
+- Should we pursue this direction or return to adaptive-depth diffusion?
+  Compare scientific payoff, PI alignment and decisive-test cost, not excitement.
+- Preserve the restricted checkpoint-header audit script in the repo for review;
+  fold identity is reported verified by Claude, not independently reproduced
+  here from checkpoint headers. Metadata joins have been reproduced here.
+
+### Honest assessment of Claude's contributions so far
+
+Helpful: it proposed the contrast-dose test, identified the patient-level
+leakage risk, documented fold/checkpoint selection exposure and provided the
+cheap checkpoint-header audit. Its reported cohort/fold counts have now been
+independently reproduced. These are concrete scientific/safety contributions.
+
+Not all suggestions should be adopted unchanged: contrast nonlinearity is not
+unique proof of a learned prior; synthetic GO must not block real-lesion tests;
+the 0.7/0.15 cutoffs are heuristic rather than validated statistical thresholds;
+supersampling changes the stimulus and cannot be compared directly to the old
+binary point; anatomy spectra are not automatically noise-power spectra.
+Checkpoint-header evidence should be preserved as runnable code, not only prose.
+
+Use Claude as a critical second reviewer, not a vote that establishes truth.
+Resolve disagreements with primary sources, runnable contracts or measured
+controls. Prefer one discriminating experiment over another descriptive sweep.
