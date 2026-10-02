@@ -620,3 +620,14 @@ CPU launcher initially fed/dev/null instead of its here-document and did no
 work; corrected and verified both output records plus explicit completion.
 Artifacts remain remote/local; publication restrictions unchanged. No change
 to PanTS evaluation. New GPU insertion/detector work requires calibrated cap.
+
+## 14. User-approved parallel control round
+
+User subsequently approved a NEW2charged-GPU-hour total round and requested
+efficient parallel submissions. Three preflighted controls queued:3290857
+matched insertion pair,3290863real-image split4,3290864fixed-seed sampled
+posterior. Exact combined hard-limit charge.66667hours, no retries. First
+interactive probe RUNNING at last check, regular probes pendingPriority.
+No completion/quality result yet. CONTROL_ROUND_20261001.md records bounds,
+scientific limits and actual scheduler restriction(one interactive submit/user).
+PANORAMA detector/radiomics still NOT launch-ready; no blind larger campaign.

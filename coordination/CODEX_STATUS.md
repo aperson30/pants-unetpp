@@ -1103,3 +1103,27 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Generic texture drift/n3diagnostic cases cannot establish early-cancer loss.
   Mayo announcement reviewed; linkedGut paper403, no REDMOD replication claim.
 - No newGPU time, weights, image egress, author contact or PanTS job change.
+
+## 2026-10-01 23:11 -07:00 — Approved2hour round; three bounded probes queued
+
+- User explicitly approved2chargedGPU-hours TOTAL new round and parallel
+  short probes. DeltaAI connected,Bridges research socket refused, noDelta
+  socket present. Reused cache rather than transferring large inputs/runtime.
+- Added bounded_controls.py/.sbatch,hash manifest and two insertion tests.
+  Same real120/model/grid,wholevolumeFP32. Input hashes and currentcontrol
+  exactly matchingcached control checked beforeGPU. All3CPU mode gates pass;
+  insertion unit contracts2/2pass in isolated remoteMONAI/PyTorch runtime.
+- Submittedheld3290857 insertion interactive; second submission rejected
+  QOSMaxSubmitJobPerUserLimit(no allocation). Liveqos_ghx4intlimit1confirmed.
+  Submittedheld3290863split4/3290864posterior toregularghx4 instead.
+- VerifiedeachoneGPU,8CPU,96G,10min,no requeue,user/account,storedscriptbyte
+  match/sourcehashes. Billing2000/1000/1000=>combinedmaximum.66667chargedh.
+  Releasedall3. LastcheckinsertionRUNNINGgh09238s,othersPENDINGPriority.
+  No completed/control-quality result yet. No autoretry. Reserve>=1.33333h.
+- Insertion8mm/-20HU111voxelscenter225/259/74,cachedtumor-positivehost,
+  matchedbaseline+modifiedpasses; engineeringNOTrealPDAC/healthy/detection.
+  Other2comparecachedmeanbaseline,notconcurrentrepeatability. Metrics-only
+  outputsavoidsharedstoragepressure. No CT images saved/uploaded byjobs.
+- CONTROL_ROUND_20261001.md explainsprobes/cost/gates. PANORAMApatient/
+  checkpointmapping and isolatedradiomics remainnotready; notsubmitted.
+  PanTSevaluation/frozenruntimeuntouched. No newmonitorautomation.
