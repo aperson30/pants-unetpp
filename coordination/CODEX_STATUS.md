@@ -1623,3 +1623,13 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Preparedprivatev1stage10min1GPU2CPU32G no-requeue/560stimeout, earlytiminggate.
   Heldsubmit/resource/billingchecknext, max.333334chargedh at2x; prior1.109722,
   worst1.443056/2. Outcomeunknown; protected47320183untouched. Handoff52.
+
+### 2026-10-02 16:49 PDT — Raw-head probe3297419 safely released
+
+- Submittedheld, independentlyverified exact1GPU2CPU32G10min/no-requeue,
+  accountbdyo-dtai-gh andReqTRESbilling2000; partitionGPUcharge2000confirmed.
+  Failclosedassertions+source/inputhashcheck passed again before release.
+-3297419 lastPENDING(None), no inference/outcome claim. Privatev1 log/results;
+  source8f2035b. Max.333334charge-equivalent, prior1.109722,worst1.443056/2,
+  posteddebitunknown. Noautomaticretry. Next samejobpoll/account/CPUmapaudit.
+  Main47320183untouched. Handoff53. Goalactive, decision stillunproven.

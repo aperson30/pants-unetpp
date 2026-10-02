@@ -1726,3 +1726,17 @@ Source/Sbatchsyntaxchecked. Freshprivatehome /u/asanjeev/compression_probe_small
 difftumor_probe_v1. Plannedheld10min1GPU/2CPU/32G/no-requeue, timeout560s,
 max~.333334chargedh ifbilling2000, worstcampaign1.443056/2. Requireactual
 heldjobresource/chargefactorcheck before release; not claimed outcome yet.
+
+## 53. Second raw-head probe3297419 released after fail-closed checks
+
+2026-10-02 16:49 PDT:3297419 submittedheld, inspectedJobHeldUser/1GPU/2CPU/32G/
+10min/Requeue0/accountbdyo-dtai-gh/ReqTRESbilling2000. Partitionchargeweights
+confirmed GRES/gpu=2000. Assertedheldstate/resources again andverified all
+source+inputhashes before scontrolrelease. LastsnapshotPENDING(None), NOT an
+inference result. Max600s*2/3600=.333334chargeequivalent, prior1.109722,
+campaignworst1.443056/2. Posteddebitunknown. Frozen source8f2035b.
+Private /u/asanjeev/compression_probe_smalloutputs/difftumor_probe_v1,
+lograw_head_3297419.log, results_3297419. Next check SAMEjob handle/logs,
+accountactualterminalcost and independentlyCPUauditcomplete savedmaps.
+Do not retry on observationtimeout or interpretqueued/running as quality.
+Protected47320183 untouched; no newcohort/training authorized.
