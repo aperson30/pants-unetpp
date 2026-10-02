@@ -1400,3 +1400,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - ScalarJSONpreserved. No realCTinference/recallclaim/autoretry/evalchanges.
   Next guardedrealpreprocessing+paired pipeline and independently cappedcompute.
   Handoff35/protocol updated; priorPENDINGentry is historical, nowcompleted.
+
+### 2026-10-02 — Three-arm judge pilot safely released
+
+- 13 CPU tests pass, real CT orientation roundtrip pixel-identical; frozen
+  source/import checks pass. Native/clipped/MAISI arms, official fold4 models,
+  GT scoring-only. Private images/maps not published; no recall claim.
+- Released held DeltaAI3295187 after state/account/resource checks: one GPU,
+  32GB, interactive, hard20min, no requeue. Last snapshot PENDING. Max0.666667
+  chargedh; campaign worst-case1.123056/2, posted debit unverified.
+- Handoff36/protocol and source recorded. No duplicate or automatic retry;
+  protected evaluation47320183 untouched. Next results+actual accounting.

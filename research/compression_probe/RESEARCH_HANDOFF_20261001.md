@@ -1376,6 +1376,7 @@ Remotehomejudge_load_gate_v1 logload_3294898.log/result_3294898.json.
 No protectedevalchange; noautoretry. Nextreadresult+charge, thenrealpairprep
 ifloadingpasses. Check existingjob before anynewsubmission.
 
+
 ## 35. Allocated real-checkpoint loading PASSED, 14 seconds
 
 Job3294898 COMPLETED0:0,14s,billing2000. .00777778charge-equivalentGPUh;
@@ -1387,3 +1388,27 @@ ScalarJSONjudge_load_result_3294898.json committed. Synthetictimingnotbenchmark.
 No CTinference/recallresult yet, noautoretry/newevalchange. Nextactual
 preprocessing and guardedpaired native/reconstruction pipeline, then separately
 cappedreal-casecompute. This closes modelcompatibility, not scientificquality.
+
+## 36. Three-arm public-case pilot released, results pending
+
+DeltaAI **3295187** was verified held and released October 2. Last snapshot:
+PENDING. One GPU, two CPUs, 32GB, ghx4-interactive, hard 20-minute limit,
+Requeue=0. Maximum charge-equivalent cost 0.666667 GPU-hours; campaign prior
+estimate 0.456389, worst-case combined 1.123056/2. Posted debit unverified.
+Do not submit a duplicate or automatically retry a failure.
+
+Native CT, clipped CT and whole-volume posterior-mean FP32 MAISI reconstruction
+use both official fold4 PANORAMA detectors with frozen publisher crop,
+postprocessing and TTA. GT is scoring-only. Raw/masked PDAC and GT-matched
+candidates, crop inclusion and mask exclusion are kept separate: a patient
+maximum elsewhere is not tumor detection. Clipping has its own control arm.
+
+13 CPU geometry/publisher-contract tests pass; source/import guards and real
+CT pixel-identical canonical/native restoration pass. No interpolation in
+orientation restoration. Private case and maps remain under home
+compression_probe_smalloutputs/paired_judge_pilot_v1, never in GitHub.
+
+One transport-selected OOF/validation-selected case is NOT clinical recall,
+external test or cohort evidence. A frozen-detector response drop alone cannot
+distinguish information loss from domain shift. Next require completion.json
+and Slurm accounting before interpreting results. Evaluation47320183 untouched.

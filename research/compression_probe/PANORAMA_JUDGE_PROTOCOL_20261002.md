@@ -318,3 +318,17 @@ through this detector, no tumor-recall result, no final candidate map, no claim
 of historic container parity. Next real preprocessing/paired-inference harness
 with guard integration, raw/masked/candidate outputs and separately capped cost.
 Protected PanTS evaluation untouched.
+
+### Three-arm diagnostic pilot released (results pending)
+
+DeltaAI3295187: one GPU, 32GB, 20min hard cap, interactive 2x charge factor,
+no retry. Held resource fields/source hashes verified before release.
+Campaign worst-case estimate1.123056/2 charged GPUh; posted debit unverified.
+13 CPU tests and exact real CT orientation roundtrip passed. Compare native,
+clipped and whole-volume posterior-mean MAISI reconstruction with frozen
+fold4 detectors. GT never sets crops; preserve raw/masked/GT-matched candidate
+scores and crop/mask inclusion. No tuned clinical threshold or recall claim.
+Transport-selected validation case is not a cohort or external test; frozen
+judge response loss alone cannot prove irreversible information loss.
+Private inputs/maps stay under home paired_judge_pilot_v1; last snapshot
+PENDING. Next check completion JSON and accounting, not just allocation state.
