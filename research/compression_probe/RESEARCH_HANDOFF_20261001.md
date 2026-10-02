@@ -1679,3 +1679,29 @@ Next: resolve producer or explicitly define full-context raw-score protocol,
 then geometry/control tests and bounded scheduled runtime. No GPU submitted,
 campaign remains1.109722/2 charge-equivalent,47320183 untouched. Details in
 INDEPENDENT_JUDGE_REVIEW_20261002.md; no new outcome supports an S-tier claim.
+
+## 51. Goal activated: novelty audit and second-model protocol locked
+
+2026-10-02: active user goal is an evidence-backed investment decision within
+2 TOTAL chargedGPUh, not a guaranteed positive idea. Current authoritative
+DeltaAI squeue empty;3297185/3296983/3296939 completed,3296871 failed; costs
+unchanged1.109722/2. No main evaluation query/mutation in this work.
+
+Read new primary literature including LearnabilityGap(MICCAI2026), lesion-aware
+LDM post-training, MAISI-v2, pathologycompression and region-separated lesion
+VAEs. Broad lesionloss/downstreamcompression ideas already crowded. Detailed
+scope/limitations/conditionalopening in NOVELTY_AND_DECISION_GATE_20261002.md.
+ProvisionalGO only for boundedsecondmodeldiagnostic; NO-GO newtraining yet.
+
+DiffTumorappendixE.2 identifies organpseudoproducer asCLIPDrivenUniversalModel
+(reference55); exact archivedmaskcheckpoint stillunverified. Three modern
+MONAIgeometryCPUtests pass after actual plainTensor/Invertd skip fixed via
+MetaTensor. Anisotropic1mmresampling edgeclamp predicted0.2nativevoxel asserted
+separately; interiorlandmarks exact1e-4, not claimed intensityinverseparity.
+
+Nextexperimentprotocol explicitly RAW fullcontext tumorhead, not official
+organmasked/clinicaldetector. Reuse100226 native/clip/mean/all3savedseeds,
+noVAE rerun/noGTinput/no crop. Predeclarednumeric/adequatenative/support/mixed
+gates beforeoutcomes. Planned10min1GPUallocationmax~.333chargedh at2x;
+verifybilling/resources/sourcehash whileheld before release. Not submitted yet;
+next implement/test actualrunner and separateCPUmapauditor. Goalstillactive.

@@ -1593,3 +1593,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Script/scalarresult/review/handoff50 preserved; originalweightsprivate.
   NoGPUspent/submitted, campaignestimate1.109722/2, posteddebitunknown,
   protected47320183untouched. Architecturepass does NOT establish quality.
+
+### 2026-10-02 16:42 PDT — Goal novelty audit, second-judge geometry gate
+
+- Useractivated2TOTALchargedGPUh investmentdecisiongoal. VerifiedemptyDeltaAI
+  squeue and last4jobaccounting; spentestimateunchanged1.109722/2.
+- Primaryliteraturenewclosecompetitor LearnabilityGapMICCAI2026 plus existing
+  lesionawareposttraining/MAISIv2/pathologycompression/regionseparatedVAEs:
+  genericlesionloss isn'tnew. Novelty_and_decisiondoc records scope, conditional
+  opening, no currentS-tier/method/speed/clinicalclaim.
+- DiffTumorappendixE.2 identifiesCLIPDrivenUniversalorganpseudoproducerfamily;
+  exactmaskweights/foldoverlapunverified.3CPUgeometrytests passed; caughtplain
+  Tensor/Invertd silentlyskipinverse, fixedMetaTensor. Predictededgeclamp
+  explicitlytested; no legacyintensityparityclaim.
+- Lockedrawfullcontextsecondtumorheadprobeprotocol/nativeclipmean3seeds;
+  noGTinput/noVAErepeat. Investmentgatewrittenbeforeoutcomes. Needrunner/tests/
+  CPUmapauditor, heldresource/billingcheck beforeGPUrelease. NoGPUjobsubmitted,
+  protected47320183untouched. No trainingauthorizedbeyondexistinggoalcap.

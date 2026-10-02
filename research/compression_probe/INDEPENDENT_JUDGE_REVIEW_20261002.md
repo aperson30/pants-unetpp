@@ -89,3 +89,29 @@ No new GPU job, no GPU hours, no independent tumor score obtained here.
 Campaign estimate remains 1.109722/2 charged GPU-hours (posted debit unknown).
 PANORAMA fold4 remains the ONLY actually executed tumorjudge. Protected
 evaluation job 47320183 untouched. Full second-judge inference is not ready.
+
+## Follow-up: producer family identified; geometry gate passed
+
+The primary paper appendixE.2 names reference55 (CLIP-Driven Universal Model)
+as the source of organ pseudo labels. Its official repository publishes Swin
+weights and pred_pseudo.py. Exact historical mask weights/runtime and
+checkpoint fold overlap remain unverified; no extra weights downloaded.
+https://arxiv.org/html/2402.19470v2
+https://github.com/ljwztc/CLIP-Driven-Universal-Model
+
+Three synthetic CPU regressions now pass for the modern image-transform port:
+RAS/1mm/padding and inverse shape/affine; flipped/permuted anisotropic grids;
+linear-coordinate landmark restoration; invalid shear/channel rejection.
+Tests caught and fixed Invertd skipping restoration for plain Tensor predictions:
+wrap prediction in MetaTensor so modern MONAI uses the original trace.
+Explicit orientation labels prevent changing-default behavior.
+
+Resampling is NOT an exact intensity inverse. Phantom2.5mm slice spacing
+produces a predicted0.2native-voxel edge clamp (0.5mm) due to integer1mm
+extent rounding; interior landmarks restore within1e-4voxel. Tests assert
+that analytically expected edge value, not a silently relaxed accuracy gate.
+These are synthetic modern-runtime contracts, not legacy-version numerical
+parity or clinical accuracy. Real-case grid assertions still required.
+
+See NOVELTY_AND_DECISION_GATE_20261002.md for the explicitly different
+raw-head protocol and its predeclared investment gate. No GPU submitted.
