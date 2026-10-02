@@ -1610,3 +1610,16 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   noGTinput/noVAErepeat. Investmentgatewrittenbeforeoutcomes. Needrunner/tests/
   CPUmapauditor, heldresource/billingcheck beforeGPUrelease. NoGPUjobsubmitted,
   protected47320183untouched. No trainingauthorizedbeyondexistinggoalcap.
+
+### 2026-10-02 16:47 PDT — Second raw-head runner CPU gates passed
+
+- difftumor_probe.py/audit/test/sbatch implemented; all6savedarms repeated,
+  fullcontext published1mm/96/Gaussian.75 FP32, CPUoutputaccumulation disclosed.
+  NoGTread inrunmode/no newVAE/crop/adaptation. Freezeinputshash/finite/gridpass,
+  manifestSHA47c5a537739d68e156a011c378865c4cdc718a8f9fb94699d6dffa1cbf23f2e9.
+-7CPUtests includingactualsliding/inversion/softmax andsavedmapcorruption pass;
+  actualstrictloader/evalmode/allparamsfrozen verified. MONAIindexwarnings
+  retained, testedcurrenttorch2.10 path not assumedcompatible withallversions.
+- Preparedprivatev1stage10min1GPU2CPU32G no-requeue/560stimeout, earlytiminggate.
+  Heldsubmit/resource/billingchecknext, max.333334chargedh at2x; prior1.109722,
+  worst1.443056/2. Outcomeunknown; protected47320183untouched. Handoff52.

@@ -1705,3 +1705,24 @@ noVAE rerun/noGTinput/no crop. Predeclarednumeric/adequatenative/support/mixed
 gates beforeoutcomes. Planned10min1GPUallocationmax~.333chargedh at2x;
 verifybilling/resources/sourcehash whileheld before release. Not submitted yet;
 next implement/test actualrunner and separateCPUmapauditor. Goalstillactive.
+
+## 52. Second raw-head probe implemented and seven CPU gates passed
+
+2026-10-02 16:47 PDT. Runner difftumor_probe.py reusesall6completedimages,
+strictfrozen4.807MparameterU-Net, publishedRAS/1mm/window96/overlap.75/Gaussian
+FP32inference, CPUoutputaccumulation disclosed. Groundtruthneverread in run
+mode; separateaudit_difftumor_probe.py loadslabel1 AFTERsavedchannel2outputs.
+All6arms willrepeattwice,<=1e-4allclassprobdrift/exactargmax; earlyfirstarm
+timinggate prevents continuation when wholeprobe can'tfit10min allocation.
+Noinputcrop/GTmask/newVAE/autoretry/AMP/adaptation. Privateoutputfresh.
+
+7CPUtests passed including actualsliding/inversion/softmax path, constants/
+anisotropiclandmarks, corruptmaphashrejection and decisionrules. Actualrunner
+strictloadedpublishedweights, evalmode/no trainableparams. Deprecationwarnings
+fromMONAI1.5.1 indexing observed but realtestedPyTorch2.10 path passes;
+no dependencyupgrade made. Frozeninputs.json SHA47c5a537739d68e156a011c378865c4
+cdc718a8f9fb94699d6dffa1cbf23f2e9, fullfilegeometry/finiteness/hash verified.
+Source/Sbatchsyntaxchecked. Freshprivatehome /u/asanjeev/compression_probe_smalloutputs/
+difftumor_probe_v1. Plannedheld10min1GPU/2CPU/32G/no-requeue, timeout560s,
+max~.333334chargedh ifbilling2000, worstcampaign1.443056/2. Requireactual
+heldjobresource/chargefactorcheck before release; not claimed outcome yet.
