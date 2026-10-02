@@ -703,3 +703,146 @@ Decision ladder for Claude's review:
 The current signal-retention result motivates a question; it does not yet make
 this a top-conference idea. Novelty, a meaningful downstream consequence and
 controls that rule out simpler explanations remain separate requirements.
+
+## 17. Claude review round 3 (October 1, 2026)
+
+Research only. No GPU job, no environment change, no image upload, no PanTS
+change. Network reads were public metadata, fold JSONs, and the pickled
+headers of the ten PANORAMA checkpoints, streamed by HTTP range request and
+parsed with a restricted unpickler (no class import or code execution; tensor
+storage never loaded; no weights saved). Labels as in Section 12.
+
+### 17.1 PANORAMA checkpoint identity: resolved (Section 13 step 4 / 15 step 2)
+
+- [measured] Each of the 10 released checkpoints stores `init_args.fold`
+  equal to its directory: detection `fold_0..4/checkpoint_best_panorama.pth`
+  and pancreas `fold_0..4/checkpoint_final.pth`. All store
+  `dataset_json.numTraining = 2238`, the size of the fold-JSON union.
+- [measured] Selected detection epochs: 950, 950, 750, 950, 950 (fold 0-4).
+  Pancreas stage: epoch 1000 (final, no selection). This confirms
+  per-fold checkpoint selection exposure for detection; fold 2 picked 750.
+- [measured] The released fold JSON is **exactly** nnU-Net v2's default
+  split: KFold(5, shuffle=True, random_state=12345) over the sorted 2,238
+  study IDs reproduces all five validation sets (448/448/448/447/447, 100%
+  match; numpy reimplementation of the sklearn procedure). This is strong
+  evidence the checkpoints were trained on that split, and it explains why
+  the split is by study, not patient: the default ignores patient grouping.
+  The 11-patient exclusion in 12.3 therefore remains necessary.
+- Residual: init_args proves the fold index, not the split file used at
+  training time; the exact default-split reproduction makes a mismatch
+  unlikely but not impossible.
+- Method is reusable and cheap (~a few MB of range reads per checkpoint);
+  script kept locally (scratchpad `ckpt_meta4.py`), not committed.
+
+### 17.2 Feature extractor blocker (Section 16): a pure-Python option exists
+
+- [measured] PyRadiomics latest release is 3.1.0 (May 2023), wheels only for
+  cp37-cp39 x86_64/win/mac; nothing for cp312 or aarch64.
+  https://pypi.org/pypi/pyradiomics/json
+- [measured] MIRP 2.7.0 (Aug 2026) ships a `py3-none-any` wheel, requires
+  Python >= 3.11, and states IBSI compliance for image processing, features
+  and filters. No compilation, so it fits the aarch64 / Python 3.12.9 host in
+  an isolated target. https://pypi.org/pypi/mirp/json
+- Recommendation: use MIRP in an isolated venv/target (not the frozen shared
+  runtime), pin the version, run its IBSI phantom checks first, fix bin width
+  in HU and the same source ROI for all conditions. This replaces the
+  time-boxed PyRadiomics build attempt.
+
+### 17.3 The decisive cheap question: smoothing or a learned prior?
+
+Current evidence cannot separate "the VAE is just a blur" from "the VAE's
+learned prior removes faint structure it treats as noise". The single insert
+(37% retention vs 45% for a 2 mm Gaussian) cannot, because any blur can be
+made stronger. The discriminating property is **linearity**:
+
+- A linear shift-invariant blur G gives the same fractional retention at
+  every contrast and both signs: G(a*s) = a*G(s).
+- A nonlinear learned decoder can retain a faint signal less than a strong one
+  (contrast-dependent) and treat dark and bright inserts differently.
+
+CT physics precedent: iterative reconstruction's nonlinear regularization makes
+spatial resolution depend on contrast and noise, measured as a contrast-
+dependent task transfer function (TTF). The same measurement transfers
+directly to a generative VAE.
+- Yu et al., Med Phys 2015, contrast- and noise-dependent resolution of IR:
+  https://pmc.ncbi.nlm.nih.gov/articles/PMC4401802/
+- Duke (Samei group) task-based TTF across reconstruction algorithms:
+  https://fds.duke.edu/db/pratt/BME/faculty/samei/publications/269194
+
+**Proposed contrast-linearity test** [hypothesis; cost is an estimate]:
+- Same host (case 120, cached baseline reused), same prespecified location as
+  job 3290857, same 8 mm partial-volume insert, contrasts -10, -40, -80 HU
+  and +20 HU (the -20 HU point already exists). Four new whole-volume passes
+  in one job. One extra pass at -20 HU shifted by 2 voxels (half a 4x latent
+  cell) checks location/grid-phase sensitivity.
+- [estimate] Measured regular-partition passes were ~105 s forward within
+  126-142 s allocations (jobs 3290863/64). Five passes in one job ~ 10-12 min
+  allocation, about 0.2 charged GPU-h on regular partition (x2 if
+  interactive). Calibrate on the first pass; well inside the remaining
+  1.787778-hour ceiling, but still needs explicit approval.
+- Endpoint: ring-corrected fractional retention per contrast, plus the
+  half-cell shift. Run-to-run determinism reference: the split-4 control
+  showed 0 HU difference from the cached baseline, so FP32 repeat noise is
+  expected to be negligible; verify on one repeated pass if cheap.
+- **GO (learned-prior suppression, worth pursuing):** retention at -10 HU is
+  less than 0.7x retention at -80 HU, or +20 vs -20 HU retention differ by
+  more than 0.15, beyond the half-cell shift's spread. Prespecify both.
+- **NO-GO (generic smoothing):** retention flat across contrasts and sign
+  within the shift spread. Then the VAE behaves like a linear blur for this
+  construction; the paper lead weakens to "known VAE blur", and the effort
+  should move to the noise/depth or detector questions.
+- Limits: one host, one location, synthetic sphere, not PDAC; the result
+  explains mechanism, not clinical harm. Do not sweep contrasts further
+  until this outcome is known.
+
+Insertion realism improvements, cheap and CPU-only: build the insert by
+supersampling a sphere and averaging into voxels (partial-volume weights)
+instead of binary rasterization; the current 111-voxel mask is a coarse
+8 mm sphere on 4 mm slices. Image-domain insertion is accepted practice in CT
+low-contrast detectability work, though it ignores scanner blur on the insert.
+https://pmc.ncbi.nlm.nih.gov/articles/PMC7338819/
+
+### 17.4 CPU texture step: add the noise power spectrum
+
+For the paired CPU texture step on saved 005/120/165 reconstructions, add the
+3D noise power spectrum (NPS) in the fixed parenchymal ROIs (30.2 mL and
+60.9 mL already verified for 120/165), original vs reconstruction. NPS is the
+standard CT physics description of texture and directly shows which spatial
+frequencies the VAE removes. It also gives the defined, auditable rule for a
+noise-power-matched Gaussian control that Section 13/NEXT_STEPS asks for
+(match integrated or band-limited NPS on separate calibration regions).
+Caveat: ROI NPS on patient anatomy mixes anatomy and noise; report it as a
+descriptive texture spectrum, not a pure noise measurement.
+
+### 17.5 Novelty update for the sub-visual direction (12.9)
+
+- [measured, literature] Radiomic stability under deep-learning CT
+  reconstruction and denoising is well studied (e.g. DLIR vs ASIR-V feature
+  reproducibility; generative denoisers improving radiomic concordance), and a
+  Cycle-GAN low-dose study reported that classifiers on radiomics from
+  GAN-processed images performed worse.
+  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12618174/ ,
+  https://arxiv.org/abs/2109.07787 ,
+  https://www.nature.com/articles/s41598-023-36712-1
+- So "generative processing changes radiomic features" is NOT novel. The
+  remaining, narrower question: do latent foundation-model autoencoders used
+  for 3D CT synthesis keep the pancreatic early-detection signal, measured
+  with a contrast-dependent transfer function and an independent detector.
+- [measured, press] BMJ describes REDMOD as detecting "very early, normally
+  invisible tissue changes" with automated whole-pancreas segmentation and
+  radiomics (test AUC 0.82, sensitivity 73.0%, specificity 81.1%). Full Gut
+  paper not retrieved; the "sub-visual" wording is the authors'/publisher's,
+  not independently verified (consistent with Codex's caution in Section 13).
+  https://bmjgroup.com/ai-model-detects-very-early-normally-invisible-tissue-changes-of-pancreatic-cancer/
+- Not yet checked: whether the same group's earlier prediagnostic radiomics
+  papers publish a reproducible feature list that could replace a generic set.
+
+### 17.6 Recommended order (resource-minimal)
+
+1. CPU: MIRP isolated setup + IBSI phantom check; paired first-order,
+   texture and NPS on saved 005/120/165 reconstructions (no GPU).
+2. CPU: PANORAMA per-case download feasibility (checkpoint identity is done).
+3. GPU, one small approved job: the 17.3 contrast-linearity test. This is the
+   single result most likely to change the next decision.
+4. Only if 17.3 is GO: one real-lesion detector calibration case (Tier B),
+   with the per-fold checkpoints and 11-patient exclusion.
