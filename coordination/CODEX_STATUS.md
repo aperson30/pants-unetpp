@@ -945,3 +945,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - No automatic retries. Pending/running is not a quality result. PanTS test
   evaluation and shared environments untouched. Completion and actual charged
   time still need checking; new budget is separate from prior ~0.17056 usage.
+
+## 2026-10-01 — Small-case probe complete; measured attenuation, no recall claim
+
+- Job3290494 COMPLETED, ExitCode0:0; one complete case120 reconstruction.
+  Elapsed162s => .045 physical GPU-hours / ~.090 charged-equivalent hours
+  under interactive2x rule, below NEW.25 cap. No retry. Both pilots combined
+  ~.13028 physical / ~.26056 allocation-equivalent hours across separate caps.
+- Tumor454voxels/.849mL: preprocessing tumor/boundary HU MAE zero.
+  Reconstruction tumor HU MAE18.27, boundary-band MAE20.08; signed contrast
+  -65.55->-58.58HU (~10.63% magnitude attenuation), signed CNR
+  -1.1691->-.9785 (~16.30% magnitude reduction). Ring is surrounding tissue,
+  not necessarily healthy pancreas. These are NOT detection/clinical metrics.
+- Forward/copy107.89s; CUDApeak~39.09GiB; PythonRSSpeak~35.89GiB. Downloaded
+  diagnostics/JSON/PNG only into research/compression_probe/small_results_20261001.
+  Viewed fixed-window PNG: visibly smoother, no erasure or fidelity verdict.
+- Selected by GT size before outcomes. Single case, possible pretraining
+  overlap, no cross-case size-effect claim. Next sensible gate: more cases and
+  independent/blinded lesion assessment before proposing expensive training.
+  No further submission; PanTS evaluation remains untouched.

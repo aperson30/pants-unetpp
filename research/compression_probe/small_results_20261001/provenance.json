@@ -1,0 +1,35 @@
+{
+  "job": "3290494",
+  "torch": "2.10.0+cu129",
+  "monai": "1.5.1",
+  "gpu": "NVIDIA GH200 120GB",
+  "precision": "fp32 including normalization; norm_float16=False",
+  "posterior": "mean only, sampled posterior not tested",
+  "geometry": "RAS reorientation only, original spacing, center padding to multiple of 4",
+  "decoder": "whole volume, num_splits=1, no tiles",
+  "manifest": {
+    "model": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/autoencoder_v1.pt",
+    "model_sha256": "1f8a7a056d0ebc00486edc43c26768bf1c12eaa6df9dd172e34598003be95eb3",
+    "model_revision": "430f2c82a96dce44b455de5876d43a5a9f753cb2",
+    "data_repo": "Angelou0516/msd-pancreas",
+    "data_revision": "327dd551a9e51295c34e14f311d8330ef44b6cac",
+    "tumor_label": 2,
+    "selection": "smallest positive total GT tumor burden among first 120 lexicographic masks; <=1mL",
+    "cases": [
+      {
+        "case": "120",
+        "image": "/projects/bdyo/asanjeev/compression_probe_20261001/small_followup_120/pancreas_120.nii.gz",
+        "image_sha256": "60301cafdd54fe66fb7517eb19eac063c1caa0e5ff106f99fc68fea26ca644c8",
+        "label": "/projects/bdyo/asanjeev/compression_probe_20261001/small_inventory_third48/pancreas_120.nii.gz",
+        "label_sha256": "60ddf8533b024353ea2b06a4eee66700f07d20c53ec0c5300aba9879714ba34d",
+        "shape": [
+          512,
+          512,
+          104
+        ],
+        "tumor_voxels": 454,
+        "tumor_mm3": 848.6181456596692
+      }
+    ]
+  }
+}
