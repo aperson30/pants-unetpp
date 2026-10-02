@@ -1657,3 +1657,25 @@ producer/labelmap/weightsstrictload/overlap before GPU. No shortcutGTmask,
 newtraining or claimclinicalindependence. INDEPENDENT_JUDGE_REVIEW_20261002.md.
 No independentweights downloaded or newGPUqueued;47320183untouched,
 large100259blocked/unreplaced. Prioritizeindependentpreflight overmoreseeds.
+
+## 50. DiffTumor independent-judge CPU gate passed; end-to-end gate still open
+
+2026-10-02 16:26 PDT: pinned public U-Net weight (19.26 MB) downloaded into
+private home, exact public SHA256/size verified. PyTorch2.10/MONAI1.5.1 exact
+63-key strict load, 4.807M parameters, finite CPU32cube forward passed with
+CUDA hidden/one thread/55s timeout. First restricted load stopped on NumPy
+metadata; statically inspected minimal allowlist fixed that without unsafe
+pickle. Script + scalar JSON preserved; no weights/images in git.
+GitHub commit ad45fb4e8bbec94105938e69deaca62fd6812c0c; HF revision
+089ba0f3f94a7858603a55106791d7d977d7bc0b. GitHub CC BY-NC-ND versus HF
+apache-2.0 metadata discrepancy recorded, not treated as resolved.
+
+120 published MSD-style pancreas masks do not generate masks for our cases.
+Scoped source inspection has not identified pinned organ-mask producer.
+Checkpoint header has no fold/training-patient manifest; patient independence
+unverified. Full transform/native-grid tests still pending. Do NOT substitute
+GT organs or claim a raw-head diagnostic is official postprocessed detection.
+Next: resolve producer or explicitly define full-context raw-score protocol,
+then geometry/control tests and bounded scheduled runtime. No GPU submitted,
+campaign remains1.109722/2 charge-equivalent,47320183 untouched. Details in
+INDEPENDENT_JUDGE_REVIEW_20261002.md; no new outcome supports an S-tier claim.

@@ -1578,3 +1578,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   shortcut/weightsdownload/GPUlaunch. Reviewdoc written. Scalarresults/audit/
   protocol/handoff49 committed; imagesprivate. No moreGPU/no automaticretry,
   47320183untouched,largercaseblocked. Nextindependentpreflight,not moreseeds.
+
+### 2026-10-02 16:26 PDT — Independent judge CPU preflight, no GPU launch
+
+- DiffTumor public pancreatic U-Net pinned/downloaded19.26MB to privatehome;
+  publicSHA/bytes verified.63keys strictload/4.807Mparams/finiteCPU32cube passed,
+  torch2.10/MONAI1.5.1,CUDAhidden/1thread/55stimeout. Initial restrictedload
+  rejectedNumPymetadata; staticinspection+narrowallowlist only, no unsafepickle.
+- Published120MSD-stylepancreasmasks aren't a producerforPANORAMAcases. Scoped
+  sourceaudit hasn't found pinnedproducer; checkpointfold/overlapunverified.
+  GitHubCCBY-NC-ND/HFapachemetadata discrepancy documented. Nativegrid/full
+  transformregressions pending; raw-head alternative would be diagnostic,
+  not officialpostprocessed/clinicaldetector. NoGTmaskshortcut.
+- Script/scalarresult/review/handoff50 preserved; originalweightsprivate.
+  NoGPUspent/submitted, campaignestimate1.109722/2, posteddebitunknown,
+  protected47320183untouched. Architecturepass does NOT establish quality.

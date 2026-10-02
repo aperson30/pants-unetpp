@@ -1,0 +1,35 @@
+{
+  "checkpoint_revision": "089ba0f3f94a7858603a55106791d7d977d7bc0b",
+  "checkpoint_sha256": "c3d7ca09aa57ce20e3537c5dfae611b4759bbd000f626fcb2d4bb180b1090d5d",
+  "bytes": 19260008,
+  "torch": "2.10.0+cu129",
+  "monai": "1.5.1",
+  "checkpoint_fields": [
+    "best_acc",
+    "epoch",
+    "state_dict"
+  ],
+  "state_tensors": 63,
+  "parameters": 4807482,
+  "unsafe_globals": [
+    "numpy.core.multiarray.scalar",
+    "numpy.dtype"
+  ],
+  "strict_load": true,
+  "device": "cpu",
+  "tiny_forward_shape": [
+    1,
+    3,
+    32,
+    32,
+    32
+  ],
+  "finite_output": true,
+  "clinical_inference": false,
+  "gpu_hours": 0,
+  "end_to_end_ready": false,
+  "blockers": [
+    "Organ mask producer and checkpoint fold/provenance unresolved",
+    "Full transform/native-grid regression not yet implemented"
+  ]
+}

@@ -36,5 +36,56 @@ with both native/reconstructed controls and frozen tumor-specific metrics.
 Do not silently substitute GT organs, a reducedcrop or unverified mask to make
 the pipeline easier. OneGT-assisted score would not be end-to-end detection.
 
-No weights downloaded, no GPU spent, no independentjudge score obtained here.
-PANORAMA fold4 currently remains the ONLY actually executed tumorjudge.
+## CPU preflight completed — 2026-10-02 16:26 PDT
+
+Pinned GitHub source: `ad45fb4e8bbec94105938e69deaca62fd6812c0c`.
+Pinned Hugging Face revision: `089ba0f3f94a7858603a55106791d7d977d7bc0b`.
+The public model API reports the pancreatic U-Net file as 19,260,008 bytes,
+SHA256 `c3d7ca09aa57ce20e3537c5dfae611b4759bbd000f626fcb2d4bb180b1090d5d`.
+Downloaded only that file into private home staging (not project quota),
+verified exact bytes/hash before loading. No patient images downloaded here.
+
+`difftumor_cpu_preflight.py` passed on PyTorch 2.10.0+cu129 / MONAI 1.5.1:
+63 state tensors, 4,807,482 parameters, exact key match and strict=True load
+into the published architecture. One-thread CPU-only 32-cube forward produced
+finite `[1,3,32,32,32]` outputs. CUDA hidden; execution timeout 55 seconds.
+This is architecture compatibility, NOT accuracy or full-volume runtime.
+Result: `difftumor_cpu_preflight_result_20261002.json`.
+
+First restricted load correctly stopped on legacy NumPy scalar/dtype metadata.
+After static inspection, allowed only those specific types and float32/float64
+dtype classes; retained weights_only=True. No arbitrary-global or unsafe-pickle
+fallback. Checkpoint fields are only best_acc, epoch, state_dict: no fold or
+patient-training manifest, so checkpoint-fold identity remains unverified.
+
+Important source discrepancy: GitHub LICENSE identifies CC BY-NC-ND 4.0;
+Hugging Face card metadata says apache-2.0. Do not assume one blanket permissive
+license for both code and weights, or claim redistribution rights resolved.
+Normal academic investigation here does not establish permission to distribute
+derived artifacts. The original weights remain private, not committed.
+Sources:
+https://github.com/MrGiovanni/DiffTumor/blob/ad45fb4e8bbec94105938e69deaca62fd6812c0c/LICENSE
+https://huggingface.co/api/models/MrGiovanni/DiffTumor?blobs=true
+
+The pinned GitHub tree contains 120 precomputed pancreas NIfTI masks in
+`STEP3.SegmentationModel/organ_pseudo_swin_new/pancreas/`, with MSD-style
+`pancreas_*.nii.gz` names. These are NOT a mask producer for our PANORAMA cases.
+Targeted inspection of README, validation.py, main.py, monai_trainer.py,
+hg.sh, postprocess.py, TumorGeneration/utils.py and INSTALL/FAQ did not identify
+a pinned mask-generating checkpoint or procedure. This is a scoped search,
+not proof no producer exists anywhere. No mask downloaded or substituted.
+
+Remaining gates: identify organ-mask producer (or explicitly define a different
+raw-head diagnostic), verify full transforms and native-grid inversion, and
+document training overlap uncertainty. A raw full-volume tumor probability
+comparison could test whether a separately trained network also responds to
+reconstruction, without relying on the external mask. But that would NOT be
+the official postprocessed DiffTumor detector, clinical detection, or its
+published benchmark result. Keep this distinction explicit before launch.
+Prefer matching the same native/mean/sample controls over training a new judge;
+do not fit or choose a judge based on which supports our hypothesis.
+
+No new GPU job, no GPU hours, no independent tumor score obtained here.
+Campaign estimate remains 1.109722/2 charged GPU-hours (posted debit unknown).
+PANORAMA fold4 remains the ONLY actually executed tumorjudge. Protected
+evaluation job 47320183 untouched. Full second-judge inference is not ready.
