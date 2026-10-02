@@ -1149,3 +1149,16 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - UpdatedCONTROL_ROUNDandhandoffwithcompleteevidence/plans. NextCPUtexture
   onalready-savedreconstructions,PANORAMAfold/dataaudit,thenboundedcalibration.
   NoPanTSjob/runtime/image-egresschanges. Noall-optimizations-exhaustedclaim.
+
+### 2026-10-01 23:31 -07:00 — resource-minimal idea-screening gate
+
+- User reaffirmed idea selection, not budget consumption. Added handoff section16
+  with bounded CPU setup, saved-volume reuse and explicit pre-GPU decision gate.
+- Read-only DeltaAI package metadata check: PyRadiomics3.0.1 has no wheel matching
+  aarch64/Python3.12; host NumPy2.5.3. No install, base-runtime change or new GPU
+  job. Source-build feasibility still untested; cap active setup at30minutes.
+- Generic texture drift is not a strong paper by itself. Compare simpler bias/
+  smoothing explanations, then require trustworthy held-out detector provenance
+  before a downstream test. Negative tiny pilots never establish clinical safety.
+- New-round expenditure unchanged .212222 charged GPU-hours; remainder1.787778
+  is a ceiling, not target. PanTS evaluation and private image/key files untouched.

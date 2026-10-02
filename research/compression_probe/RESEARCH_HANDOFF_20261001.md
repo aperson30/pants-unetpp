@@ -666,3 +666,40 @@ lesion detector test or one new prespecified insertion host. Not a40caseAUC
 experiment within an unmeasured cost. AskClaude to challenge controls,endpoint
 definitions,rasterization/location effects and what truly requires additional
 GPU inference. No blanket claim that the stack is maximally optimized.
+
+## 16. Idea selection first, resource-minimal screening
+
+User reiterated the objective: find the strongest research idea using the least
+resources, not maximize experiments or spend the remaining authorized budget.
+The remaining 1.787778 charged GPU-hours is a ceiling, not a spending target.
+No new GPU job was submitted during this follow-up.
+
+Next screen is CPU-only, reusing the existing saved posterior-mean volumes.
+Time-box isolated extractor setup to 30 minutes of active engineering; if it
+does not pass identity/phantom checks, record the blocker and change route rather
+than improvise an unvalidated feature implementation. Read-only inspection found
+Python 3.12.9 / NumPy 2.5.3 on the aarch64 host. Official PyPI metadata for pinned
+PyRadiomics 3.0.1 has only Python 3.5-3.7 x86 wheels and a source archive: no
+matching prebuilt wheel. No dependency was installed and no base environment
+was changed. This is a setup risk, not proof that compilation cannot work.
+Source: https://pypi.org/pypi/pyradiomics/3.0.1/json
+
+Decision ladder for Claude's review:
+
+1. Measure a small, fixed set of paired features on already-saved cases, with
+   identical source masks/grids/binning and separate HU-bias summaries. This is
+   descriptive feasibility, not cancer detection, AUC or REDMOD replication.
+2. Ask whether an observation is more informative than generic smoothing or
+   intensity bias. If all observations are readily explained by those controls,
+   deprioritize this pilot as a paper lead; do NOT conclude clinical safety.
+3. In parallel, resolve an independent detector's actual checkpoint folds,
+   patient exclusions and per-case data access using metadata first. A detector
+   that saw the cases is not a cheap decisive test just because it is available.
+4. Before another GPU allocation, specify the competing explanations, endpoint,
+   controls, charged-hour hard cap and what result would change our next action.
+   Prefer one bounded discriminating test over more parameter sweeps or broad
+   downloads. No fresh training until evidence supports a specific mechanism.
+
+The current signal-retention result motivates a question; it does not yet make
+this a top-conference idea. Novelty, a meaningful downstream consequence and
+controls that rule out simpler explanations remain separate requirements.
