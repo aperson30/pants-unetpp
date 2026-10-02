@@ -703,3 +703,27 @@ Decision ladder for Claude's review:
 The current signal-retention result motivates a question; it does not yet make
 this a top-conference idea. Novelty, a meaningful downstream consequence and
 controls that rule out simpler explanations remain separate requirements.
+
+## 17. CPU texture screen completed; generic texture story demoted
+
+See TEXTURE_SCREEN_20261001.md and reproducible texture_screen.py. Isolated
+Python3.12 install failed cleanly; Python3.11 module/source build succeeded
+without training-environment changes. Geometry/identity/analytical/shift checks
+passed, then all3existing reconstruction pairs completed under a180s CPU bound.
+No new GPU job/charge. Fixed sourceROIs,25HU bins,native grid,8features;
+no images or reader keys published. This is not REDMOD or early-cancerAUC.
+
+Parenchymal mean shifts005/120/165:-39.90/-8.96/-27.20HU. GLCMcontrast changes
+-31.5/-24.4/-26.0%;1mm Gaussian references change it more:-58.7/-42.4/-65.2%.
+Entropy and other selected textures likewise change less underVAE than chosen
+blur controls. Secondary mean-bias removal leaves similar texture changes.
+Case005variance increases underVAE, unlike blur: no full Gaussian-equivalence
+claim. Controls are exploratory/notnoise-matched; this cannot establish safety.
+
+Decision:deprioritize generictexture-drift as a standalonepaperlead. Do not
+expand features/cohort just to accumulate results. Remaining potentially useful
+question is task-specificsignalpreservation, gated by trustworthy judge/data
+provenance. OfficialPANORAMA source rechecked:two-stage5foldensemble and
+validationAUROC/AP-selected detectioncheckpoints;outoffold alone does not
+eliminate selectionexposure. Actualweightfoldidentity/dataaccess still open.
+No detector download/inference ornewtraining. RemainingNEWcap1.787778chargedh.

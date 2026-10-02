@@ -1162,3 +1162,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   before a downstream test. Negative tiny pilots never establish clinical safety.
 - New-round expenditure unchanged .212222 charged GPU-hours; remainder1.787778
   is a ceiling, not target. PanTS evaluation and private image/key files untouched.
+
+### 2026-10-01 23:39 -07:00 — CPU texture screen complete, no GPU spend
+
+- Python3.12 source install failed on removed SafeConfigParser; separate provided
+  Python3.11 environment built pinned PyRadiomics3.0.1/NumPy1.26.4 successfully.
+  No shared training runtime changes. Added texture_screen.py with identity,
+  analytical mean/variance, whole-bin shift and RAS/LPS coordinate contracts;
+  all passed remotely. Three existing local ROI tests pass too.
+- Existing005/120/165 mean reconstructions analyzed under detached180s/oneCPU
+  bound; allJSONs plus ALL_TEXTURE_SCREENS_COMPLETE verified. FixedROIs/native
+  grids/25HU bins/8features, secondarybias removal, illustrative1/2mm blur.
+- VAE parenchymalHU shifts -39.90/-8.96/-27.20;contrast -31.5/-24.4/-26.0%,
+  smaller selectedtexture changes than blur references. Bias removal does not
+  remove texture differences;005variance increases unlikeblur. Notnoise-matched,
+  notdetection/REDMOD/AUC/safety. Demote generictexture-drift paperlead.
+- Next is provenance-gated downstream task test, notmorefeature sweeps/training.
+  RecheckedPANORAMAofficial two-stageensemble/checkpointselection caveat. No
+  weights/data download or detector inference. Raw metrics/logs remain remote;
+  source/report/handoff only committed. Newroundcharge unchanged .212222h.
