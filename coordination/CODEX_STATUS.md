@@ -964,3 +964,24 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   overlap, no cross-case size-effect claim. Next sensible gate: more cases and
   independent/blinded lesion assessment before proposing expensive training.
   No further submission; PanTS evaluation remains untouched.
+
+## 2026-10-01 — Second size-ranked case; sensitivity audit and bounded launch
+
+- User requested continuation; using remainder of approved NEW.25 cap.
+  Case165 is second-smallest total GT burden among same120 masks, 445voxels /
+  1060.9616mm3 (1.061mL, NOT <=1mL). Chosen by size before its own outcome.
+- First CT download failed expected-hash check: received10,292,481 bytes vs
+  expected25,525,318; preserved incomplete evidence, spent zero GPU hours.
+  A separate bounded CPU attempt succeeded with pinned hash/grid checks;
+  unchanged model CPU encode/decode preflight passed. No source substitution.
+- Job3290519 submitted held; verified oneGH200/8CPU/96G/billing2000, four-minute
+  limit, Requeue0, stored-script parity; then released. Maxadditional charge
+  .13334 plus priorcase120 .09 = .22334 <= NEW.25 cap. No automatic retry.
+- Added post-hoc CPU sensitivity diagnostic; nine local tests pass. Case120:
+  all-tissue rings retain87.25%,89.37%,92.10% contrast for1-3/2-5/3-7mm;
+  GT-pancreas-only rings retain86.35%,85.24%,86.11%. Slice retention differs
+  (89.15%,85.83%,101.48%). Mean lesion shift-1.96HU vs ring-8.93HU for2-5mm;
+  attenuation reflects surrounding intensity shifts too, not simply erasure.
+  Post-hoc descriptive measurements, not independent detection evidence.
+- No changes to frozen GPU runner/base environments/PanTS evaluation. Job
+  completion/results/cost still need checking before any second-case claim.

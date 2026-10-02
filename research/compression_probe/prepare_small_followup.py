@@ -16,6 +16,8 @@ from prepare_msd import DATA_REPO, DATA_REV, MODEL_HASH, MODEL_REV, fetch, sha
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--root', type=Path, required=True)
+    parser.add_argument('--rank', type=int, choices=(0, 1), default=0)
+    parser.add_argument('--attempt', type=int, choices=(1, 2), default=1)
     args = parser.parse_args()
     root = args.root
     rows = []
@@ -29,12 +31,15 @@ def main():
         raise RuntimeError('Expected 120 unique prespecified masks')
     positive = sorted((r for r in rows if r['tumor_voxels'] > 0),
                       key=lambda r: (r['tumor_mm3'], r['mask']))
-    selected = positive[0]
-    if selected['tumor_mm3'] > 1000:
-        raise RuntimeError('No small candidate under prespecified cutoff')
+    selected = positive[args.rank]
+    cutoff = 1000 if args.rank == 0 else 1500
+    if selected['tumor_mm3'] > cutoff:
+        raise RuntimeError('Candidate exceeds rank-specific exploratory size bound')
     if shutil.disk_usage(root).free < 1024**3:
         raise RuntimeError('Need 1GiB headroom')
-    output = root / 'small_followup_120'
+    output = root / ('small_followup_120' if args.rank == 0 else 'small_followup_rank1')
+    if args.attempt != 1:
+        output = output.with_name(output.name + f'_attempt{args.attempt}')
     output.mkdir(exist_ok=False)
     with urllib.request.urlopen(
             f'https://huggingface.co/api/datasets/{DATA_REPO}/revision/{DATA_REV}?blobs=true',
@@ -76,7 +81,8 @@ def main():
                tumor_mm3=selected['tumor_mm3'])
     manifest = dict(model=str(model), model_sha256=MODEL_HASH, model_revision=MODEL_REV,
                     data_repo=DATA_REPO, data_revision=DATA_REV, tumor_label=2,
-                    selection='smallest positive total GT tumor burden among first 120 lexicographic masks; <=1mL',
+                    selection=f'positive total GT tumor burden rank {args.rank + 1} among first 120 lexicographic masks; chosen before own reconstruction',
+                    rank=args.rank, exploratory_size_bound_mm3=cutoff,
                     cases=[row])
     with (output / 'inputs_manifest.json').open('x') as stream:
         json.dump(manifest, stream, indent=2, allow_nan=False)
