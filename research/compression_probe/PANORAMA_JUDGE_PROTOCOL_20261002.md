@@ -181,3 +181,31 @@ Bounded checkpoint acquisition and matching archive metadata; compatible pinned
 nnU-Net runtime supporting both plan schemas; actual model-load/preprocessor
 checks; runner integration of guards and provenance; priced one-case inference.
 No weights downloaded, GPU job submitted, or protected evaluation modified.
+
+## Archive correspondence and runtime parsing verified; paused before weights
+
+Read only plans/dataset JSONs directly from both official Zenodo11160381
+archives using bounded HTTP ranges: 3567 bytes stage1, 4124 stage2. Parsed
+JSONs match pinned repository exactly. A separate stage1 directory-only check
+used2163 bytes. Thus correspondence now verified, not just presumed.
+
+Live authenticated DeltaAI connection worked. Existing environment is
+PyTorch2.10.0+cu129/nnUNet2.8.1. Read its ConfigurationManager conversion code;
+ran actual PlansManager/label-manager parsing on both published plans in memory.
+Legacy stage1 converts successfully to PlainConvUNet, five stages with features
+32/64/128/256/320 and two heads. Modern stage2 resolves six stages with features
+32/64/128/256/320/320 and seven heads. Required architecture/import symbols
+resolve. NO network instantiated, checkpoint loaded, CT preprocessed or model
+inference performed. Shared training environment unchanged.
+
+Prepared fetch_judge_fold4.py, fixed official URLs and fold4 member allowlist.
+No pickle execution; streams only selected members, verifies ZIP CRC and SHA256,
+limits size/bytes/requests/time, refuses overwrite and retains failed partials.
+Three transfer tests and five existing range tests pass. RangeReader default
+32-request limit preserved; explicitly bounded up-to512 option supports large
+member transport. Transfer helper has NOT been launched; weights NOT downloaded.
+Expected total two checkpoints378,590,434 uncompressed bytes (~361MiB).
+
+User requested pause here. Next: review/launch bounded transfer, then isolated
+actual network-load/preprocessor tests; GPU inference only after those pass.
+No new GPU spending or protected evaluation modifications.

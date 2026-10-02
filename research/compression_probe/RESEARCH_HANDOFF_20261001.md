@@ -1316,3 +1316,17 @@ architecture fields. Must test runtime compatibility and compare archived plans,
 not assume current nnUNet loads both. More in PANORAMA_JUDGE_PROTOCOL_20261002.md.
 No GPU spending/weightsdownload/eval change. Next bounded weight/metadata access
 and isolated actual-load checks before any priced tiny real-lesion calibration.
+
+## 31. User-requested pause before checkpoint transport
+
+Authorized normal public downloads/read-only cluster access resumed. DeltaAI
+socket works; PyTorch2.10+cu129/nnUNet2.8.1 verified. Both archive JSON pairs
+match pinned repo (3567/4124 fetchedbytes). Actual runtime converts legacy
+stage1 plans and resolves stage2 plans/classes/imports; heads2/7. No network
+instantiation/checkpointload/preprocessing/inference yet.
+
+Prepared fixed-source fold4 transfer helper: bounded streaming, CRC/hash,
+no overwrite/pickle execution/retries, watchdog. Three new+five existing range
+tests pass. NOT launched: no weights downloaded or new GPU job. User asked to
+pause; next restart at transfer review/launch, then actual-load checks.
+Protected PanTS evaluation untouched; .448611of2 screening estimate unchanged.

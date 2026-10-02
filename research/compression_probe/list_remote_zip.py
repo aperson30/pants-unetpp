@@ -13,7 +13,11 @@ import zipfile
 
 
 class RangeReader(io.RawIOBase):
-    def __init__(self, url, opener=urllib.request.urlopen, byte_limit=8*1024**2):
+    def __init__(self, url, opener=urllib.request.urlopen, byte_limit=8*1024**2,
+                 max_calls=32):
+        if not isinstance(max_calls, int) or not 1 <= max_calls <= 512:
+            raise ValueError('Invalid bounded request limit')
+        self.max_calls = max_calls
         self.url, self.opener, self.byte_limit = url, opener, byte_limit
         self.used, self.calls, self.position, self.total = 0, 0, 0, None
         self.etag = None
@@ -25,7 +29,7 @@ class RangeReader(io.RawIOBase):
         if remaining <= 0:
             raise TimeoutError('Range probe total deadline exceeded')
         # Reserve the extra byte used to detect an oversized server response.
-        if count > 4*1024**2 or self.used+count+1 > self.byte_limit or self.calls >= 32:
+        if count > 4*1024**2 or self.used+count+1 > self.byte_limit or self.calls >= self.max_calls:
             raise ValueError('Range metadata budget exceeded')
         request = urllib.request.Request(self.url, headers={
             'Range': f'bytes={start}-{start+count-1}', 'Accept-Encoding': 'identity'})

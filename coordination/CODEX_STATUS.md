@@ -1341,3 +1341,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Archive JSON correspondence/history package parity not yet proven.
 - No weights/GPU jobs or protected evaluation changes. Screening estimate
   .448611of2 unchanged. Protocol/handoff30 record measured scope and open gates.
+
+### 2026-10-02 — Paused at user request, before model-weight transfer
+
+- Verified live DeltaAI read-only access and actual PlansManager compatibility
+  for both stages under nnUNet2.8.1/PyTorch2.10. Archive JSONs exactly match
+  pinned repo via tiny bounded range reads. No networks/weights loaded.
+- Prepared fixed-source fold4 transfer helper with CRC/hash/size/time/overwrite
+  guards; three tests pass plus five existing range tests. NOT launched.
+- User requested pause. No checkpoint download/GPU submission/CT upload or
+  protected evaluation changes. Next transfer review/launch then actual-load
+  checks. Screening estimate .448611of2 unchanged; handoff31 records state.
