@@ -1575,3 +1575,18 @@ False; possible algorithm/history confound, not proven rootcause. Futurelocal
 code saves failure diagnostics before raising, not yet GPU-validated.
 Need runtime/repeatability audit before further inference. See controlprotocol
 and fixed_crop_failure_3296871.json. Protected47320183untouched.
+
+## 45. Same-input repeatability diagnostic released
+
+3296939 released after four CPU contract/geometry tests and held/source/resource
+checks.1GPU/2CPU/32G/3min/no-requeue,150s process timeout, max0.1chargedh;
+campaignworst0.976389/2, currentestimate0.876389, posteddebitunverified.
+Same100430 nativeimage/window x two repeats under publisherdefaults and two
+under strictdeterministicpolicy. No VAE/training/newpatient/scientificarm.
+Record backendflags before/after, global/tumor drift, historicalmap drift,
+policy drift. SharedCUBLAS_WORKSPACE_CONFIG and seededprocess mean default
+arm not exacthistoricenvironment. Historical1e-4gateunchanged; no retrospective
+pass claim. Unsupported deterministic ops preservefailure,no silentfallback.
+See JUDGE_REPEATABILITY_20261002.md. Need result/accounting before claims;
+oneprocess study doesn't establish crossprocess/device repeatability.
+47320183untouched,no automaticretry.

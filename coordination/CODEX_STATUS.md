@@ -1508,3 +1508,16 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   not GPUvalidated/resubmitted. Scalarfailureaudit committed, imagesprivate.
   No GPUjobrunning/automaticretry. Need runtime/repeatability audit next,
   not more patients/remedytraining.47320183untouched.
+
+### 2026-10-02 17:28 cluster time — Same-input repeatability probe released
+
+-3296939 lastPENDING after4CPUtests/source/heldchecks.1GPU/2CPU/32G/3min,
+  no-requeue,150s timeout, max0.1charge-equivalenth; worstcampaign0.976389/2.
+- Same native100430/window repeated twice under defaults, twice strict
+  deterministicpolicy; measuredhistorical/policy/tumor/globaldrift. No VAE,
+  training/newpatient or relaxedhistorical1e-4gate. CPU/sourceaudit confirms
+  predictorbenchmarkoverride and AMP. OfficialPyTorch notes support plausible
+  algorithmselectionconfound, NOT diagnosedcause. Loggingbefore/afterflags.
+- Strictopsraise,no warn-onlyfallback; partialfailurepreserved. Fourcalls in
+  oneprocess cannot prove crossprocess/device reproducibility. No47320183
+  change/automaticretry. Protocol/code/handoff45 committed for Claude.
