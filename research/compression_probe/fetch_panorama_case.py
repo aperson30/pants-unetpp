@@ -32,6 +32,8 @@ def main():
     parser.add_argument('--eligibility', type=Path, required=True)
     parser.add_argument('--study', required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--max-member-mb', type=int, choices=(30, 60), default=30,
+                        help='Explicit transport cap; 60 is only for locked replication cases')
     parser.add_argument('--verify-existing', action='store_true',
                         help='Verify a completed transfer against fresh ZIP CRC; never overwrite inputs')
     args = parser.parse_args()
@@ -41,8 +43,8 @@ def main():
         raise ValueError('Require one audited provisional candidate')
     case = selected[0]
     expected = case['archive']
-    if expected['compression'] != 0 or expected['encrypted'] or expected['compressed'] > 30_000_000:
-        raise ValueError('This transport test only permits stored, unencrypted members under 30 MB')
+    if expected['compression'] != 0 or expected['encrypted'] or expected['compressed'] > args.max_member_mb*1_000_000:
+        raise ValueError('Require stored, unencrypted member within explicit transport cap')
     if args.verify_existing:
         if not args.output.is_dir() or (args.output/'completion.json').exists():
             raise ValueError('Require an incomplete existing transport directory')
@@ -51,7 +53,8 @@ def main():
     if shutil.disk_usage(args.output).free < 1_000_000_000:
         raise ValueError('Insufficient local working space')
     reader = RangeReader('https://zenodo.org/records/10998332/files/batch_1.zip?download=1',
-                         byte_limit=40*1024**2)
+                         byte_limit=(args.max_member_mb+10)*1024**2, max_calls=128,
+                         total_timeout=300)
     partial = args.output/'image.nii.gz.partial'
     digest = hashlib.sha256()
     with zipfile.ZipFile(reader) as archive:

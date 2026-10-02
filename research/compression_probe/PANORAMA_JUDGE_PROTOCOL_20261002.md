@@ -339,3 +339,12 @@ CPU regression passes both checkpoints and installed prediction weight loop
 (neural sliding-window calculation mocked), plus four geometry tests. No
 clinical results yet. Replacement3295395 released PENDING with identical
 20min/no-requeue cap, v2 private folder; campaign worst-case1.181389/2 chargedh.
+
+Completion update:3295395 COMPLETED0:0,126s,0.070charge-equivalenth. Native and
+clipped scores identical; mean GT PDAC0.171565 to0.023676 after reconstruction,
+all GT retained by crop/mask. No recall or irreversible-loss claim. Scalar
+JSON preserved. Locked replication plan in JUDGE_REPLICATION_PLAN_20261002.md;
+3295549 released PENDING, same3arms on two additional histopathology patients.
+Resource cap explicit56M including padding and >=110GBfreeGPU, no geometry
+changes. Selection is size-biased and before predictions. Worst-case campaign
+1.251389/2chargedh. Completion/accounting still required for replication.

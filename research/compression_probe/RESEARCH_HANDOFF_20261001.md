@@ -1433,3 +1433,40 @@ One GPU/32GB/20min interactive/no requeue, frozen SHA and bash syntax pass.
 Campaign estimate now0.514722; worst-case with replacement1.181389/2 chargedh.
 No threshold/model/geometry changes or protected evaluation changes. No retries
 automatically. Next read3295395 logs, completion and actual accounting.
+
+## 38. Real three-arm pilot completed; locked two-patient replication queued
+
+3295395 COMPLETED0:0,126s,billing2000, completion.json verified. Cost0.070
+charge-equivalentGPUh, campaign cumulative estimate0.584722/2. Scalar JSON
+paired_judge_result_3295395.json preserved; private images/maps stay remote.
+Native/control mean tumor probability0.1715648, reconstruction0.0236760
+(~86.2% lower). GT-overlapping candidate confidence0.821785 vs0.125032.
+All arms retain100% of tumor in crop/postprocess mask; crop bounds identical.
+Native/control scores identical. This narrows attribution but proves neither
+clinical recall loss nor irreversible information loss: frozen-judge domain
+shift remains a real alternative. Pancreas Dice is only a coarse localizer
+diagnostic, not the quality endpoint. No S-tier/novelty claim yet.
+
+Locked two additional histopathology cases100430_00001/100259_00001 by smallest
+stored batch1 fold4 member size under60MB excluding pilot, BEFORE predictions.
+Private pinned clinical join verifies three distinct patients. Size-biased
+feasibility cohort, not representative. Download CRC/geometry/finite/mask and
+native orientation roundtrip pass. Shapes512x512x123/210, tumors6.283/1.943mL.
+Two selection tests pass; five actual-weight-loop/geometry tests pass1.297s.
+
+The32M-voxel default guard is explicit56M for this replication INCLUDING padded
+volume: no cropping, resampling or changed model operations. Scaling the pilot
+24.25GB peak suggests~88GB for larger volume, NOT a proven bound. Runtime
+requires at least110GB actual free GPU memory before any larger-volume VAE.
+Resource failure is retained, never silently rescued or replaced.
+
+Job3295549 verified held and released, last PENDING:1GPU/32GB/20min interactive,
+Requeue=0;480s per case, sequential separate processes. Max0.666667 chargedh,
+campaign worst-case1.251389/2; actual posted debit unverified. Frozen code,
+selection and batch SHA pass. No automatic retry or case replacement; include
+original misses/failures. Protected evaluation47320183 unchanged.
+
+See JUDGE_REPLICATION_PLAN_20261002.md. Next read both completion files and
+accounting. If consistent, prioritize posterior/independent mechanism controls
+and PI alignment before larger cohorts, new VAE or remedy training. Mixed
+results mean report heterogeneity; no posthoc threshold/selection tricks.

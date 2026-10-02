@@ -1,0 +1,83 @@
+{
+  "completed": true,
+  "clinical_recall": false,
+  "scope": "one public out-of-fold validation-selected case, not external held-out test",
+  "vae_seconds": 72.88587183970958,
+  "vae_peak_bytes": 24250846720,
+  "detector_fold": 4,
+  "posterior": "mean FP32; native whole volume; no VAE crop/tile",
+  "results": [
+    {
+      "tumor_voxels": 1756,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_mean_raw_probability": 0.17156478762626648,
+      "tumor_max_raw_probability": 0.590510904788971,
+      "tumor_mean_masked_probability": 0.17156478762626648,
+      "candidate_confidence_on_tumor": 0.8217849135398865,
+      "tumor_voxels_with_candidate": 358,
+      "patient_max_candidate_score": 0.8217849135398865,
+      "interpretation": "continuous diagnostic scores; no clinical detection threshold fixed here",
+      "arm": "native",
+      "crop_bounds": {
+        "x_start": 38,
+        "x_finish": 512,
+        "y_start": 138,
+        "y_finish": 396,
+        "z_start": 19,
+        "z_finish": 41
+      },
+      "detector_seconds": 7.121669934131205,
+      "tumor_fraction_in_postprocess_mask": 1.0,
+      "tumor_fraction_mask_excluded_within_crop": 0.0,
+      "gt_label4_pancreas_dice": 0.15378694442693938
+    },
+    {
+      "tumor_voxels": 1756,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_mean_raw_probability": 0.17156478762626648,
+      "tumor_max_raw_probability": 0.590510904788971,
+      "tumor_mean_masked_probability": 0.17156478762626648,
+      "candidate_confidence_on_tumor": 0.8217849135398865,
+      "tumor_voxels_with_candidate": 358,
+      "patient_max_candidate_score": 0.8217849135398865,
+      "interpretation": "continuous diagnostic scores; no clinical detection threshold fixed here",
+      "arm": "control",
+      "crop_bounds": {
+        "x_start": 38,
+        "x_finish": 512,
+        "y_start": 138,
+        "y_finish": 396,
+        "z_start": 19,
+        "z_finish": 41
+      },
+      "detector_seconds": 6.114482467062771,
+      "tumor_fraction_in_postprocess_mask": 1.0,
+      "tumor_fraction_mask_excluded_within_crop": 0.0,
+      "gt_label4_pancreas_dice": 0.15378694442693938
+    },
+    {
+      "tumor_voxels": 1756,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_mean_raw_probability": 0.02367604523897171,
+      "tumor_max_raw_probability": 0.11198136955499649,
+      "tumor_mean_masked_probability": 0.02367604523897171,
+      "candidate_confidence_on_tumor": 0.12503156065940857,
+      "tumor_voxels_with_candidate": 249,
+      "patient_max_candidate_score": 0.12503156065940857,
+      "interpretation": "continuous diagnostic scores; no clinical detection threshold fixed here",
+      "arm": "reconstruction",
+      "crop_bounds": {
+        "x_start": 38,
+        "x_finish": 512,
+        "y_start": 138,
+        "y_finish": 396,
+        "z_start": 19,
+        "z_finish": 41
+      },
+      "detector_seconds": 6.227239593863487,
+      "tumor_fraction_in_postprocess_mask": 1.0,
+      "tumor_fraction_mask_excluded_within_crop": 0.0,
+      "gt_label4_pancreas_dice": 0.1524885344418589
+    }
+  ]
+}

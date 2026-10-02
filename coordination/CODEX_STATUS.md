@@ -1422,3 +1422,17 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Released replacement3295395 after held checks/SHA/bash syntax, PENDING.
   Same1GPU/32GB/20min/no retry, separate private v2; worst-case campaign
   1.181389/2 chargedh. No changes to models/experiment/evaluation47320183.
+
+### 2026-10-02 — Pilot succeeded; two-case replication queued
+
+-3295395 COMPLETED0:0 in126s,0.070charge-equivalentGPUh. Scalar completion
+  JSON preserved. Native/clipped tumor means identical0.171565; reconstructed
+  0.023676, allGT retained in crop/mask. Frozen-judge shift, not proven erasure
+  or clinical-recall loss. Campaign estimate0.584722/2, posted debit unknown.
+- Locked two distinct additional histopathology/fold4 patients BEFORE output:
+  100430_00001/100259_00001, size-biased feasibility selection. CRC/geometry/
+  native roundtrip passes; two selection and five predictor/geometry tests pass.
+-3295549 released after held/source checks, PENDING,1GPU/32GB/20min/no requeue.
+  Explicit56M full-volume cap plus110GBfreeGPU gate; no input/model changes.
+  Maxcampaign1.251389/2. No substitution/retry/clinical-threshold tuning.
+  Handoff38 and replication plan recorded; evaluation47320183 untouched.

@@ -92,9 +92,13 @@ def main():
     parser.add_argument('--vae', type=Path, required=True)
     parser.add_argument('--vae-sha', required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--max-voxels', type=int, choices=(32_000_000, 56_000_000),
+                        default=32_000_000, help='Explicit full-volume resource cap; no resampling')
     args = parser.parse_args()
     if not os.environ.get('SLURM_JOB_ID') or torch.cuda.device_count() != 1:
         raise RuntimeError('One scheduled GPU required')
+    if args.max_voxels > 32_000_000 and torch.cuda.mem_get_info()[0] < 110_000_000_000:
+        raise RuntimeError('Larger whole-volume screen requires at least110GB free GPU memory')
     if args.output.exists():
         raise FileExistsError('Refuse reused output directory')
     if importlib.metadata.version('monai') != '1.5.1' or importlib.metadata.version('report-guided-annotation') != '0.3.4':
@@ -118,11 +122,13 @@ def main():
     native = nib.load(image_path)
     canonical = nib.as_closest_canonical(native)
     data = canonical.get_fdata(dtype=np.float32)
-    if data.size > 32_000_000 or not np.isfinite(data).all() or native.header.get_xyzt_units()[0] != 'mm':
+    if data.size > args.max_voxels or not np.isfinite(data).all() or native.header.get_xyzt_units()[0] != 'mm':
         raise ValueError('Invalid/oversized CT')
     control = np.clip(data, -1000, 1000)
     pads = [(((-n)%4)//2, (-n)%4-(((-n)%4)//2)) for n in data.shape]
     normalized = np.pad((control+1000)/2000, pads)
+    if normalized.size > args.max_voxels:
+        raise ValueError('Padded full volume exceeds explicit resource cap')
     model = load_model(str(args.vae)).cuda()
     torch.cuda.reset_peak_memory_stats()
     started = time.monotonic()
@@ -210,6 +216,7 @@ def main():
     save_json(args.output/'completion.json', dict(completed=True, clinical_recall=False,
               scope='one public out-of-fold validation-selected case, not external held-out test',
               vae_seconds=vae_seconds, vae_peak_bytes=vae_peak, detector_fold=4,
+              max_voxels=args.max_voxels, native_shape=list(native.shape),
               posterior='mean FP32; native whole volume; no VAE crop/tile', results=reports))
     print('PAIRED_JUDGE_PILOT_COMPLETE_NOT_COHORT', flush=True)
 
