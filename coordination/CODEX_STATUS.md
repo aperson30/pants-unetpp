@@ -1181,3 +1181,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   RecheckedPANORAMAofficial two-stageensemble/checkpointselection caveat. No
   weights/data download or detector inference. Raw metrics/logs remain remote;
   source/report/handoff only committed. Newroundcharge unchanged .212222h.
+
+### 2026-10-01 23:52 -07:00 — contrast probe3291031 preflighted/released
+
+- Refreshedcoordination;prepared samebinary111voxel/8mm insert amplitude test,
+  notsupersampled replacement. Sevenpasses inclsameallocation baseline/-20
+  repeat and2voxel xshift. Wholevolume FP32mean path unchanged.
+- Threeunit tests passed:linear amplitude/sign retention,nowrapshift,count
+  preservation,clipping/ROI/zero guards. RealcaseCPUpreflight passed strict
+  checkpoint/toyencode/decode andallamplitude/shiftROI bounds. Freeze hashes
+  coverrunner/helpers/metricimport/MONAIwheel;bashsyntaxpassed.
+- Addedcachedbaseline max0.001HU parity gate andfirstpass watchdogprojection;
+  perpassscalar records/fullarrayrelease,1020s watchdog,18minSlurm,noretries.
+- Submittedheld3291031;verifiedactualbilling1000/1GPU/96G/8CPU/ghx4/18min and
+  frozenscriptthenreleased. LastPENDING,None;noGPUresultyet. Max0.30chargedh,
+  oldnewroundactual0.212222plusreserve0.512222<=user2hourcap. Notposteddebits.
+- NoPanTSjob/runtime/image/keychanges. Documentexplicitnonlinearity confounds,
+  onephasecontrol limitation andheuristicthresholds;noautomaticclinicalverdict.

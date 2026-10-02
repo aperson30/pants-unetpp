@@ -894,3 +894,20 @@ synthetic NO-GO can deprioritize this mechanism without excluding PDAC harm.
 Next prepare a bounded multi-contrast runner and CPU contracts/cost estimate,
 then use the existing authorized total screening ceiling only if that plan
 meets provenance/runtime checks. No extra GPU job submitted in this update.
+
+## 19. Bounded contrast probe preflighted and submitted
+
+User said continue; existing2chargedhour screening authorization covers this
+single probe. See CONTRAST_PROBE_20261001.md and reproducible runner/tests.
+All3CPU unit tests and realcase/modelCPUpreflight passed. Original111voxel
+insert and allcontrasts/shift preserve ROI/no-clipping contracts. Sevenpasses:
+baseline,-20repeat,-10,-40,-80,+20,shifted-20. FP32/fullvolume/mean unchanged.
+Cachedbaseline max0.001HU gate and first-pass runtime projection stop early
+ifparity/timing fails. No automatic retry, no images saved/published.
+
+Heldsubmission3291031 inspected:regularghx4,oneGPU,18min,billing1000,requeue0.
+Released onlyafter frozen script/resources/sourcehash checks. LaststatePENDING;
+noresultyet. Maxadditional0.30chargedh;newroundactualunchanged0.212222,
+actualplusreservedceiling0.512222of2. PanTS evaluation untouched.
+Nonlinearity is not unique evidence of a learned prior;flat response is not
+clinical safety. Report signed retentions and phase sensitivity, notjustGO.
