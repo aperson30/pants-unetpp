@@ -1083,3 +1083,23 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   is conditional on exclusions/runtime checks and a new bounded GPU cap.
 - Documentation only. No change to PanTS evaluation, environments, reader
   key or data-egress restrictions. No new GPU time; no message sent to Claude.
+
+## 2026-10-01 22:56 -07:00 — Next-step preparation after Claude731dcad
+
+- Reviewed corrected insertion plan and new sub-visual direction. Added
+  NEXT_STEPS_PREFLIGHT.md:ROI->isolated validated extraction->paired features;
+  PANORAMA checkpoint/data audit in parallel;GPU calibrated separately.
+- Added prepare_texture_roi.py/test_texture_roi.py. Fixed original-mask
+  parenchymalROI excludes tumor+5mm/organ-edge2mm in physical distances,
+  rejects invalid labels/spacing/affine and explicitly lacks duct mask.
+  All12local tests pass. No hand-coded radiomics/clinical-score claim.
+- Read-only DeltaAI dependency check:SimpleITK/nibabel yes, radiomics no.
+  No install. Bounded CPU run on hash-verified120/165 completed:16138/
+  25526ROIvoxels,30.165/60.859mL. Raw auditJSONs remain remote.
+- Initial CPU launcher stdin redirected to/dev/null, did no work; preserved
+  empty log, corrected and verified explicit completion in attempt2 log.
+- Primary-source duct study says data available on request; existingMSD has
+  no duct label. Fixed-mask diameter cannot assess reconstructed visibility.
+  Generic texture drift/n3diagnostic cases cannot establish early-cancer loss.
+  Mayo announcement reviewed; linkedGut paper403, no REDMOD replication claim.
+- No newGPU time, weights, image egress, author contact or PanTS job change.

@@ -592,3 +592,31 @@ Demoted after search: anatomy-routed compute for 3D diffusion (deep only near
 the pancreas). Structure-adaptive sparse 3D diffusion already reports up to
 10x training acceleration (https://pith.science/paper/2604.17773), and
 LAW & ORDER learns where to spend compute (https://arxiv.org/abs/2603.04795).
+
+## 13. Execution preparation after731dcad (Codex)
+
+See NEXT_STEPS_PREFLIGHT.md for the actionable checklist and remaining gates.
+No new GPU allocation or feature extraction has run. Isolated CPU ROI tool
+and three tests added; total12local tests pass. Existing cached120/165 labels
+hash-checked and audited with fixed tumor5mm/edge2mm exclusions:16138voxels
+(30.165mL) and25526voxels(60.859mL) remain. Both suitable for an initial
+engineering feature-availability check, not proven healthy tissue.
+
+New direction needs these safeguards: MSD has no duct label, so its proposed
+duct-diameter step is unavailable; geometry from a fixed mask is unchanged by
+definition. Duct dilation is not inherently invisible. Three diagnostic
+tumor-positive scans cannot measure prediagnostic discrimination orAUC loss.
+Generic radiomics changes do not replicateREDMOD. The duct paper's cohort is
+available on request, not verified public download; no author contacted.
+Mayo announcement inspected, linkedGut full paper returned403 here.
+
+Read-only dependency check:SimpleITK/nibabel present, PyRadiomics absent.
+No shared-runtime install. Next is choosing/pinning an isolated validated
+feature implementation/settings, identity/phantom tests, then paired descriptive
+features. Freeze image grids, sourceROIs and binning; report bias separately.
+Do not treat negative tiny pilots as proof of preserved cancer signal.
+
+CPU launcher initially fed/dev/null instead of its here-document and did no
+work; corrected and verified both output records plus explicit completion.
+Artifacts remain remote/local; publication restrictions unchanged. No change
+to PanTS evaluation. New GPU insertion/detector work requires calibrated cap.
