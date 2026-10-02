@@ -915,3 +915,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Original cap remaining ~0.07944 charged hours; asked user to approve an
   additional <=0.25 charged-hour cap before a comparable next GPU probe.
   No additional GPU time spent. Prior results commit 2f66f48 verified on origin.
+
+## 2026-10-01 — Restored SSH; small case prepared without GPU spending
+
+- User reopened DeltaAI compression master; hostname and empty user queue
+  verified. Two detached CPU-only 48-mask windows completed: 120 unique pinned
+  masks total. Retrieved all three inventory JSONs for reproducible selection.
+- Smallest positive total tumor burden case120: 454 voxels, 848.6181mm3,
+  native 512x512x104. Only case in this screened subset below exploratory 1mL
+  cutoff; not a clinical-stage/representativeness claim. No outcomes used to
+  select the case, no crop, no reconstruction performed.
+- Downloaded one matched CT, verified mirror hashes, image/mask grid and units,
+  orthonormal affine, unchanged VAE weight. CPU strict checkpoint + 8-cubed
+  encode/decode passed. Added preparation tool and captured input manifest.
+- Six region-metric tests passed again. Additional GPU time ZERO; prior total
+  still ~0.17056 charge-equivalent hours. Waiting for explicit additional
+  <=0.25 charged-hour cap approval before any next GPU submission.
+  PanTS evaluation untouched; no changes to shared base environment.

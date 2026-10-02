@@ -1,0 +1,587 @@
+{
+  "data_repo": "Angelou0516/msd-pancreas",
+  "data_revision": "327dd551a9e51295c34e14f311d8330ef44b6cac",
+  "tumor_label": 2,
+  "selection": "bounded lexicographic mask window; smallest positive total tumor burden",
+  "window_start": 72,
+  "window_count": 48,
+  "exploratory_small_cutoff_mm3": 1000,
+  "inventory": [
+    {
+      "mask": "labelsTr/pancreas_117.nii.gz",
+      "sha256": "a8a13f497af7a78143fb85d410a0cffa88d8d3e0a9cf4b26f24bf88091f95013",
+      "shape": [
+        512,
+        512,
+        134
+      ],
+      "tumor_voxels": 3948,
+      "tumor_mm3": 5161.685785823244
+    },
+    {
+      "mask": "labelsTr/pancreas_119.nii.gz",
+      "sha256": "bb2053e6c831c00833e36a38b35f7d980be1936b2126e14311b32e311094d45c",
+      "shape": [
+        512,
+        512,
+        85
+      ],
+      "tumor_voxels": 7572,
+      "tumor_mm3": 15280.121810366047
+    },
+    {
+      "mask": "labelsTr/pancreas_120.nii.gz",
+      "sha256": "60ddf8533b024353ea2b06a4eee66700f07d20c53ec0c5300aba9879714ba34d",
+      "shape": [
+        512,
+        512,
+        104
+      ],
+      "tumor_voxels": 454,
+      "tumor_mm3": 848.6181456596692
+    },
+    {
+      "mask": "labelsTr/pancreas_122.nii.gz",
+      "sha256": "6eec14979cf8e0bec1539f07002a9269576f995077a3d1365546520a83daa97b",
+      "shape": [
+        512,
+        512,
+        97
+      ],
+      "tumor_voxels": 4516,
+      "tumor_mm3": 7064.223955084151
+    },
+    {
+      "mask": "labelsTr/pancreas_124.nii.gz",
+      "sha256": "4a7dc462dd96b1a9db4cc278ff53d0f9e5a06d9d95fe1613013ec14199a4706e",
+      "shape": [
+        512,
+        512,
+        82
+      ],
+      "tumor_voxels": 15567,
+      "tumor_mm3": 35209.75826674313
+    },
+    {
+      "mask": "labelsTr/pancreas_125.nii.gz",
+      "sha256": "82af1c9e8d9b726cbe509bd90cb76979334c3e869c19d5cf1141f0ab732a3e78",
+      "shape": [
+        512,
+        512,
+        102
+      ],
+      "tumor_voxels": 3615,
+      "tumor_mm3": 7844.142594125579
+    },
+    {
+      "mask": "labelsTr/pancreas_126.nii.gz",
+      "sha256": "916a1889c71faa14d31c0f90cb64e2a46c3aa016484a7063c5ec9f842fc18db4",
+      "shape": [
+        512,
+        512,
+        73
+      ],
+      "tumor_voxels": 5235,
+      "tumor_mm3": 7058.1756591796875
+    },
+    {
+      "mask": "labelsTr/pancreas_127.nii.gz",
+      "sha256": "a55f2cafe7b2749e010b910ab3a7dac87dc95c302f089ba9429cb86f14bf2a32",
+      "shape": [
+        512,
+        512,
+        126
+      ],
+      "tumor_voxels": 5075,
+      "tumor_mm3": 9584.214229982339
+    },
+    {
+      "mask": "labelsTr/pancreas_129.nii.gz",
+      "sha256": "ce402e15aa787a8b2663cc9d3df7d8b97773d20e2de7a396755e24c82be09250",
+      "shape": [
+        512,
+        512,
+        44
+      ],
+      "tumor_voxels": 1966,
+      "tumor_mm3": 5245.139990095607
+    },
+    {
+      "mask": "labelsTr/pancreas_130.nii.gz",
+      "sha256": "d2ab5d81371c7c32a5defc8bc19aa8ee7207c119b23fa3518a250a631431dcec",
+      "shape": [
+        512,
+        512,
+        130
+      ],
+      "tumor_voxels": 2175,
+      "tumor_mm3": 2810.0830078125005
+    },
+    {
+      "mask": "labelsTr/pancreas_131.nii.gz",
+      "sha256": "ddd73cbe6512c2a52b8fc77bfaeed280579d5df38254cdcb48e3f1f9be80f13b",
+      "shape": [
+        512,
+        512,
+        59
+      ],
+      "tumor_voxels": 5261,
+      "tumor_mm3": 8475.232974556793
+    },
+    {
+      "mask": "labelsTr/pancreas_135.nii.gz",
+      "sha256": "54afda7a57a1df71b754fd3967d586ef31d4c72d30f401e87b5eab71b1af0233",
+      "shape": [
+        512,
+        512,
+        60
+      ],
+      "tumor_voxels": 4070,
+      "tumor_mm3": 10627.415320371503
+    },
+    {
+      "mask": "labelsTr/pancreas_137.nii.gz",
+      "sha256": "d495474129b5791e188e6f4247dedd2285656b85f4a8a27ce959d1412ca31bad",
+      "shape": [
+        512,
+        512,
+        85
+      ],
+      "tumor_voxels": 3547,
+      "tumor_mm3": 6254.584048898463
+    },
+    {
+      "mask": "labelsTr/pancreas_138.nii.gz",
+      "sha256": "4864856215739b25884eed2612c43fd9dd68e29e6096941fe9cd101c9ed22e23",
+      "shape": [
+        512,
+        512,
+        95
+      ],
+      "tumor_voxels": 9006,
+      "tumor_mm3": 19788.57421875
+    },
+    {
+      "mask": "labelsTr/pancreas_140.nii.gz",
+      "sha256": "eba9bc9d1ca04199e76cc85ae9ca3634195a424231965883eacaaf04c0c43bd7",
+      "shape": [
+        512,
+        512,
+        56
+      ],
+      "tumor_voxels": 3931,
+      "tumor_mm3": 13226.081730616092
+    },
+    {
+      "mask": "labelsTr/pancreas_145.nii.gz",
+      "sha256": "861b54ac64ee1d39f75cbb2185f26a39f69ff6fe504985691a5ff429b2922597",
+      "shape": [
+        512,
+        512,
+        93
+      ],
+      "tumor_voxels": 1580,
+      "tumor_mm3": 3471.6796875
+    },
+    {
+      "mask": "labelsTr/pancreas_147.nii.gz",
+      "sha256": "a5ba9e48c4eed90250b58010f9d3aa1039ee127926c0c084ab67ceaa776543df",
+      "shape": [
+        512,
+        512,
+        85
+      ],
+      "tumor_voxels": 880,
+      "tumor_mm3": 1180.1723507233278
+    },
+    {
+      "mask": "labelsTr/pancreas_148.nii.gz",
+      "sha256": "3c55d45b294199809d64ea753301ca8bd70b47588789d02133c25afe3a4fc154",
+      "shape": [
+        512,
+        512,
+        42
+      ],
+      "tumor_voxels": 1438,
+      "tumor_mm3": 4171.751726512274
+    },
+    {
+      "mask": "labelsTr/pancreas_149.nii.gz",
+      "sha256": "bc704af2c89619eb27b1c69d8a3ca072edee91b765c948d0e9c3f3e5c2869c54",
+      "shape": [
+        512,
+        512,
+        77
+      ],
+      "tumor_voxels": 5419,
+      "tumor_mm3": 7941.2957763671875
+    },
+    {
+      "mask": "labelsTr/pancreas_155.nii.gz",
+      "sha256": "52453694230544627f59158b605f5a05ee71efb824e4324635d1e39a8f42d69a",
+      "shape": [
+        512,
+        512,
+        95
+      ],
+      "tumor_voxels": 3489,
+      "tumor_mm3": 6038.37395792411
+    },
+    {
+      "mask": "labelsTr/pancreas_157.nii.gz",
+      "sha256": "9141fe4a14d089b90bf4c41c68befc089b22f85474d43fb9367a3cc7fb43c63f",
+      "shape": [
+        512,
+        512,
+        77
+      ],
+      "tumor_voxels": 2686,
+      "tumor_mm3": 4098.5107421875
+    },
+    {
+      "mask": "labelsTr/pancreas_158.nii.gz",
+      "sha256": "a7096e92a2401565514805ccf23a5b79afd5dbf20c014b2a8af1cafbe1fb52ca",
+      "shape": [
+        512,
+        512,
+        66
+      ],
+      "tumor_voxels": 2626,
+      "tumor_mm3": 11830.349113103748
+    },
+    {
+      "mask": "labelsTr/pancreas_159.nii.gz",
+      "sha256": "15e086df4f625e56330901162590d8e76337b75fdad2b28f75ccb2298b63dd7f",
+      "shape": [
+        512,
+        512,
+        90
+      ],
+      "tumor_voxels": 6059,
+      "tumor_mm3": 6523.48388671875
+    },
+    {
+      "mask": "labelsTr/pancreas_160.nii.gz",
+      "sha256": "93402788b20dda0e5946001ca7b89d4c3eef8cea1d8308c516e8b81c91de654f",
+      "shape": [
+        512,
+        512,
+        75
+      ],
+      "tumor_voxels": 9424,
+      "tumor_mm3": 15853.802369540326
+    },
+    {
+      "mask": "labelsTr/pancreas_165.nii.gz",
+      "sha256": "25b2e9336c215ccb34a0a155bad7eb5de6cf5a3a567413e919021c817fbc3a0b",
+      "shape": [
+        512,
+        512,
+        85
+      ],
+      "tumor_voxels": 445,
+      "tumor_mm3": 1060.9616409058417
+    },
+    {
+      "mask": "labelsTr/pancreas_166.nii.gz",
+      "sha256": "7240acbfca8112374281d72337c2d1177100c01f6ee8b8d76d7a2fdf7721945d",
+      "shape": [
+        512,
+        512,
+        95
+      ],
+      "tumor_voxels": 3918,
+      "tumor_mm3": 8395.005365359222
+    },
+    {
+      "mask": "labelsTr/pancreas_167.nii.gz",
+      "sha256": "524606e8d59f94e06643e88282872555843d61aa8f839af9da20af0115373d5d",
+      "shape": [
+        512,
+        512,
+        101
+      ],
+      "tumor_voxels": 7480,
+      "tumor_mm3": 10794.46931430378
+    },
+    {
+      "mask": "labelsTr/pancreas_169.nii.gz",
+      "sha256": "68505b4400cc50caf4f3c13da8592370cbf28553e418afcd7b12b3822839596c",
+      "shape": [
+        512,
+        512,
+        87
+      ],
+      "tumor_voxels": 1339,
+      "tumor_mm3": 1843.9469189390704
+    },
+    {
+      "mask": "labelsTr/pancreas_170.nii.gz",
+      "sha256": "1c99bf7b525a76da01580b8cbc3756c97a4e6e862bd210a5519891ecfe43f92c",
+      "shape": [
+        512,
+        512,
+        103
+      ],
+      "tumor_voxels": 1662,
+      "tumor_mm3": 2677.4068054957975
+    },
+    {
+      "mask": "labelsTr/pancreas_172.nii.gz",
+      "sha256": "bbeaf6c6a7d0b541078c8ad40cea3518096485473aa6d42df6974a6f0f31a9af",
+      "shape": [
+        512,
+        512,
+        95
+      ],
+      "tumor_voxels": 1298,
+      "tumor_mm3": 1778.0860695410013
+    },
+    {
+      "mask": "labelsTr/pancreas_173.nii.gz",
+      "sha256": "6e8ed0ce6c626dc0bdd8c05e69dcb2b4893991c1069ebdf849474f9af4522dd2",
+      "shape": [
+        512,
+        512,
+        81
+      ],
+      "tumor_voxels": 1584,
+      "tumor_mm3": 1903.7570388061404
+    },
+    {
+      "mask": "labelsTr/pancreas_175.nii.gz",
+      "sha256": "d84d7223357c0235d3f4e784dff6fad4fdbbcf9d33af224c2cb4c8c881dad0c4",
+      "shape": [
+        512,
+        512,
+        91
+      ],
+      "tumor_voxels": 1750,
+      "tumor_mm3": 2643.6535839459552
+    },
+    {
+      "mask": "labelsTr/pancreas_178.nii.gz",
+      "sha256": "32ee933dfa7623438b9e68d6e21f8af4cd367a93c5ece973e1c3cb50933294d8",
+      "shape": [
+        512,
+        512,
+        110
+      ],
+      "tumor_voxels": 3400,
+      "tumor_mm3": 5450.626942329592
+    },
+    {
+      "mask": "labelsTr/pancreas_179.nii.gz",
+      "sha256": "a811ee4962f258c4ac856a6ffe09ae5a92697582946a8caff6a9cd14e9195b12",
+      "shape": [
+        512,
+        512,
+        89
+      ],
+      "tumor_voxels": 1199,
+      "tumor_mm3": 1847.8687126610268
+    },
+    {
+      "mask": "labelsTr/pancreas_180.nii.gz",
+      "sha256": "bfb745659ad7ef46d1bdb9df6107d1d0752afa525dfa4dfec70158ba9aa97058",
+      "shape": [
+        512,
+        512,
+        95
+      ],
+      "tumor_voxels": 8857,
+      "tumor_mm3": 12197.040971652985
+    },
+    {
+      "mask": "labelsTr/pancreas_181.nii.gz",
+      "sha256": "e2fe9040568ea3430e16f647ee38c56a3a687363923ba1a883300d94102d706f",
+      "shape": [
+        512,
+        512,
+        87
+      ],
+      "tumor_voxels": 2275,
+      "tumor_mm3": 5424.017377664697
+    },
+    {
+      "mask": "labelsTr/pancreas_182.nii.gz",
+      "sha256": "0efba294337ebf508ae8d936f21fb4d5e5c95f54068adbfb8e8331b97135b748",
+      "shape": [
+        512,
+        512,
+        79
+      ],
+      "tumor_voxels": 20299,
+      "tumor_mm3": 23041.60709498173
+    },
+    {
+      "mask": "labelsTr/pancreas_183.nii.gz",
+      "sha256": "f8b1cee6664ea8a385b6d7ef9a3b8a079f26f30c634a26369fa31de9c6757ee0",
+      "shape": [
+        512,
+        512,
+        76
+      ],
+      "tumor_voxels": 1812,
+      "tumor_mm3": 3062.829698226994
+    },
+    {
+      "mask": "labelsTr/pancreas_186.nii.gz",
+      "sha256": "8dd694a91f168111a6ece3c62132b2604c6a8f31625eba4592e9f6c33838c96f",
+      "shape": [
+        512,
+        512,
+        51
+      ],
+      "tumor_voxels": 2450,
+      "tumor_mm3": 6157.5646268918
+    },
+    {
+      "mask": "labelsTr/pancreas_187.nii.gz",
+      "sha256": "0a6acfa4d8280f442b809b47537a568b95f6448807d7cab52df1d8d329ca273c",
+      "shape": [
+        512,
+        512,
+        95
+      ],
+      "tumor_voxels": 9042,
+      "tumor_mm3": 15944.16379197629
+    },
+    {
+      "mask": "labelsTr/pancreas_191.nii.gz",
+      "sha256": "f457bcf8348973c050d93cc687c8304b1bf486b61a07aea6715bc595d901c66a",
+      "shape": [
+        512,
+        512,
+        57
+      ],
+      "tumor_voxels": 6609,
+      "tumor_mm3": 9005.734883189209
+    },
+    {
+      "mask": "labelsTr/pancreas_193.nii.gz",
+      "sha256": "66c8b0c07a95afe9707669d583875e9b5c387647d25718c41fb322ce13c97454",
+      "shape": [
+        512,
+        512,
+        113
+      ],
+      "tumor_voxels": 4643,
+      "tumor_mm3": 7013.990623006325
+    },
+    {
+      "mask": "labelsTr/pancreas_194.nii.gz",
+      "sha256": "e1466fae95405d7ac0df2ebeef44bd5dfa89dcd4de0cb47ccdb3eeb2dd582f55",
+      "shape": [
+        512,
+        512,
+        98
+      ],
+      "tumor_voxels": 4645,
+      "tumor_mm3": 6196.255151066658
+    },
+    {
+      "mask": "labelsTr/pancreas_196.nii.gz",
+      "sha256": "9d14be9787d2fc495721bdef3bf30330beb95f15b008023333fed9acfbe58417",
+      "shape": [
+        512,
+        512,
+        92
+      ],
+      "tumor_voxels": 2963,
+      "tumor_mm3": 3077.2253158739322
+    },
+    {
+      "mask": "labelsTr/pancreas_197.nii.gz",
+      "sha256": "e2e9c047156e42813b2468723039e8c2ca027f288be0bf92b85449db5714e12c",
+      "shape": [
+        512,
+        512,
+        73
+      ],
+      "tumor_voxels": 1813,
+      "tumor_mm3": 3286.778087896394
+    },
+    {
+      "mask": "labelsTr/pancreas_198.nii.gz",
+      "sha256": "d1a80b5cae985a3f9e9d935dee28a1d5d53e9b7760c5baef5f2aea429f5d9e6c",
+      "shape": [
+        512,
+        512,
+        111
+      ],
+      "tumor_voxels": 3037,
+      "tumor_mm3": 6128.596135509995
+    },
+    {
+      "mask": "labelsTr/pancreas_199.nii.gz",
+      "sha256": "eed9cd2adc2bf678d10908e13c38f4fd27073cad134b4c81832c0519a3c70613",
+      "shape": [
+        512,
+        512,
+        95
+      ],
+      "tumor_voxels": 9060,
+      "tumor_mm3": 14595.25009494099
+    },
+    {
+      "mask": "labelsTr/pancreas_200.nii.gz",
+      "sha256": "994436005fe2920033c6f742d9606615c61f439cc86ef84cc99230f1fd9d96d6",
+      "shape": [
+        512,
+        512,
+        89
+      ],
+      "tumor_voxels": 2706,
+      "tumor_mm3": 5970.599242353443
+    }
+  ],
+  "candidates": [
+    {
+      "mask": "labelsTr/pancreas_120.nii.gz",
+      "sha256": "60ddf8533b024353ea2b06a4eee66700f07d20c53ec0c5300aba9879714ba34d",
+      "shape": [
+        512,
+        512,
+        104
+      ],
+      "tumor_voxels": 454,
+      "tumor_mm3": 848.6181456596692
+    },
+    {
+      "mask": "labelsTr/pancreas_165.nii.gz",
+      "sha256": "25b2e9336c215ccb34a0a155bad7eb5de6cf5a3a567413e919021c817fbc3a0b",
+      "shape": [
+        512,
+        512,
+        85
+      ],
+      "tumor_voxels": 445,
+      "tumor_mm3": 1060.9616409058417
+    },
+    {
+      "mask": "labelsTr/pancreas_147.nii.gz",
+      "sha256": "a5ba9e48c4eed90250b58010f9d3aa1039ee127926c0c084ab67ceaa776543df",
+      "shape": [
+        512,
+        512,
+        85
+      ],
+      "tumor_voxels": 880,
+      "tumor_mm3": 1180.1723507233278
+    }
+  ],
+  "small_candidates": [
+    {
+      "mask": "labelsTr/pancreas_120.nii.gz",
+      "sha256": "60ddf8533b024353ea2b06a4eee66700f07d20c53ec0c5300aba9879714ba34d",
+      "shape": [
+        512,
+        512,
+        104
+      ],
+      "tumor_voxels": 454,
+      "tumor_mm3": 848.6181456596692
+    }
+  ]
+}
