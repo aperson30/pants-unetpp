@@ -1266,3 +1266,20 @@ Decision:prioritizeindependentlyjustifiedreal-lesionjudgecalibration after
 protocolaudit;NOTcleanboth-matched-familyGO,learned-priorproof orS-tiermethod.
 Noextrafilterfamilies/retuning/newGPUjobs. .448611chargedhestimate unchanged;
 PanTSevaluntouched. NeedPIalignment beforeanyrepresentation-repairtraining.
+
+## 28. Real-lesion judge source audit completed before spending
+
+Read pinned PANORAMA process/data utilities, requirements, Dockerfile and README.
+See PANORAMA_JUDGE_PROTOCOL_20261002.md for concrete execution gates. Important:
+crop margins are 100/50/15 mm despite README cm text; stage-2 mask suppresses
+PDAC probabilities outside predicted labels1/4/5 plus voxel dilation. Separate
+crop exclusion, mask suppression, raw detector and candidate-extraction effects.
+Use held-out fold in BOTH stages, not default five-fold ensemble. Fresh per-arm
+directories essential: fixed scan names plus --continue_prediction can reuse
+earlier predictions. Empty pancreas is pipeline failure, not negative finding.
+
+Runtime is not reproducibly pinned by upstream Dockerfile; external candidate
+extractor/defaults and actual model plans remain unverified. No weights/GPU
+jobs/trainer-env changes or protected evaluation changes. Screening budget
+estimate unchanged. Next CPU geometry and dependency contracts, then priced
+single-case calibration only after remaining gates pass.

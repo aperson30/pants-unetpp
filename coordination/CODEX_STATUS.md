@@ -1303,3 +1303,16 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   committed,noimages/readerkey. DENOISER_CONTROLdoc/handoff27updated.
 - NoGPUuse,evalchangeornewSlurmjob. Screeningestimate .448611of2 unchanged.
   Nextjudgeprotocol+pricedtinycalibration,notmorecontrolparametersearch.
+
+### 2026-10-02 — Pinned PANORAMA judge pipeline audited before allocation
+
+- Read complete process.py/data_utils.py/requirements/Dockerfile/README at
+  d08f2356fa70d9460881fec0aedba4ebd1566c7e. New protocol records operational
+  mm margins, B-spline/default outside-value caveat, label1/4/5 mask suppression,
+  voxel dilation, and separate crop/raw/masked/candidate diagnostic outputs.
+- Single held-out fold required in BOTH stages. Fixed scan names plus
+  --continue_prediction require unique per-arm output dirs to avoid stale results.
+  Empty masks are failures. Upstream moving nnUNet/unpinned dependencies not
+  accepted as reproducible runtime; external candidate extraction still open.
+- No detector inference/weights/GPU allocation or protected PanTS eval changes.
+  Charge estimate .448611of2 unchanged. Handoff28 and standalone protocol saved.
