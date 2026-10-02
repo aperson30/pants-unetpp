@@ -9,6 +9,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import tempfile
 import time
 
 import nibabel as nib
@@ -23,6 +24,18 @@ from run_maisi import load_model, publish
 
 
 CONTRASTS = (-20., -10., -40., -80., 20.)
+
+
+def check_output_destination(parent):
+    """Check the actual small-output destination, not the read-only data pool."""
+    if not parent.is_dir() or shutil.disk_usage(parent).free < 16*1024**2:
+        raise RuntimeError('Insufficient output filesystem headroom')
+    # Raw free space does not prove user-quota headroom. A bounded write/fsync
+    # probes it; TemporaryFile removes only its own file on close.
+    with tempfile.TemporaryFile(dir=parent) as stream:
+        stream.write(bytes(1024**2))
+        stream.flush()
+        os.fsync(stream.fileno())
 
 
 def shift_mask(mask, shift=(2, 0, 0)):
@@ -70,6 +83,10 @@ def main():
     args = parser.parse_args()
     if importlib.metadata.version('monai') != '1.5.1' or not torch.__version__.startswith('2.10.0'):
         raise RuntimeError('Frozen MONAI/torch stack mismatch')
+    if args.output is not None:
+        if args.output.exists():
+            raise FileExistsError(args.output)
+        check_output_destination(args.output.parent)
     manifest = json.loads((args.root/'small_followup_120/inputs_manifest.json').read_text())
     ct, control, labels, spacing = prepare(manifest)
     reference_path = args.root/'small_results_3290494/pancreas_120/reconstruction.nii.gz'
@@ -108,8 +125,6 @@ def main():
         raise RuntimeError('Require one Slurm GPU and unique output directory')
     if not torch.__version__.startswith('2.10.0'):
         raise RuntimeError('Frozen torch stack mismatch')
-    if shutil.disk_usage(args.root).free < 1024**3:
-        raise RuntimeError('Insufficient metrics headroom')
     args.output.mkdir(exist_ok=False)
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False

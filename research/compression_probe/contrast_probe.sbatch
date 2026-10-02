@@ -11,15 +11,16 @@
 #SBATCH --time=00:18:00
 #SBATCH --no-requeue
 #SBATCH --job-name=vae_contrast
-#SBATCH --output=/projects/bdyo/asanjeev/compression_probe_20261001/contrast_%j.log
+#SBATCH --output=/u/asanjeev/compression_probe_smalloutputs/contrast_%j.log
 set -euo pipefail
 ROOT=/projects/bdyo/asanjeev/compression_probe_20261001
+CODE=/u/asanjeev/compression_probe_smalloutputs
 PYTHON=/projects/bdyo/asanjeev/pants_venv/bin/python
 export PYTHONPATH=$ROOT/wheels/monai-1.5.1-py3-none-any.whl:$ROOT
 export OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 MKL_NUM_THREADS=4
 cd "$ROOT"
-sha256sum -c contrast_source.sha256
+sha256sum -c "$CODE/contrast_source.sha256"
 timeout 15 nvidia-smi -L
 srun --ntasks=1 --gpus-per-task=1 --gpu-bind=closest \
- timeout --signal=TERM --kill-after=10 1020 "$PYTHON" -u "$ROOT/contrast_probe.py" \
- --root "$ROOT" --output "$ROOT/contrast_results_${SLURM_JOB_ID}"
+ timeout --signal=TERM --kill-after=10 1020 "$PYTHON" -u "$CODE/contrast_probe.py" \
+ --root "$ROOT" --output "$CODE/contrast_results_${SLURM_JOB_ID}"

@@ -911,3 +911,19 @@ noresultyet. Maxadditional0.30chargedh;newroundactualunchanged0.212222,
 actualplusreservedceiling0.512222of2. PanTS evaluation untouched.
 Nonlinearity is not unique evidence of a learned prior;flat response is not
 clinical safety. Report signed retentions and phase sensitivity, notjustGO.
+
+## 20. October2 live status and storage-guard correction
+
+Bridges2connection reopened byuser;read-onlycheck47320183:PENDING,Priority,
+runtime0. Scheduler currentlyestimatesOct4 18:00EDT=15:00Pacific,NOTguaranteed.
+All4finaltrainingcheckpoints present. Testtable stillincomplete;queued frozen
+evaluation untouched. This is not anewtraining delay orneed to retrain.
+
+Contrast3291031FAILED1:0 after36sec, beforeinference:projectroot freebytes0.
+Correct guard preventedoutput loss;manual fix movessmallsource/logs/metrics
+to home /u/asanjeev/compression_probe_smalloutputs, weights/dataread-only.
+1MiBwrite/fsyncprobe passed,4unit tests andrealcaseCPUpreflightpassed.
+Read-onlyhomequotaqueryunsupported(non-Lustre),so rawfree notquota proof.
+No data deletion/baseenv changes. New3291159held/resources/frozen script
+verified thenreleased:PENDINGlastcheck,18min/0.30chargedhmax,noretry.
+Newroundactualestimate0.222222h;actualplusreservation0.522222<=2.

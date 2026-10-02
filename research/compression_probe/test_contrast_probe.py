@@ -1,6 +1,8 @@
 import unittest
+import tempfile
+from pathlib import Path
 import numpy as np
-from contrast_probe import alter, response_metrics, shift_mask
+from contrast_probe import alter, response_metrics, shift_mask, check_output_destination
 
 
 class ContrastTests(unittest.TestCase):
@@ -32,6 +34,16 @@ class ContrastTests(unittest.TestCase):
         self.roi[9, 9, 9] = False
         with self.assertRaises(ValueError):
             alter(self.control, self.mask, self.roi, -20.)
+
+    def test_output_probe_cleans_only_own_file(self):
+        with tempfile.TemporaryDirectory() as folder:
+            parent = Path(folder)
+            keep = parent/'keep.txt'
+            keep.write_text('preserve')
+            check_output_destination(parent)
+            self.assertEqual(list(parent.iterdir()), [keep])
+            with self.assertRaises(RuntimeError):
+                check_output_destination(parent/'missing')
 
 
 if __name__ == '__main__':

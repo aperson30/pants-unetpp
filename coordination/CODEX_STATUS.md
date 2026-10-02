@@ -1198,3 +1198,19 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   oldnewroundactual0.212222plusreserve0.512222<=user2hourcap. Notposteddebits.
 - NoPanTSjob/runtime/image/keychanges. Documentexplicitnonlinearity confounds,
   onephasecontrol limitation andheuristicthresholds;noautomaticclinicalverdict.
+
+### 2026-10-02 00:05 -07:00 — 2x2 live queue check; guarded research storage fix
+
+- OldBridges2socket refused;user openedbridges2-progress.sock. Live47320183
+  PENDINGPriority/runtime0. SchedulerestimatedOct4 18:00EDT(15:00Pacific);
+  timezonechecked,estimateNOTreservation. All4finalcheckpointfiles present.
+  FrozenqueuedtwoH100evaluation unchanged;testtable notcomplete.
+- Contrast3291031FAILED1:0/36sec beforeGPUinference,projectfreebytes0,correct
+  outputguard stopped. Actualcostestimate0.01chargedh,notposteddebit. Noauto
+  retry,delete,trainingenvchange orPanTStestdataresearch use.
+- Fix checksactualoutputparent/writeability beforeheavyload;home1MiBfsyncprobe
+  passed. Fourunit tests+realcaseCPUpreflight passed. Tinylogs/source/JSONhome,
+  projectcachedCTs/weightsread-only. lfsquotaunsupportedhome;rawfree notquota.
+- Manuallysubmitted3291159held;verifiedbilling1000/1GPU/96G/18min/no-requeue
+  andhomeStdOut/frozenscript;released,PENDINGlastcheck. Newroundactualestimate
+  .222222plus .30reserve=.522222of2cap. No furtherautomaticretry.

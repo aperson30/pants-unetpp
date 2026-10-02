@@ -1,5 +1,31 @@
 # Contrast/phase probe: submitted, results pending
 
+## October 2 update: original storage stop and corrected submission
+
+Job3291031 FAILED1:0 after36allocationseconds, before GPU inference. The
+project filesystem reports0freebytes, so the original guard correctly stopped
+instead of filling quota or silently losing metrics. This consumed0.010000
+physical/charged-equivalentGPU-hours (billing1000); no automatic retry occurred.
+
+Corrected job **3291159** submitted held, frozen script/resources verified,
+then released. Last observed PENDING. Same scientific experiment and18min/
+0.30charged-hour maximum. Small source/logs/JSONs now live in
+`/u/asanjeev/compression_probe_smalloutputs`; CTs/weights remain read-only in
+the old projectroot. Do not treat the original paragraph's queue state as current.
+
+Check actual output parent before heavy input loading, including a1MiB temporary
+write/fsync probe to test writeability/quota; raw filesystemfree alone is not
+treated as per-userquota proof. `lfs quota` cannot query this non-Lustre home
+mount. Actual homewrite passed; no dataset deletion or globalruntime change.
+All4unit tests and corrected real-data CPU preflight pass. The cleanup test
+proves the probe leaves an existing sibling file unchanged. No CTimages saved.
+
+New-round actual spending estimate0.222222chargedh; with this reservation the
+ceiling is0.522222of2hours. Posted debits still not independently verified.
+No more retries are automatic; investigate any new failure before another job.
+
+## Original submission record (historical)
+
 Job **3291031**, DeltaAI `ghx4`, one GH200 GPU, 8 CPUs, 96 GB host RAM,
 18-minute Slurm cap, 1020-second process watchdog plus 10-second kill grace,
 no automatic retry/requeue. Actual held-job `ReqTRES` verified billing=1000,
