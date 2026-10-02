@@ -1,0 +1,63 @@
+{
+  "completed": true,
+  "clinical_recall": false,
+  "saved_map_scalar_parity": true,
+  "all_seeds_reported": true,
+  "contrasts": [
+    {
+      "arm": "native",
+      "tumor_mean_raw_probability": 0.17154879868030548,
+      "ratio_to_native": 1.0,
+      "candidate_confidence_on_tumor": 0.8223563432693481,
+      "tumor_voxels_with_candidate": 358,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_fraction_in_postprocess_mask": 1.0
+    },
+    {
+      "arm": "control",
+      "tumor_mean_raw_probability": 0.17154879868030548,
+      "ratio_to_native": 1.0,
+      "candidate_confidence_on_tumor": 0.8223563432693481,
+      "tumor_voxels_with_candidate": 358,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_fraction_in_postprocess_mask": 1.0
+    },
+    {
+      "arm": "posterior_mean",
+      "tumor_mean_raw_probability": 0.023677092045545578,
+      "ratio_to_native": 0.13801957360056877,
+      "candidate_confidence_on_tumor": 0.12503156065940857,
+      "tumor_voxels_with_candidate": 249,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_fraction_in_postprocess_mask": 1.0
+    },
+    {
+      "arm": "posterior_seed0",
+      "tumor_mean_raw_probability": 0.018533367663621902,
+      "ratio_to_native": 0.10803554327512531,
+      "candidate_confidence_on_tumor": 0.055813129991292953,
+      "tumor_voxels_with_candidate": 523,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_fraction_in_postprocess_mask": 1.0
+    },
+    {
+      "arm": "posterior_seed1",
+      "tumor_mean_raw_probability": 0.08153942227363586,
+      "ratio_to_native": 0.47531328054118827,
+      "candidate_confidence_on_tumor": 0.25294968485832214,
+      "tumor_voxels_with_candidate": 611,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_fraction_in_postprocess_mask": 1.0
+    },
+    {
+      "arm": "posterior_seed2",
+      "tumor_mean_raw_probability": 0.06054652854800224,
+      "ratio_to_native": 0.35294055693642834,
+      "candidate_confidence_on_tumor": 0.3823778033256531,
+      "tumor_voxels_with_candidate": 211,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_fraction_in_postprocess_mask": 1.0
+    }
+  ],
+  "caveat": "One feasibility-selected patient and one frozen judge; posterior control not diffusion generation, clinical loss or irreversible erasure"
+}

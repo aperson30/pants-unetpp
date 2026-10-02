@@ -1637,3 +1637,23 @@ This differs fromofficial embeddingpipeline's AMP/resizing: isolate sampling,
 not claim exactMAISIdiffusiontrainingreproduction. Selectionbias/independent
 judge remainsopen. See POSTERIOR_CONTROL_20261002.md. No47320183change,
 large100259blocked/unreplaced; requirecompletion/accounting before results.
+
+## 49. Posterior control completed: substantial seed variation, no clinicalmiss
+
+3297185 COMPLETED292s,0.162222charge-equivalentGPUh; campaign1.109722/2,
+posteddebitunknown, estimatedremaining0.890278. Encodeonce31.72s,4decodes
+41.73–41.85s; GPUpeak24.259GB. All6arms repeats EXACTLY(7classmaps/labels),
+CPU savedmapauditmatches,100%GTincrop/mask. Native/clipmean0.171549,
+posteriormean0.023677, seed0/1/2means0.018533/0.081539/0.060547. Native
+fractions13.80%mean,10.80%/47.53%/35.29%samples. Seeds1/2 partlyrecover,
+seed0worse; allremainbelow native. Mean-only choice can'tfullyexplain score
+weakeningonthiscase, but don't extendmean86%drop to sampled/diffusionlatents.
+AllarmsGTcandidateoverlap>0; samplecandidatecounts canrise despite lower
+confidence, so no newmiss/clinicalrecall/irreversibleerasure/noveltyclaim.
+Allseeds/scalarJSON/audit/POSTERIOR_CONTROL_20261002.md retained, imagesprivate.
+Independentjudge web/sourcelead: DiffTumorpublicpancreascheckpoints real, but
+publishedpipeline usesexternalorgan_pseudo and legacytransforms; verifymask
+producer/labelmap/weightsstrictload/overlap before GPU. No shortcutGTmask,
+newtraining or claimclinicalindependence. INDEPENDENT_JUDGE_REVIEW_20261002.md.
+No independentweights downloaded or newGPUqueued;47320183untouched,
+large100259blocked/unreplaced. Prioritizeindependentpreflight overmoreseeds.

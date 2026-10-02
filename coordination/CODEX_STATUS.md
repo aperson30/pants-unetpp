@@ -1561,3 +1561,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - CPUmocktest1encode4decodes12predictions + pinnedformulaseed/geometry tests.
   No47320183change/automaticretry; largerpatientblocked. Full embeddingAMP/
   resizingnotreplicated,onlysamplingisolated. Protocol/code/handoff48 committed.
+
+### 2026-10-02 — Posterior control completed, mixed stochastic effect retained
+
+-3297185 COMPLETED292s,billing2000 =>0.162222charge-equivalentGPUh.
+  Campaignestimate1.109722/2,posteddebitunknown,remainingestimate0.890278.
+  Encodeonce31.72s,4decodes~41.8s;peakGPU24.259GB. All6detectorarmrepeats
+  exact(7classes/labels),CPU savedmapauditmatches,GTinclusion/mask100%.
+- Native/cliptumormean0.171549,mean0.023677,seed0/1/2 0.018533/0.081539/
+  0.060547. Samplesretain10.80/47.53/35.29%native vsmean13.80%. ReportALL:
+  two partlyrecover,oneworse; don't generalizemean86%drop to everylatent.
+  AllarmsstillGTcandidateoverlap; candidatecounts canrise whileconfidence
+  drops. No clinicalrecall/newmiss/irreversibleloss/noveltyclaim.
+- Independentjudgeprimarysourcelead DiffTumorpancreasweights, but external
+  organ_pseudo/legacytransform/checkpointoverlap gates remain; no GTmask
+  shortcut/weightsdownload/GPUlaunch. Reviewdoc written. Scalarresults/audit/
+  protocol/handoff49 committed; imagesprivate. No moreGPU/no automaticretry,
+  47320183untouched,largercaseblocked. Nextindependentpreflight,not moreseeds.

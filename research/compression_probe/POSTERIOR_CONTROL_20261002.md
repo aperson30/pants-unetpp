@@ -55,3 +55,40 @@ Actualhomequota7.364GBused against102.4GBsoftquota (not rawfilesystemcapacity),
 plenty for thissmallcase; outputsprivate underfreshposterior_control_v1.
 Weights/16Mpaddedshape/40GBactualfreeCUDA guards checked atruntime too.
 No automaticretry or dataset/model/clinicalthreshold modification.
+
+## Completed mixed result: samples partially change the story
+
+3297185 COMPLETED0:0,292allocationseconds,billing2000 =>0.162222charge-
+equivalentGPUh. Campaignestimate1.109722/2, posteddebitunverified;0.890278
+estimatedbudget remains. VAEencode31.72s ONCE;4decodes41.73–41.85s each.
+GPUpeak24.259GB, sigma mean0.65014/max1.16893. Everydetectorarm's repeated
+7classprobabilities and segmentationlabels match EXACTLY; CPU savedmapaudit
+reproduces allreportedscalars. No crop/mask exclusion: allarms100%GTretained.
+
+| Arm | Mean tumor probability | Fraction of native score | GT candidate confidence | GT candidate voxels |
+|---|---:|---:|---:|---:|
+| Native |0.171549|100%|0.822356|358|
+| Clippingcontrol |0.171549|100%|0.822356|358|
+| Posteriormean |0.023677|13.80%|0.125032|249|
+| Seed0 |0.018533|10.80%|0.055813|523|
+| Seed1 |0.081539|47.53%|0.252950|611|
+| Seed2 |0.060547|35.29%|0.382378|211|
+
+ReportALLseeds. Seeds1/2 partiallyrecover score relative to mean; seed0 is
+worse than mean. All remainbelow native (52.47–89.20%lower). Thus mean-only
+selection is NOT sufficient to explain all observedscore weakening on this
+case, but stochasticposterior matters strongly: don't generalize mean's86%
+drop to everylatent sample or hide variation behind bestseed/average.
+Candidatevoxels increase for two lower-confidence samples, illustrating why
+candidatecount is not a clinicalrecall/safety indicator. ALL arms retain some
+GT-overlappingcandidate: no newclinicalmiss or independentlycalibratedthreshold.
+
+This remains one selectedpatient/onefrozenjudge; posterior sampling is not
+diffusiongeneration, not evidence of irreversibleloss or novelS-tiermethod.
+Frozenjudge domainshift/readeradequacy remain unresolved. No remedytraining
+or biggercohort now. Nextbestinformation-per-resource step is an independent
+taskjudge preflight, not moreseedcherrypicking. DiffTumorpubliccheckpoint lead
+is real but its externalorganmask/patientoverlap must be audited first:
+INDEPENDENT_JUDGE_REVIEW_20261002.md. No independentinference launched.
+Scalars/code pushed; images/cropmaps private. No moreGPUjobs/no retry;
+47320183untouched,large100259stillblocked/unreplaced.
