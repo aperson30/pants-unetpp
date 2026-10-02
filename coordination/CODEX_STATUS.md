@@ -1327,3 +1327,17 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Plans/label schema and pinned candidate extractor remain gates, no launch.
 - No packages installed, GPU hours used, patient data committed, or PanTS eval
   touched. Screening estimate .448611of2 unchanged. Handoff29 updated.
+
+### 2026-10-02 — Actual upstream geometry and extractor CPU tests pass
+
+- Selected task-local CPU wheels SimpleITK2.5.3/report-guided-annotation0.3.4/
+  tqdm4.67.1; no shared trainer edits. Ran unmodified pinned data_utils.py with
+  hash/version guards. Nine upstream+eight helper tests pass (17,0.050s).
+- Confirms anisotropic/rotated physical crop, NIfTI roundtrip, resample, masking,
+  expansion; extractor discards <=10 voxels and global peak/2.5 suppresses faint
+  component in toy case. Default-fast doesn't cap5; don't alter primary defaults.
+- Read complete installed extractor + pinned plans/dataset JSONs/custom trainer.
+  Stage1 legacy plan schema vs stage2 modern schema remains runtime-load gate.
+  Archive JSON correspondence/history package parity not yet proven.
+- No weights/GPU jobs or protected evaluation changes. Screening estimate
+  .448611of2 unchanged. Protocol/handoff30 record measured scope and open gates.

@@ -1294,3 +1294,25 @@ No new packages or GPU spend. These are helper tests, not upstream-wrapper
 execution: local environment lacks SimpleITK, actual resample/read/crop parity
 still open. Helpers not yet wired into inference; no claim of launch readiness.
 Need actual plans and pinned candidate extractor before detector calibration.
+
+## 30. Published crop code and selected extractor executed on CPU
+
+Task-local SimpleITK2.5.3/report-guided-annotation0.3.4/tqdm4.67.1 only; no trainer
+environment change. Nine actual publisher-code toy tests plus eight guards pass
+(17,0.050s). Pinned source hashes/version contracts in test_judge_upstream_cpu.py.
+Actual NIfTI roundtrip, B-spline resample, rotated/anisotropic physical crop,
+masking/expansion verified. Still NOT network/preprocessor/HPC execution parity.
+
+Extractor dynamic-fast has scan-global max/2.5 threshold, discards <=10 voxels,
+and doesn't enforce iterative mode's five-candidate cap. Toy unchanged faint
+component disappears solely after adding remote stronger peak; preserve raw
+maps and report postprocessing effects, don't call this CT/VAE damage evidence.
+Complete selected wheel source read; it differs from main, historical container
+version unknown. Primary thresholds not changed to make outcomes look better.
+
+Pinned repository plans/dataset JSONs now read: stage1 labels0/1, stage2tumor1
+andpancreas4/duct5; both CT/SimpleITKIO. Plans mix legacy stage1 and modern stage2
+architecture fields. Must test runtime compatibility and compare archived plans,
+not assume current nnUNet loads both. More in PANORAMA_JUDGE_PROTOCOL_20261002.md.
+No GPU spending/weightsdownload/eval change. Next bounded weight/metadata access
+and isolated actual-load checks before any priced tiny real-lesion calibration.

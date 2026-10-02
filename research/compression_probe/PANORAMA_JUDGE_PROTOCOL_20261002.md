@@ -120,3 +120,64 @@ B-spline resampling, physical-coordinate crop behavior and NIfTI export must
 still be tested in the isolated inference runtime. Candidate extraction and
 released model-plan label validation remain open. Helpers are not yet wired
 into a real detector runner, so they cannot be claimed to protect a GPU job.
+
+## Actual publisher-code CPU execution (2026-10-02 follow-up)
+
+Installed ONLY task-local CPU wheels under `work/judge_cpu_deps_v1`:
+SimpleITK2.5.3, report-guided-annotation0.3.4, tqdm4.67.1, no dependencies
+auto-upgraded. Initial package import exposed missing tqdm; explicitly adding
+that small dependency fixed the import without touching any trainer environment.
+Existing Python3.12.14/NumPy2.5.3/SciPy1.18.1 were reused. This is a selected
+research runtime, NOT proof of the historic baseline container's package versions.
+
+Executed independently fetched, unmodified pinned `src/data_utils.py` on toy
+images. Source SHA256:
+`5f09cb980619e1f459a0163e6808a1bc20188a466c000218719eff36cd1ad68a`.
+PyPI0.3.4 extractor source SHA256:
+`15119b3bf469d8505c949c6c901321a0941dae340f070270f533dd15cb546990`.
+Read the complete installed extractor source, not just its README. PyPI code
+differs from current upstream main; do not substitute main and claim same runtime.
+
+Nine upstream-execution tests plus eight guard tests PASS, 17 total in 0.050s.
+Tests exercise NIfTI write/read geometry, actual B-spline resampling, actual
+physical crop with anisotropic spacing AND rotated direction, empty localization
+assertion, exact mask helper parity, native expansion geometry, and extractor
+edge cases. Tests require explicit source path and verify source/version hashes;
+without it the optional upstream suite skips, rather than implying execution.
+SimpleITK emits a NumPy2.5 deprecation warning; no test failure. This tiny-input
+execution does not validate large-volume memory, nnU-Net preprocessing/network
+load, Linux/HPC runtime compatibility, historic container parity or detection.
+
+Verified extractor0.3.4 default is `dynamic-fast`: threshold is scan-wide
+maximum/2.5; 26-connected components with <=10 voxels are discarded, retained
+component values become their maximum probability. Default-fast does NOT apply
+the exposed five-candidate limit or adjacency removal used by iterative mode.
+Toy tests retained seven components, removed a ten-voxel component but retained
+eleven, and erased an unchanged twelve-voxel .15-probability component when a
+remote .8 component raised threshold to .32. These are algorithm contracts,
+NOT patient evidence. Preserve this primary pipeline; don't relax minimum size
+or thresholds after seeing reconstructed lesions. Save raw maps for attribution.
+
+### Repository model plans and label schema read
+
+Read complete plans/dataset JSONs under pinned `src/nnUNet_results/` for both
+stages, plus customTrainerCEcheckpoints.py (CE trainer subclass, no replacement
+network). Stage1 is background0/pancreas1; stage2 background0/tumor1/veins2/
+arteries3/pancreas4/pancreaticduct5/commonbileduct6. Both specify CT and
+SimpleITKIO, numTraining2238, identity transpose. Stage1 3d spacing ZYX
+9/4.5/4.5 mm, patch48x96x96, CT clips[-152,253], mean42.803375/std93.941116.
+Stage2 spacing1.5/.747/.747 mm, patch48x128x288, clips[-55,430],
+mean109.620674/std77.439339. These fixed intensity statistics must come from
+the released plans, not be estimated separately per reconstruction arm.
+
+Stage1 plans have LEGACY UNet_class_name/base-feature fields; stage2 plans have
+new architecture metadata. Selected nnU-Net runtime must explicitly support
+both. Repository JSONs are evidence of intended configurations, not verification
+that the weight archive contains identical JSONs or loads in that runtime.
+
+### Gates still open
+
+Bounded checkpoint acquisition and matching archive metadata; compatible pinned
+nnU-Net runtime supporting both plan schemas; actual model-load/preprocessor
+checks; runner integration of guards and provenance; priced one-case inference.
+No weights downloaded, GPU job submitted, or protected evaluation modified.
