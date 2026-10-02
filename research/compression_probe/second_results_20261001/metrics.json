@@ -1,0 +1,51 @@
+{
+  "inference_seconds": 96.11057342914864,
+  "peak_allocated_bytes": 35529854464,
+  "peak_reserved_bytes": 35544629248,
+  "preprocessing_damage": {
+    "protocol": "same-grid HU reconstruction diagnostics, not clinical realism",
+    "component_connectivity": 6,
+    "tumor_label": 2,
+    "tumor_voxels": 445,
+    "lesions": [
+      {
+        "component": 1,
+        "voxels": 445,
+        "volume_mm3": 1060.9616409058417,
+        "mae_hu": 0.0,
+        "boundary_mae_hu": 0.0,
+        "ring_voxels": 1717,
+        "touches_volume_edge": false,
+        "reference_signed_contrast_hu": 11.791213989257812,
+        "reference_cnr": 0.22660372192146422,
+        "reconstruction_signed_contrast_hu": 11.791213989257812,
+        "reconstruction_cnr": 0.22660372192146422,
+        "contrast_ratio": 1.0
+      }
+    ],
+    "whole_image_mae_hu": 6.695470333099365
+  },
+  "compression_damage": {
+    "protocol": "same-grid HU reconstruction diagnostics, not clinical realism",
+    "component_connectivity": 6,
+    "tumor_label": 2,
+    "tumor_voxels": 445,
+    "lesions": [
+      {
+        "component": 1,
+        "voxels": 445,
+        "volume_mm3": 1060.9616409058417,
+        "mae_hu": 42.12073516845703,
+        "boundary_mae_hu": 45.03791046142578,
+        "ring_voxels": 1717,
+        "touches_volume_edge": false,
+        "reference_signed_contrast_hu": 11.791213989257812,
+        "reference_cnr": 0.22660372192146422,
+        "reconstruction_signed_contrast_hu": 11.198966979980469,
+        "reconstruction_cnr": 0.26608276789552543,
+        "contrast_ratio": 0.9497721769940821
+      }
+    ],
+    "whole_image_mae_hu": 69.24702453613281
+  }
+}

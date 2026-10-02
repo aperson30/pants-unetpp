@@ -43,3 +43,23 @@ The earlier0.25 and new0.25 caps are separate; no single-cap overrun claim.
 Downloaded JSONs, source manifest and PNG only, not the raw CT/mask/volume
 reconstruction. Fixed-window PNG inspected: reconstruction visibly smoother;
 no lesion-erasure or preserved-detection conclusion drawn from that image.
+
+## Post-hoc CPU sensitivity audit
+
+Three physical rings (1-3, 2-5, 3-7mm) yield contrast ratios .8725, .8937,
+.9210 against all surrounding tissue. Restricting these same rings to GT
+pancreas gives .8635, .8524, .8611: attenuation persists across these choices.
+This restriction is defined by the original GT, not predicted healthy tissue.
+
+Mean tumor intensity shifts -1.96HU; the standard2-5mm surrounding ring shifts
+-8.93HU. Thus the reduced contrast also reflects changes to surrounding
+tissue; it cannot be attributed solely to fading of tumor voxels.
+
+Across the three tumor-containing axial slices, ratios are .8915, .8583,
+1.0148. Slice averages do not all attenuate. These slices are correlated
+measurements of one lesion, NOT three independent cases or significance tests.
+
+Diagnostic uses local measurement halos AFTER whole-volume reconstruction,
+never model-input cropping. Tests check identity/global intensity shift,
+synthetic erasure, empty pancreas reference and invalid inputs. Nine total
+metric tests pass; this validates implementation contracts, not clinical utility.

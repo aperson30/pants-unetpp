@@ -1,0 +1,99 @@
+{
+  "protocol": "post-hoc GT-region contrast sensitivity, not recall",
+  "component_connectivity": 6,
+  "lesions": [
+    {
+      "component": 1,
+      "tumor_voxels": 454,
+      "lesion_mean_shift_hu": -1.9565407037734985,
+      "rings": [
+        {
+          "inner_mm": 1,
+          "outer_mm": 3,
+          "tissue": "all_surrounding",
+          "voxels": 530,
+          "reference_signed_contrast_hu": -68.16195678710938,
+          "reconstruction_signed_contrast_hu": -59.47093963623047,
+          "signed_contrast_ratio": 0.8724946060744176,
+          "ring_mean_shift_hu": -10.647562026977539
+        },
+        {
+          "inner_mm": 1,
+          "outer_mm": 3,
+          "tissue": "gt_pancreas_only",
+          "voxels": 408,
+          "reference_signed_contrast_hu": -59.50121307373047,
+          "reconstruction_signed_contrast_hu": -51.381622314453125,
+          "signed_contrast_ratio": 0.8635390718973072,
+          "ring_mean_shift_hu": -10.076123237609863
+        },
+        {
+          "inner_mm": 2,
+          "outer_mm": 5,
+          "tissue": "all_surrounding",
+          "voxels": 1808,
+          "reference_signed_contrast_hu": -65.55415344238281,
+          "reconstruction_signed_contrast_hu": -58.583038330078125,
+          "signed_contrast_ratio": 0.8936586814681121,
+          "ring_mean_shift_hu": -8.927659034729004
+        },
+        {
+          "inner_mm": 2,
+          "outer_mm": 5,
+          "tissue": "gt_pancreas_only",
+          "voxels": 1330,
+          "reference_signed_contrast_hu": -48.09071350097656,
+          "reconstruction_signed_contrast_hu": -40.99394226074219,
+          "signed_contrast_ratio": 0.8524294874499988,
+          "ring_mean_shift_hu": -9.05331802368164
+        },
+        {
+          "inner_mm": 3,
+          "outer_mm": 7,
+          "tissue": "all_surrounding",
+          "voxels": 2988,
+          "reference_signed_contrast_hu": -66.9815673828125,
+          "reconstruction_signed_contrast_hu": -61.689125061035156,
+          "signed_contrast_ratio": 0.9209865858836951,
+          "ring_mean_shift_hu": -7.2489752769470215
+        },
+        {
+          "inner_mm": 3,
+          "outer_mm": 7,
+          "tissue": "gt_pancreas_only",
+          "voxels": 1938,
+          "reference_signed_contrast_hu": -40.94239044189453,
+          "reconstruction_signed_contrast_hu": -35.256317138671875,
+          "signed_contrast_ratio": 0.8611201436493471,
+          "ring_mean_shift_hu": -7.642599582672119
+        }
+      ],
+      "axial_slices": [
+        {
+          "axial_index": 68,
+          "tumor_voxels": 152,
+          "ring_voxels": 361,
+          "reference_signed_contrast_hu": -71.0533218383789,
+          "reconstruction_signed_contrast_hu": -63.34734344482422,
+          "signed_contrast_ratio": 0.8915465428754611
+        },
+        {
+          "axial_index": 69,
+          "tumor_voxels": 179,
+          "ring_voxels": 370,
+          "reference_signed_contrast_hu": -83.38536071777344,
+          "reconstruction_signed_contrast_hu": -71.56786346435547,
+          "signed_contrast_ratio": 0.8582785137379745
+        },
+        {
+          "axial_index": 70,
+          "tumor_voxels": 123,
+          "ring_voxels": 348,
+          "reference_signed_contrast_hu": -60.609962463378906,
+          "reconstruction_signed_contrast_hu": -61.509910583496094,
+          "signed_contrast_ratio": 1.014848188045999
+        }
+      ]
+    }
+  ]
+}

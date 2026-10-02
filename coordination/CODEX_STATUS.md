@@ -985,3 +985,25 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Post-hoc descriptive measurements, not independent detection evidence.
 - No changes to frozen GPU runner/base environments/PanTS evaluation. Job
   completion/results/cost still need checking before any second-case claim.
+
+## 2026-10-01 — Second-case completed; average-versus-local measurement gap
+
+- Job3290519 COMPLETED0:0; onecase165 completed. Elapsed128s => .03556 physical
+  GPU-hours / ~.07111 allocation-equivalent hours. NEWapproved campaign total
+  .16111<=.25, remainder .08889. All campaigns total .16583physical/~.33167
+  charge-equivalent; no additional submission or retry. Accounting estimates
+  are elapsed*partition rule, not posted account balance.
+- Preprocessing tumor/boundary HU MAE0; reconstruction tumorMAE42.12HU,
+  boundary-bandMAE45.04, mean contrast11.79->11.20 (~5.02% reduction),
+  CNR.22660->.26608 (~17.42% increase). CNR is NOT detection quality.
+- Posthoc case165 ring contrast direction varies: all-tissue ratios.6307,
+  .9498,1.0898; pancreas-only.6307,.9443,1.1606. Slice contrasts25.86->16.27,
+  22.97->7.24,.85->13.41HU. Last reference nearzero makes ratio misleading.
+  Matched tumor/ring mean shifts (-32.52/-31.93HU) hide absolute changes.
+- Captured complete evidence and sensitivity JSONs for both cases; fixed-window
+  image viewed. Signal is heterogeneous local changes masked by averages, NOT
+  proven tumor disappearance/clinical harm. Native-spacing protocol may differ
+  from official deployment; production-preprocessing parity not established.
+- Nine local tests pass. Cheap next research gate: independent lesion-local
+  assessment, official-pipeline/pretraining overlap checks and more cases,
+  not expensive adaptive-depth/VAE training. PanTS evaluation untouched.
