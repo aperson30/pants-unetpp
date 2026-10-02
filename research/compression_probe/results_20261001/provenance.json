@@ -1,0 +1,93 @@
+{
+  "job": "3289833",
+  "torch": "2.10.0+cu129",
+  "monai": "1.5.1",
+  "gpu": "NVIDIA GH200 120GB",
+  "precision": "fp32 including normalization; norm_float16=False",
+  "posterior": "mean only, sampled posterior not tested",
+  "geometry": "RAS reorientation only, original spacing, center padding to multiple of 4",
+  "decoder": "whole volume, num_splits=1, no tiles",
+  "manifest": {
+    "model": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/autoencoder_v1.pt",
+    "model_sha256": "1f8a7a056d0ebc00486edc43c26768bf1c12eaa6df9dd172e34598003be95eb3",
+    "model_revision": "430f2c82a96dce44b455de5876d43a5a9f753cb2",
+    "data_revision": "327dd551a9e51295c34e14f311d8330ef44b6cac",
+    "data_repo": "Angelou0516/msd-pancreas",
+    "tumor_label": 2,
+    "selection": "two smallest physical tumor burdens among four prespecified cases, not globally smallest",
+    "mask_inventory": [
+      {
+        "case": "001",
+        "tumor_voxels": 26153,
+        "tumor_mm3": 27161.212853881523,
+        "label": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/pancreas_001_label.nii.gz",
+        "label_sha256": "c23328f95bc048c3d49c31b8b52edd232a741781c8a56763c94674595736e67d"
+      },
+      {
+        "case": "004",
+        "tumor_voxels": 28448,
+        "tumor_mm3": 39175.95365943142,
+        "label": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/pancreas_004_label.nii.gz",
+        "label_sha256": "e12664490fe02b8d9d2857b7c66a4176c8445020bf02faf1597395dc98616a50"
+      },
+      {
+        "case": "005",
+        "tumor_voxels": 3609,
+        "tumor_mm3": 7602.963582217275,
+        "label": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/pancreas_005_label.nii.gz",
+        "label_sha256": "6297b554d5cb36e150072a01d14ddff9249f821062641530687918c14f054f9a",
+        "image": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/pancreas_005_image.nii.gz",
+        "image_sha256": "d2cc93d434bb967a2ea69109d32abfaf5eaed350d884fb6a9b098b66fdc48c2d",
+        "shape": [
+          512,
+          512,
+          104
+        ]
+      },
+      {
+        "case": "006",
+        "tumor_voxels": 9244,
+        "tumor_mm3": 13615.857243840912,
+        "label": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/pancreas_006_label.nii.gz",
+        "label_sha256": "743d0015c01dadd3b5a3d5315b37ea9e06088399b9ba4b8e7b9e1ca6299d4025",
+        "image": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/pancreas_006_image.nii.gz",
+        "image_sha256": "5a9fb6e0e3930ced6377d9233c3633b3eca9d95795858c9a461ccb1b3903de87",
+        "shape": [
+          512,
+          512,
+          101
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "case": "005",
+        "tumor_voxels": 3609,
+        "tumor_mm3": 7602.963582217275,
+        "label": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/pancreas_005_label.nii.gz",
+        "label_sha256": "6297b554d5cb36e150072a01d14ddff9249f821062641530687918c14f054f9a",
+        "image": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/pancreas_005_image.nii.gz",
+        "image_sha256": "d2cc93d434bb967a2ea69109d32abfaf5eaed350d884fb6a9b098b66fdc48c2d",
+        "shape": [
+          512,
+          512,
+          104
+        ]
+      },
+      {
+        "case": "006",
+        "tumor_voxels": 9244,
+        "tumor_mm3": 13615.857243840912,
+        "label": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/pancreas_006_label.nii.gz",
+        "label_sha256": "743d0015c01dadd3b5a3d5315b37ea9e06088399b9ba4b8e7b9e1ca6299d4025",
+        "image": "/projects/bdyo/asanjeev/compression_probe_20261001/inputs/pancreas_006_image.nii.gz",
+        "image_sha256": "5a9fb6e0e3930ced6377d9233c3633b3eca9d95795858c9a461ccb1b3903de87",
+        "shape": [
+          512,
+          512,
+          101
+        ]
+      }
+    ]
+  }
+}

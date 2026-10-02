@@ -1,6 +1,7 @@
 # Compression-only lesion-preservation screen
 
-Status: first attempt 3289813 hit host-memory OOM; retry 3289833 released.
+Status: first attempt 3289813 hit host-memory OOM; retry 3289833 COMPLETED.
+Measured total cost and limited fidelity observations: results_20261001/SUMMARY.md.
 Separate from segmentation experiment.
 
 ## Verified inventory (October 1, 2026)

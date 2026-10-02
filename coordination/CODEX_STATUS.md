@@ -877,3 +877,25 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Current submission snapshot: retry PENDING, no quality result yet. Source and
   protocol in research/compression_probe/. Preserve failed-attempt files/logs;
   never treat a partial directory/provenance file as a completed reconstruction.
+
+## 2026-10-02 — MSD compression pilot completed, bounded cost verified
+
+- Retry 3289833 COMPLETED at 3m24s; completion.json records one complete case.
+  Forward/copy 106.892s on one GH200 120GB, GPU peak allocated ~39.09GiB.
+  Python RSS high-water ~35.60GiB; Slurm sampled MaxRSS lower (~21.90GiB).
+  Supports the first attempt's insufficient 32G host-memory limit; no need to
+  change model/geometry or use decoder tiles to recover this case.
+- Both attempts total elapsed 103+204=307s => 0.08528 physical GPU-hours,
+  ~0.17056 allocation-equivalent hours under interactive 2x rule (not claimed
+  posted balance debit). Total original 0.25-hour cap respected. No more jobs.
+- Case005 lesion 7.60mL, not voxel-tiny. Preprocessing caused zero tumor-region
+  HU MAE. Reconstruction mean local contrast 43.67->43.32HU (~99.19% retained),
+  CNR .56165->.54443; lesion HU MAE 36.21, boundary-band HU MAE 36.09.
+  Fixed-window image inspected: texture visibly smoother. Mean contrast does
+  not establish preserved boundaries/detection/clinical realism. No erasure
+  claim, no matched-quality or faster-training claim from one example.
+- Downloaded only small diagnostics/JSON/source manifest to
+  research/compression_probe/results_20261001/; raw CTs/masks stay remote.
+  Source published in 6574fbd; final evidence and cautious interpretation in
+  results_20261001/SUMMARY.md. Next: truly small lesion cases, paired controls
+  and independent quality validation, not premature adaptive-depth training.
