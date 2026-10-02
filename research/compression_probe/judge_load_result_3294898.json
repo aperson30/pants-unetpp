@@ -1,0 +1,39 @@
+{
+  "completed": true,
+  "clinical_inference": false,
+  "torch_version": "2.10.0+cu129",
+  "results": [
+    {
+      "dataset": "Dataset103_PANORAMA_baseline_Pancreas_Segmentation",
+      "fold": 4,
+      "strict_state_load": true,
+      "checkpoint_sha256": "81fba70fc62e7d0aaf8f5a3c3e5ddc9bd88fc326b35736444e970812b1cac6b1",
+      "synthetic_output_finite": true,
+      "output_shape": [
+        1,
+        2,
+        16,
+        64,
+        64
+      ],
+      "forward_seconds": 0.32783232908695936,
+      "cuda_peak_bytes": 127192064
+    },
+    {
+      "dataset": "Dataset104_PANORAMA_baseline_PDAC_Detection",
+      "fold": 4,
+      "strict_state_load": true,
+      "checkpoint_sha256": "c5a201f0f05030f4e367332f5f64caad66138fe56ea1e1fe1c2f2d9b6c635d1c",
+      "synthetic_output_finite": true,
+      "output_shape": [
+        1,
+        7,
+        16,
+        64,
+        64
+      ],
+      "forward_seconds": 0.013785540824756026,
+      "cuda_peak_bytes": 184667648
+    }
+  ]
+}

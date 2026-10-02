@@ -1389,3 +1389,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Budgetreserveconservative.166667chargedh max, prior.448611,maxcombined.615278of2.
   Heldbilling1000 isn'tactualinteractivebilling; verifyAllocTRES/accounting later.
   No PanTSevalchange/autoretry. Handoff34/protocolrecordjob+logs+nextsteps.
+
+### 2026-10-02 — Judge actual checkpoint-load gate3294898 PASSED
+
+- COMPLETEDexit0:0,14s,AllocTRESbilling2000GPU1CPU2mem8G. Charge-equivalent
+  .00777778h; campaignestimate~.456389of2, posteddebitunverified.
+- Bothrealmodels strictloaded withrestrictedNumPymetadata compatibility,
+  exactcheckpoint/archiveplans+datasetmatch; expected2/7head finite outputs.
+  Peaks127192064/184667648bytes. Toyforwardtimesnotcomparativebenchmarks.
+- ScalarJSONpreserved. No realCTinference/recallclaim/autoretry/evalchanges.
+  Next guardedrealpreprocessing+paired pipeline and independently cappedcompute.
+  Handoff35/protocol updated; priorPENDINGentry is historical, nowcompleted.

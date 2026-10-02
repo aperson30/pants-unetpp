@@ -297,3 +297,24 @@ result. NO successful model load or synthetic forward claim yet. Slurm test-only
 IDs3294897/3294901 are not submitted jobs. Frozen batch script uses regular
 directive but actual held-job partition override documented above; no post-submit
 code mutation. Protected PanTS evaluation untouched; no automatic retry.
+
+## Actual model-load gate PASSED (job3294898)
+
+Slurm COMPLETED exit0:0,14 allocation seconds,AllocTRESbilling2000/cpu2/GPU1/
+mem8G. Charge-equivalent14/3600*2=.00777778GPUh; updated campaign estimate
+.45638878of2 (prior.448611 approximate). Actual posted debit remains unverified.
+No retry/continuation submitted. Sourcehash check passed in allocation.
+
+Both real official fold4 checkpoints passed restricted loading, exact archive/
+checkpoint plans+dataset correspondence, strict state_dict load and finite
+synthetic outputs under PyTorch2.10+cu129. Pancreas shape1x2x16x64x64,
+PDAC1x7x16x64x64. GPUpeak127192064/184667648bytes. Synthetic forward timing
+.327832/.013786s includes different warmup states and is NOT a comparative
+benchmark, full-CT inference estimate or accuracy result. Legacy plans warning
+is expected conversion; strict realstate load succeeded.
+
+Scalar result preserved as judge_load_result_3294898.json. Still no CT passed
+through this detector, no tumor-recall result, no final candidate map, no claim
+of historic container parity. Next real preprocessing/paired-inference harness
+with guard integration, raw/masked/candidate outputs and separately capped cost.
+Protected PanTS evaluation untouched.

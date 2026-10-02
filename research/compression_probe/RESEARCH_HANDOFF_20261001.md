@@ -1375,3 +1375,15 @@ runningAllocTRES/accounting. TestonlyIDs3294897/3294901 aren't actualjobs.
 Remotehomejudge_load_gate_v1 logload_3294898.log/result_3294898.json.
 No protectedevalchange; noautoretry. Nextreadresult+charge, thenrealpairprep
 ifloadingpasses. Check existingjob before anynewsubmission.
+
+## 35. Allocated real-checkpoint loading PASSED, 14 seconds
+
+Job3294898 COMPLETED0:0,14s,billing2000. .00777778charge-equivalentGPUh;
+campaignestimate~.456389of2, posteddebitunverified. Bothactualfold4model files
+loadedwithrestrictedloader/strictstate, archive/checkpointmetadataexactmatch,
+finiteexpected2/7head syntheticoutput. Peaks127192064/184667648bytes.
+ScalarJSONjudge_load_result_3294898.json committed. Synthetictimingnotbenchmark.
+
+No CTinference/recallresult yet, noautoretry/newevalchange. Nextactual
+preprocessing and guardedpaired native/reconstruction pipeline, then separately
+cappedreal-casecompute. This closes modelcompatibility, not scientificquality.
