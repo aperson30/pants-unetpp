@@ -1363,3 +1363,17 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   DeltaAI. User requested allocation resources: actual load/inference on compute
   allocation, not login; don't idle GPU for download. No GPU job/evalchange/spend.
 - Handoff32/protocol record restart state. Screening estimate .448611of2 unchanged.
+
+### 2026-10-02 — Both public fold4 models staged on DeltaAI home
+
+- Reopened SSH worked. Actual quota-s:home6180M/102400Msoft103Ghard. Stopped
+  only owned Windows zero-byte transfer after executable+command verification;
+  partial retained. Frozen helpers scp tohome, hashesmatched, detached remote
+  transfer completed (PID2688525 atlaunch), no duplicate/retry.
+- Verified completion+CRC+SHA:pancreas132172006bytes,PDAC246418428bytes.
+  Archive traffic351596245bytes/115requests, not all fivefolds. Models in
+  /u/asanjeev/compression_probe_smalloutputs/judge_stage_fold4_v1/models.
+- Prepared judge_load_smoke.py: scheduledoneGPU only, restrictedload/strictstate/
+  metadata/finitesyntheticoutput. Syntaxonly locally, NOTrun/submitted.
+  No clinicaldataupload/GPUspend/evalchanges. .448611of2 estimate unchanged.
+  Protocol/handoff33 save restart at smoke review+shortcapped allocation.

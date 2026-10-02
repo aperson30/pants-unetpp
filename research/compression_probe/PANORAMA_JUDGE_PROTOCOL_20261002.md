@@ -230,3 +230,38 @@ run on allocated compute, not HPC login nodes. Do not reserve a GPU simply for
 this local download. Remaining screening cap applies, including failed jobs.
 Restore authenticated access, verify transfer completion/hash and staging space,
 then prepare one bounded compute check. Protected evaluation untouched.
+
+## Transfer completed directly on DeltaAI (2026-10-02)
+
+Local detached transfer remained zero-byte and was stopped only after checking
+its exact executable/command line matched our own helper (PID22644). Zero-byte
+partial retained, no retry running locally. Resumed authenticated DeltaAI master
+works. Actual `quota -s` reports home6180M used of102400M soft/103G hard;
+this is user quota evidence, unlike raw filesystem free space. Shared projects
+still near quota; no model files staged there.
+
+Copied frozen helper+RangeReader via authenticated scp to
+`/u/asanjeev/compression_probe_smalloutputs/judge_stage_fold4_v1`, mode700.
+Source hashes matched. Detached remote transfer PID2688525 at launch, timeout670s
+outside helper's660s watchdog, no retry. Completed marker and both CRC/hash
+results verified. Public model members only, no clinical image upload.
+
+| Stage | Uncompressed bytes | Downloaded archive bytes | Requests | SHA256 |
+|---|---:|---:|---:|---|
+|Pancreas|132172006|122696071|44|81fba70fc62e7d0aaf8f5a3c3e5ddc9bd88fc326b35736444e970812b1cac6b1|
+|PDAC|246418428|228900174|71|c5a201f0f05030f4e367332f5f64caad66138fe56ea1e1fe1c2f2d9b6c635d1c|
+
+Total351596245 archive bytes rather than all five folds. Archives lack ETag;
+ZIP CRC, TLS/public release URL, and local SHA provenance are checked, NOT
+claimed publisher-signature authenticity. `models/completion.json` true;
+weights_loaded false. No GPU hours used. Protected evaluation untouched.
+
+Prepared `judge_load_smoke.py` after reading installed network-construction
+API signature. Requires scheduled allocation, one visible CUDA GPU, completed
+transfer, matching hashes/fold/archive metadata, strict state load, finite tiny
+FP32 synthetic output. Uses `torch.load(weights_only=True)` with NO unrestricted
+fallback or blanket globals allowlist. Unsupported metadata fails cleanly for
+review; no repeated allocations until cause understood. No full CT inference.
+AST syntax check only passed locally (local runtime lacks torch); smoke script
+NOT executed, NOT submitted and NOT certified runtime-ready. Next review and
+one short capped allocated-compute smoke, then actual preprocessing/pair setup.

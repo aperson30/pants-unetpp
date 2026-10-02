@@ -1344,3 +1344,17 @@ user reopen DeltaAI. User requests allocation resources: actual load/inference
 on scheduled compute, not login; no GPU reserved for waiting on local download.
 No GPU job/eval modification/new spending. Restart by inspecting current local
 transfer (do not duplicate), then authenticated staging and capped compute check.
+
+## 33. Both selected model files staged; restricted load smoke prepared
+
+Local zero-byte transfer stopped after verifying own exact command. Partial kept.
+Reopened DeltaAI master worked; actual homequota~6.18GBof100GB, enough staging.
+Frozen helper copied tohome/judge_stage_fold4_v1; detached remote transfer
+completed with CRC/SHA, onlyfold4 members:132172006+246418428bytes; total
+archive traffic351596245bytes,115requests. Completiontrue,weightsloadedfalse.
+Source/noimages only; sharedprojects and protectedeval untouched. ZeroGPUspend.
+
+judge_load_smoke.py prepared against installedAPI: allocatedGPUonly, hashes,
+strictweight/head/fold/meta checks, restrictedtorchload, tinyfiniteFP32output,
+no unrestricted fallback. Localsyntaxonly, NOTexecuted/submitted. Seeprotocol
+for hashes/source paths. Nextreview+cappedcompute smoke, then realpairedinputs.
