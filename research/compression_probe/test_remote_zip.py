@@ -42,6 +42,25 @@ class ZipRangeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'budget'):
             reader.read(3)
 
+    def test_same_length_changed_etag_rejected(self):
+        count = 0
+        def opener(request, timeout):
+            nonlocal count
+            count += 1
+            response = Response(b'x', 0, 0, 100)
+            response.headers['ETag'] = '"first"' if count == 1 else '"second"'
+            return response
+        reader = RangeReader('https://zenodo.org/test', opener=opener)
+        with self.assertRaisesRegex(ValueError, 'identity changed'):
+            reader.read(1)
+
+    def test_expired_deadline_rejected(self):
+        reader = RangeReader('https://zenodo.org/test',
+                             opener=lambda *a, **k: Response(b'x', 0, 0, 100))
+        reader.deadline = 0
+        with self.assertRaises(TimeoutError):
+            reader.read(1)
+
 
 if __name__ == '__main__':
     unittest.main()

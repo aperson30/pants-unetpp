@@ -1245,3 +1245,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Next:version/clinicalmanual-label/foldeligible-casejoin,thenboundedmember
   integritytest andjudgeprotocolcheck beforeanynewGPUspend. NoXLSXanalysis
   orweightsdownload yet. Handoffsection22 updated;Claude's logunchanged.
+
+### 2026-10-02 — CPU-only cohort join and selective CT retrieval completed
+
+- Independentlyreproduced380manualPDAC studies(74/81/84/58/83),11crossfold
+  patients/25studies excluded;MSD/NIHexcluded viaexplicitclinicallevel.
+  Batch1contains81candidates(17/16/15/14/19). Sourcespinned;workbookunchanged.
+- Two-stagefoldJSONlists differinorder,butmembershipidentical. Failclosed
+  comparisoncorrected tovalidatedsets;2regressiontests pass. Noassumedmatch.
+- ActualsingleCT100226_00001download21,471,554bytes viaRange;ZIPCRC/hash,
+  pinnedmask/geometry/finite/mmunits/tumor1verified. Smallestpathology-backed
+  filechosenfortransportONLY,notcohort. ETagabsent:noimmutabilityclaim.
+- Initialnibabelimportnotavailablebundled,usedexistingisolatedimagingenv.
+  Binarymaskguardcaughtactualdocumented0-6labels;correctedand reverified
+  existingCTwithoutrepeatdownload. Completiontrue;failedchecksnotcalledGO.
+- 5rangeguardtests+2foldtests passed;noGPUcharge/weights/imagepublication
+  orprotected47320183change. Estimate .448611of2cap unchanged. Seeaccessdoc
+  andhandoff23. Nextjudgeprotocol/singlefoldbothstages beforeGPUspend.

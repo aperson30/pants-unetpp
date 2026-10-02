@@ -7,6 +7,7 @@ import argparse
 import io
 import json
 import re
+import time
 import urllib.request
 import zipfile
 
@@ -15,18 +16,30 @@ class RangeReader(io.RawIOBase):
     def __init__(self, url, opener=urllib.request.urlopen, byte_limit=8*1024**2):
         self.url, self.opener, self.byte_limit = url, opener, byte_limit
         self.used, self.calls, self.position, self.total = 0, 0, 0, None
+        self.etag = None
+        self.deadline = time.monotonic() + 180
         self._fetch(0, 1)
 
     def _fetch(self, start, count):
+        remaining = self.deadline - time.monotonic()
+        if remaining <= 0:
+            raise TimeoutError('Range probe total deadline exceeded')
         # Reserve the extra byte used to detect an oversized server response.
         if count > 4*1024**2 or self.used+count+1 > self.byte_limit or self.calls >= 32:
             raise ValueError('Range metadata budget exceeded')
         request = urllib.request.Request(self.url, headers={
             'Range': f'bytes={start}-{start+count-1}', 'Accept-Encoding': 'identity'})
+        if self.etag and not self.etag.startswith('W/'):
+            request.add_header('If-Match', self.etag)
         self.calls += 1
-        with self.opener(request, timeout=15) as response:
+        with self.opener(request, timeout=min(15, remaining)) as response:
             if response.status != 206:
                 raise ValueError('Server did not honor Range; body not read')
+            etag = response.headers.get('ETag')
+            if self.calls == 1:
+                self.etag = etag
+            elif self.etag != etag:
+                raise ValueError('Archive identity changed between requests')
             match = re.fullmatch(r'bytes (\d+)-(\d+)/(\d+)', response.headers.get('Content-Range', ''))
             if not match:
                 raise ValueError('Missing/invalid Content-Range')

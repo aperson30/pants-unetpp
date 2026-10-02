@@ -963,3 +963,23 @@ Nextcheapgate:clinical/manualmask/fold/versionjoin andsingle-member transfer
 integrity beforeboundedreal-lesionjudge. No workbookanalysis/checkpointdownload
 yet;no largearchive justifiedbydirectorysuccess. Preserveoriginaljudgemisses;
 frozenjudge failure doesnotproveirrecoverableinformationloss. PanTSevaluntouched.
+
+## 23. CPU-only public metadata and individual CT access verified
+
+See SELECTIVE_DATA_ACCESS_20261002.md forpinnedSHAs/details. Independentjoin
+reproduces380manualPDAC studies,74/81/84/58/83byfold afterMSD/NIH and11
+crossfoldpatient exclusions. Batch1contains81(17/16/15/14/19). Two-stagefold
+membership matches despite differentJSONlistorder;twofold-contracttestspass.
+
+Fetchedonly21,471,554byteCT100226_00001,smallestpathology-confirmedtransfer
+candidate,NOTscientificcohortselection. ZIPCRC/fullhash/pinnedmanualmask,
+512x512x58geometry,mmunits/finite/nonemptytumorverified;completiontrue.
+Maskinitiallyfailedbinary-onlycheck;actual documented0-6 conventionverified
+thenexistingCTCRC/pinnedmaskrecheckedwithoutrepeatCTdownload. ZenodoETagabsent;
+noimmutableETagclaim. Bundledruntime lackednibabel,usedexistingisolatedimaging
+runtime,noinstall/trainingenvchange. Fivebounded-rangeunit tests nowpass.
+
+Noimages/workbook/readerkeypublished;noGPUjob,PanTSeval47320183untouched.
+Chargeestimateunchanged .448611of2. Next:judgepreprocessing/singlefoldboth
+stages andprespecifiedpairedprotocol beforeanynewGPUcalibration. Access
+resolvedforonecase,notunbiasedcohortorindependentcheckpointselectionexposure.
