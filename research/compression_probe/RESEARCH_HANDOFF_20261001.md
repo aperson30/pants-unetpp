@@ -1491,3 +1491,21 @@ selection bias; do not turn a two-patient feasibility screen into a cohort.
 
 https://docs.ncsa.illinois.edu/systems/deltaai/en/latest/user-guide/architecture.html
 https://docs.ncsa.illinois.edu/systems/deltaai/en/latest/user-guide/software.html
+
+## 40. Small replication hit Slurm OOM; host-RAM-only correction queued
+
+3295577 FAILED1:0 after114s, step OUT_OF_MEMORY0:125, Slurm oom_kill event,
+no completion/arm outputs. Cost0.063333charge-equivalentGPUh. Logged CUDA
+free101495996416/total102087458816 bytes;65GBGPU guard passed. Host limit32G.
+Sampled MaxRSS17328064K is not the instantaneous peak. CPU-offload source
+was inspected directly in installedMONAI1.5.1: GroupNorm for maxdimension>=500
+uses cloned CPU tensors and repeated concatenation before returning to GPU.
+Likely host-memory pressure; no Python failure-stage traceback survived.
+
+3296011 verified held then released PENDING,96G host RAM instead of32G,
+same1GPU/2CPU/billing2000/10min/no requeue/540s timeout. Scientific settings
+and locked patient unchanged; added CPU RSS/GPU memory stage logging only.
+Frozen hashes/bash syntax pass, five CPU contract/geometry tests pass1.408s.
+New private small_v2 preserves OOM artifacts. No case substitution or47320183
+changes. Cumulative estimate0.669167/2, worst-case1.002500 with new job;
+posted debit unverified. Do not automatically retry if it fails again.

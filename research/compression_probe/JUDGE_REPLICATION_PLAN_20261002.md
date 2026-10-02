@@ -84,3 +84,28 @@ prediction weight contract and all neural operations remain unchanged.
 Campaign estimate0.605833/2 chargedh; maximum new0.333333 =>0.939167 worst-case.
 Do not automatically retry or change posterior/chunking to force the large case.
 Any later larger-volume protocol needs its own compatible hardware/memory plan.
+
+## Host-memory OOM and resource-only correction
+
+3295577 FAILED1:0 in114s; step3295577.0 OUT_OF_MEMORY0:125 and logged Slurm
+oom_kill. No completion or arm results. Charge-equivalent0.063333GPUh.
+Actual logged CUDA free101495996416/total102087458816 bytes; GPU65GB gate
+passed. Slurm host RAM limit32G. Sampled MaxRSS17328064K does not capture
+the instantaneous killing peak and must not be cited as the true peak.
+
+Installed MONAI1.5.1 MaisiGroupNorm3D.forward uses CPU concatenation when
+max(inputs[0].size())>=500; _cat_inputs clones to CPU and repeatedly torch.cat
+before returning to GPU. Thus512-wide volumes require substantial host memory
+even with enough HBM. This supplies a concrete explanation consistent with
+the Slurm OOM kill; failure location was not captured in a Python traceback.
+No claim that GPU allocation remained below capacity at every instant.
+
+One explicit resource-only retry3296011 verified held then released PENDING:
+host96G instead of32G, same1GPU/billing2000,10min/no-requeue/540s timeout,
+same patient and pixels, precision, VAE operations, detectors and65GBfree gate.
+Added CPU peak-RSS and CUDA allocated/reserved logs at model/encode/decode/
+release stages; no synchronization or model changes. Private small_v2 preserves
+v1 artifacts. Frozen hashes/bash syntax and five CPU weight-loop/geometry
+tests pass1.408s. Larger patient remains blocked, no new case or method.
+Campaign estimate0.669167 used; max with new job1.002500/2 charged GPUh.
+Posted debit unknown. Further failure requires fresh diagnosis, not auto-retry.

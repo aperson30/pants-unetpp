@@ -355,3 +355,10 @@ Large selected patient remains blocked, no replacement. Smaller locked patient
 3295577 released PENDING,33M padded cap and65GB actual-free gate, same pixels/
 model/three arms.10min hard cap/no requeue. Campaign worst-case0.939167/2;
 see plan amendment and handoff39. No clinical result or automatic retry.
+
+3295577 subsequently failed Slurm step OOM after114s, no arm results,0.063333h.
+CUDA free/total101.50/102.09GB passed gate; host32G limit and installed MONAI
+GroupNorm CPU-concat path identified. Sampled RSS is not actual kill peak.
+3296011 released PENDING with host96G, sameGPU/billing2000/10min and unchanged
+scientific settings; stage memory logs added. Five CPU tests pass1.408s.
+Campaign max1.002500/2chargedh. Larger case stays blocked; no auto-retry/evalchange.

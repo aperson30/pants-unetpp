@@ -1447,3 +1447,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   requeue. Estimated52GB peak is NOT a proven bound. Neural protocol unchanged.
 - Estimate0.605833 used/2; worst-case0.939167. Handoff39/plan amended,
   actual memory will print. No data publishing, substitute, or47320183 change.
+
+### 2026-10-02 — Slurm OOM diagnosed; host-RAM-only correction queued
+
+-3295577 FAILED114s, stepOOM0:125 and oom_kill; no results.0.063333chargedh.
+  GPUfree101.50GB passed;32Ghost request. InstalledMONAI GroupNorm CPU
+  concatenation on512-wide tensors supplies likely cause; no exact kill peak.
+-3296011 released PENDING after held checks:96Ghost, same1GPU/billing2000,
+  10min/no requeue. Same patient/scientific operations; stage memory logs added.
+  Five CPUtests pass1.408s, hashes/bash pass; separate small_v2 preservesv1.
+- Estimate0.669167/2 used, worst-case1.002500. Handoff40/plan/protocol updated.
+  Larger case blocked, no substitution/automaticretry/protected47320183change.

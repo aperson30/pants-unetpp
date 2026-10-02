@@ -10,6 +10,7 @@ import importlib.metadata
 import json
 import os
 from pathlib import Path
+import resource
 import time
 
 import nibabel as nib
@@ -38,6 +39,14 @@ def sha(path):
 def save_json(path, result):
     with path.open('x', encoding='utf8') as stream:
         json.dump(result, stream, indent=2, allow_nan=False)
+
+
+def log_memory(stage):
+    """Diagnostic only; does not synchronize or change model operations."""
+    print('MEMORY_STAGE', stage, dict(
+        cpu_peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+        cuda_allocated=torch.cuda.memory_allocated(),
+        cuda_reserved=torch.cuda.memory_reserved()), flush=True)
 
 
 def detector(models, dataset, trainer, checkpoint_name, heads):
@@ -134,13 +143,17 @@ def main():
     if normalized.size > args.max_voxels:
         raise ValueError('Padded full volume exceeds explicit resource cap')
     model = load_model(str(args.vae)).cuda()
+    log_memory('vae_loaded')
     torch.cuda.reset_peak_memory_stats()
     started = time.monotonic()
     with torch.inference_mode():
         tensor = torch.from_numpy(normalized)[None, None].cuda()
+        log_memory('before_encode')
         mean, sigma = model.encode(tensor)
+        log_memory('after_encode')
         del tensor, sigma
         output = model.decode(mean)
+        log_memory('after_decode')
         if not torch.isfinite(output).all():
             raise ValueError('Nonfinite VAE output')
         reconstruction = output[0, 0].float().cpu().numpy()
@@ -153,6 +166,7 @@ def main():
     del model, normalized
     gc.collect()
     torch.cuda.empty_cache()
+    log_memory('vae_released')
     for name, array in [('control', control), ('reconstruction', reconstruction)]:
         restored = restore_native(array, canonical, native)
         restored_image = nib.Nifti1Image(restored, native.affine, native.header.copy())
