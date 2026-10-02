@@ -398,7 +398,9 @@ Short answer: **yes, with two exclusions and one residual caveat.**
 
 ### 12.4 Cheapest decisive experiment
 
-Run two tiers; stop after Tier A if it is negative.
+Run two tiers. Revised per 12.8: Tier A is a cheap engineering diagnostic,
+not a gate that blocks Tier B; a Tier A pass cannot rule out damage to real
+PDAC.
 
 **Tier A — controlled lesion-insertion dose-response (no detector, no reader).**
 - [estimate] Cost: about 8 MAISI VAE passes. Measured passes in Section 6 were
@@ -438,7 +440,7 @@ Run two tiers; stop after Tier A if it is negative.
   (`extract_lesion_candidates`, picai_eval matching), full probabilities saved.
 - Primary outcome: paired lesion-level detection lost vs gained at a fixed
   threshold, exact McNemar on discordant pairs; false positives on negatives.
-- **GO** (bring to PI): losses minus gains >= 5 with one-sided exact McNemar
+- **GO** (pursue the representation question): losses minus gains >= 5 with one-sided exact McNemar
   p < 0.05 for MAISI vs control, and MAISI loses more than the Gaussian arm.
   (For reference, 7 losses and 0 gains gives p = 0.0078.)
 - **NO-GO**: losses minus gains <= 2, or MAISI no worse than the Gaussian
@@ -495,3 +497,98 @@ Run two tiers; stop after Tier A if it is negative.
   https://arxiv.org/abs/2508.05772
 - Committed probe outputs: `results_20261001/`, `small_results_20261001/`,
   `second_results_20261001/` (`metrics.json`, `contrast_sensitivity.json`).
+
+### 12.8 Corrections after Codex review of 5f566e2 (accepted)
+
+1. **Synthetic inserts are not real tumors.** Passing Tier A cannot rule out
+   damage to real PDAC (infiltrative margins, desmoplastic texture, duct
+   changes). Tier A is demoted to a diagnostic (see 12.4).
+2. **"Not in MAISI's training list" is not proof of unseen.** 12.1/12.3
+   wording "clean with respect to MAISI" is too strong; read it as "not
+   listed in the published training tables". Patient-level independence from
+   MAISI is unverified.
+3. **Tier A cost must be recomputed.** Isolating an inserted signal needs
+   matched reconstructions with and without the insert (at least 2 passes per
+   host per spacing), and isotropic resampling can enlarge volumes and memory
+   substantially. The 0.3-0.5 GPU-h figure is withdrawn until one matched
+   insertion pair has been calibrated.
+4. **Checkpoint-selection bias does not necessarily cancel in paired
+   deltas.** PANORAMA selected each fold's detection checkpoint on that
+   fold's validation AUROC/AP, so a checkpoint tuned to those images may
+   respond differently to perturbed versions of them. Keep the caveat on
+   paired results.
+
+Revised order: (a) CPU-verify checkpoint/fold identity from one `.pth`'s
+stored `init_args`; (b) prepare ONE matched insertion pair and calibrate its
+actual cost; (c) then decide how far to expand Tier A, and run Tier B
+independently of Tier A's outcome.
+
+### 12.9 Candidate direction: sub-visual fidelity of generative CT models
+
+Status: idea with a cheap kill test. Novelty NOT cleared; only "not found" in
+a short search.
+
+**Observation [measured, external sources].** Pancreatic cancer leaves
+signals on routine CT before a visible tumour: Mayo Clinic's REDMOD
+radiomics model flagged 73% of prediagnostic cancers at a median of about 16
+months before diagnosis (Gut, 2026), and main-pancreatic-duct features have
+been used to predict PDAC up to 10 years ahead. These signals are texture
+and duct patterns that radiologists typically cannot see.
+
+**Gap [hypothesis].** Generative CT models and their autoencoders are
+validated on what humans or segmenters see (FID, reader "real vs fake"
+tests, Dice on synthetic data). A reader study cannot, by definition, check
+sub-visual signals. If compression or synthesis smooths parenchymal texture,
+synthetic data and latent-space foundation models could lose exactly the
+early-detection signal while passing every standard check.
+
+**Question.** Do pretrained 3D CT generative models (MAISI VAE first)
+preserve the sub-visual pancreatic signals that separate cancer-bearing from
+healthy pancreases?
+
+**Known nearby work.** Radiomics stability under deep-learning CT denoising
+and reconstruction is studied in medical physics; model observers (e.g.
+channelized Hotelling) are standard for CT low-contrast detectability. Not
+found: the same question for generative foundation models/autoencoders or
+for prediagnostic signals. Check these literatures properly before claiming
+novelty.
+
+**Cheapest kill test.**
+1. CPU only, on existing reconstructions: compute standard pancreatic
+   radiomics (first-order, GLCM/GLRLM texture) and main-duct diameter on the
+   three MSD originals vs MAISI reconstructions, in parenchyma excluding the
+   tumour plus a margin. Engineering check only (n = 3, MSD exposure caveats
+   in 12.2).
+2. Then about 20 PDAC + 20 negative PANORAMA-native studies, patient-
+   disjoint (12.3), parenchyma away from the lesion: original, matched
+   Gaussian control, MAISI reconstruction (paired passes; cost to be
+   calibrated, 12.8 item 3).
+3. Prespecify the feature set (e.g. a published early-detection radiomics
+   set) and the separation metric (per-feature AUC PDAC-pancreas vs healthy)
+   before any reconstruction.
+- **GO:** the features that separate PDAC-bearing from healthy pancreas lose
+  most of that separation after MAISI reconstruction (e.g. median AUC drop
+  >= 0.1) AND more than under the matched Gaussian control.
+- **NO-GO:** separation is preserved within the control's spread; report as
+  evidence that the VAE keeps sub-visual signal.
+- Caveat: visible-PDAC cases are a proxy for prediagnostic scans. A true
+  test needs prediagnostic CTs, which PANORAMA does not provide (only 14
+  multi-study patients).
+
+**Why it could matter.** Either outcome is reportable, and a positive result
+would challenge how generative medical models are evaluated. Detectability
+curves from CT physics (model observers) are the natural measurement tool.
+
+Sources:
+- Mayo Clinic REDMOD announcement (Gut, 2026):
+  https://newsnetwork.mayoclinic.org/discussion/mayo-clinic-ai-detects-pancreatic-cancer-up-to-3-years-before-diagnosis-in-landmark-validation-study/
+- Duct features in prediagnostic CT, up to 10 years ahead:
+  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12153928/
+- Task-based evaluation of AI imaging methods: https://arxiv.org/abs/2107.04540
+- CHO low-contrast detectability in CT:
+  https://www.researchgate.net/publication/283967044_Objective_assessment_of_low_contrast_detectability_in_computed_tomography_with_Channelized_Hotelling_Observer
+
+Demoted after search: anatomy-routed compute for 3D diffusion (deep only near
+the pancreas). Structure-adaptive sparse 3D diffusion already reports up to
+10x training acceleration (https://pith.science/paper/2604.17773), and
+LAW & ORDER learns where to spend compute (https://arxiv.org/abs/2603.04795).
