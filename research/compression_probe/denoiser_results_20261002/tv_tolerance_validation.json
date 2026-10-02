@@ -1,0 +1,62 @@
+{
+  "completed": true,
+  "checks": [
+    {
+      "eps": 2e-05,
+      "max_num_iter": 800,
+      "strength": 5.85732019570609,
+      "records": [
+        {
+          "raw_signed_retention": 0.7080235004425048,
+          "ring_corrected_retention": 0.6882047280669212,
+          "contrast_hu": -20.0,
+          "difference_from_primary": -0.0020105302333831565
+        },
+        {
+          "raw_signed_retention": 0.6842277526855469,
+          "ring_corrected_retention": 0.6625731825828552,
+          "contrast_hu": -10.0,
+          "difference_from_primary": -0.00046749264001844093
+        },
+        {
+          "raw_signed_retention": 0.6508595466613769,
+          "ring_corrected_retention": 0.6270689368247986,
+          "contrast_hu": 20.0,
+          "difference_from_primary": -0.0018270984292030334
+        }
+      ],
+      "fitting_hf_sd_hu": 18.146340281395528,
+      "holdout_hf_sd_hu": 15.905969172471655
+    },
+    {
+      "eps": 2e-06,
+      "max_num_iter": 800,
+      "strength": 5.85732019570609,
+      "records": [
+        {
+          "raw_signed_retention": 0.7074422359466552,
+          "ring_corrected_retention": 0.6876496911048888,
+          "contrast_hu": -20.0,
+          "difference_from_primary": -0.0025655671954155634
+        },
+        {
+          "raw_signed_retention": 0.6842456340789795,
+          "ring_corrected_retention": 0.662656980752945,
+          "contrast_hu": -10.0,
+          "difference_from_primary": -0.00038369446992869705
+        },
+        {
+          "raw_signed_retention": 0.6507982730865478,
+          "ring_corrected_retention": 0.6270755052566528,
+          "contrast_hu": 20.0,
+          "difference_from_primary": -0.0018205299973488298
+        }
+      ],
+      "fitting_hf_sd_hu": 18.146003554252186,
+      "holdout_hf_sd_hu": 15.904827158611539
+    }
+  ],
+  "elapsed_seconds": 48.21899999999732,
+  "runner_sha256": "82f9010d68886be3507202e9c7e5aa55e61efb26ec2e67b56115a0235e488cac",
+  "note": "Numerical validation only; strength never retuned, primary outputs preserved."
+}

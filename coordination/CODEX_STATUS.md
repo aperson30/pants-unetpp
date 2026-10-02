@@ -1288,3 +1288,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Uniqueoutputswork/denoiser_control_20261002_v1*. TVpassesnowpresent;NLM/final
   completionnotyetverified. No prematureverdict ornewGPUspend. PanTSeval
   untouched; .448611chargedGPUhestimate unchanged. Handoff26/protocolsaved.
+
+### 2026-10-02 — CPU control and tighter-TV validation complete
+
+- Interruptiondidnotduplicatework:primarycompleted98.547s,successmarkertrue,
+  stderr empty. TV/NLMfiterrors.0617%/.2481%;holdout8.92%/11.19%. NLMfails
+  fixed10%holdoutmatch;curvevalidbutnotfullymatchedcomparator. No threshold
+  relaxation. TV.663vsVAE.314 retentionat-10HU;weakgapnotreproducedhere.
+- NLMsignasymmetry.198>VAE.135 underminesunique-VAE-asymmetryclaim. Onehost,
+  HFtexture NOTnoisepower;nolearned-prior/clinical/noveltyproof.
+- Sameeps200/400capcheckpotentiallyweak;separatenumericalvalidationfroze
+  TVstrength,eps2e-5/2e-6,max800 onbaseline+3inserts. Completed48.219s,max
+  retentionchange.002566<.01. Noretuning/primaryoverwrite. Source+scalarJSONs
+  committed,noimages/readerkey. DENOISER_CONTROLdoc/handoff27updated.
+- NoGPUuse,evalchangeornewSlurmjob. Screeningestimate .448611of2 unchanged.
+  Nextjudgeprotocol+pricedtinycalibration,notmorecontrolparametersearch.

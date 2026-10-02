@@ -1,0 +1,40 @@
+{
+  "scope": "one-host engineering control, NOT clinical endpoint or VAE-specific proof",
+  "hashes": {
+    "image": "60301cafdd54fe66fb7517eb19eac063c1caa0e5ff106f99fc68fea26ca644c8",
+    "label": "60ddf8533b024353ea2b06a4eee66700f07d20c53ec0c5300aba9879714ba34d",
+    "reconstruction": "a2d31659c02f2d2b51eea9d0bf97656ed6cb477a204187977d47131fcd1ac1c1"
+  },
+  "spacing_mm": [
+    0.6835939884185791,
+    0.6835939884185791,
+    4.0
+  ],
+  "fit_voxels": 6570,
+  "holdout_voxels": 6386,
+  "target_hf_sd_hu": 18.16831404158417,
+  "calibration_axis": 0,
+  "calibration_cut_voxel": 195,
+  "crop_shapes": [
+    [
+      251,
+      179,
+      25
+    ],
+    [
+      297,
+      225,
+      33
+    ]
+  ],
+  "matching": "2mm high-pass texture SD, NOT pure noise SD or observer detectability",
+  "families": [
+    "tv",
+    "nlm"
+  ],
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "nibabel": "5.4.2",
+  "skimage": "0.25.2",
+  "runner_sha256": "acd6617b4b84887d598cee8966371bc510ab1577edb469ff296a4b2991070395"
+}

@@ -1,0 +1,8 @@
+{
+  "crop_max_abs_hu": 0.00017547607421875,
+  "iteration_max_abs_hu": 0.0,
+  "vae_holdout_hf_sd_hu": 17.48046687502686,
+  "filter_holdout_hf_sd_hu": 15.921486538956026,
+  "holdout_relative_hf_error": 0.08918413605405708,
+  "holdout_match_within_10pct": true
+}

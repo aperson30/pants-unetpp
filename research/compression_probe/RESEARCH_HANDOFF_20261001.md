@@ -1243,3 +1243,26 @@ Metrics-only uniqueoutput. Noheavydenoising onHPC login,nonewGPUallocation.
 Statusatlaunch:running,NOTcompleted. Estimate .448611chargedGPUh unchanged.
 ProtectedPanTSeval untouched. No auto scientificGO; numerical/matching failure
 meansinconclusive,anddoesnotautomaticallyblockreal-lesiontest.
+
+## 27. CPU denoiser comparison completed, with meaningful limitations
+
+Completed98.547s,zeroGPUhours. SeeDENOISER_CONTROL_20261002.md andcommitted
+denoiser_results_20261002/ scalarprovenance. FixedTV/NLM fitting errors.0617%/
+.2481%;heldout errors8.92%/11.19%,soNLMfails10%holdoutmatchingcriterion.
+Do notclaimbothcontrols matched orrelaxthresholdafteroutcomes. TVcropmax
+.000175HU/NLM0;allpasscropresponse discrepancies <=1.5e-9.
+
+Correctedretention -10/-20/-40HU: VAE.314/.371/.517; TV.663/.690/.766;
+NLM.635/.707/.832. Weakgapnotreproducedbytheseconfigurations,butonehost and
+HFtexturematchingnotpure-noisematching. NLM+/−20asymmetry.198 >VAE.135,
+soasymmetryaloneNOTVAE-specific. Do notturncontrolfailureintosafetyresult.
+
+TV200/400capcheckcouldearlystopatsametolerance;post-runnumericalcheckheld
+strengthfixed,usedeps2e-5/2e-6,max800 onbaseline/-20/-10/+20. Completed48.219s;
+largestretentionshift .002566<.01. Primaryresults/strengthsunchanged. Gapremains,
+notglobalconvergenceproof. Numericalvalidation code+scalars preserved.
+
+Decision:prioritizeindependentlyjustifiedreal-lesionjudgecalibration after
+protocolaudit;NOTcleanboth-matched-familyGO,learned-priorproof orS-tiermethod.
+Noextrafilterfamilies/retuning/newGPUjobs. .448611chargedhestimate unchanged;
+PanTSevaluntouched. NeedPIalignment beforeanyrepresentation-repairtraining.

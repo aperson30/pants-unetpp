@@ -1,0 +1,170 @@
+{
+  "completed": true,
+  "outcomes": {
+    "tv": {
+      "status": "valid-engineering-curve",
+      "strength": 5.85732019570609,
+      "checks": {
+        "crop_max_abs_hu": 0.00017547607421875,
+        "iteration_max_abs_hu": 0.0,
+        "vae_holdout_hf_sd_hu": 17.48046687502686,
+        "filter_holdout_hf_sd_hu": 15.921486538956026,
+        "holdout_relative_hf_error": 0.08918413605405708,
+        "holdout_match_within_10pct": true
+      },
+      "records": [
+        {
+          "raw_signed_retention": 0.7101163864135742,
+          "ring_corrected_retention": 0.6902152583003044,
+          "crop_retention_difference": 1.4901161415892261e-09,
+          "contrast_hu": -20.0,
+          "shift_voxels": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "raw_signed_retention": 0.6848430633544922,
+          "ring_corrected_retention": 0.6630406752228737,
+          "crop_retention_difference": 1.4901161415892261e-09,
+          "contrast_hu": -10.0,
+          "shift_voxels": [
+            0,
+            0,
+            0
+          ],
+          "iteration_retention_difference": 0.0
+        },
+        {
+          "raw_signed_retention": 0.7804443359375,
+          "ring_corrected_retention": 0.7655686199665069,
+          "crop_retention_difference": 0.0,
+          "contrast_hu": -40.0,
+          "shift_voxels": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "raw_signed_retention": 0.8753077507019043,
+          "ring_corrected_retention": 0.8669814571738242,
+          "crop_retention_difference": 0.0,
+          "contrast_hu": -80.0,
+          "shift_voxels": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "raw_signed_retention": 0.6527529239654541,
+          "ring_corrected_retention": 0.6288960352540016,
+          "crop_retention_difference": 0.0,
+          "contrast_hu": 20.0,
+          "shift_voxels": [
+            0,
+            0,
+            0
+          ],
+          "iteration_retention_difference": 0.0
+        },
+        {
+          "raw_signed_retention": 0.7132051944732666,
+          "ring_corrected_retention": 0.6938950464129447,
+          "crop_retention_difference": 0.0,
+          "contrast_hu": -20.0,
+          "shift_voxels": [
+            2,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "nlm": {
+      "status": "valid-engineering-curve",
+      "strength": 10.062222716760937,
+      "checks": {
+        "crop_max_abs_hu": 0.0,
+        "iteration_max_abs_hu": 0.0,
+        "vae_holdout_hf_sd_hu": 17.48046687502686,
+        "filter_holdout_hf_sd_hu": 15.523856968853792,
+        "holdout_relative_hf_error": 0.11193121557687578,
+        "holdout_match_within_10pct": false
+      },
+      "records": [
+        {
+          "raw_signed_retention": 0.7244826793670655,
+          "ring_corrected_retention": 0.7072060734033585,
+          "crop_retention_difference": 0.0,
+          "contrast_hu": -20.0,
+          "shift_voxels": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "raw_signed_retention": 0.6590279102325439,
+          "ring_corrected_retention": 0.6352401465177536,
+          "crop_retention_difference": 0.0,
+          "contrast_hu": -10.0,
+          "shift_voxels": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "raw_signed_retention": 0.8377948760986328,
+          "ring_corrected_retention": 0.8319429975003004,
+          "crop_retention_difference": 0.0,
+          "contrast_hu": -40.0,
+          "shift_voxels": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "raw_signed_retention": 0.9976630210876465,
+          "ring_corrected_retention": 1.000160612910986,
+          "crop_retention_difference": 0.0,
+          "contrast_hu": -80.0,
+          "shift_voxels": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "raw_signed_retention": 0.5404325962066651,
+          "ring_corrected_retention": 0.5088747829198838,
+          "crop_retention_difference": 0.0,
+          "contrast_hu": 20.0,
+          "shift_voxels": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "raw_signed_retention": 0.7091532230377198,
+          "ring_corrected_retention": 0.6913767322897911,
+          "crop_retention_difference": 0.0,
+          "contrast_hu": -20.0,
+          "shift_voxels": [
+            2,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  "elapsed_seconds": 98.54699999999866,
+  "note": "No automated scientific GO/STOP; matching and validity limitations must be reviewed.",
+  "volumes_saved": false
+}

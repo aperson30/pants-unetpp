@@ -103,3 +103,51 @@ failed matching or numerical gates. Inconclusive synthetic controls do not
 block a separately justified real-lesion test. Do not tune strengths, add
 families or choose a paper claim after seeing inserts. Spending estimate stays
 0.448611charged-equivalentGPUhours of the2-hour cap; CPU work adds zeroGPUhours.
+
+## Completed October2 results
+
+Primary CPU run completed in98.547s; completion marker true, stderr empty.
+Both fitting targets matched (TVrelativeerror0.0617%; NLM0.2481%). Classical
+controls were matched to18.168314HU fitting high-frequency SD, not noise power.
+Raw scalar/provenance results preserved in denoiser_results_20261002/.
+
+| Insert | MAISI corrected retention | TV corrected retention | NLM corrected retention |
+|---|---:|---:|---:|
+| -10HU | 0.313566 | 0.663041 | 0.635240 |
+| -20HU | 0.370755 | 0.690215 | 0.707206 |
+| -40HU | 0.517142 | 0.765569 | 0.831943 |
+| -80HU | 0.720277 | 0.866981 | 1.000161 |
+| +20HU | 0.235942 | 0.628896 | 0.508875 |
+| shifted-20HU | 0.374746 | 0.693895 | 0.691377 |
+
+Retention is signal response, NOT tumor accuracy. Ring correction can yield
+values slightly above1; do not clamp or interpret this as clinical improvement.
+Absolute +/-20 retention asymmetry: MAISI0.134812, TV0.061319, NLM0.198331.
+Thus this classical NLM configuration shows stronger local sign asymmetry
+than MAISI; asymmetry alone is NOT a unique VAE/learned-prior signature.
+
+Baseline crop maximum differences: TV0.000175HU, NLM0HU. All contrast crop
+retention differences <=1.5e-9. Primary TV200vs400caps gaveidenticalresults,
+but the same early-stop tolerance can make that a weak convergence check.
+Therefore added separately labeled post-run numerical validation, NOT retuning:
+same selectedTVweight5.857320, fixed eps2e-5/2e-6, max800iterations, baseline
+and -20/-10/+20 inserts only. This completed in48.219s. Largest response shift
+fromprimary0.002566 (0.257percentagepoints),below0.01engineering tolerance.
+At eps2e-6 correctedretentions -20/-10/+20=.687650/.662657/.627076; the weak-
+signal gap toVAE remains. Strengths,primary outputs and scientific thresholds
+were not changed. This checks numerical stability, not all solver convergence.
+
+**Holdout limitation:** VAEHFSD17.480467HU; TV15.921487HU (-8.92%relative),
+NLM15.523857HU (-11.19%). TVpasses thepredeclared10%descriptive holdout check,
+NLMfails. The raw NLM curve is numericallyvalid, but it is NOT a well-matched
+holdout comparator. Do not loosen10% or relabelitGO after seeing this result.
+EvenTV's8.92%mismatch is appreciable; HFtextureSD includes anatomy, not justnoise.
+
+**Decision:** fixed TV control leaves substantially more weak signal than MAISI
+in this one construction; both fixed classical curves do not reproduce MAISI's
+faint-signal loss. This is useful evidence to prioritize a paired real-lesion
+judge, not a clean BOTH-matched-familiesGO, learned-prior proof or novelmethod.
+NLMholdoutfailure prevents applying Claude's strongest two-matched-controlGO
+literally. No further family or strength search. Real-lesion relevance remains
+unmeasured. Next inspect judge protocol, then price a tiny bounded calibration
+before GPU submission. Total screening estimate remains0.448611chargedGPUh.
