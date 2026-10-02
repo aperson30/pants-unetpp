@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 import time
 
+import numpy as np
 import torch
 from nnunetv2.utilities.get_network_from_plans import get_network_from_plans
 from nnunetv2.utilities.plans_handling.plans_handler import PlansManager
@@ -22,6 +23,20 @@ def digest(path):
         while block := source.read(4*1024**2):
             value.update(block)
     return value.hexdigest()
+
+
+def restricted_checkpoint_load(path):
+    # Static audit of these two official files found only old NumPy scalar/dtype
+    # metadata. Never allow arbitrary globals or use weights_only=False.
+    permitted = {'numpy.core.multiarray.scalar', 'numpy._core.multiarray.scalar', 'numpy.dtype'}
+    observed = set(torch.serialization.get_unsafe_globals_in_checkpoint(path))
+    if not observed.issubset(permitted):
+        raise RuntimeError('Unexpected checkpoint metadata types: ' + repr(sorted(observed)))
+    entries = [(np._core.multiarray.scalar, 'numpy.core.multiarray.scalar'),
+               (np._core.multiarray.scalar, 'numpy._core.multiarray.scalar'),
+               np.dtype, type(np.dtype('float32')), type(np.dtype('float64'))]
+    with torch.serialization.safe_globals(entries):
+        return torch.load(path, map_location='cpu', weights_only=True)
 
 
 def main():
@@ -59,9 +74,7 @@ def main():
         path = folder / 'fold_4' / checkpoint_name
         if path.stat().st_size != item['bytes'] or digest(path) != item['sha256']:
             raise RuntimeError('Checkpoint integrity mismatch')
-        # Reject unsupported checkpoint metadata instead of using weights_only=False
-        # or blanket allowlisting arbitrary checkpoint globals.
-        checkpoint = torch.load(path, map_location='cpu', weights_only=True)
+        checkpoint = restricted_checkpoint_load(path)
         if checkpoint['init_args']['fold'] != 4:
             raise RuntimeError('Checkpoint header fold mismatch')
         plans = json.loads((folder / 'plans.json').read_text())

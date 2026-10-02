@@ -1358,3 +1358,20 @@ judge_load_smoke.py prepared against installedAPI: allocatedGPUonly, hashes,
 strictweight/head/fold/meta checks, restrictedtorchload, tinyfiniteFP32output,
 no unrestricted fallback. Localsyntaxonly, NOTexecuted/submitted. Seeprotocol
 for hashes/source paths. Nextreview+cappedcompute smoke, then realpairedinputs.
+
+## 34. One short model-load job queued, no duplicate or retry
+
+Static metadata audit caught NumPy scalar/dtype compatibility BEFORE allocation.
+Narrow float32/64+old/newscalar aliases, weights_only=True retained. Toyroundtrip
+passed; no unrestrictedfallback. Source d5fc186b... frozen+hashchecked.
+
+Actualjob3294898 submittedheld, oneGPU/twoCPU/8GB/5min/norequeue. Regular
+estimate~week vs near-term interactive; moved SAME heldjob tointeractive,
+verifiedfields and released. LastlivePENDINGPriority,elapsed0; no loadresult.
+Conservativeinteractive2x max.166667chargedh; prior.448611,maxreservedtotal
+.615278of2. HeldReqTRESbilling1000 not assumedactualinteractivecharge; check
+runningAllocTRES/accounting. TestonlyIDs3294897/3294901 aren't actualjobs.
+
+Remotehomejudge_load_gate_v1 logload_3294898.log/result_3294898.json.
+No protectedevalchange; noautoretry. Nextreadresult+charge, thenrealpairprep
+ifloadingpasses. Check existingjob before anynewsubmission.

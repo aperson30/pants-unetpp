@@ -265,3 +265,35 @@ review; no repeated allocations until cause understood. No full CT inference.
 AST syntax check only passed locally (local runtime lacks torch); smoke script
 NOT executed, NOT submitted and NOT certified runtime-ready. Next review and
 one short capped allocated-compute smoke, then actual preprocessing/pair setup.
+
+## Allocated load gate submitted, not completed (2026-10-02)
+
+Static metadata audit using torch.serialization.get_unsafe_globals_in_checkpoint
+found ONLY numpy.core.multiarray.scalar/numpy.dtype in both files; no tensor
+weights loaded. Bounded pickletools inspection (no pickle execution) foundf4/f8
+dtype descriptors. Narrow restricted loader supports that scalar's NumPy1/2
+module paths, np.dtype and explicit float32/64dtype classes, never arbitrary
+globals or weights_only=False. First synthetic test exposed NumPy2_core alias;
+fixed and repeated successfully before any allocation. This is serialization
+compatibility work on official public model files, not security probing.
+
+Frozen actual smoke source SHA256:
+`d5fc186b3f47ddbbac9ccad35a6fdcb6f5829ea256763a4c5f22964c18891dcf`.
+Remote home `judge_load_gate_v1`, source.sha256 verified, bash syntax checked,
+synthetic float32/64+tensor roundtrip passed. No real weights loaded yet.
+
+Submitted HELD job3294898, accountbdyo-dtai-gh, oneGPU/twoCPU/8GB/5min,
+no requeue. Regular ghx4 test-only estimate was a week later versus near-term
+interactive estimate (both uncertain). Updated SAME held job partition to
+ghx4-interactive; no duplicate actual job. HeldReqTRES reportedbilling1000;
+conservatively reserve2x interactive charge <=.166667GPUh, verify actual running
+AllocTRES/accounting later. Prior screening estimate.448611, worst-case total
+with this reservation.615278of2. Posted allocation debit still unverified.
+
+Initial ordered-string release guard rejected field-order mismatch; no release
+occurred. Replaced with independent exact-field checks, verified hold/partition/
+time/resources, released job. Lastlive statePENDING Priority, elapsed0, no log/
+result. NO successful model load or synthetic forward claim yet. Slurm test-only
+IDs3294897/3294901 are not submitted jobs. Frozen batch script uses regular
+directive but actual held-job partition override documented above; no post-submit
+code mutation. Protected PanTS evaluation untouched; no automatic retry.

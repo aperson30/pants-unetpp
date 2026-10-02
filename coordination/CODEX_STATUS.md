@@ -1377,3 +1377,15 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   metadata/finitesyntheticoutput. Syntaxonly locally, NOTrun/submitted.
   No clinicaldataupload/GPUspend/evalchanges. .448611of2 estimate unchanged.
   Protocol/handoff33 save restart at smoke review+shortcapped allocation.
+
+### 2026-10-02 — Model-load gate3294898 queued (not a scientific result)
+
+- Static metadata audit onofficialmodels foundNumPy scalar/dtype only; bounded
+  pickletools f4/f8 audit, noexecution. Narrow restrictedload compatibility fixed;
+  toyroundtrip passes. Realmodel loading not yetrun. Sourced5fc186b... verified.
+- Heldsubmission3294898 oneGPU/twoCPU/8GB/5min,norequeue. Regularestimate~week;
+  interactiveearlier. MovedSAMEheldjob tointeractive, exactresource/hold checks,
+  released. LastlivePENDINGPriorityelapsed0. No duplicates; testonlyIDsnotjobs.
+- Budgetreserveconservative.166667chargedh max, prior.448611,maxcombined.615278of2.
+  Heldbilling1000 isn'tactualinteractivebilling; verifyAllocTRES/accounting later.
+  No PanTSevalchange/autoretry. Handoff34/protocolrecordjob+logs+nextsteps.
