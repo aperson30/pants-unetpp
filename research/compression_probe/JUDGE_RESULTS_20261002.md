@@ -59,3 +59,24 @@ a remedy yet or claim an S-tier idea from these two feasibility cases.
 
 Scalar originals and map audits are preserved alongside this report. Images,
 maps and clinical workbook remain private; no raw patient data in GitHub.
+
+## Split gate completed: parity passes, memory lever rejected
+
+3296141 COMPLETED0:0 in114 allocation seconds, billing2000 =>0.063333
+charge-equivalentGPUh. Scalar result split_parity_result_3296141.json.
+Global and tumor maximum/mean HU differences exactly0 on this case; numerical
+gate passes. GPU peak24250846720 bytes EXACTLY matches split1. Split4 elapsed
+83.21s vs frozen split1 72.89s (~14.2% longer). Single cross-job timing, not
+a repeated throughput benchmark; no speed advantage claimed. CPUpeak~23.04GiB.
+
+Do not adopt split4 as a demonstrated memory optimization or assume it unlocks
+the55M case. Full-output parity on one patient is not all-shape/clinical parity.
+Stop this lever per prespecified decision rule. Campaignestimate0.854722/2
+chargedGPUh, posteddebitunverified. No further GPU job submitted by this update.
+
+Scientific next priority is adjudicating evidence, not adding method training:
+native/reconstructed candidate status did not switch in either completed case;
+only confidence weakened. Review clinical-threshold/independent-judge and
+posterior-mean versus sampled-embedding controls before a broader harm claim.
+Larger locked patient remains blocked; any larger-memory hardware/runtime
+proposal needs its own preflight, no crop-based rescue or case substitution.

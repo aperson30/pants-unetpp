@@ -1472,3 +1472,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   partition;1GPU/96G/5min/norequeue. Maxcampaign0.958056/2. Prespecified
   maxHUdrift0.1 is engineering-only, no automatic rollout/threshold relaxation.
   Largecaseblocked and47320183untouched. Handoff41/results report updated.
+
+### 2026-10-02 — Split gate completed; no memory gain, stopped lever
+
+-3296141 COMPLETED114s,0.063333charge-equivalentGPUh, sameHUoutput exactly
+  on testedcase. GPUpeak24.251GB identical;83.21s vs72.89s singlechecks,
+  no repeated speed benchmark. Numerical gatepasses, memory benefitfails.
+- ScalarJSON/results report/handoff42 preserved. Campaignestimate0.854722/2,
+  posteddebitunverified. No furtherGPU submitted, no adoption as memoryfix.
+  Two patients have weakened scores but no GTcandidate-present->absent switch.
+  Large100259blocked; clinical/independentjudge/posterior controls remain next
+  scientific priorities. No case replacement or protected47320183change.

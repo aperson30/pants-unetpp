@@ -1,0 +1,23 @@
+{
+  "completed": true,
+  "clinical_quality": false,
+  "changed_factor": "MaisiConvolution.num_splits1to4 only",
+  "model_sha256": "1f8a7a056d0ebc00486edc43c26768bf1c12eaa6df9dd172e34598003be95eb3",
+  "baseline_reconstruction_sha256": "9bad493cab6377f28201e1a1a4caf76f1b550e9c94e7841b1886cc96bc4c91b6",
+  "torch": "2.10.0+cu129",
+  "gpu": "NVIDIA GH200 120GB",
+  "split_layers": 36,
+  "precision": "whole-volume FP32/posterior mean/native spacing/no tiles",
+  "numerical_gate_hu": 0.1,
+  "numerical_gate_pass": true,
+  "numerical_gate_scope": "one-case implementation screen, not detector/clinical parity",
+  "max_abs_difference_hu": 0.0,
+  "mean_abs_difference_hu": 0.0,
+  "tumor_max_abs_difference_hu": 0.0,
+  "tumor_mean_abs_difference_hu": 0.0,
+  "seconds": 83.21289597102441,
+  "peak_gpu_bytes": 24250846720,
+  "peak_cpu_rss_kib": 24163776,
+  "baseline_seconds": 72.88587183970958,
+  "baseline_peak_gpu_bytes": 24250846720
+}

@@ -1532,3 +1532,18 @@ MaisiConvolution split1to4 only, full-volumeFP32/mean/spacing/context retained.
 Compare frozen split1 with maxHUdrift<=0.1 engineering tolerance before any
 larger-case rollout, measure memory. Not clinical/detector parity. If drift
 fails or memory benefit weak, stop this lever; no automatic pipeline changes.
+
+## 42. Real split parity completed; no memory win, stop lever
+
+3296141 COMPLETED0:0,114s,billing2000 =>0.063333charge-equivalentGPUh.
+HUoutputglobal/tumor max/mean differences0 against frozen split1. GPUpeak
+24250846720bytes identical. Split4 83.21s vs split1 72.89s (~14.2% longer)
+in single checks, not rigorous throughput benchmark. Numerical gate passes,
+memory benefit gate fails: do not roll out as a memory optimization or claim
+it unlocks big100259. ScalarJSON and result report updated.
+
+Campaignestimate0.854722/2, posteddebitunknown. No more GPU submitted here;
+47320183 untouched. Both completed patients show confidence loss, not a
+conversion from GTcandidate presence to absence. Need independent/task and
+posterior controls before claiming clinical harm/irreversible erasure/new
+method. Larger patient blocked, no scientific outcome-driven replacement.
