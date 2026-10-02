@@ -1044,3 +1044,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   raw input-audit JSON local/remote; commit only tooling and written audit.
   No attempt to bypass the restriction. User can share the local blinded ZIP
   with their qualified reviewer; public image upload needs explicit approval.
+
+## 2026-10-01 22:10 -07:00 — CPU execution contracts and judge-overlap audit
+
+- Real hash-verified VAE weights on CPU FP32 random[1,1,8,64,8]: explicit
+  posterior-mean encode/decode exactly matches MONAI1.5.1 reconstruct();
+  stage2 embedding exactly matches same-seed posterior sampling. Official
+  reconstruction is valid, but sampled diffusion embeddings remain a distinct
+  untested real-case pathway.
+- In-memory change of36 MaisiConvolution layers from splits1 to4 yields
+  max2.4140e-6 normalized full-reconstruction difference (global scale1.09344).
+  All checked outputs finite. Toy CPU check ONLY, not real CT/GPU/FP16 parity
+  or large-output offload coverage. Raw execution_contracts.json stays remote.
+- PANTHER/PancCTMultiTalentV2 explicitly pretrains on MSD+PANORAMA765cases;
+  rejected as patient-independent MSD judge absent exclusion evidence.
+- Added reproducible bounded CPU harness and written audit. No new GPU job,
+  no detector weights, no changes to PanTS evaluation or shared environments.
+  Existing new-campaign charge estimate.16111/.25 allocation-hours unchanged.
+- Reader packet remains LOCAL pending explicit image-egress permission;
+  qualified reader ratings still missing. No clinical-harm/detection claim.

@@ -39,6 +39,51 @@ https://github.com/NVIDIA-Medtech/NV-Generate-CTMR/blob/5cb04e82fed71f2fe64a2617
 
 ## Independent automatic judge: candidate, not ready
 
+### CPU execution contracts (2026-10-01)
+
+Inspected the installed MONAI1.5.1 wheel source, rather than assuming current
+upstream behavior. `reconstruct(x)` decodes the posterior mean; `forward(x)`
+and `encode_stage_2_inputs(x)` sample `mu + epsilon * sigma`. Thus the probe
+uses an official reconstruction path, but does NOT reproduce sampled diffusion
+embeddings. These paths answer different questions.
+
+`audit_execution_contracts.py` checked the real hash-verified pretrained weights
+on a seeded random `[1,1,8,64,8]` CPU FP32 tensor, using one CPU thread:
+
+| Contract | Maximum absolute difference |
+|---|---:|
+| Explicit encode/decode(mean) vs official reconstruct | 0 |
+| Stage-2 embedding vs same-seed explicit sampling | 0 |
+| num_splits=1 vs4: encoded mean | 1.5497e-6 |
+| num_splits=1 vs4: encoded sigma | 1.7881e-7 |
+| num_splits=1 vs4: decoding the SAME latent | 2.2650e-6 |
+| num_splits=1 vs4: full mean reconstruction | 2.4140e-6 |
+
+All checked outputs finite;36 MaisiConvolution layers changed in memory only.
+Normalized baseline output global scale1.09344. Sample-versus-mean latent max
+difference2.75780, sigma mean.535319: sampling is a real change, not a numerical
+rounding variation. Neither statistic measures real CT reconstruction quality.
+
+This is a toy-input implementation check, NOT real-case/GPU/FP16 parity. It
+does not exercise the large-output CPU-offload path or establish clinical
+fidelity. No new GPU job or GPU-hour used. Raw result retained at remote
+compression_probe_20261001/execution_contracts.json; only tooling and this
+written report are published.
+
+Installed source locations: monai/networks/nets/autoencoderkl.py and
+monai/apps/generation/maisi/networks/autoencoderkl_maisi.py in the isolated
+monai-1.5.1-py3-none-any.whl. Public source reference:
+https://github.com/Project-MONAI/MONAI/blob/1.5.1/monai/networks/nets/autoencoderkl.py
+
+### Additional judge rejected for held-out claims
+
+PANTHER's official repository explicitly describes PancCTMultiTalentV2 as
+pretrained on765 pancreatic-tumor cases from MSD Pancreas AND PANORAMA,
+initialized from MultiTalentV2. It therefore does not solve the MSD training-
+overlap problem. Do not call this an independent held-out detector on our two
+MSD cases without actual patient-exclusion evidence. No weights downloaded.
+https://github.com/MIC-DKFZ/panther
+
 MONAI pancreas_ct_dints_segmentation targets background0, pancreas1, tumor2;
 compatible with MSD masks. Official metadata says trained on Task07Pancreas.
 The model is independently implemented, NOT established independent of these
