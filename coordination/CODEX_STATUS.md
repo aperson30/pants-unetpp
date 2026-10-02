@@ -1007,3 +1007,9 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Nine local tests pass. Cheap next research gate: independent lesion-local
   assessment, official-pipeline/pretraining overlap checks and more cases,
   not expensive adaptive-depth/VAE training. PanTS evaluation untouched.
+
+- Follow-up official web-source check: current NVIDIA data README's VAEv1
+  table lists MSDTask03, not Task07; DDPMdiffusion table DOES list224Task07.
+  This is not proof of AE patient-level exclusion. Keep AE/diffusion corpora
+  separate for any future held-out claims. Sources/production-parity caveat
+  recorded in second_results_20261001/SUMMARY.md; no extra compute.

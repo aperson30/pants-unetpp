@@ -67,3 +67,19 @@ a boundary/detection metric either. No erasure or clinical harm claim.
 Fixed-window PNG inspected: visibly smoother/different intensities, no clinical
 verdict. Native-spacing diagnostic protocol may differ from MAISI's production
 preprocessing; matched official-pipeline parity is not established.
+
+## Official data-source check (web, October1)
+
+The current official data README lists MSDTask03 (liver), not MSDTask07
+(pancreas), in autoencoder_v1.pt's training-source table. In contrast, the
+diff_unet_3d_ddpm-ct.pt table explicitly includes224 MSDTask07 volumes.
+The AE and diffusion training corpora must not be conflated. Absence from the
+VAE source table is NOT proof of individual-patient exclusion or dataset
+deduplication; it narrows the audit rather than settling it.
+https://github.com/NVIDIA-Medtech/NV-Generate-CTMR/blob/main/data/README.md
+
+The official inference guide describes variable spacing and field-of-view
+and sliding-window AE decode settings. Our diagnostic deliberately used
+native spacing and whole-volume decoding, so do not call it a faithful replay
+of production generation without a separately matched protocol check.
+https://github.com/NVIDIA-Medtech/NV-Generate-CTMR/blob/main/docs/inference.md
