@@ -1603,3 +1603,20 @@ New separate same-process study planned:4image/windowcells eachrepeated,
 freshnativecontrol, allclassmaxrepeatdrift<=1e-4 plus identicalsegmentation.
 No relaxation/retroactivepass. Max0.1additionalchargedh if preflightpasses;
 worstcampaign1.001944/2. See SAME_PROCESS_WINDOW_20261002.md. No47320183change.
+
+## 47. Fresh same-process window control completed and map-audited
+
+3296983 COMPLETED0:0,82s,0.045556charge-equivalentGPUh. FiveCPUtests,
+held/source/resourcechecks passed before release. Fourimage/windowcells,
+8actualpredictions; eachcell all7classmaps/labels repeat EXACTLY, flagslocked.
+CPU savedcropmapaudit confirms scalars. Originalwindow native0.030073991 to
+reconstruction0.005856431 (80.53%decrease); reconstructionwindow native
+0.033307783 to0.007681508 (76.94%decrease). WindowchangeALONE cannotexplain
+decrease onthiscase; windowstill affects scores. All4cells GTinclusion/mask1,
+GTcandidateoverlap0: no newclinicalmiss/recallclaim. Historicalreplay3296871
+stillFAILED, not retroactivelypassed. Frozenjudge domainshift, selectionbias,
+mean-vs-sampledlatent controls unresolved; not proofirreversibleloss/novelty.
+Scalarresult/audit and SAME_PROCESS_WINDOW_20261002.md preserved; imagesprivate.
+Campaignestimate0.947500/2, posteddebitunknown. Turncost0.071111; no moreGPU
+queued/running,47320183untouched,large100259blocked/unreplaced. Next prepare
+posteriorcontrol/independentjudge, no remedytraining or automaticsubmission.

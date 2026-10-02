@@ -1533,3 +1533,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
  8calls/4cells; no VAE/training/newpatient/GT-drivenwindow. Max0.1additional
   chargedh, worstcampaign1.001944/2. CPUpreflight before heldsubmission.
  47320183untouched,largecaseblocked,no automaticretry.
+
+### 2026-10-02 — Fresh window control completed, all repeat/map checks passed
+
+-3296983 COMPLETED82s,billing2000 =>0.045556charge-equivalentGPUh. FiveCPU
+  tests/held/source/resourcechecks, then8actualpredictions. All4cells repeat
+  exactly(all7classmaps/labels), unchangedflags; CPU savedmapauditmatches.
+- Fixedoriginalwindow mean native0.030073991,reconstruction0.005856431,
+  80.53%drop. Fixedreconstructionwindow native0.033307783,reconstruction
+  0.007681508,76.94%drop. WindowchangeALONE ruledout forthiscase, not all
+  preprocessing/domainshift. All4GTcandidateoverlap0, GTinclusion/mask100%:
+  no newmiss/clinicalrecall/irreversibleloss/noveltyclaim. Oldgate staysFAILED.
+- Campaignestimate0.947500/2, posteddebitunknown; turncost0.071111. No more
+  jobsqueued/running/no automaticretry/47320183change. ScalarJSONs/audit/
+  protocol/handoff47 saved; imagesprivate. Next posterior/independentjudge
+  protocols, not remedytraining. Largerlockedcase stillblocked/unreplaced.

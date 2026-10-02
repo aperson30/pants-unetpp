@@ -1,0 +1,153 @@
+{
+  "completed": true,
+  "clinical_recall": false,
+  "historical_replay_gate_passed": false,
+  "scope": "posthoc one-patient same-process factorial diagnostic with fresh repeated controls",
+  "backend": {
+    "benchmark": false,
+    "cudnn_deterministic": true,
+    "deterministic_algorithms": true,
+    "matmul_tf32": false,
+    "cudnn_tf32": false,
+    "cublas_workspace": ":4096:8"
+  },
+  "torch": "2.10.0+cu129",
+  "cudnn": 91002,
+  "original_sha256": "8bb02fe298bdd9fe85e7844779a05f0654c5cece24d9abd031838bcd0eda40ec",
+  "reconstruction_sha256": "497ed5072bc7eebf94723fe8281f079cf7a7b1ce46799fd79d21e6a29a1c2387",
+  "producer_sha256": "79bd127faaafcbc84dcb220eee3b0db7be61645f53a76a8a1ccf98f35b9322de",
+  "results": [
+    {
+      "tumor_voxels": 3704,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_mean_raw_probability": 0.030073991045355797,
+      "tumor_max_raw_probability": 0.23382924497127533,
+      "tumor_mean_masked_probability": 0.030073991045355797,
+      "candidate_confidence_on_tumor": 0.0,
+      "tumor_voxels_with_candidate": 0,
+      "patient_max_candidate_score": 0.7329835295677185,
+      "interpretation": "continuous diagnostic scores; no clinical detection threshold fixed here",
+      "image_arm": "native",
+      "crop_arm": "native",
+      "crop_bounds": {
+        "x_start": 65,
+        "x_finish": 503,
+        "y_start": 120,
+        "y_finish": 377,
+        "z_start": 64,
+        "z_finish": 101
+      },
+      "seconds_including_repeat": 14.41028867699788,
+      "repeatability": {
+        "global_max_abs_probability_drift": 0.0,
+        "global_mean_abs_probability_drift": 0.0,
+        "tumor_max_abs_probability_drift": 0.0,
+        "tumor_mean_abs_probability_drift": 0.0,
+        "tumor_mean_signed_probability_change": 0.0,
+        "engineering_gate_max_drift_1e4": true,
+        "all_class_max_abs_probability_drift": 0.0,
+        "segmentation_labels_different": 0
+      },
+      "tumor_fraction_in_postprocess_mask": 1.0
+    },
+    {
+      "tumor_voxels": 3704,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_mean_raw_probability": 0.0058564310893416405,
+      "tumor_max_raw_probability": 0.0699278712272644,
+      "tumor_mean_masked_probability": 0.0058564310893416405,
+      "candidate_confidence_on_tumor": 0.0,
+      "tumor_voxels_with_candidate": 0,
+      "patient_max_candidate_score": 0.5544685125350952,
+      "interpretation": "continuous diagnostic scores; no clinical detection threshold fixed here",
+      "image_arm": "reconstruction",
+      "crop_arm": "native",
+      "crop_bounds": {
+        "x_start": 65,
+        "x_finish": 503,
+        "y_start": 120,
+        "y_finish": 377,
+        "z_start": 64,
+        "z_finish": 101
+      },
+      "seconds_including_repeat": 13.643248817999847,
+      "repeatability": {
+        "global_max_abs_probability_drift": 0.0,
+        "global_mean_abs_probability_drift": 0.0,
+        "tumor_max_abs_probability_drift": 0.0,
+        "tumor_mean_abs_probability_drift": 0.0,
+        "tumor_mean_signed_probability_change": 0.0,
+        "engineering_gate_max_drift_1e4": true,
+        "all_class_max_abs_probability_drift": 0.0,
+        "segmentation_labels_different": 0
+      },
+      "tumor_fraction_in_postprocess_mask": 1.0
+    },
+    {
+      "tumor_voxels": 3704,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_mean_raw_probability": 0.03330778330564499,
+      "tumor_max_raw_probability": 0.273980051279068,
+      "tumor_mean_masked_probability": 0.03330778330564499,
+      "candidate_confidence_on_tumor": 0.0,
+      "tumor_voxels_with_candidate": 0,
+      "patient_max_candidate_score": 0.7329835295677185,
+      "interpretation": "continuous diagnostic scores; no clinical detection threshold fixed here",
+      "image_arm": "native",
+      "crop_arm": "reconstruction",
+      "crop_bounds": {
+        "x_start": 65,
+        "x_finish": 503,
+        "y_start": 120,
+        "y_finish": 377,
+        "z_start": 61,
+        "z_finish": 101
+      },
+      "seconds_including_repeat": 14.288283589994535,
+      "repeatability": {
+        "global_max_abs_probability_drift": 0.0,
+        "global_mean_abs_probability_drift": 0.0,
+        "tumor_max_abs_probability_drift": 0.0,
+        "tumor_mean_abs_probability_drift": 0.0,
+        "tumor_mean_signed_probability_change": 0.0,
+        "engineering_gate_max_drift_1e4": true,
+        "all_class_max_abs_probability_drift": 0.0,
+        "segmentation_labels_different": 0
+      },
+      "tumor_fraction_in_postprocess_mask": 1.0
+    },
+    {
+      "tumor_voxels": 3704,
+      "tumor_fraction_in_crop": 1.0,
+      "tumor_mean_raw_probability": 0.007681507617235184,
+      "tumor_max_raw_probability": 0.10391407459974289,
+      "tumor_mean_masked_probability": 0.007681507617235184,
+      "candidate_confidence_on_tumor": 0.0,
+      "tumor_voxels_with_candidate": 0,
+      "patient_max_candidate_score": 0.5544685125350952,
+      "interpretation": "continuous diagnostic scores; no clinical detection threshold fixed here",
+      "image_arm": "reconstruction",
+      "crop_arm": "reconstruction",
+      "crop_bounds": {
+        "x_start": 65,
+        "x_finish": 503,
+        "y_start": 120,
+        "y_finish": 377,
+        "z_start": 61,
+        "z_finish": 101
+      },
+      "seconds_including_repeat": 14.227939553005854,
+      "repeatability": {
+        "global_max_abs_probability_drift": 0.0,
+        "global_mean_abs_probability_drift": 0.0,
+        "tumor_max_abs_probability_drift": 0.0,
+        "tumor_mean_abs_probability_drift": 0.0,
+        "tumor_mean_signed_probability_change": 0.0,
+        "engineering_gate_max_drift_1e4": true,
+        "all_class_max_abs_probability_drift": 0.0,
+        "segmentation_labels_different": 0
+      },
+      "tumor_fraction_in_postprocess_mask": 1.0
+    }
+  ]
+}

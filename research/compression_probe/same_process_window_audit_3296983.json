@@ -1,0 +1,33 @@
+{
+  "completed": true,
+  "clinical_recall": false,
+  "historical_gate_retroactively_passed": false,
+  "saved_map_scalar_parity": true,
+  "contrasts": [
+    {
+      "crop_arm": "native",
+      "native_tumor_mean": 0.030073991045355797,
+      "reconstruction_tumor_mean": 0.0058564310893416405,
+      "reconstruction_native_ratio": 0.19473408369741552,
+      "reconstruction_native_signed_change": -0.024217559956014156
+    },
+    {
+      "crop_arm": "reconstruction",
+      "native_tumor_mean": 0.03330778330564499,
+      "reconstruction_tumor_mean": 0.007681507617235184,
+      "reconstruction_native_ratio": 0.23062200047198353,
+      "reconstruction_native_signed_change": -0.025626275688409805
+    }
+  ],
+  "window_changes": [
+    {
+      "image_arm": "native",
+      "tumor_mean_change_reconstruction_window_minus_native_window": 0.003233792260289192
+    },
+    {
+      "image_arm": "reconstruction",
+      "tumor_mean_change_reconstruction_window_minus_native_window": 0.0018250765278935432
+    }
+  ],
+  "caveat": "One posthoc patient; fixed windows do not exclude domain shift or prove clinical loss/information erasure"
+}
