@@ -348,3 +348,10 @@ JSON preserved. Locked replication plan in JUDGE_REPLICATION_PLAN_20261002.md;
 Resource cap explicit56M including padding and >=110GBfreeGPU, no geometry
 changes. Selection is size-biased and before predictions. Worst-case campaign
 1.251389/2chargedh. Completion/accounting still required for replication.
+
+Resource amendment:3295549 FAILED at110GB free-memory guard in38s, no outputs.
+Official architecture lists96GBGPU/120GBCPU despite misleading120gb Slurm label.
+Large selected patient remains blocked, no replacement. Smaller locked patient
+3295577 released PENDING,33M padded cap and65GB actual-free gate, same pixels/
+model/three arms.10min hard cap/no requeue. Campaign worst-case0.939167/2;
+see plan amendment and handoff39. No clinical result or automatic retry.

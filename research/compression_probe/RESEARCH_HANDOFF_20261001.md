@@ -1470,3 +1470,24 @@ See JUDGE_REPLICATION_PLAN_20261002.md. Next read both completion files and
 accounting. If consistent, prioritize posterior/independent mechanism controls
 and PI alignment before larger cohorts, new VAE or remedy training. Mixed
 results mean report heterogeneity; no posthoc threshold/selection tricks.
+
+## 39. Memory guard stopped replication; smaller locked case queued safely
+
+3295549 FAILED1:0 in38s,billing2000 =>0.021111charge-equivalentGPUh. Both cases
+stopped before VAE at110GB-free gate. No scientific output. Runtime exact
+free/total was not logged in v1, so do not invent it. Official NCSA architecture
+lists96GB GPU/120GB CPU; Slurm GRES misleadingly says nvidia_gh200_120gb and
+software documentation inconsistently says120GB/~97GB usable. Earlier HBM
+assumption was insufficiently checked. Safety gate prevented large allocation.
+
+Large100259 remains blocked, no replacement. Small100430 has explicit33M
+padded limit, >=65GB actual-free guard, estimated~52GB VAE peak from pilot
+scaling (not guaranteed). No crop/resize/model/neural operation changed.
+Runtime now prints free/total. New private small_v1 preserves prior sources.
+3295577 released after held/SHA/syntax checks, last PENDING,1GPU/32GB/10min,
+no requeue,540s timeout. Estimate0.605833/2 used; maximum0.939167 including
+new allocation. Protected47320183 unchanged. Report resource failure and
+selection bias; do not turn a two-patient feasibility screen into a cohort.
+
+https://docs.ncsa.illinois.edu/systems/deltaai/en/latest/user-guide/architecture.html
+https://docs.ncsa.illinois.edu/systems/deltaai/en/latest/user-guide/software.html

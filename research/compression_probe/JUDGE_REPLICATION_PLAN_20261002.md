@@ -55,3 +55,32 @@ shift from irreversible task-information loss. No training planned yet.
 
 All CT/masks/maps stay in private home storage, not GitHub. Publish code and
 scalar findings only. Current preparation/transfer state belongs in handoff.
+
+## Resource correction and explicit amendment before new outcomes
+
+3295549 failed in38 allocation seconds at the free-memory gate on BOTH cases,
+before reconstruction/detector output:0.021111 charge-equivalenth. Retain both
+failures and frozen v1 files. No clinical or compression result from this job.
+NCSA architecture says GPU96GB/CPU120GB, while Slurm names its GRES120gb and
+the software page also contains inconsistent120GB/~97GB usable language.
+Actual runtime guard proves free memory <110GB, NOT an exact capacity reading.
+Earlier120GB HBM sizing premise was not adequately verified; corrected here.
+https://docs.ncsa.illinois.edu/systems/deltaai/en/latest/user-guide/architecture.html
+https://docs.ncsa.illinois.edu/systems/deltaai/en/latest/user-guide/software.html
+
+No blind lowering of the larger-volume gate. Large patient100259 remains
+resource-blocked; no substitute. Smaller locked100430 gets an explicit33M
+including-padding resource cap and >=65GB actual-free-memory gate. Pilot
+scaling estimates~52GB for its32.5M padded voxels, leaving a meaningful margin
+on the documented96GB GPU; estimate still not a proven bound. No changed
+pixels/spacing/model settings. New code prints actual GPU memory before gate.
+One case means at most two completed patients with pilot, not a three-patient
+study; report the larger patient as unavailable, not an original-image miss.
+
+3295577 verified held and released PENDING:1GPU/32GB/10min, no requeue,
+540s process timeout. Sources/selection/batch SHA and bash/Python syntax pass.
+The five integration/geometry tests passed before this resource-only amendment;
+prediction weight contract and all neural operations remain unchanged.
+Campaign estimate0.605833/2 chargedh; maximum new0.333333 =>0.939167 worst-case.
+Do not automatically retry or change posterior/chunking to force the large case.
+Any later larger-volume protocol needs its own compatible hardware/memory plan.

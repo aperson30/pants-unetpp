@@ -92,13 +92,17 @@ def main():
     parser.add_argument('--vae', type=Path, required=True)
     parser.add_argument('--vae-sha', required=True)
     parser.add_argument('--output', type=Path, required=True)
-    parser.add_argument('--max-voxels', type=int, choices=(32_000_000, 56_000_000),
+    parser.add_argument('--max-voxels', type=int, choices=(32_000_000, 33_000_000, 56_000_000),
                         default=32_000_000, help='Explicit full-volume resource cap; no resampling')
     args = parser.parse_args()
     if not os.environ.get('SLURM_JOB_ID') or torch.cuda.device_count() != 1:
         raise RuntimeError('One scheduled GPU required')
-    if args.max_voxels > 32_000_000 and torch.cuda.mem_get_info()[0] < 110_000_000_000:
-        raise RuntimeError('Larger whole-volume screen requires at least110GB free GPU memory')
+    free_gpu, total_gpu = torch.cuda.mem_get_info()
+    print('GPU_MEMORY_BYTES', dict(free=free_gpu, total=total_gpu), flush=True)
+    required_free = {32_000_000: 0, 33_000_000: 65_000_000_000,
+                     56_000_000: 110_000_000_000}[args.max_voxels]
+    if free_gpu < required_free:
+        raise RuntimeError(f'Whole-volume resource cap requires{required_free} free GPU bytes')
     if args.output.exists():
         raise FileExistsError('Refuse reused output directory')
     if importlib.metadata.version('monai') != '1.5.1' or importlib.metadata.version('report-guided-annotation') != '0.3.4':

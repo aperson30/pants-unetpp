@@ -1436,3 +1436,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Explicit56M full-volume cap plus110GBfreeGPU gate; no input/model changes.
   Maxcampaign1.251389/2. No substitution/retry/clinical-threshold tuning.
   Handoff38 and replication plan recorded; evaluation47320183 untouched.
+
+### 2026-10-02 — Memory guard stopped larger replication; smaller case bounded
+
+-3295549 FAILED at110GBfree gate on both patients,38s =>0.021111 chargedh,
+  no scientific output. Architecture96GBGPU/120GBCPU vs misleading120gb GRES;
+  earlier120GBHBM premise insufficiently verified. No blind larger-case retry.
+-100259 retained as resource-blocked. Locked smaller100430 queued3295577 after
+  held/SHA/syntax checks:33M padded cap,65GBfreeGPU gate,1GPU/32GB/10min/no
+  requeue. Estimated52GB peak is NOT a proven bound. Neural protocol unchanged.
+- Estimate0.605833 used/2; worst-case0.939167. Handoff39/plan amended,
+  actual memory will print. No data publishing, substitute, or47320183 change.
