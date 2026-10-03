@@ -1701,3 +1701,19 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   exist, but retrieval/runtime/data terms not verified.
 - Spend0/no47320183 action. Next charged-ledger refresh and validation-only
   feasibility manifest before GPU decision. Goal active; no S-tier claim.
+
+### 2026-10-02 — Live campaign ledger and stronger early-exit novelty gate
+
+- Confirmed4e81cb2 push completed; pulled latest main before coordination read.
+- Live sacct of all17campaign allocations reproduces4413weighted seconds,
+  1.225833charge-equivalentGPUh spent/.774167remaining. Includes failures;
+  posted account debit/rounding not verified. Saved machine-readable ledger.
+- Official MICCAI2026CLS material already discusses presence-level FNR and
+  whole-lesion misses; Fast yet Safe already notes weak-final-model relative
+  risk can be misleading. Neither issue alone is our novelty.
+- Tightened candidate1 gate: actual sequential-router overhead and strongest
+  fixed-exit baseline required, plus absolute recall/FP burden. Standalone
+  truncated timing only oracle bound, not deployable speed proof.
+- Bridges2 research master refused connection; requested fresh user master
+  solely for development-validation summary inventory. No new job/GPU spend,
+  production edit, or47320183 action. Goal active; no candidate cleared bar.

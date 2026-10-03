@@ -1,0 +1,35 @@
+{
+  "scope": "Existing 2 charged GPU-hour idea-screening campaign; not a fresh budget",
+  "source": "Live DeltaAI sacct -X JobID,State,ElapsedRaw,AllocTRES checked 2026-10-02",
+  "normalization": "ElapsedRaw * AllocTRES billing / 1000 / 3600; charge-equivalent GPU-hours, not verified posted account debit",
+  "cap": 2.0,
+  "allocations": [
+    [3290857, "COMPLETED", 248, 2000],
+    [3290863, "COMPLETED", 126, 1000],
+    [3290864, "COMPLETED", 142, 1000],
+    [3291031, "FAILED", 36, 1000],
+    [3291159, "COMPLETED", 815, 1000],
+    [3294898, "COMPLETED", 14, 2000],
+    [3295187, "FAILED", 105, 2000],
+    [3295395, "COMPLETED", 126, 2000],
+    [3295549, "FAILED", 38, 2000],
+    [3295577, "FAILED", 114, 2000],
+    [3296011, "COMPLETED", 220, 2000],
+    [3296141, "COMPLETED", 114, 2000],
+    [3296871, "FAILED", 39, 2000],
+    [3296939, "COMPLETED", 46, 2000],
+    [3296983, "COMPLETED", 82, 2000],
+    [3297185, "COMPLETED", 292, 2000],
+    [3297419, "COMPLETED", 209, 2000]
+  ],
+  "columns": ["job_id", "state", "elapsed_seconds", "allocated_billing_TRES"],
+  "weighted_seconds": 4413,
+  "used_charge_equivalent_gpu_hours": 1.2258333333333333,
+  "remaining_charge_equivalent_gpu_hours": 0.7741666666666667,
+  "caveats": [
+    "All listed allocations have one GPU; failures are included.",
+    "Posted account debit and rounding/minimum billing policies are not independently verified.",
+    "No new job was submitted in this verification turn.",
+    "Any future allocation requires refreshed accounting and bounded worst-case cost with headroom; do not spend exactly to the reconstructed remainder."
+  ]
+}

@@ -338,3 +338,46 @@ New GPU hours0, protected main evaluation untouched. Next: authoritative
 campaign charge-ledger refresh and validation-only case availability; only
 then decide whether a capped trained-model probe satisfies all gates.
 Goal active; execution feasibility is not a novel method contribution.
+
+## Live accounting and stronger novelty rejection (2026-10-02)
+
+Re-queried all17 allocation IDs through the live DeltaAI master. Every record
+is terminal; FAILED allocations are included. ElapsedRaw times AllocTRES billing,
+normalized by1000, totals4413weighted seconds =1.225833charge-equivalent GPUh,
+leaving.774167under the unchanged2hour cap. Machine-readable records:
+screening_allocation_ledger_20261002.json. This is verified Slurm reconstruction,
+NOT independently verified posted account debit or billing-rounding policy.
+No new allocation. Previous4e81cb2 push completed, then pull was up-to-date.
+
+The official MICCAI2026 CLS page now strengthens the novelty warning: its
+author feedback explicitly discusses presence-level FNR and complete misses
+as well as voxel-level FNR. Its formal guarantee targets per-case voxel-FNR
+tolerance under exchangeability, not deterministic safety of every test case.
+Therefore do NOT claim nobody studies whole-lesion misses, or that changing
+voxel risk into an object metric is sufficient novelty. Author feedback also
+warns of scanner/site shift; our contextual-risk framing must beat real baselines.
+https://papers.miccai.org/miccai-2026/0194-Paper2825.html
+
+Fast yet Safe itself warns that a weak final predictor can make the relative
+performance-gap risk trivially easy to control (AppendixD.2, GTA5). Thus our
+native-response adequacy gate is not a novel discovery. It is essential hygiene.
+https://arxiv.org/html/2405.20915v1
+
+New compute-accounting gate for candidate1: standalone truncated-exit timing
+is only an oracle lower bound. A deployed router must also pay for preceding
+exit checks, heads, routing and potentially recomputation. Incremental execution
+may reuse the nested dependency graph, but needs a separately verified runtime;
+do not assume separate forward_exit calls reuse state. No savings claim from
+standalone depth timing or node counts alone. Compare against cheapest FIXED
+exit satisfying identical lesion/false-positive criteria, not only deepest exit.
+Always report absolute native recall alongside newly introduced misses. Existing
+project any-overlap detection is a reproducibility convention, not a clinical
+matching standard; giant foreground predictions need explicit FP/volume checks.
+No production scorer or901-case evaluation protocol changed.
+
+Data gate: nine-case DeltaAI calibration is tumor-negative, so cannot support
+rare-lesion claims. Existing Bridges2 research socket refused connection; no
+fresh login was attempted. Requested a new user-authenticated master to locate
+development-validation summaries only. No main evaluation job was inspected
+or modified. Candidate1 remains an unproven diagnostic, not an S-tier method;
+next decision requires real positive-case availability and runtime parity.
