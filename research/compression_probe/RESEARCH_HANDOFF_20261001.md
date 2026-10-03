@@ -1740,3 +1740,25 @@ lograw_head_3297419.log, results_3297419. Next check SAMEjob handle/logs,
 accountactualterminalcost and independentlyCPUauditcomplete savedmaps.
 Do not retry on observationtimeout or interpretqueued/running as quality.
 Protected47320183 untouched; no newcohort/training authorized.
+
+## 54. Investment screen complete: negative second-judge gate, no new training
+
+3297419 COMPLETED0:0,209allocation seconds,1GH200,billing2000; .116111
+charged-equivalent GPUh. Campaign including prior failures1.225833/2,
+remaining .774167; posted allocation debit unverified. Latest live DeltaAI
+queue check empty. No retry or new GPU experiment. Main47320183 untouched.
+
+All six arms repeated exactly, strict checkpoint/full native-grid contracts
+passed, independent CPU saved-map/hash audit complete. Native tumor mean
+.00329347 below predeclared .01 floor, all tumor-argmax annotation overlaps0,
+seed2/native1.679. This is negative evidence for investing in the present
+lesion-erasure route, not clinical proof and not compression-safety proof.
+Do not chase a favorable judge or seed.
+
+GO_NO_GO_RECOMMENDATION_20261002.md records novelty limits, strongest conditional
+posterior/judge-robust fidelity-audit question, and NO-GO for new training.
+Smallest PI next step: expert known-location review of existing blinded packet,
+zero new GPU hours. No clinical reader study or top-conference contribution
+has been established. Official organ-mask pipeline/training overlap remain
+unverified; they are expressly outside the executed raw-head diagnostic.
+Scalar result/audit JSONs preserved; images/weights/maps remain private.

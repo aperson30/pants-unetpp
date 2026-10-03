@@ -1633,3 +1633,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   source8f2035b. Max.333334charge-equivalent, prior1.109722,worst1.443056/2,
   posteddebitunknown. Noautomaticretry. Next samejobpoll/account/CPUmapaudit.
   Main47320183untouched. Handoff53. Goalactive, decision stillunproven.
+
+### 2026-10-02 — Final investment screen: NO-GO new training
+
+- Live sacct recheck:3297419 COMPLETED0:0,209 allocation seconds,billing2000.
+  DeltaAI user queue empty. No new jobs/retries; protected47320183 untouched.
+- Independent CPU map audit and all-six-arm exact repeats passed. Native tumor
+  mean .00329347 fails frozen .01 adequacy floor; seed2/native1.679; original
+  and recon tumor argmax overlap0. Not confirmation of clinical tumor erasure.
+- Added scalar result/audit and GO_NO_GO_RECOMMENDATION_20261002.md; handoff54,
+  independent-judge and novelty docs retain negative findings and limitations.
+  Official mask pipeline and patient-independent provenance remain unverified.
+- Cost .116111 this job; total estimate1.225833/2 incl prior failures,
+  remaining .774167. Posted debit unknown. No incentive to spend remainder.
+- Strongest conditional direction: posterior/judge-robust lesion fidelity
+  acceptance audit, not proven novel method. Smallest PI next experiment:
+  existing blinded packet expert known-location review, zero GPU spend.
+  No new training recommended. Completion audit underway before goal closure.

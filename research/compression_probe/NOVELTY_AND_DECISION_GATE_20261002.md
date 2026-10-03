@@ -156,3 +156,16 @@ latent-size reduction is not automatically file bitrate or an actual GPU-hour
 saving. Likewise loss of a detector response is not proof information was
 irreversibly erased: a different judge, adaptation or conditioning can alter
 that conclusion. Hypothesize mechanism only after appropriate controls.
+
+## Outcome against the frozen criteria
+
+Job3297419 completed all arms and numeric contracts. Independent saved-map
+CPU audit: native mean .00329347 < .01 adequacy floor; seed2/native1.679;
+all repeat drift0; native/control max tumor-map difference2.42e-8.
+The predeclared result is NO_GO_CURRENT_ROUTE. No gates were relaxed.
+This does not prove compression safe, nor prove clinical tumor erasure.
+Do not start remedy training or replace judges/cases to obtain agreement.
+
+Final recommendation and the smaller zero-GPU, PI-approved expert-image
+review option: GO_NO_GO_RECOMMENDATION_20261002.md. The prospective cohort
+above remains a conditional later step, not an authorized next allocation.

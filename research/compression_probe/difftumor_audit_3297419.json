@@ -1,0 +1,66 @@
+{
+  "completed": true,
+  "saved_map_hashes_verified": true,
+  "tumor_voxels": 1756,
+  "rows": {
+    "native": {
+      "tumor_mean": 0.0032934718765318394,
+      "tumor_max": 0.041592855006456375,
+      "tumor_voxels_argmax": 0,
+      "total_argmax_tumor_voxels": 1304,
+      "global_max": 0.9999103546142578,
+      "tumor_max_abs_vs_native": 0.0,
+      "ratio_to_native": 1.0
+    },
+    "control": {
+      "tumor_mean": 0.003293472807854414,
+      "tumor_max": 0.041592877358198166,
+      "tumor_voxels_argmax": 0,
+      "total_argmax_tumor_voxels": 1304,
+      "global_max": 0.9999103546142578,
+      "tumor_max_abs_vs_native": 2.421438694000244e-08,
+      "ratio_to_native": 1.0000002827783596
+    },
+    "posterior_mean": {
+      "tumor_mean": 0.0009871727088466287,
+      "tumor_max": 0.006518897134810686,
+      "tumor_voxels_argmax": 0,
+      "total_argmax_tumor_voxels": 1325,
+      "global_max": 0.9910854697227478,
+      "tumor_max_abs_vs_native": 0.03836197406053543,
+      "ratio_to_native": 0.29973618899887555
+    },
+    "posterior_seed0": {
+      "tumor_mean": 0.0013289288617670536,
+      "tumor_max": 0.017991837114095688,
+      "tumor_voxels_argmax": 0,
+      "total_argmax_tumor_voxels": 1203,
+      "global_max": 0.9972200393676758,
+      "tumor_max_abs_vs_native": 0.03467012196779251,
+      "ratio_to_native": 0.40350393493156833
+    },
+    "posterior_seed1": {
+      "tumor_mean": 0.0008954563527368009,
+      "tumor_max": 0.004490506369620562,
+      "tumor_voxels_argmax": 0,
+      "total_argmax_tumor_voxels": 582,
+      "global_max": 0.9662609696388245,
+      "tumor_max_abs_vs_native": 0.040050655603408813,
+      "ratio_to_native": 0.2718882645142709
+    },
+    "posterior_seed2": {
+      "tumor_mean": 0.005528136622160673,
+      "tumor_max": 0.079756960272789,
+      "tumor_voxels_argmax": 0,
+      "total_argmax_tumor_voxels": 448,
+      "global_max": 0.9167855381965637,
+      "tumor_max_abs_vs_native": 0.07098988443613052,
+      "ratio_to_native": 1.6785133832635082
+    }
+  },
+  "decision": "NO_GO_CURRENT_ROUTE: native response below predeclared adequacy floor",
+  "max_repeat_drift": 0.0,
+  "clinical_recall": false,
+  "official_postprocessing": false,
+  "caveat": "One feasibility-selected patient; different trained judge, not proven patient independent"
+}

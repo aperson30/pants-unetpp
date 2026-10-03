@@ -1,0 +1,146 @@
+{
+  "completed": true,
+  "clinical_recall": false,
+  "official_postprocessing": false,
+  "ground_truth_input": false,
+  "manifest_sha256": "47c5a537739d68e156a011c378865c4cdc718a8f9fb94699d6dffa1cbf23f2e9",
+  "checkpoint_sha256": "c3d7ca09aa57ce20e3537c5dfae611b4759bbd000f626fcb2d4bb180b1090d5d",
+  "torch": "2.10.0+cu129",
+  "monai": "1.5.1",
+  "gpu": "NVIDIA GH200 120GB",
+  "accumulation_device": "cpu",
+  "precision": "FP32",
+  "overlap": 0.75,
+  "roi": [
+    96,
+    96,
+    96
+  ],
+  "batch": 1,
+  "mode": "gaussian",
+  "affine": [
+    [
+      -0.68359375,
+      0.0,
+      0.0,
+      163.7034149169922
+    ],
+    [
+      0.0,
+      -0.68359375,
+      0.0,
+      51.627296447753906
+    ],
+    [
+      0.0,
+      0.0,
+      5.0,
+      32.60003662109375
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "native_shape": [
+    512,
+    512,
+    58
+  ],
+  "results": [
+    {
+      "arm": "native",
+      "image_sha256": "7af1c0d674c69dbf7a98ced8d8bf8059322f462bc55b98e0d30bd917579f9815",
+      "prepared_shape": [
+        1,
+        350,
+        350,
+        286
+      ],
+      "all_class_repeat_max_abs": 0.0,
+      "labels_different": 0,
+      "seconds_including_repeat": 30.606935668271035,
+      "probability_sha256": "4212f1a8fe5184d7d147154632f3fb50130ded658f5c03eae045f22a0fdfa7fc",
+      "labels_sha256": "0c1edb91296bcc7926cf8785aa9728d7e7ff93be80092f11b99dc559d087a44d"
+    },
+    {
+      "arm": "control",
+      "image_sha256": "384f2422f56ce7f94207d3eaba623ee8ca56d5cd3714bc173a74761ae9aef71a",
+      "prepared_shape": [
+        1,
+        350,
+        350,
+        286
+      ],
+      "all_class_repeat_max_abs": 0.0,
+      "labels_different": 0,
+      "seconds_including_repeat": 29.54252398107201,
+      "probability_sha256": "4bf4c4e072a2c437a5c990b68017e8f4a93e666cb9668aec0e485d5c7cc7868d",
+      "labels_sha256": "0c1edb91296bcc7926cf8785aa9728d7e7ff93be80092f11b99dc559d087a44d"
+    },
+    {
+      "arm": "posterior_mean",
+      "image_sha256": "9bad493cab6377f28201e1a1a4caf76f1b550e9c94e7841b1886cc96bc4c91b6",
+      "prepared_shape": [
+        1,
+        350,
+        350,
+        286
+      ],
+      "all_class_repeat_max_abs": 0.0,
+      "labels_different": 0,
+      "seconds_including_repeat": 29.425657019019127,
+      "probability_sha256": "979c2e24340c1c5f413438e4063683145431d81b1268676e72690ab3583ed61e",
+      "labels_sha256": "c8217d086d03b958c714aa20899cb3a21042e6ce59f099790aa7f52a147f3d85"
+    },
+    {
+      "arm": "posterior_seed0",
+      "image_sha256": "0455ccaaad143add67e63907f18f6449068bf747a291c61617d7b3d206470039",
+      "prepared_shape": [
+        1,
+        350,
+        350,
+        286
+      ],
+      "all_class_repeat_max_abs": 0.0,
+      "labels_different": 0,
+      "seconds_including_repeat": 29.107427690178156,
+      "probability_sha256": "8eec05ab90eb0f868224c2a5b1698a03ebbcbfbe60eba7403f953fc2cbd5d7b3",
+      "labels_sha256": "8d8f914427646b08b9c65d0e76c1ab244a904e190dcf0b872875bf086701bc58"
+    },
+    {
+      "arm": "posterior_seed1",
+      "image_sha256": "22f27f9254be51398851f4c3f610dfb338d200a68a06f98228a25d9e6b369b5c",
+      "prepared_shape": [
+        1,
+        350,
+        350,
+        286
+      ],
+      "all_class_repeat_max_abs": 0.0,
+      "labels_different": 0,
+      "seconds_including_repeat": 30.295188151765615,
+      "probability_sha256": "4e1dfe2cce8c71ab62d9a2d09e2c94ff97c2920454d325675163b29fb1256d0e",
+      "labels_sha256": "7d18b6442061aa1bd85b3e51d5971a0a8c7c852ec41a76e66dd311efc0af3e12"
+    },
+    {
+      "arm": "posterior_seed2",
+      "image_sha256": "ca46c5fcd0fb1e697881c8866856a5e26b21f623c9038164e41e02a4e0e66d70",
+      "prepared_shape": [
+        1,
+        350,
+        350,
+        286
+      ],
+      "all_class_repeat_max_abs": 0.0,
+      "labels_different": 0,
+      "seconds_including_repeat": 29.98666631570086,
+      "probability_sha256": "17a2996857cbe308b74baa35df4b654f93feb7e6bdbb16dbb7a57da1ec8750c5",
+      "labels_sha256": "f9970715fb8e1ee9e4f87040a5457b65042ee00a661b0a2a462f0fdf7d8e0b6a"
+    }
+  ],
+  "seconds": 181.1187702943571,
+  "peak_gpu_bytes": 82947072
+}

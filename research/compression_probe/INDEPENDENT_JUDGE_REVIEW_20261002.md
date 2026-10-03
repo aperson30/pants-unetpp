@@ -115,3 +115,25 @@ parity or clinical accuracy. Real-case grid assertions still required.
 
 See NOVELTY_AND_DECISION_GATE_20261002.md for the explicitly different
 raw-head protocol and its predeclared investment gate. No GPU submitted.
+
+## Final follow-up: raw-head diagnostic completed, negative investment gate
+
+The preceding no-GPU statements describe the earlier preflight only.
+Job3297419 subsequently completed0:0 in209 allocation seconds. Strict frozen
+checkpoint loading, real-case geometry contracts, all six arms and exact
+three-channel repeats passed. A separate CPU audit verified saved-map hashes
+and scored all1756 annotated voxels; GT was not an inference input.
+
+Native tumor mean .00329347 fails the predeclared .01 adequacy floor.
+Mean/seed0/seed1/native ratios were .300/.404/.272, but seed2 was1.679.
+All arms, including native, had zero tumor argmax overlap with annotation.
+Thus this is NOT confirmation of clinically introduced misses or uniform
+tumor suppression. See difftumor_audit_3297419.json and the final decision report.
+
+The independent-network runtime check is resolved for this raw-head question.
+The official external-organ-mask pipeline, exact historical producer weights
+and patient-independent training provenance remain unverified. These limits
+are retained, not bypassed; this weak-native result does not justify spending
+more GPU hours to reconstruct a clinical validation pipeline or select a
+favorable replacement judge. Campaign estimate1.225833/2 charged-equivalent
+GPU-hours; posted debit unknown. Main evaluation47320183 untouched.
