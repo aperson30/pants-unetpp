@@ -1731,3 +1731,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Pythoncompile/diffchecks pass. NoGPUallocation, productionedit or47320183
   action. Goalactive. GitHubpublicationcurrentlyblockedbycredentialprompt;
   commit/pushattempt follows, never claimpublishedbeforeverification.
+
+### 2026-10-02 — Actual trained checkpoint CPU parity, closer CBT/ADS prior art
+
+- Separate localCPUvenv:torch2.10+cpu/DNA0.4.2;113.7MBofficialtorchwheel,
+  no productionenv changes/login-node inference. SavedDS-oncheckpointSHA
+  verified beforeload; actualfull-channelarchitecturestrictloadpasses.
+- Fixedsynthetic32cubed input:alltrainedj2..j5 exitsbit-identical tofullgraph;
+  deepestDS matchesordinarysingleoutput.5.89s/oneCPUthread. Reporttracked.
+  NOTfullpatch/GPU/TTA/resampling parity or tumorquality/speed evidence.
+- Source-only nnUNetpredictoraudit foundDS-off initialization/foldweightsreload
+  andSimpleITKZYXvsNibabelXYZ trap; naivewrapper unsafe withoutstatekey handling.
+- CBTalreadyclass-specificsegmentationthresholds; predictedclassselection
+  doesnotitselfguardtumor-to-backgroundmisses. ADSalreadyshallowstagewise
+  nestedtraining. Furthernoveltywarning, notclaimingdiscovery fromcounterexample.
+- DeltaAI/Bridgesmastersclosed duringread-onlyqueries; requestedfreshDeltaAI.
+  GitHubpushauthenticationstillneedsuser;askednormalgitpush, no token handling.
+  Spend0new/no47320183 action; goalactive pendingrealprobe/sourcecontracts.

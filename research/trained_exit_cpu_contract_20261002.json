@@ -1,0 +1,46 @@
+{
+  "completed": true,
+  "torch": "2.10.0+cpu",
+  "device": "cpu",
+  "threads": 1,
+  "checkpoint_sha256": "81f9598fb86d90e18676c89eb3cc9a91379a7cb932e35cfad116e54bbf52d4a5",
+  "strict_weights_loaded": true,
+  "full_architecture": true,
+  "synthetic_input_shape": [
+    1,
+    1,
+    32,
+    32,
+    32
+  ],
+  "branches": [
+    {
+      "depth": 2,
+      "bit_identical": true,
+      "max_abs_diff": 0.0
+    },
+    {
+      "depth": 3,
+      "bit_identical": true,
+      "max_abs_diff": 0.0
+    },
+    {
+      "depth": 4,
+      "bit_identical": true,
+      "max_abs_diff": 0.0
+    },
+    {
+      "depth": 5,
+      "bit_identical": true,
+      "max_abs_diff": 0.0
+    }
+  ],
+  "ds_deepest_equals_single_output": true,
+  "elapsed_seconds": 5.889999999999418,
+  "scope": "Saved trained weights, tiny synthetic CPU-input contract only",
+  "limits": [
+    "Not full training patch or patient input",
+    "No GPU/BF16/TTA/sliding-window/resampling parity",
+    "No tumor quality or speedup conclusion"
+  ]
+}

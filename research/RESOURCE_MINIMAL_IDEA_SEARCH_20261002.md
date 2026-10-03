@@ -441,3 +441,61 @@ weights/data but weak novelty;2/3stilldeprioritized and4negative preserved.
 Next: actual isolated checkpoint/preprocessing compatibility, then decide
 whether runtime/lesion oracle probe is worth the remaining verified budget.
 Do not make a new conference-quality claim from data-readiness checks.
+
+## Trained-weight CPU contract and stricter competitors (2026-10-02)
+
+Actual local WindowsCPU test with the hash-verified1000epoch DS-on checkpoint,
+full trained6stage architecture/32..320channels and29outputs: strict state-dict
+load passes. Depthj2..j5each bit-identical to its full-graph branch on fixed
+synthetic32cubed input; deepest DS branch also bit-identical to ordinary
+single-output inference. One CPUthread, PyTorch2.10.0+cpu, DNA0.4.2,5.890s
+including load/init/checks. See test_trained_exit_cpu.py and
+trained_exit_cpu_contract_20261002.json. Trusted checkpoint hash checked BEFORE
+pickle loading. No source checkpoint writes. This is stronger execution evidence
+than random small weights, but NOT fullpatch/GPU/patient/lesion quality evidence.
+Separate local exit-cpu-venv; no existing environment/cluster login compute
+modified. Official CPUwheel113.7MB; setup took roughly a few minutes of wall
+time, no charged allocation. Full package versions available via pipfreeze.
+https://download.pytorch.org/whl/cpu/torch/
+
+Inspected actual installed DeltaAI nnUNetPredictor methods (CUDAdisabled,
+source only). initialize_from_trained_model_folder buildsDS-off and restores
+parameters; predict_logits_from_preprocessed_data reloads parameters by fold.
+A wrapper that adds state-dict prefixes will fail unless explicitly handled.
+predict_single_npy_array warns that NibabelXYZ differs from SimpleITKZYX;
+preserve trained SimpleITKIO rather than freestyle array ordering. Predicted
+logits require official native-shape probability-space conversion. Do not skip
+TTA, context, resampling or class competition to make this probe cheaper.
+Follow-up source query lostSSH; no new login/bypass attempted. Both prior
+DeltaAI and Bridges sockets now closed/refused; requested fresh DeltaAI master.
+
+Stronger competing work, primary fullHTML checked:
+Class Based Thresholding (CBT,2210.15621) already learns class-specific pixel
+exit thresholds from class-conditioned training probabilities, usingADP-C.
+Its rule selects the threshold by predictedargmax class (Section2), not unknown
+GT class. Thus a confident tumor-to-background error receivesBACKGROUND
+threshold: increasing only the tumor threshold does not guarantee protection.
+This is an inference from the explicit rule, not an observed failure in our data
+or a novel theorem. Formalrisk/ordinarybackground-threshold baselines still
+needed. Table1W48:387.80->299.10GFLOPs,81.31->80.69mIoU at[.99,.998]; these
+are CityscapesFLOP/accuracy values, NOT latency on our3Dhardware or lossless.
+https://arxiv.org/html/2210.15621v1
+
+ADS_UNet (2304.04567,authorabstract) already proposes stage-wise additive
+training/resource-efficient shallow supervision/performance-weighted nested
+sub-UNets. Generic depth-curriculum/weighted-nested ensemble is therefore not
+new either. Its34%trainingtime claim is vsTransformers in histopathology, NOT
+our optimizedUNet++baseline; fullHTML unavailable, implementation not audited.
+https://arxiv.org/abs/2304.04567
+
+Additional related authorrepository okdlibri/risk-aware-early-exit describes
+margin/Mahalanobis/entropy-change logistic routing and survivor-conditioned
+predictor training. Read README only; paper-code attribution, pretrained-weight
+retrieval and formalguarantees remain unverified. Treat as a lead, not confirmed
+benchmark evidence. https://github.com/okdlibri/risk-aware-early-exit
+
+No new GPUhours/production edits/protected evaluation action. Generic
+class-aware early exit and generic depth-curriculum ideas further rejected;
+candidate1 needs a substantive empirical distinction beyond these baselines.
+Next inspect sliding-window/mirroring/channel accumulation before any parallel
+head extraction optimization. Source/code feasibility is not an S-tier result.
