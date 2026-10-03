@@ -301,3 +301,40 @@ weak novelty;2 deferred for objective/optimizer/variance issues;3 duplicates
 class-aware-pruning premises;4 retains previous NO-GO on tumor-erasure claims.
 Next cheap work: audit primary baseline code/public second-backbone availability
 and lesion matching. No candidate warrants full method training yet.
+
+## Isolated exit contracts and official baseline implementation audit
+
+Added research/isolated_unetpp_exit.py without production edits. It truncates
+encoder and decoder dependency closure, returns individual logits, rejects
+training/omittedj1/non-DS/ensemble settings. Flags do not prove supervised
+checkpoint provenance. Installed PlainConvEncoder source confirmed independent
+sequential stages. No full-encoder computation shortcut was assumed.
+
+Actual torch2.10+cu129 CPU/GPU-disabled one-thread tests:2tests pass in.429s,
+2D4stage,3D4stage,3D6stage anisotropic final stride[1,2,2]. All retained depths
+2..L match full-graph logits bit-for-bit. Hooks prove no deeper encoder stages
+or out-of-closure decoder nodes run. Six-stage depth2 executes3encoder/3decoder
+blocks versus6/15 at full depth; node counts are NOT FLOPs or measured latency.
+Hashes/results: exit_cpu_contract_20261002.json. Small random weights only:
+real checkpoint/full-patch/GPU/BF16 parity and tumor accuracy unverified.
+No large network or patient-volume CPU inference ran on a login node.
+
+Read author RC-EENN code at commit3db9a52dfbbe8edb5d9b787b6f0712d4e580b9f4:
+rc/risk_control.py already implements naive/CRC/LTT/UCB over precomputed loss
+matrices and calibration/test splits. CRC finite-sample correction and UCB
+safe-prefix thresholding are baselines, not new inventions. sem_seg/README
+documents ADP-C and GTA5-tuned weights. Root README leaves license and some
+dependencies TODO: do not redistribute its code without resolving permission.
+https://github.com/metodj/RC-EENN/blob/3db9a52dfbbe8edb5d9b787b6f0712d4e580b9f4/rc/risk_control.py
+https://github.com/metodj/RC-EENN/blob/3db9a52dfbbe8edb5d9b787b6f0712d4e580b9f4/sem_seg/README.md
+
+ADP-C original README offers W18/W48 multi-exit weights via Google Drive;
+code MIT. Actual weight retrieval/hash/license scope/runtime still unverified.
+Cityscapes has its own data access terms. This optional nonmedical backbone
+is not proof of pancreatic validity or frictionless free data availability.
+https://github.com/liuzhuang13/anytime
+
+New GPU hours0, protected main evaluation untouched. Next: authoritative
+campaign charge-ledger refresh and validation-only case availability; only
+then decide whether a capped trained-model probe satisfies all gates.
+Goal active; execution feasibility is not a novel method contribution.

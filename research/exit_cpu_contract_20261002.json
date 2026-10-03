@@ -1,0 +1,20 @@
+{
+  "completed": true,
+  "scope": "Tiny random-weight CPU execution contracts, not tumor quality or GPU speed",
+  "torch": "2.10.0+cu129",
+  "gpu": false,
+  "cpu_threads": 1,
+  "tests": 2,
+  "seconds": 0.429,
+  "architectures": ["2D4stage", "3D4stage", "3D6stage anisotropic last stride"],
+  "depths": "All retained depths2..L",
+  "bit_identical_logits": true,
+  "skipped_work_verified_by_hooks": true,
+  "source_sha256": {
+    "isolated_unetpp_exit.py": "6b575255503cd5de7ba3e6f9c4e7237e56244339cd364a3f7f4728565c3fd437",
+    "test_isolated_unetpp_exit.py": "f35732f17d5b3a0c89e4e5c5897efbefa2e3dc2dece30a6693fc346b76764101",
+    "unet_plusplus.py": "66df18c1303dcaeecfe7e49a7a0dccb535165961f052e2565d9cce2e3463bf3e"
+  },
+  "new_gpu_hours": 0,
+  "limitations": ["No trained checkpoint/full patch parity", "No BF16/compiled/GPU parity", "Not a label-free routing policy"]
+}

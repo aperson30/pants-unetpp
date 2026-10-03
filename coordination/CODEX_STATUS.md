@@ -1688,3 +1688,16 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - No GPU job, new spend, test901 policy fitting, or47320183 mutation. Spending
   verification still required before any new job. Goal active; source/public
   baseline and isolated execution contracts next, not method training.
+
+### 2026-10-02 — Isolated exit graph verified on tiny CPU models
+
+- No production edits. Added isolated_unetpp_exit.py/test and scalar result.
+  Actual torch2.10CPU/GPU-disabled one-thread2tests pass.429s across2D4stage,
+  3D4stage/3D6stage anisotropic topology. All depth2..L logits bit-identical;
+  hooks confirm skipped encoder/decoder work. No tumor/GPU speed claim.
+- Private source-only exit_cpu_contract_v1 stage; no weights/patient data.
+- Read official RC-EENN code at3db9a52: existing CRC/LTT/UCB threshold methods.
+  Dependency/license TODO retained; no code redistribution. ADP-C weight links
+  exist, but retrieval/runtime/data terms not verified.
+- Spend0/no47320183 action. Next charged-ledger refresh and validation-only
+  feasibility manifest before GPU decision. Goal active; no S-tier claim.
