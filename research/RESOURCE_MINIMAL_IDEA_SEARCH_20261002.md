@@ -1,6 +1,8 @@
 # Resource-minimal idea search: reopened after negative compression gate
 
-Status: active investigation, not a selected contribution or novelty certificate.
+Status: investment decision concluded NO-GO on current evidence; not a selected
+contribution or novelty certificate. Latest decision and minimal PI plan:
+[IDEA_SEARCH_DECISION_20261002.md](IDEA_SEARCH_DECISION_20261002.md).
 Main PanTS evaluation is protected. No GPU job submitted in this search.
 
 ## Authoritative starting evidence
@@ -652,3 +654,31 @@ Bridgesidea socket authoritatively missing on recheck; local progress folder
 contains only SUMMARY.md/checkpoint_manifest.json, not per-case outcomes.
 No new job, new spending, production change or47320183action. Goal active;
 conditional diagnostic recommendation unchanged, full-paper commitment NO-GO.
+
+## Decisive frozen native-outcome gate completed (2026-10-02)
+
+User reopened Bridgesidea master. Read ONLY the frozen development-summary
+file, size bounded12MiB, exact SHA256fecb2318... matched,1800unique IDs. All6
+prespecified rows retain expected reference counts; nonnegative integral
+TP/FP/FN/TN and n_pred/n_ref identities pass. All4positive cases haveTP=0.
+Off-annotation voxels:3548=936,5782=535,others0; both fixednegatives predict0.
+Allselectedrows retained in frozen_exit_native_outcomes_20261002.json.
+
+This is0/4any-overlap detection on four SMALLEST annotation-positive cases,
+not overall174positive accuracy, clinical sensitivity or a representative
+cohort. It triggers the predeclared inadequate-native STOP for the current
+relative-safety probe. Do NOT build/submit oracle/controllerGPUinference or
+replace failures with easiercases. No shallow results measured; potential
+rescue would be a different question with knownoverthinking/ensemblebaselines.
+
+LiveDeltaAIsacct recheck of17campaign IDs matches all terminalstates/elapsed/
+billing and4413weightedseconds=1.225833charge-equivalentGPUh. No newallocation;
+posteddebitstillunverified. No47320183/main901evaluationread or mutation.
+Ordinarypublic author-modelHEAD/GET reached200OneDriveHTML(~395kcharacters)
+withoutlogin or payloaddownload; thisdoesNOTverifycheckpointaccess/provenance.
+
+Finaldecision/ranking/alternativeexplanations/wholepapercostsensitivities/
+PIexecutionplan/completionevidence:IDEA_SEARCH_DECISION_20261002.md.
+No candidateclearsinvestmentbar; strongestremainingquestionis absolute
+rare-lesionrisk/compute, notanestablishednewmethod. Finishboundedsearchwith
+honestNO-GO ratherthanconsumeunusedbudget; mainpaperworkremainsseparate.

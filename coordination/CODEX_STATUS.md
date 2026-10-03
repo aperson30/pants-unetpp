@@ -1787,3 +1787,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   <1GPUhsearchclaimNOTtotaltrainingcost. No new model/GPU allocation orspend.
   Goalactive, conditionaldiagnosticonly, full-paperinvestmentstillNO-GO.
   Commit/pushattempt follows; credentialsstillneededtopublish.
+
+### 2026-10-02T20:24-07:00 — Frozen native gate fails; final investment recommendation
+
+- FreshuserBridgesidea master:hash-verifiedsaved1800case development summary,
+  ONLY6frozenoutcomesread. All4smallestpositivesTP=0;936/535off-annotationvoxels
+  on3548/5782. Twofixednegativespredict0. Countsidentitiespass, allcasesretained.
+  ThisisNOToverallaccuracy/clinicalsensitivity. Stopsrelative-safetyrouteunder
+  preregisterednativeadequacygate; no outcome-selectedreplacement/GPUinference.
+- Revalidated17DeltaAIledgerrecords live:4413weightedseconds/1.225833charge-
+  equivalentGPUh, allterminal/failuresincluded. Posteddebitstillunverified.
+- PublicauthorSharePointlink200OneDriveHTML notcheckpointretrieval; noauth,
+  downloadorprovenanceclaim. NoGPUjob/newspend/main47320183action.
+- FinalPIdecision in research/IDEA_SEARCH_DECISION_20261002.md:5candidate
+  ranking, novelty/confounds, transparentfullpapercostsensitivities, minimal
+  executionplan and evidence requiredtoreopen. NO-GOnewmethodinvestment;
+  remainingabsolute-risk/computequestionnotcertifiedS-tier. Noforcedpositive.
+- Save6caseJSON, verifyarithmetic/docs/diff, commit/pushattempt next. MainPanTS
+  paper/evaluationremainsseparate. Completiondecisionawaitsfinalartifactaudit.

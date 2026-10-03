@@ -1,0 +1,27 @@
+{
+  "source": "/ocean/projects/cis260296p/asanjeev/pants_unetpp/progress_20260929/unetpp_ds_on_class28_validation.json",
+  "source_sha256": "fecb2318b7dc469670e3bae40b45d2f9ba03ac2049945886b41f33a9eab7df07",
+  "verified_read_date": "2026-10-02",
+  "source_case_count": 1800,
+  "selection_manifest": "exit_validation_feasibility_manifest_20261002.json",
+  "selection_frozen_before_prediction_outcomes": true,
+  "cases": [
+    {"case_id":"PanTS_00003548","TP":0,"FP":936,"FN":36,"TN":7281828,"n_pred":936,"n_ref":36,"dice_from_counts":0.0,"case_any_overlap_detection":false},
+    {"case_id":"PanTS_00006854","TP":0,"FP":0,"FN":66,"TN":43731314,"n_pred":0,"n_ref":66,"dice_from_counts":0.0,"case_any_overlap_detection":false},
+    {"case_id":"PanTS_00000133","TP":0,"FP":0,"FN":126,"TN":14615034,"n_pred":0,"n_ref":126,"dice_from_counts":0.0,"case_any_overlap_detection":false},
+    {"case_id":"PanTS_00005782","TP":0,"FP":535,"FN":126,"TN":54191939,"n_pred":535,"n_ref":126,"dice_from_counts":0.0,"case_any_overlap_detection":false},
+    {"case_id":"PanTS_00000016","TP":0,"FP":0,"FN":0,"TN":44181504,"n_pred":0,"n_ref":0,"dice_from_counts":null,"case_any_overlap_detection":null},
+    {"case_id":"PanTS_00000023","TP":0,"FP":0,"FN":0,"TN":36166080,"n_pred":0,"n_ref":0,"dice_from_counts":null,"case_any_overlap_detection":null}
+  ],
+  "positive_case_any_overlap_detected": 0,
+  "positive_cases": 4,
+  "decision": "STOP_CURRENT_RELATIVE_SAFETY_SCREEN_NATIVE_INADEQUATE",
+  "limits": [
+    "Four smallest annotation-positive development cases, not a representative cohort.",
+    "Saved deepest output only; no shallow prediction or inference performed.",
+    "Zero additional misses relative to a model missing all four cannot establish preservation.",
+    "Case any-overlap convention, not a clinical sensitivity estimate or lesion-matching protocol.",
+    "Do not replace cases after outcomes or infer all 174 positives are missed.",
+    "No main 901-case evaluation access, model modification, or new GPU allocation."
+  ]
+}
