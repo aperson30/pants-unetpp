@@ -499,3 +499,83 @@ class-aware early exit and generic depth-curriculum ideas further rejected;
 candidate1 needs a substantive empirical distinction beyond these baselines.
 Next inspect sliding-window/mirroring/channel accumulation before any parallel
 head extraction optimization. Source/code feasibility is not an S-tier result.
+
+## Literature-first rejection and cheaper next decision (2026-10-02)
+
+No new allocation or inference in this update. The previous access-refresh
+turn did not advance the research decision; this turn checks a different,
+tempting mechanism before building more inference infrastructure.
+
+### Candidate5: prevent auxiliary labels from teaching away tiny lesions
+
+Proposed claim: nearest/thresholded label reduction can turn a true tiny lesion
+into background, so suppress unreliable negative auxiliary supervision or use
+foreground-preserving targets. This could explain a DS interaction without
+inventing another architecture. It would matter if it prevented missed lesions
+at unchanged inference cost. However, this mechanism/remedy is already studied:
+
+- Park et al., NeuroImage2021, multi-scale highlighting foregrounds uses
+  max-pooled auxiliary labels, compares average-pooled hard labels and loss
+  weighting, with repeated cross-scanner experiments. Primary indexed Section3.3
+  inspected; full-page opening encountered a verification page. This is a real
+  competing lesion-supervision method, not a new pooling idea of ours.
+  https://pmc.ncbi.nlm.nih.gov/articles/PMC8382044/
+  https://pubmed.ncbi.nlm.nih.gov/33957235/
+- KG-Seg, Electronics2026, Section3.4.2 explicitly constructs a max-pool
+  occupancy reference and masks auxiliary negatives where downsampling has
+  removed a lesion (equations21-23). Primary indexed section inspected; direct
+  full-page opening unavailable. This directly overlaps the proposed validity
+  mask. Performance/code/checkpoint reproduction NOT checked here.
+  https://www.mdpi.com/2079-9292/15/18/4227
+- Deep Feature Surgery already tackles shared-exit gradient conflict and
+  training cost in CIFAR100/ImageNet (author abstract checked, already present
+  in the historical brief). Generic conflict correction is not a fallback
+  novelty claim. Its reported training reduction is NOT measured on our3DCT.
+  https://arxiv.org/abs/2407.13986
+
+Alternative explanations for a PanTS DS effect remain loss magnitude, different
+branch weights, model capacity, augmentation/preprocessing and optimization;
+label disappearance alone would not identify the causal training effect.
+Our UNet++ full-resolution branches also differ from plain U-Net's lower-
+resolution auxiliary heads. The4-cell comparison cannot isolate all of these.
+
+Cheapest distinguishing experiment would first count per-component label loss
+under the ACTUAL trained preprocessing, augmentations and DS scales, then
+compare nearest/occupancy/validity-mask gradients on matched batches. A native-
+grid mask rescaling is not that experiment. Those measurements could be useful
+for interpreting the existing paper but would not defeat the above prior art.
+Minimum causal paper would require resolution-matched supervision ablations,
+two tasks, repeated seeds, those target baselines and class-specific outcomes.
+Even a lower-bound4conditions*2tasks*3seeds is24training runs, plus evaluation;
+cost=24R GPUh with R calibrated on the respective tasks, not assumed to equal
+our main grid. This exceeds an inference-only reuse plan in researcher effort.
+Decision: REJECT as a new main method direction before any GPU expenditure.
+Do not modify the completed scientific grid to try this known remedy.
+
+### Stronger allocation decision: inspect saved native outcomes first
+
+Candidate1 remains the strongest NEXT EVIDENCE choice, not a top-conference
+method endorsement. Before implementing a stacked-head patient predictor,
+inspect the saved development-validation outcomes for the frozen6case manifest.
+The selected IDs and reference counts were frozen using annotations only;
+retain all cases, including deepest failures. A summary with TP>0 establishes
+only any-overlap CASE detection, not lesion-wise matching or clinical adequacy.
+If all4selected positives have TP=0, additional miss risk versus the deepest
+model is vacuous on this screen: stop the relative-safety probe instead of
+replacing cases with easier ones. Any shallow rescue would need a separately
+justified question and the existing overthinking/ensemble baselines; it is not
+permission to rename this negative gate a positive method result.
+
+At least one native detection merely makes a relative-loss calculation
+non-vacuous; it is NOT a success gate or evidence of acceptable absolute recall.
+Full-head results, FP burden, actual deployed cost, preprocessing parity and
+novelty remain separate gates. The most useful next action is thus a free read
+of6saved rows, not GPU inference, a router implementation or another download.
+Bridges2 master currently absent; requested user reopening. DeltaAI read-only
+hostname check succeeds. Main evaluation47320183 remains untouched.
+
+Ranking after this pass:1conditional diagnostic;2training mechanism deferred;
+3class-aware pruning insufficiently distinct;4compression method NO-GO;
+5auxiliary-label remedy rejected by direct prior art. None clears the full-
+paper investment bar. No new spending; last verified Slurm reconstruction
+remains1.225833charge-equivalent GPUh, NOT newly verified posted debit.

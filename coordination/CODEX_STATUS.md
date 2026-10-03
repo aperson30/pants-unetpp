@@ -1748,3 +1748,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - DeltaAI/Bridgesmastersclosed duringread-onlyqueries; requestedfreshDeltaAI.
   GitHubpushauthenticationstillneedsuser;askednormalgitpush, no token handling.
   Spend0new/no47320183 action; goalactive pendingrealprobe/sourcecontracts.
+
+### 2026-10-02T18:16-07:00 — Literature rejects auxiliary-label route before compute
+
+- Pulled before coordination read; tracked research remains separate from
+  unrelated untracked deployment scripts. No production/evaluation changes.
+- Candidate5: tiny-lesion auxiliary-target disappearance/validity correction
+  directly overlaps Park2021foreground-highlighting and KG-Seg2026Section3.4.2.
+  Primary indexed sections inspected; direct full pages blocked/unavailable,
+  no code/performance reproduction claimed. Generic gradient-conflict fallback
+  already overlaps Deep Feature Surgery. Rejected before GPU work.
+- Changed next-action order: read6frozen validation rows before implementing
+  multihead patient predictor. All-native-misses would make additional-risk
+  comparison vacuous; never replace cases after outcomes. TP>0is case any-overlap,
+  NOT lesion-wise or clinical detection. Ranking/uncertainties in research doc.
+- DeltaAI actualread-onlyhostname succeeds; Bridgesidea socket absent. No jobs,
+  new spend or47320183action. Ledgernotrefreshed/posteddebitstillunverified.
+- PyTorchCLAUDE/AIpolicy read earlier: repo-specific PR rules do not authenticate
+  thisPanTSfork. GitHubCLIloggedout; localcommitsnotpublished. Commit/pushattempt
+  follows thisentry; goalactive, no candidateclearedpaperinvestmentbar.
