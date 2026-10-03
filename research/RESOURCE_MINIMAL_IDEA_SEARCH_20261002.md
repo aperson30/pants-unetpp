@@ -206,3 +206,98 @@ size/monotonicity requirements. If existing exits/data cannot support it cheaply
 use the public ADP-C checkpoint as an optional nonmedical falsification test,
 not as proof of pancreatic-tumor validity. No external expert is required.
 Campaign spending unchanged; no new GPU work. Goal remains active.
+
+## Checkpoint reuse and rare-risk feasibility resolved on CPU
+
+audit_local_exit_metadata.py inspected local September29 safety backups using
+the existing inert restricted metadata parser: no tensor loading or execution
+of pickled classes, fixed8MiB metadata bound, all four SHA256s match manifest.
+Each checkpoint records epoch1000/fold0 and the expected sparse-validation
+trainer. This independently verifies artifacts, not their latest remote state.
+The saved debug configuration records DS-on/skip-shallowest=True for UNet++.
+All five seg-head keys exist in BOTH UNet++ files; this alone cannot establish
+training. Current trainer semantics plus saved configuration support j2..j5
+supervision for DS-on; j1 is omitted. DS-off has no auxiliary supervision.
+Do not use its head keys as evidence of learned shallow exits.
+
+For six stages, conceptual loss weights are j5:8/15,j4:4/15,j3:2/15,j2:1/15,
+j1:0. This is not the equal-weight Paper configuration. To test actual compute
+savings, exit-j dependency closure can in principle truncate to encoder stages
+0..j and decoder columns1..j; current production forward does NOT do this.
+We will not modify existing training/evaluation to add it. First validate an
+isolated inference copy against all relevant full-graph logits.
+
+Checkpoint hashes verified:
+- UNet++ DS-on:81f9598fb86d90e18676c89eb3cc9a91379a7cb932e35cfad116e54bbf52d4a5
+- UNet++ DS-off:6f1eac58af27784c7eb94539216d72670f0135c884df8ea2bc2bb3ecaff5e27a
+- Plain DS-on:9b27d6ee87771eddb254300916bd1b836c6640a7f21cb98fd84723d0d0cc8df2
+- Plain DS-off:e453225ad7cfe0a58d7ab47c6af9279dbf51f2e319651874fcf62c1bff8b8bf4
+
+### Statistical rejection gate
+
+rare_risk_feasibility.py:3CPUchecks passed. Known exact binomial zero-failure
+bound gives29/59/299 independent positive cases for10%/5%/1% upper miss bounds
+at95% confidence, for ONE prespecified fixed policy. Ten positives and zero
+misses still permit25.9% miss risk. These are NOT new theory or CRC calibration
+sample sizes, nor guarantees after selecting thresholds on the same cases.
+At10% prevalence,590 random cases yield59 positives only IN EXPECTATION—not
+with a guaranteed count. Use actual counts, separate policy-selection data,
+and patient rather than patch/lesion independence. Correct policy multiplicity.
+
+Synthetic counterexamples: marginal4% miss can hide40% conditional miss at10%
+prevalence; a perfect10000-voxel lesion plus missed10-voxel lesion gives99.9%
+voxel recall but50% lesion recall. These illustrate established metric gaps,
+not discoveries in our models. Relative additional misses and absolute recall
+must both be reported; the deepest branch itself may miss tumors.
+
+Closer competing primary paper: Conformal Lesion Segmentation (2510.17897)
+calibrates3D false-negative constraints, tested across6datasets/5backbones.
+Its formal loss counts missed foreground voxels within each case, not a new
+lesion-object-matching speed controller. This narrows but does not establish
+our novelty. Combining its score with Fast yet Safe is a baseline, not a core
+contribution. Inspect implementations before stating their precise guarantees.
+https://arxiv.org/html/2510.17897v1
+Fast yet Safe official code: https://github.com/metodj/RC-EENN
+
+### Candidate1 minimal decisive probe: predeclared before execution
+
+Purpose: determine whether supervised nested branches have a useful oracle
+lesion-recall/compute frontier. No claim of deployable routing from an oracle.
+Use a fixed validation-only feasibility manifest selected by IDs/annotation
+presence, never by favorable branch responses. Keep main test901 untouched.
+Report every chosen positive/negative, lesion burden, all supervised branches,
+and repeat errors. Preserve full spatial context/sliding windows; no GT crop
+or test-time GT routing. Oracle sees labels only in offline analysis.
+Define lesion matching/FP treatment before inference. A tiny feasibility set
+does NOT satisfy the statistical sizes above or clinical generalization.
+
+Kill if full native response is inadequate to assess additional misses, exits
+offer no meaningful oracle benefit, or real truncated execution saves<20%
+latency after overhead. The20% is a resource-screen heuristic, not a clinical
+tolerance. Retain inadequate-native cases instead of replacing them post hoc.
+Only GO to cohort if paired-repeat/grid contracts pass and the oracle can save
+>=20% measured time without additional whole-lesion misses on the fixed probe.
+Even a GO is NOT proof a label-free controller can attain the oracle frontier.
+
+No GPU submission: exact posted campaign spending is still unverified and
+the user explicitly requires verified spending before jobs. CPU/source/public
+artifact work can continue. No need for external clinical readers for this
+model-behavior question; do not call it clinically safe pruning.
+
+### Whole-paper cost sensitivity, not measured estimates
+
+For a modest inference-only paper, two datasets *500held-out/calibration cases
+*two multi-exit backbones =2000 all-head image passes. At hypothetical measured
+c=10/30/60seconds per pass, that is5.6/16.7/33.3 physical GPUh BEFORE repeats,
+truncated-latency profiling, staging and billing multipliers. This is a cost
+sensitivity model, NOT a forecast; our3D c is unknown. Three repeat passes
+would triple those figures. Existing full-depth outputs do not supply branches.
+Reuse is realistic for UNet++ DS-on; plain-U-Net downsampled heads are NOT the
+same adaptive-depth architecture. A second public backbone avoids retraining
+only if compatible weights/data are available and license/overlap are checked.
+
+Ranking:1 remains best reuse/cost candidate, but currently a diagnostic with
+weak novelty;2 deferred for objective/optimizer/variance issues;3 duplicates
+class-aware-pruning premises;4 retains previous NO-GO on tumor-erasure claims.
+Next cheap work: audit primary baseline code/public second-backbone availability
+and lesion matching. No candidate warrants full method training yet.

@@ -1669,3 +1669,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   trained-model speedup/quality claim. Correction-gradient GPU probe deferred.
 - Next metadata-only reuse audit and lesion-risk calibration feasibility;
   goal remains active, no candidate yet clears top-conference bar.
+
+### 2026-10-02 — Metadata reuse audit and lesion-risk CPU gates
+
+- Local all-four-final backup SHA256s verified against manifest; restricted
+  bounded pickle-header audit, no tensor loading. All epoch1000/fold0/trainer
+  metadata matches. UNet++ DS-on debug supports j2..j5 supervision, NOTj1;
+  DS-off saved head keys do not mean trained exits. No remote live-state claim.
+- Added audit_local_exit_metadata.py and rare_risk_feasibility.py. Three exact
+  CPU statistical/metric checks pass: zero failures need59positive independent
+  cases for5% upper bound95%confidence (fixed policy), not10cases. Synthetic
+  marginal/voxel vs positive/whole-lesion risk gaps are known, not new findings.
+- Found Conformal Lesion Segmentation primary work across6datasets/5backbones;
+  combining it with Fast yet Safe alone is not defensible novelty.
+- Updated idea evidence with frozen oracle-frontier probe gates and explicit
+  whole-paper inference cost sensitivity5.6–33.3physicalGPUh BEFORE overhead,
+  conditional on unknown10–60s/case timing. Not a measured forecast.
+- No GPU job, new spend, test901 policy fitting, or47320183 mutation. Spending
+  verification still required before any new job. Goal active; source/public
+  baseline and isolated execution contracts next, not method training.
