@@ -381,3 +381,63 @@ fresh login was attempted. Requested a new user-authenticated master to locate
 development-validation summaries only. No main evaluation job was inspected
 or modified. Candidate1 remains an unproven diagnostic, not an S-tier method;
 next decision requires real positive-case availability and runtime parity.
+
+New bridges2-idea master now works. Read only development-validation summary
+schema/reference counts, not model response metrics. Source SHA256fecb2318...
+contains1800cases/174class28positives. Fixed feasibility manifest records first
+four positives by(n_ref,ID):3548/6854/133/5782, with36/66/126/126GT voxels,
+and first two negative IDs16/23. These tiny cases are a stress screen, not a
+representative cohort or clinical sample. No outcomes-based replacement.
+Manifest:exit_validation_feasibility_manifest_20261002.json.
+
+CT/GT availability is still unverified: usual raw/preprocessed paths under
+the Bridges project root are absent (a separate nine-case calibration subtree
+exists). Therefore do not infer full training data survived node-local staging
+and do not submit a probe until exact reusable data or bounded selective access
+is established. No need to redownload1.1TB just to run this screen.
+
+Commit0bfba1b records accounting/novelty gates locally. Its noninteractive push
+failed because GitHub credentials could not be obtained; findings are NOT yet
+published. No credential changes or alternate login bypass attempted.
+
+## Bounded public validation data reuse completed (2026-10-02)
+
+The user's Ocean area has no usual persistent full-training raw/preprocessed
+directory; bounded inventory did not locate one. Instead verified individual
+public iPanTSMini files at immutable revision
+0254c148f3c05fd3913e42d16982b010a048167c. Dataset card declaresCC-BY-NC-SA4.0;
+use for noncommercial research with attribution, retain redistribution terms.
+https://huggingface.co/datasets/BodyMaps/iPanTSMini/tree/0254c148f3c05fd3913e42d16982b010a048167c
+
+Actual CPU/network audit:6combined masks plus6individual pancreatic_lesion
+masks,7441862bytes/20.640s. Every combined class28mask equals individual lesion
+mask voxel-for-voxel, matches header geometry, and reproduces saved development
+reference counts36/66/126/126/0/0. No model predictions used for selection.
+CT staging:230730733bytes/21.953s. All6CT headers match corresponding label
+shape/affine (absolute1e-6); all downloads match pinned LFS SHA256/size. These
+checks support paired-case reuse, NOT original archive byte identity or full
+class-map equivalence. Intensity/preprocessing/checkpoint parity remains open.
+
+Scripts:audit_exit_public_labels.py,stage_exit_public_images.py. Exclusive new
+output directories, bounded files/total bytes, TLS verification, no retries or
+overwrites; public data/actual audit JSON remain outsideGit in sibling
+exit_label_audit_20261002_v1 and exit_image_audit_20261002_v1. Python compilation
+passes, actual6case audits completed. Source-data payload238172595bytes total;
+no1.1TBdownload, GPU hours0, protected evaluation untouched.
+
+Additional primary competitors found:
+- ICML2019Shallow-Deep Networks already studies destructive overthinking and
+  confidence/disagreement exits. Shallow branches rescuing deepest errors alone
+  is NOT novel. https://proceedings.mlr.press/v97/kaya19a.html
+- MIDL2026Adaptive Inference for Medical Vision Transformers already profiles
+  medical data and learns to select token reduction/early exit across5datasets.
+  Abstract reports71.4%averageFLOPs reduction/.1ppaccuracy loss, NOT a measured
+ 3DCTlatency comparison on our hardware. This further rules out a generic
+  medical adaptive-compute pitch. Abstract audit only, full code not reviewed.
+  https://proceedings.mlr.press/v315/byun26b.html
+
+Ranking unchanged only for cheapest next evidence: candidate1 has reusable
+weights/data but weak novelty;2/3stilldeprioritized and4negative preserved.
+Next: actual isolated checkpoint/preprocessing compatibility, then decide
+whether runtime/lesion oracle probe is worth the remaining verified budget.
+Do not make a new conference-quality claim from data-readiness checks.

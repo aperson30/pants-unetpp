@@ -1717,3 +1717,17 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Bridges2 research master refused connection; requested fresh user master
   solely for development-validation summary inventory. No new job/GPU spend,
   production edit, or47320183 action. Goal active; no candidate cleared bar.
+
+### 2026-10-02 — Six annotation-selected validation cases staged without archives
+
+- Fresh user-authenticated bridges2-idea master works. Saved validation-only
+  summary1800cases/174positives confirmed via n_ref; no prediction-score selection.
+- Public iPanTSMini pinned0254c148:6combined+individualtumormask audits pass
+  class28equality, geometry and36/66/126/126/0/0referencecounts;7.44MB/20.64sCPU.
+- SixCTs230.73MB/21.953s; allpinnedhashes/sizes andCT-labelheadergeometrypass.
+  Payloads/auditJSONoutsideGit. No1.1TBdownload, originalarchiveidentityunproven.
+- PrimaryICML2019overthinking andMIDL2026medicaladaptivecompute sources further
+  weaken genericearlyexitnovelty. Stillneedtrainedpreprocess/checkpointparity.
+- Pythoncompile/diffchecks pass. NoGPUallocation, productionedit or47320183
+  action. Goalactive. GitHubpublicationcurrentlyblockedbycredentialprompt;
+  commit/pushattempt follows, never claimpublishedbeforeverification.

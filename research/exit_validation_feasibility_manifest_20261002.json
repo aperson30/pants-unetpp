@@ -1,0 +1,25 @@
+{
+  "purpose": "Annotation-selected development-validation feasibility cases only; not a representative cohort or test-set policy calibration",
+  "source": "/ocean/projects/cis260296p/asanjeev/pants_unetpp/progress_20260929/unetpp_ds_on_class28_validation.json",
+  "source_sha256": "fecb2318b7dc469670e3bae40b45d2f9ba03ac2049945886b41f33a9eab7df07",
+  "source_case_count": 1800,
+  "source_tumor_positive_count": 174,
+  "selection": "First four positives sorted by (n_ref, case_id), first two negatives sorted by case_id; no prediction outcomes used in this selection",
+  "tumor_class": 28,
+  "cases": [
+    {"case_id": "PanTS_00003548", "n_ref_voxels": 36},
+    {"case_id": "PanTS_00006854", "n_ref_voxels": 66},
+    {"case_id": "PanTS_00000133", "n_ref_voxels": 126},
+    {"case_id": "PanTS_00005782", "n_ref_voxels": 126},
+    {"case_id": "PanTS_00000016", "n_ref_voxels": 0},
+    {"case_id": "PanTS_00000023", "n_ref_voxels": 0}
+  ],
+  "availability": "Six public CTs and paired combined/individual lesion labels staged locally outside Git; hashes/counts/header geometry pass. Original-archive byte identity, trained preprocessing and checkpoint/GPU parity remain unverified. Do not submit on this manifest alone.",
+  "gates": [
+    "Verify raw CT and GT case IDs, hashes and geometry, actual split membership, and trained preprocessing before execution.",
+    "Preserve full volume context; no GT crop. Keep all selected cases even if deepest model performs poorly.",
+    "Use only supervised UNet++ DS-on branches j2 through j5; no unsupervised j1.",
+    "Report absolute deepest-model recall and FP burden, additional misses and all heads; no clinical safety inference from four positives.",
+    "No protected 901-case evaluation reads, changes, or policy fitting."
+  ]
+}
