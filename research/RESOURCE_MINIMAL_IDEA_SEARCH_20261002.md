@@ -133,3 +133,76 @@ Status: reserve, not the favored direction.
 No candidate currently clears the top-conference investment bar. Initial rank
 is provisional; candidate1 has the best reuse potential, candidate2 the clearest
 training-efficiency mechanism but substantial variance and novelty risk.
+
+## Follow-up: code audit and zero-GPU rejection calculation
+
+Read the prior work/diffusion_idea_screen_20261001.md as historical context;
+its budget/no-experiments statements are superseded by the completed campaign
+ledger. It already covers multi-decoder diffusion, ASE, TDC, gradient surgery,
+noise scheduling and compression/noise/depth separation. Do not rediscover
+those as new ideas. Its latest snapshot also explicitly says our PanTS models
+are segmentation checkpoints, not pretrained diffusion denoisers.
+
+### Candidate1 reuse caveats actually verified in source
+
+nnUNetTrainerUNetPlusPlus.py hardcodes skip_shallowest_deep_supervision_head=True;
+the shallowest full-resolution head is omitted because its conceptual weight
+is zero. Other retained heads are supervised with decaying weights. DS-off is
+not an anytime-trained model; do not infer trained exits from state-dict keys.
+unet_plusplus.py computes the full encoder and ALL nested decoder columns before
+selecting any outputs. Returning a shallow tensor from that forward gives no
+truncated-network speedup. True exit execution requires dependency-aware
+truncation and activation/memory timing; encoder computation is already paid.
+No trainer or existing evaluation changed. This source audit does not prove
+what trainer/config a remote checkpoint used; metadata still needs inspection.
+
+Closer competing work found: Fast yet Safe (NeurIPS2024) already calibrates
+early exits for semantic segmentation AND diffusion image generation. It uses
+public ADP-C HRNet/Cityscapes checkpoints and evaluates GTA5 too. A general
+segmentation risk-control proposal duplicates it. A lesion-level/positive-case
+failure study could be a distinction, but must beat class/group-aware baselines
+and be more than changing the risk's definition.
+https://arxiv.org/html/2405.20915v1
+https://github.com/liuzhuang13/anytime
+
+### Candidate2 CPU gate completed
+
+multidepth_estimator_gate.py ran locally:3 exact-enumeration/analytic tests pass
+in .113s, zero GPU hours. It verifies unbiased RAW Bernoulli-corrected gradients,
+added conditional variance, analytic cost-variance optimum, and a clipping
+counterexample. No trained gradients or measured surrogate cost used.
+
+Let V=trace(Cov(gf)), r=E||gf-gs||^2/V, shallow cost a, incremental correction
+cost b. Relative efficiency proxy is (a+p*b)*(1+(1/p-1)*r), normalizing V and
+full cost to1. For 0<r<1 its interior optimum is sqrt(a*r/[b*(1-r)]), capped
+at1; r>=1 favors always full depth. Deep-only parameters have gs=0, so their
+residual second moment is at least their full-gradient variance. They cannot
+gain sampling efficiency through this estimator unless a genuine cheap
+gradient surrogate reaches them. Shared parameters might still benefit; this
+does not rule out total savings, but rules out a blanket all-parameter claim.
+
+Illustrative assumptions (not measurements): a=.25, r=.1 -> proxy .5598;
+a=.25,r=.7 -> .9969 (essentially no advantage). At a=.5,r=.3 -> .9583.
+Any recomputation overhead raises costs and worsens this screen. Equal proxy
+values do NOT imply matched optimization or generation quality.
+Clipping example: full gradient2 clipped at1 is1. Shallow0 with p=.25 produces
+raw0 or8, unbiased mean2; clipping produces expected update.25, not1.
+Thus this is NOT quality-neutral plumbing for our existing training runs.
+
+Resolved blocked paper through its arXiv version: Taylor-control-variate work
+already tests diffusion-gradient variance reduction, reports weak U-Net/MNIST
+variance reduction and no loss convergence benefit. Its surrogate is different
+from a nested branch, but both efficiency and novelty need proof, not slogans.
+https://arxiv.org/html/2408.12270v1
+
+### Decision update and next test
+
+Do NOT submit a correction-gradient GPU experiment yet. Cheap gates expose
+deep-parameter and optimizer problems, and there is no verified pretrained
+diffusion model with compatible trained exits. Candidate2 demoted below1.
+Candidate1 remains a potential cheap DIAGNOSTIC, not an accepted method idea.
+Next: metadata-only checkpoint availability audit and the lesion-risk sample
+size/monotonicity requirements. If existing exits/data cannot support it cheaply,
+use the public ADP-C checkpoint as an optional nonmedical falsification test,
+not as proof of pancreatic-tumor validity. No external expert is required.
+Campaign spending unchanged; no new GPU work. Goal remains active.

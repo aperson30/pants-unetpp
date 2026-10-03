@@ -1650,3 +1650,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   acceptance audit, not proven novel method. Smallest PI next experiment:
   existing blinded packet expert known-location review, zero GPU spend.
   No new training recommended. Completion audit underway before goal closure.
+
+### 2026-10-02 — New resource-minimal idea search, CPU rejection gates
+
+- Previous bounded compression investment goal completed; new broad idea goal
+  active. Prior campaign cap/spending persists1.225833/2 estimated, posted debit
+  unverified. No GPU submission, no47320183 action.
+- research/RESOURCE_MINIMAL_IDEA_SEARCH_20261002.md ranks4 candidates with claims,
+  nearest work, alternatives, cheap tests and whole-paper compute models.
+- Source audit: main UNet++ omits zero-weight shallowest head; forward computes
+  full graph before output selection. Returning shallow logits saves no compute.
+  Remote checkpoint exit/trainer metadata not yet verified.
+- Found direct prior Fast yet Safe: segmentation AND diffusion risk-controlled
+  exits. Resolved Taylor-control-variate diffusion paper via arXiv: weak MNIST
+  U-Net convergence result. Generic calibrated exits/variance tricks not novel.
+- Added local multidepth_estimator_gate.py;3CPUtests pass in.113s. Deep-only
+  parameters lack cheap surrogate; clipping destroys raw unbiasedness. No
+  trained-model speedup/quality claim. Correction-gradient GPU probe deferred.
+- Next metadata-only reuse audit and lesion-risk calibration feasibility;
+  goal remains active, no candidate yet clears top-conference bar.
