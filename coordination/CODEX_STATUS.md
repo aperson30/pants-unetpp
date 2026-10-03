@@ -1767,3 +1767,23 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - PyTorchCLAUDE/AIpolicy read earlier: repo-specific PR rules do not authenticate
   thisPanTSfork. GitHubCLIloggedout; localcommitsnotpublished. Commit/pushattempt
   follows thisentry; goalactive, no candidateclearedpaperinvestmentbar.
+
+### 2026-10-02T18:20-07:00 — Whole-paper reuse and positive-cohort limits audited
+
+- Pulled before coordination read. Bridgesidea master missing; local progress
+  folder has only summary/manifest, not6case prediction outcomes. No freshMFA
+  fallback attempted and no protected evaluation access.
+- Official UNet++ PyTorchREADME advertises MSDLiver/tumor pretrained models:
+  useful second-dataset LEAD, notverifieddownload/supervisedheads/secondbackbone.
+  SharePoint fetch unavailable; existing v1branch-loss provenance caveat remains.
+  ADP-C public4exitlinks verified inREADME, actualDrivepayloads not retrieved.
+  STU-Net pretrained organlabels not a validated tumor-anytime substitute.
+- Existing exact-binomial CPUfunctions: hypotheticalzero failures174positives
+  ->1.707%95%upper;87holdout->3.385%;3simultaneous29case groups->13.167%each.
+ 1%fixed-policyboundneeds299positives;3simultaneous5%groupsneed80each.
+  Design calculations NOT modelresults/clinicaltolerances/conformalguarantees.
+  SavedJSON and modelinventory in researchdoc; cheapfullpaper also needscohort.
+- MESSauthorabstract adds strong knownpost-trainingcustomizationbaseline;
+  <1GPUhsearchclaimNOTtotaltrainingcost. No new model/GPU allocation orspend.
+  Goalactive, conditionaldiagnosticonly, full-paperinvestmentstillNO-GO.
+  Commit/pushattempt follows; credentialsstillneededtopublish.

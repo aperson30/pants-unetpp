@@ -579,3 +579,76 @@ Ranking after this pass:1conditional diagnostic;2training mechanism deferred;
 5auxiliary-label remedy rejected by direct prior art. None clears the full-
 paper investment bar. No new spending; last verified Slurm reconstruction
 remains1.225833charge-equivalent GPUh, NOT newly verified posted debit.
+
+## Reusable-model inventory and whole-paper statistical cost (2026-10-02)
+
+Rechecked the official repositories, not just search-result descriptions.
+Our own DS-on checkpoint remains the only fully loaded, provenance-audited
+medical multi-exit model in this workspace. No new model downloaded or loaded.
+
+| Resource | Evidence actually checked | What remains unproven |
+| --- | --- | --- |
+| Our PanTS UNet++ DS-on | Local strict trained-weight CPU parity for j2..j5 | Patient/GPU runtime, all branch outcomes, deployment router |
+| Official UNet++ v1 MSD Liver models | PyTorch README advertises a SharePoint model folder and per-branch liver/tumor results | SharePoint fetch failed; actual files/hashes/folds/trainer revision/exit supervision unknown |
+| ADP-C HRNet W18/W48 | Official MIT-code README has Drive model links, four-exit commands and Cityscapes metrics | Drive fetch unavailable through web tool; checkpoint integrity, data access and runtime not reproduced |
+| UNet3+ | Author README/source repository exists | No reusable supervised-exit checkpoint identified in the inspected README; not evidence none exists anywhere |
+| STU-Net | Official README offers pretrained TotalSegmentator models and downstream fine-tuning | Pretrained anatomical labels do not establish tumor heads or genuine trained adaptive-depth exits; not a drop-in substitute |
+
+Sources:
+https://github.com/MrGiovanni/UNetPlusPlus/tree/master/pytorch
+https://github.com/liuzhuang13/anytime
+https://github.com/ZJUGiveLab/UNet-Version/blob/master/README.md
+https://github.com/uni-medical/STU-Net
+
+Important correction to a broad no-model impression: the official UNet++
+PyTorch README DOES advertise pretrained MSD Liver/tumor models. It reports
+branch-wise validation results. This is a potentially useful second DATASET,
+not an independent second backbone. Published numbers are not proof that the
+accessible weights match current repository training code. FINDINGS.md already
+documents a branch/loss mismatch in the v1 source. Current author trainer still
+sets ds_loss_weights=None and passes it to MultipleOutputLoss2. Do not infer
+all-head supervision or silently repair a downloaded checkpoint's provenance.
+No checkpoint was retrieved, so no claim about those weights' actual behavior.
+https://raw.githubusercontent.com/MrGiovanni/UNetPlusPlus/master/pytorch/nnunet/training/network_training/nnUNetPlusPlusTrainerV2.py
+
+MESS (ECCV2022) is another strong deployment baseline, not a new idea of ours:
+its author abstract already describes two-stage multi-exit segmentation training
+and post-training architecture/policy search. The advertised <1GPUh is search
+cost, NOT total model training/paper cost. Public usable weights/code not verified
+in this pass; do not transfer its speed claims to3Dlesions.
+https://arxiv.org/abs/2106.03527
+
+### The cohort, not just runtime, constrains a cheap credible safety claim
+
+Executed our existing exact-binomial CPU functions on the frozen174positive
+case count. New values recorded in exit_cohort_design_limits_20261002.json;
+no extra patient data, prediction inspection, inference or GPU allocation.
+
+- Even if ALL174independent positives were an untouched validation set and
+  zero additional misses occurred, a fixed-policy one-sided95% upper bound
+  would be1.707%, not1%. One1% claim needs299zero-failure positives.
+- A hypothetical87calibration/87held-out-positive split gives3.385% upper
+  bound with zero failures on the holdout. This is a design illustration,
+  NOT a split already performed or evidence zero misses occurred.
+- Three hypothetical equal29case strata from that holdout give13.167% per-
+  stratum upper bounds using delta=.05/3 for simultaneous95% coverage. Three
+  simultaneous5% bounds need80zero-failure positives PERstratum (240total).
+
+These are known statistical calculations, not novel theory and not a clinical
+tolerance recommendation. Nonzero failures, threshold selection, unequal
+size strata and patient/scanner dependence only make the simplistic design
+less reassuring. CRC expected-risk calibration and binomial holdout validation
+are different guarantees; don't rename one as the other. The main901test
+remains protected, not a convenient extra calibration dataset.
+
+Consequences for the PI plan: choose an honest empirical endpoint first; don't
+promise a1%tiny-lesion risk certificate with this cohort. Full-paper feasibility
+must include independent positive-case count, source/model overlap and actual
+checkpoint availability, not only2000inferencepasses. A smaller descriptive
+audit may be feasible, but is not automatically a top-conference contribution.
+
+Next highest-information action remains reading the6frozen saved native rows.
+Bridgesidea socket authoritatively missing on recheck; local progress folder
+contains only SUMMARY.md/checkpoint_manifest.json, not per-case outcomes.
+No new job, new spending, production change or47320183action. Goal active;
+conditional diagnostic recommendation unchanged, full-paper commitment NO-GO.

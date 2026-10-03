@@ -1,0 +1,21 @@
+{
+  "scope": "CPU design calculation only; no model outcomes inspected",
+  "source_count": "Frozen validation-summary manifest: 1800 cases, 174 class-28-positive cases",
+  "method": "Known exact one-sided zero-failure binomial bound: 1 - delta^(1/n)",
+  "confidence": 0.95,
+  "optimistic_all_174_positive_cases_upper": 0.017069489069354196,
+  "hypothetical_87_positive_holdout_upper": 0.03384761068161959,
+  "hypothetical_three_29_case_strata_simultaneous_upper_each": 0.1316707320082179,
+  "positive_cases_needed_one_fixed_policy_one_percent_upper": 299,
+  "positive_cases_needed_per_stratum_three_simultaneous_five_percent_bounds": 80,
+  "limits": [
+    "Zero failures is hypothetical, not an observed outcome.",
+    "87/87 split and equal 29-case strata are design examples, not actual selected splits.",
+    "Independent positive cases, fixed policy, no outcome-based selection, and no shift assumed.",
+    "Multiple lesions or patches from one patient do not increase independent case count.",
+    "All 174 cannot serve as independent final validation if used to tune the policy.",
+    "Nonzero failures worsen bounds; selecting policies on validation requires correction or another split.",
+    "This is not a conformal expected-risk guarantee or a clinical safety result.",
+    "Do not access the protected 901-case test evaluation to augment this research cohort."
+  ]
+}
