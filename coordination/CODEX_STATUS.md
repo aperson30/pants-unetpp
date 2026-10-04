@@ -1847,3 +1847,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   spend, no main test-evaluation/production actions. Pull-before-read succeeded.
 - Re-run CPU assertions, verify generated JSON/source/doc diff, commit only these
   research/log files, attempt push next; authentication may still block publication.
+
+### 2026-10-03T23:20-07:00 — Batch utility mechanism screened; rare-target gate weak
+
+- Read-only source/literature audit plus own CPU code; no GPU spending or main
+  grid/test-evaluation changes. Pull-before-coordination-read succeeded.
+- Binary CE+batch Dice: 10/256 isolated/exact replacement-score sign reversals;
+  CE control 0. Follow-up with 29-channel foreground Dice/fp32 reductions: 1/256
+  aggregate reversals, exploratory rare-class soft-Dice target 0/256. All seeds
+  and original JSONs retained. Toy labels are not patient lesions or recall.
+- Directional sufficient-statistic correction matches multiclass autograd with
+  maximum absolute error 1.1991e-8. A real backbone's scoring cost is unmeasured;
+  current upstream loss read is not deployed-version parity certification.
+- VIF already handles non-decomposable attribution; JEST/ACID already condition
+  selection on companions. Generic batch-aware utility is not a novelty claim.
+- PARK standalone method, do not spend remaining GPU allowance to chase the
+  favorable binary endpoint. Full rationale/contracts/results in
+  research/BATCH_CONDITIONED_UTILITY_20261004.md. No selected S-tier idea yet.

@@ -102,6 +102,13 @@ specific affordable hypothesis pass. Main 901-case evaluation stays protected.
 
 ## Honest progress
 
+Follow-up: [batch-conditioned utility CPU screen](BATCH_CONDITIONED_UTILITY_20261004.md)
+found isolated/full-batch gradient disagreement, but the 29-channel aggregate
+endpoint reversed only 1/256 decisions and the exploratory rare-class target
+reversed none. The sufficient-statistic correction contract passes; novelty and
+meaningful rare-class benefit do not. Park the standalone paper proposal rather
+than spending GPU hours on its stronger-looking binary toy result.
+
 This pass ruled out several tempting combinations and located reusable author
 assets. It did not find an S-tier idea, demonstrate better quality, or establish
 that no good idea exists. The best immediate investment remains a bounded source
