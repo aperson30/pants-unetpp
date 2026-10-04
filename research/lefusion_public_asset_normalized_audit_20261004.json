@@ -1,0 +1,3786 @@
+{
+  "revision": "b0516d354c4473ea4f8539cad395dfddb5944215",
+  "gpu_hours": 0,
+  "scope": "Integrity/member inventory only; upstream provenance and clinical adequacy unverified",
+  "assets": [
+    {
+      "archive": "Normal.tar",
+      "member_count": 63,
+      "expanded_bytes": 6297342,
+      "sha256": "2c3342b79b57b457dd97fbbc1786ef56ce32f81d14e4b3e2caf91b7b03806f02"
+    },
+    {
+      "archive": "Demo.tar",
+      "member_count": 189,
+      "expanded_bytes": 41148897,
+      "sha256": "eea5b165b14d5ae3b10212fe946466831a9edbbcbc8c236a58bb00997d8f6e47"
+    }
+  ],
+  "geometry": {
+    "groups": {
+      "Demo/Image/Image_1": 30,
+      "Demo/Image/Image_2": 30,
+      "Demo/Image/Image_3": 30,
+      "Demo/Mask/Mask_1": 30,
+      "Demo/Mask/Mask_2": 30,
+      "Demo/Mask/Mask_3": 30,
+      "Normal/Image": 30,
+      "Normal/Mask": 30
+    },
+    "normal_roi_count": 30,
+    "normal_unique_public_patient_ids": 22,
+    "all_cases": [
+      {
+        "case_key_hash": "0fd56e0c69101e0ad9320b3d7274a700739aa26b17e712e399218ad9a5321dae",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.9628909826278687,
+          0.9628909826278687
+        ],
+        "normal_range": [
+          -892.0,
+          1137.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 594,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -0.8414826393127441,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.0101253567263484,
+            "background_abs_error_quantiles_normalized": [
+              0.008489876985549927,
+              0.025117999315261836,
+              0.034499365985393514,
+              0.07763850688934326
+            ],
+            "foreground_mean_normalized": -0.42491909861564636,
+            "foreground_mean_change_normalized": 0.2494603991508484,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6045730799436569,
+              -0.4213181734085083,
+              -0.2560742065310478
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -0.847490131855011,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010216469876468182,
+            "background_abs_error_quantiles_normalized": [
+              0.008565276861190796,
+              0.02530089616775512,
+              0.034506641179323186,
+              0.07904267311096191
+            ],
+            "foreground_mean_normalized": -0.29457584023475647,
+            "foreground_mean_change_normalized": 0.3798036277294159,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5704797714948654,
+              -0.27679577469825745,
+              -0.06266481541097156
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -0.8484026193618774,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010030321776866913,
+            "background_abs_error_quantiles_normalized": [
+              0.008365720510482788,
+              0.024980065226554868,
+              0.03427134782075881,
+              0.0739128589630127
+            ],
+            "foreground_mean_normalized": 0.11297206580638885,
+            "foreground_mean_change_normalized": 0.7873515486717224,
+            "foreground_intensity_quantiles_normalized": [
+              -0.47553023844957354,
+              0.19979412108659744,
+              0.5241474211215974
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "29771e24d5660744db7ec8698439c66df3b1ca12cb4113fd6c7cdfa1212a328f",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.9628909826278687,
+          0.9628909826278687
+        ],
+        "normal_range": [
+          -1009.0,
+          1260.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 5709,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010579491965472698,
+            "background_abs_error_quantiles_normalized": [
+              0.008913934230804443,
+              0.0260805532336235,
+              0.03533118665218356,
+              0.08475035429000854
+            ],
+            "foreground_mean_normalized": -0.2996036410331726,
+            "foreground_mean_change_normalized": 0.32883793115615845,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5501537442207336,
+              -0.2957075834274292,
+              -0.04994569197297105
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -0.9916290044784546,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010622669011354446,
+            "background_abs_error_quantiles_normalized": [
+              0.008961498737335205,
+              0.026147788763046263,
+              0.03554187551140786,
+              0.10774749517440796
+            ],
+            "foreground_mean_normalized": 0.07577703148126602,
+            "foreground_mean_change_normalized": 0.7042186260223389,
+            "foreground_intensity_quantiles_normalized": [
+              -0.4978055238723755,
+              0.13552697002887726,
+              0.46064686775207514
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -0.9943937659263611,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010256890207529068,
+            "background_abs_error_quantiles_normalized": [
+              0.008608818054199219,
+              0.02531122565269469,
+              0.0343766957521439,
+              0.10079324245452881
+            ],
+            "foreground_mean_normalized": 0.2746290862560272,
+            "foreground_mean_change_normalized": 0.9030706286430359,
+            "foreground_intensity_quantiles_normalized": [
+              -0.4233306586742401,
+              0.4414912760257721,
+              0.597682511806488
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "974034f0bbeb6fc3f0b9a1192107621842768ac25ea5991e03ec9340c5da7a48",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.9101560115814209,
+          0.9101560115814209
+        ],
+        "normal_range": [
+          -977.0,
+          1203.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1819,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9101560115814209,
+              0.9101560115814209
+            ],
+            "range": [
+              -0.9467366933822632,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.009509935975074768,
+            "background_abs_error_quantiles_normalized": [
+              0.007950961589813232,
+              0.023670846223831175,
+              0.032524156570434566,
+              0.06816679239273071
+            ],
+            "foreground_mean_normalized": -0.5033600330352783,
+            "foreground_mean_change_normalized": 0.26491448283195496,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7077709555625915,
+              -0.5059458017349243,
+              -0.2829774528741837
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9101560115814209,
+              0.9101560115814209
+            ],
+            "range": [
+              -0.9593825340270996,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.009611176326870918,
+            "background_abs_error_quantiles_normalized": [
+              0.008054077625274658,
+              0.023900210857391357,
+              0.03253127574920652,
+              0.07964587211608887
+            ],
+            "foreground_mean_normalized": -0.2125023901462555,
+            "foreground_mean_change_normalized": 0.5557721853256226,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6624131023883819,
+              -0.2487446516752243,
+              0.33510619401931724
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9101560115814209,
+              0.9101560115814209
+            ],
+            "range": [
+              -0.9439287781715393,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.009414984844624996,
+            "background_abs_error_quantiles_normalized": [
+              0.007869064807891846,
+              0.023639529943466187,
+              0.03255642890930176,
+              0.0860031247138977
+            ],
+            "foreground_mean_normalized": 0.06617078930139542,
+            "foreground_mean_change_normalized": 0.8344453573226929,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5767066955566407,
+              0.11305760592222214,
+              0.5429535090923309
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "6d18e0ac730d6fc2702fc9aebb2b52734e7ba5ca37ad4b70f2fe0ab3c8a51918",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.7421879768371582,
+          0.7421879768371582
+        ],
+        "normal_range": [
+          -1024.0,
+          1217.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1686,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012670928612351418,
+            "background_abs_error_quantiles_normalized": [
+              0.010715276002883911,
+              0.031003907322883606,
+              0.041205850243568334,
+              0.09262329339981079
+            ],
+            "foreground_mean_normalized": -0.27460142970085144,
+            "foreground_mean_change_normalized": 0.45176786184310913,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6022927165031433,
+              -0.27615685760974884,
+              0.07599078118801117
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012798135168850422,
+            "background_abs_error_quantiles_normalized": [
+              0.010851234197616577,
+              0.03139480762183666,
+              0.041494491696357716,
+              0.08539319038391113
+            ],
+            "foreground_mean_normalized": 0.06380119174718857,
+            "foreground_mean_change_normalized": 0.7901703715324402,
+            "foreground_intensity_quantiles_normalized": [
+              -0.4844270125031471,
+              0.1184844821691513,
+              0.4567502290010452
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012598968110978603,
+            "background_abs_error_quantiles_normalized": [
+              0.010691344738006592,
+              0.030808046460151672,
+              0.04085884988307951,
+              0.08219831436872482
+            ],
+            "foreground_mean_normalized": 0.24654850363731384,
+            "foreground_mean_change_normalized": 0.9729177951812744,
+            "foreground_intensity_quantiles_normalized": [
+              -0.41766592115163803,
+              0.34898123145103455,
+              0.5993441641330719
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "a81c5a934e0879b3ca52bc6e79f3874eaf820bcd31a2717c50d5cb2e43dab083",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.6054689884185791,
+          0.6054689884185791
+        ],
+        "normal_range": [
+          -1020.0,
+          79.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 4552,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.6054689884185791,
+              0.6054689884185791
+            ],
+            "range": [
+              -0.9964788556098938,
+              0.5256819725036621
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.009336191229522228,
+            "background_abs_error_quantiles_normalized": [
+              0.00798383355140686,
+              0.022515222430229177,
+              0.029893063902854917,
+              0.094920814037323
+            ],
+            "foreground_mean_normalized": -0.3175661265850067,
+            "foreground_mean_change_normalized": 0.5051416158676147,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7527201652526856,
+              -0.38536736369132996,
+              0.390091167390346
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.6054689884185791,
+              0.6054689884185791
+            ],
+            "range": [
+              -1.0,
+              0.5370374917984009
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.009419581852853298,
+            "background_abs_error_quantiles_normalized": [
+              0.008042842149734497,
+              0.022711506485939014,
+              0.03034518957138059,
+              0.0955042839050293
+            ],
+            "foreground_mean_normalized": -0.030634663999080658,
+            "foreground_mean_change_normalized": 0.7920730710029602,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6908260405063629,
+              0.0016412666300311685,
+              0.46277054995298383
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.6054689884185791,
+              0.6054689884185791
+            ],
+            "range": [
+              -0.9996970295906067,
+              0.7136054039001465
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.009381335228681564,
+            "background_abs_error_quantiles_normalized": [
+              0.0079573392868042,
+              0.02278128266334533,
+              0.030957266092300408,
+              0.12594479322433472
+            ],
+            "foreground_mean_normalized": 0.19770707190036774,
+            "foreground_mean_change_normalized": 1.0204148292541504,
+            "foreground_intensity_quantiles_normalized": [
+              -0.621055856347084,
+              0.3261193484067917,
+              0.61466383934021
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "c038b22e84174f0bc72faffa4c21b6013e064ec0a7d6a9f45bb7f2d67c0461bf",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.0,
+          0.72265625,
+          0.72265625
+        ],
+        "normal_range": [
+          -1021.0,
+          173.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 208,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.0,
+              0.72265625,
+              0.72265625
+            ],
+            "range": [
+              -1.0,
+              0.6646339297294617
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011105886660516262,
+            "background_abs_error_quantiles_normalized": [
+              0.00952155888080597,
+              0.026767313480377197,
+              0.03501300990581511,
+              0.17452065646648407
+            ],
+            "foreground_mean_normalized": -0.6472386121749878,
+            "foreground_mean_change_normalized": 0.19938915967941284,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7926096528768539,
+              -0.6648884415626526,
+              -0.4309702977538109
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.0,
+              0.72265625,
+              0.72265625
+            ],
+            "range": [
+              -1.0,
+              0.6706394553184509
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01117709744721651,
+            "background_abs_error_quantiles_normalized": [
+              0.009590059518814087,
+              0.026928749680519094,
+              0.034971488118171655,
+              0.17681884765625
+            ],
+            "foreground_mean_normalized": -0.5608326196670532,
+            "foreground_mean_change_normalized": 0.2857951521873474,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7917262136936187,
+              -0.5941559970378876,
+              -0.2465238064527515
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.0,
+              0.72265625,
+              0.72265625
+            ],
+            "range": [
+              -1.0,
+              0.6699365377426147
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010956855490803719,
+            "background_abs_error_quantiles_normalized": [
+              0.009398043155670166,
+              0.02646224498748778,
+              0.03433582484722137,
+              0.17118169367313385
+            ],
+            "foreground_mean_normalized": -0.35549479722976685,
+            "foreground_mean_change_normalized": 0.4911329448223114,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7270612120628357,
+              -0.4157683551311493,
+              0.16222426667809453
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "603c97d401ffb8f2b6dc3a8cceedb3f790996774e7ea7c75c722d53323e3ce3f",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.5859379768371582,
+          0.5859379768371582
+        ],
+        "normal_range": [
+          -1024.0,
+          1546.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 2357,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.5859379768371582,
+              0.5859379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011953960172832012,
+            "background_abs_error_quantiles_normalized": [
+              0.01014089584350586,
+              0.029333060979843128,
+              0.03869530320167541,
+              0.06340819597244263
+            ],
+            "foreground_mean_normalized": -0.46421927213668823,
+            "foreground_mean_change_normalized": 0.2760850191116333,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6658669710159302,
+              -0.4681515097618103,
+              -0.25187078714370736
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.5859379768371582,
+              0.5859379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011975908651947975,
+            "background_abs_error_quantiles_normalized": [
+              0.010133147239685059,
+              0.029325339198112484,
+              0.038275582790374754,
+              0.06954687833786011
+            ],
+            "foreground_mean_normalized": -0.25831368565559387,
+            "foreground_mean_change_normalized": 0.4819905757904053,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6300256609916687,
+              -0.2680940628051758,
+              0.15293855965137468
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.5859379768371582,
+              0.5859379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011696580797433853,
+            "background_abs_error_quantiles_normalized": [
+              0.00992739200592041,
+              0.028809350728988607,
+              0.0378633612394333,
+              0.06382721662521362
+            ],
+            "foreground_mean_normalized": 0.04018835350871086,
+            "foreground_mean_change_normalized": 0.7804926037788391,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5922853112220764,
+              0.08009827882051468,
+              0.5214208364486693
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "b6d94afac83dcebd7ece53d13cc23f21d0dd9689173ecda56a202be469f2d3e1",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6972659826278687,
+          0.6972659826278687
+        ],
+        "normal_range": [
+          -1024.0,
+          244.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 309,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.7271876931190491
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012485750950872898,
+            "background_abs_error_quantiles_normalized": [
+              0.010625362396240234,
+              0.03041483461856842,
+              0.03960063040256501,
+              0.06699786335229874
+            ],
+            "foreground_mean_normalized": -0.5784972310066223,
+            "foreground_mean_change_normalized": 0.2738882899284363,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7536192655563354,
+              -0.589572548866272,
+              -0.3602365732192994
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.7417780160903931
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01256469264626503,
+            "background_abs_error_quantiles_normalized": [
+              0.010750651359558105,
+              0.030495053529739358,
+              0.03959851861000061,
+              0.06648015975952148
+            ],
+            "foreground_mean_normalized": -0.4278193712234497,
+            "foreground_mean_change_normalized": 0.42456623911857605,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7203674793243409,
+              -0.4610787630081177,
+              -0.056638319790363316
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.7621658444404602
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012466376647353172,
+            "background_abs_error_quantiles_normalized": [
+              0.01061391830444336,
+              0.030309021472930894,
+              0.03949847579002381,
+              0.06667041778564453
+            ],
+            "foreground_mean_normalized": -0.15129518508911133,
+            "foreground_mean_change_normalized": 0.701090395450592,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6592670559883118,
+              -0.19518716633319855,
+              0.45961337685585013
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "bf7e200c7bc325f1d3ba0d456cfc51172079955f848f6ff4a0446346d1cb9e40",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6972659826278687,
+          0.6972659826278687
+        ],
+        "normal_range": [
+          -1024.0,
+          1272.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 8578,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012146420776844025,
+            "background_abs_error_quantiles_normalized": [
+              0.010323047637939453,
+              0.02961176633834839,
+              0.03887542366981505,
+              0.06788045167922974
+            ],
+            "foreground_mean_normalized": -0.2888341248035431,
+            "foreground_mean_change_normalized": 0.5139545798301697,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6493323177099228,
+              -0.351496160030365,
+              0.32568207830190615
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01214233785867691,
+            "background_abs_error_quantiles_normalized": [
+              0.01036807894706726,
+              0.02956665456295013,
+              0.03870339870452881,
+              0.06879544258117676
+            ],
+            "foreground_mean_normalized": 0.046046897768974304,
+            "foreground_mean_change_normalized": 0.8488356471061707,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5895283073186874,
+              0.11753050237894058,
+              0.4798511788249016
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011813933961093426,
+            "background_abs_error_quantiles_normalized": [
+              0.009998232126235962,
+              0.029006212949752794,
+              0.03798711374402045,
+              0.06553679704666138
+            ],
+            "foreground_mean_normalized": 0.2689269185066223,
+            "foreground_mean_change_normalized": 1.0717154741287231,
+            "foreground_intensity_quantiles_normalized": [
+              -0.4972766235470772,
+              0.4636169821023941,
+              0.5849697351455688
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "bec2c86170f4db852e62885fd5b748f48bb44748b89edd628f1369001c18bd24",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6972659826278687,
+          0.6972659826278687
+        ],
+        "normal_range": [
+          -1024.0,
+          139.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1089,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.6106783151626587
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01274073962122202,
+            "background_abs_error_quantiles_normalized": [
+              0.010885894298553467,
+              0.030939203500747678,
+              0.04041801333427425,
+              0.06310534477233887
+            ],
+            "foreground_mean_normalized": -0.4702186584472656,
+            "foreground_mean_change_normalized": 0.3394652009010315,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7495173931121826,
+              -0.49699363112449646,
+              -0.14531544148922004
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.597638726234436
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012792796827852726,
+            "background_abs_error_quantiles_normalized": [
+              0.010869145393371582,
+              0.03105342984199523,
+              0.040315624475479095,
+              0.07046011090278625
+            ],
+            "foreground_mean_normalized": -0.12263428419828415,
+            "foreground_mean_change_normalized": 0.6870496273040771,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6767733216285705,
+              -0.10593368113040924,
+              0.3924799919128417
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.6861138939857483
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012734616175293922,
+            "background_abs_error_quantiles_normalized": [
+              0.010891497135162354,
+              0.030879640579223624,
+              0.040118761062622056,
+              0.07054203748703003
+            ],
+            "foreground_mean_normalized": 0.0508328415453434,
+            "foreground_mean_change_normalized": 0.8605166673660278,
+            "foreground_intensity_quantiles_normalized": [
+              -0.608637261390686,
+              0.09400828182697296,
+              0.5723452925682067
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "46cfc7aa1a46b8ff9a9c28f66b997e30cff0e55efc5e3ae01762e0f75a39bf44",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6972659826278687,
+          0.6972659826278687
+        ],
+        "normal_range": [
+          -1024.0,
+          1292.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 353,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01263388991355896,
+            "background_abs_error_quantiles_normalized": [
+              0.010755479335784912,
+              0.030811572074890124,
+              0.040466490983962995,
+              0.07459300756454468
+            ],
+            "foreground_mean_normalized": -0.5205826759338379,
+            "foreground_mean_change_normalized": 0.31389325857162476,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7192701458930969,
+              -0.5318846702575684,
+              -0.29587681293487594
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012733394280076027,
+            "background_abs_error_quantiles_normalized": [
+              0.010833203792572021,
+              0.031011152267456044,
+              0.04061539411544794,
+              0.0729721188545227
+            ],
+            "foreground_mean_normalized": -0.2773924469947815,
+            "foreground_mean_change_normalized": 0.5570834279060364,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6539700150489807,
+              -0.3019486665725708,
+              0.14182713329792015
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012548163533210754,
+            "background_abs_error_quantiles_normalized": [
+              0.010646998882293701,
+              0.030724126100540154,
+              0.040118880271911614,
+              0.07022982835769653
+            ],
+            "foreground_mean_normalized": -0.02060612477362156,
+            "foreground_mean_change_normalized": 0.8138697743415833,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5947268843650818,
+              -0.046440575271844864,
+              0.5713429570198059
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "5add3f253676f5b6b10020be1ad6bbe31510f3304d1ab5c035f63a144b820622",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6640620231628418,
+          0.6640620231628418
+        ],
+        "normal_range": [
+          -1024.0,
+          1379.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 674,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012769654393196106,
+            "background_abs_error_quantiles_normalized": [
+              0.010919243097305298,
+              0.030936840176582325,
+              0.04037411510944366,
+              0.07426288723945618
+            ],
+            "foreground_mean_normalized": -0.29461997747421265,
+            "foreground_mean_change_normalized": 0.45666658878326416,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6649153262376786,
+              -0.3094543069601059,
+              0.09124752804636968
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012847861275076866,
+            "background_abs_error_quantiles_normalized": [
+              0.010937690734863281,
+              0.03129383623600005,
+              0.04079627335071563,
+              0.07309460639953613
+            ],
+            "foreground_mean_normalized": -0.0792454406619072,
+            "foreground_mean_change_normalized": 0.672041118144989,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5935153394937516,
+              -0.0596163347363472,
+              0.3838510468602181
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012754679657518864,
+            "background_abs_error_quantiles_normalized": [
+              0.010863125324249268,
+              0.03096477091312408,
+              0.04021410942077636,
+              0.07079721987247467
+            ],
+            "foreground_mean_normalized": 0.17263458669185638,
+            "foreground_mean_change_normalized": 0.9239212274551392,
+            "foreground_intensity_quantiles_normalized": [
+              -0.45517154783010483,
+              0.25039904564619064,
+              0.6077026426792145
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "148eb0510de61ddb87429c7c412676e119e0ae67883c253a6b903b0879e6b457",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.78125,
+          0.78125
+        ],
+        "normal_range": [
+          -1024.0,
+          1294.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 3079,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.78125,
+              0.78125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012669933959841728,
+            "background_abs_error_quantiles_normalized": [
+              0.010756909847259521,
+              0.030895566940307616,
+              0.04039554357528687,
+              0.07160192728042603
+            ],
+            "foreground_mean_normalized": -0.2407025545835495,
+            "foreground_mean_change_normalized": 0.5816711187362671,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7057936787605286,
+              -0.3008548617362976,
+              0.3820040345191955
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.78125,
+              0.78125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012697124853730202,
+            "background_abs_error_quantiles_normalized": [
+              0.010782241821289062,
+              0.031012153625488263,
+              0.040464158058166506,
+              0.06923425197601318
+            ],
+            "foreground_mean_normalized": -0.009101912379264832,
+            "foreground_mean_change_normalized": 0.8132717609405518,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6311149954795837,
+              0.03177626430988312,
+              0.47338999211788174
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.78125,
+              0.78125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012650545686483383,
+            "background_abs_error_quantiles_normalized": [
+              0.010721206665039062,
+              0.030838656425476074,
+              0.04027559518814087,
+              0.07453465461730957
+            ],
+            "foreground_mean_normalized": 0.20586811006069183,
+            "foreground_mean_change_normalized": 1.0282418727874756,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5323801934719086,
+              0.340517520904541,
+              0.6205172419548034
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "b817ffee76c10024496d194cefc89eb9033834fc81b8d9a2d0e6e5559fe6f4cc",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.7617189884185791,
+          0.7617189884185791
+        ],
+        "normal_range": [
+          -1024.0,
+          1263.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1265,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7617189884185791,
+              0.7617189884185791
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012323281727731228,
+            "background_abs_error_quantiles_normalized": [
+              0.010431528091430664,
+              0.030165220052003856,
+              0.03935505032539369,
+              0.07406558096408844
+            ],
+            "foreground_mean_normalized": -0.45201653242111206,
+            "foreground_mean_change_normalized": 0.350237637758255,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6677203178405762,
+              -0.4564990699291229,
+              -0.22441688179969796
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7617189884185791,
+              0.7617189884185791
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012344646267592907,
+            "background_abs_error_quantiles_normalized": [
+              0.010497987270355225,
+              0.03014300465583801,
+              0.03965014576911928,
+              0.07107281684875488
+            ],
+            "foreground_mean_normalized": -0.10097000002861023,
+            "foreground_mean_change_normalized": 0.7012841105461121,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5925066232681274,
+              -0.09441668540239334,
+              0.38532842993736266
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7617189884185791,
+              0.7617189884185791
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01210364792495966,
+            "background_abs_error_quantiles_normalized": [
+              0.010261476039886475,
+              0.02967050671577453,
+              0.03891175270080567,
+              0.06884199380874634
+            ],
+            "foreground_mean_normalized": 0.1245175451040268,
+            "foreground_mean_change_normalized": 0.9267717003822327,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5573973298072815,
+              0.20883966982364655,
+              0.596569013595581
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "ead20ac6d4d7b80151b6a14c990aa0ee31f4013db6b20968952793cc0205c58b",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6640620231628418,
+          0.6640620231628418
+        ],
+        "normal_range": [
+          -1024.0,
+          1424.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 903,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012509484775364399,
+            "background_abs_error_quantiles_normalized": [
+              0.0106583833694458,
+              0.03050431013107297,
+              0.0396760845184326,
+              0.07461518049240112
+            ],
+            "foreground_mean_normalized": -0.4429313838481903,
+            "foreground_mean_change_normalized": 0.3080178499221802,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7032780289649964,
+              -0.4355646073818207,
+              -0.20285358577966692
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012564249336719513,
+            "background_abs_error_quantiles_normalized": [
+              0.01070094108581543,
+              0.030673158168792708,
+              0.04022701025009155,
+              0.0721178874373436
+            ],
+            "foreground_mean_normalized": -0.12068622559309006,
+            "foreground_mean_change_normalized": 0.6302629709243774,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6207468092441559,
+              -0.11730144917964935,
+              0.3601972222328186
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012438777834177017,
+            "background_abs_error_quantiles_normalized": [
+              0.010599374771118164,
+              0.030257225036621087,
+              0.039615089893340984,
+              0.06353318691253662
+            ],
+            "foreground_mean_normalized": 0.11615143716335297,
+            "foreground_mean_change_normalized": 0.867100715637207,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5462644517421722,
+              0.17032571136951447,
+              0.5869744539260864
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "6956613dae7deeaf4e0db4aae4ded6427ca384e4e3c52776002be420ac10f567",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6738280057907104,
+          0.6738280057907104
+        ],
+        "normal_range": [
+          -1024.0,
+          758.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1333,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6738280057907104,
+              0.6738280057907104
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01258612796664238,
+            "background_abs_error_quantiles_normalized": [
+              0.010730326175689697,
+              0.03058414459228514,
+              0.039842544794082634,
+              0.06520956754684448
+            ],
+            "foreground_mean_normalized": -0.4235711991786957,
+            "foreground_mean_change_normalized": 0.43893763422966003,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6835318207740784,
+              -0.4116193652153015,
+              -0.17927877604961398
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6738280057907104,
+              0.6738280057907104
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012519167736172676,
+            "background_abs_error_quantiles_normalized": [
+              0.010651171207427979,
+              0.030519145727157575,
+              0.03984498500823974,
+              0.06810081005096436
+            ],
+            "foreground_mean_normalized": 0.004449858795851469,
+            "foreground_mean_change_normalized": 0.866958737373352,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5734455704689025,
+              0.060348354279994965,
+              0.4498049139976501
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6738280057907104,
+              0.6738280057907104
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012370849959552288,
+            "background_abs_error_quantiles_normalized": [
+              0.010551810264587402,
+              0.030096942186355582,
+              0.03944331407546994,
+              0.07048657536506653
+            ],
+            "foreground_mean_normalized": 0.19699552655220032,
+            "foreground_mean_change_normalized": 1.0595043897628784,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5157440185546875,
+              0.32443907856941223,
+              0.634160029888153
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "22b700ffe3090aaaedf1cc7c1f633ee2b1893407df49c7d1fc3a7858301e2a4e",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.0,
+          0.546875,
+          0.546875
+        ],
+        "normal_range": [
+          -1023.0,
+          616.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 987,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011596443131566048,
+            "background_abs_error_quantiles_normalized": [
+              0.009808361530303955,
+              0.02831724882125854,
+              0.037679004669189456,
+              0.14772148430347443
+            ],
+            "foreground_mean_normalized": -0.4063657820224762,
+            "foreground_mean_change_normalized": 0.3550960421562195,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6509806871414184,
+              -0.42167145013809204,
+              -0.09844535365700728
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011635265313088894,
+            "background_abs_error_quantiles_normalized": [
+              0.009894013404846191,
+              0.02829358577728269,
+              0.0373391890525818,
+              0.1270529180765152
+            ],
+            "foreground_mean_normalized": 0.010412927716970444,
+            "foreground_mean_change_normalized": 0.7718748450279236,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5184843182563782,
+              0.0552767850458622,
+              0.4469540864229202
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011411849409341812,
+            "background_abs_error_quantiles_normalized": [
+              0.009710073471069336,
+              0.02779022455215454,
+              0.036524139642715454,
+              0.1561477780342102
+            ],
+            "foreground_mean_normalized": 0.2216951996088028,
+            "foreground_mean_change_normalized": 0.9831570982933044,
+            "foreground_intensity_quantiles_normalized": [
+              -0.428414985537529,
+              0.33931630849838257,
+              0.6152661859989166
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "34bb3b7eb8e36be0c207d58af13b6593950dd78b6d2b2163f45e6e7dfb74fc38",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.0,
+          0.546875,
+          0.546875
+        ],
+        "normal_range": [
+          -1023.0,
+          598.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 4308,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01090435404330492,
+            "background_abs_error_quantiles_normalized": [
+              0.009279370307922363,
+              0.026526689529418945,
+              0.03490019336342811,
+              0.17677059769630432
+            ],
+            "foreground_mean_normalized": -0.2298906296491623,
+            "foreground_mean_change_normalized": 0.5547091364860535,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6626815229654311,
+              -0.28495728969573975,
+              0.3872666254639624
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010971092619001865,
+            "background_abs_error_quantiles_normalized": [
+              0.009349942207336426,
+              0.026572817564010615,
+              0.03518501579761504,
+              0.17317721247673035
+            ],
+            "foreground_mean_normalized": 0.09916125237941742,
+            "foreground_mean_change_normalized": 0.883760929107666,
+            "foreground_intensity_quantiles_normalized": [
+              -0.605741548538208,
+              0.20987757295370102,
+              0.4905476674437523
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010723398067057133,
+            "background_abs_error_quantiles_normalized": [
+              0.009096592664718628,
+              0.026059302687644958,
+              0.034370685219764684,
+              0.17429599165916443
+            ],
+            "foreground_mean_normalized": 0.2698414921760559,
+            "foreground_mean_change_normalized": 1.0544413328170776,
+            "foreground_intensity_quantiles_normalized": [
+              -0.54532290995121,
+              0.4759068638086319,
+              0.6179908454418183
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "c0a8eecb872a574e1445136ff5424f305a7e034b70e8ae71b1d6540e8d61b623",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.7558590173721313,
+          0.7558590173721313
+        ],
+        "normal_range": [
+          -1024.0,
+          285.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 618,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              0.804590106010437
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012233096174895763,
+            "background_abs_error_quantiles_normalized": [
+              0.010406017303466797,
+              0.02976107895374296,
+              0.038835478425025945,
+              0.0810011625289917
+            ],
+            "foreground_mean_normalized": -0.5577626824378967,
+            "foreground_mean_change_normalized": 0.22299550473690033,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7524987429380416,
+              -0.5620927810668945,
+              -0.34722712934017186
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              0.7903690934181213
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012378218583762646,
+            "background_abs_error_quantiles_normalized": [
+              0.010540872812271118,
+              0.030060553550720202,
+              0.038858963847160345,
+              0.07164686918258667
+            ],
+            "foreground_mean_normalized": -0.31955453753471375,
+            "foreground_mean_change_normalized": 0.4612036645412445,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6959986686706543,
+              -0.3343318849802017,
+              0.0991259384900331
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              0.8021491765975952
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012379741296172142,
+            "background_abs_error_quantiles_normalized": [
+              0.010560542345046997,
+              0.030182185769081115,
+              0.039301300644874575,
+              0.07597750425338745
+            ],
+            "foreground_mean_normalized": -0.005330320913344622,
+            "foreground_mean_change_normalized": 0.7754279375076294,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6139593482017517,
+              -0.007753830635920167,
+              0.5501395553350449
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "9b9363fac7564707ffd56a9261bf764e14ea21f8e5145b019e3787f6bfe9ef92",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.7558590173721313,
+          0.7558590173721313
+        ],
+        "normal_range": [
+          -1024.0,
+          1525.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1140,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011551160365343094,
+            "background_abs_error_quantiles_normalized": [
+              0.009796276688575745,
+              0.028437462449073792,
+              0.03697194099426272,
+              0.06261354684829712
+            ],
+            "foreground_mean_normalized": -0.522825300693512,
+            "foreground_mean_change_normalized": 0.2722598910331726,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7320673108100891,
+              -0.5299797058105469,
+              -0.2854841932654381
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01150814164429903,
+            "background_abs_error_quantiles_normalized": [
+              0.00973328948020935,
+              0.028227303177118298,
+              0.03696821689605713,
+              0.06730659306049347
+            ],
+            "foreground_mean_normalized": -0.38410425186157227,
+            "foreground_mean_change_normalized": 0.4109809100627899,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6968194663524627,
+              -0.40118470788002014,
+              -0.004765343433246085
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011312250047922134,
+            "background_abs_error_quantiles_normalized": [
+              0.009566336870193481,
+              0.02779606729745865,
+              0.0364778745174408,
+              0.06458771228790283
+            ],
+            "foreground_mean_normalized": -0.12897884845733643,
+            "foreground_mean_change_normalized": 0.6661064028739929,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6809656679630279,
+              -0.16529352962970734,
+              0.5069445699453353
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "9b3c6c3c1f7cb3f697bed8981ceec1c06675a8772b376f21a09b678b03866d9a",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.7558590173721313,
+          0.7558590173721313
+        ],
+        "normal_range": [
+          -1024.0,
+          634.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1172,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011586036533117294,
+            "background_abs_error_quantiles_normalized": [
+              0.009859301149845123,
+              0.028282362222671505,
+              0.037033448219299284,
+              0.06402283906936646
+            ],
+            "foreground_mean_normalized": -0.40596455335617065,
+            "foreground_mean_change_normalized": 0.4013294577598572,
+            "foreground_intensity_quantiles_normalized": [
+              -0.703873735666275,
+              -0.3905198872089386,
+              -0.14322109594941135
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011620941571891308,
+            "background_abs_error_quantiles_normalized": [
+              0.009871572256088257,
+              0.02842806130647659,
+              0.03726117193698881,
+              0.0638822615146637
+            ],
+            "foreground_mean_normalized": -0.07759054005146027,
+            "foreground_mean_change_normalized": 0.7297034859657288,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6592857450246811,
+              -0.06522148847579956,
+              0.45393836498260504
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011336332187056541,
+            "background_abs_error_quantiles_normalized": [
+              0.00963050127029419,
+              0.02783198952674864,
+              0.03642291247844696,
+              0.06386971473693848
+            ],
+            "foreground_mean_normalized": 0.14544208347797394,
+            "foreground_mean_change_normalized": 0.9527360796928406,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6188639163970947,
+              0.224862240254879,
+              0.6508596658706666
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "76cf0d5d93489920bcbb6d69ad63dede8d4175b88a5ae7ff1b07c070636d8f8e",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.703125,
+          0.703125
+        ],
+        "normal_range": [
+          -1024.0,
+          1091.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 856,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.703125,
+              0.703125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011932393535971642,
+            "background_abs_error_quantiles_normalized": [
+              0.010130077600479126,
+              0.029294326901435852,
+              0.0386853851377964,
+              0.07459497451782227
+            ],
+            "foreground_mean_normalized": -0.47906187176704407,
+            "foreground_mean_change_normalized": 0.2010115534067154,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6672404408454895,
+              -0.49265532195568085,
+              -0.2764763608574867
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.703125,
+              0.703125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012006751261651516,
+            "background_abs_error_quantiles_normalized": [
+              0.010179907083511353,
+              0.02925834059715271,
+              0.03857869505882282,
+              0.06452584266662598
+            ],
+            "foreground_mean_normalized": -0.32531923055648804,
+            "foreground_mean_change_normalized": 0.354754239320755,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6156981587409973,
+              -0.3311416804790497,
+              -0.013275682460516691
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.703125,
+              0.703125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011737674474716187,
+            "background_abs_error_quantiles_normalized": [
+              0.009934619069099426,
+              0.028915703296661377,
+              0.038008967041969335,
+              0.06845418363809586
+            ],
+            "foreground_mean_normalized": 0.0421195849776268,
+            "foreground_mean_change_normalized": 0.7221930623054504,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5216275453567505,
+              0.06638138182461262,
+              0.5293155759572983
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "eae28106d6f5d87a74d6859ba1354947305a97e60dec5f6676a2e7681b2f0427",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6484379768371582,
+          0.6484379768371582
+        ],
+        "normal_range": [
+          -1024.0,
+          720.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 153,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6484379768371582,
+              0.6484379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01168033480644226,
+            "background_abs_error_quantiles_normalized": [
+              0.009900569915771484,
+              0.02864471077919005,
+              0.03748915553092956,
+              0.06283095479011536
+            ],
+            "foreground_mean_normalized": -0.6079509258270264,
+            "foreground_mean_change_normalized": 0.2551209032535553,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7801770329475403,
+              -0.604971170425415,
+              -0.429108852148056
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6484379768371582,
+              0.6484379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011641004122793674,
+            "background_abs_error_quantiles_normalized": [
+              0.009863734245300293,
+              0.028506773710250854,
+              0.03727806806564331,
+              0.07512742280960083
+            ],
+            "foreground_mean_normalized": -0.4680592715740204,
+            "foreground_mean_change_normalized": 0.39501264691352844,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7369964480400085,
+              -0.48571810126304626,
+              -0.16040933430194854
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6484379768371582,
+              0.6484379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01131044328212738,
+            "background_abs_error_quantiles_normalized": [
+              0.009569108486175537,
+              0.027754276990890496,
+              0.03659055471420288,
+              0.06618821620941162
+            ],
+            "foreground_mean_normalized": -0.24777965247631073,
+            "foreground_mean_change_normalized": 0.6152921915054321,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6741512417793274,
+              -0.2573331594467163,
+              0.18988056182861354
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "80edb1dfd5db125ca78cc2828852086f939ef61a54831c29fcddcc4e230cb850",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.609375,
+          0.609375
+        ],
+        "normal_range": [
+          -1024.0,
+          1112.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1822,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.609375,
+              0.609375
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01256590336561203,
+            "background_abs_error_quantiles_normalized": [
+              0.010684162378311157,
+              0.030745363235473624,
+              0.0401608258485794,
+              0.0816468596458435
+            ],
+            "foreground_mean_normalized": -0.1441895067691803,
+            "foreground_mean_change_normalized": 0.6390047669410706,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6339367240667343,
+              -0.16713571548461914,
+              0.36842867732048035
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.609375,
+              0.609375
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012669745832681656,
+            "background_abs_error_quantiles_normalized": [
+              0.010782860219478607,
+              0.030844303965568542,
+              0.04022937834262846,
+              0.07271146774291992
+            ],
+            "foreground_mean_normalized": 0.047203097492456436,
+            "foreground_mean_change_normalized": 0.8303974270820618,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5645163476467132,
+              0.14095915853977203,
+              0.4591680660843849
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.609375,
+              0.609375
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01256764866411686,
+            "background_abs_error_quantiles_normalized": [
+              0.010662078857421875,
+              0.03063969612121581,
+              0.03990779340267181,
+              0.07330387830734253
+            ],
+            "foreground_mean_normalized": 0.24691683053970337,
+            "foreground_mean_change_normalized": 1.0301110744476318,
+            "foreground_intensity_quantiles_normalized": [
+              -0.4595914825797081,
+              0.3992690145969391,
+              0.6540597915649413
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "91dabbe403ebde536502095ce672484ebe6f017e432066abdcf088b5cdb7996e",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.7421879768371582,
+          0.7421879768371582
+        ],
+        "normal_range": [
+          -962.0,
+          916.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 2663,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -0.9351584315299988,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010091031901538372,
+            "background_abs_error_quantiles_normalized": [
+              0.008609473705291748,
+              0.0244899034500122,
+              0.03253660917282104,
+              0.07667404413223267
+            ],
+            "foreground_mean_normalized": -0.4083332121372223,
+            "foreground_mean_change_normalized": 0.3525771498680115,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6933109164237976,
+              -0.404293417930603,
+              -0.12090864852070807
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -0.9382700324058533,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010114417411386967,
+            "background_abs_error_quantiles_normalized": [
+              0.00861811637878418,
+              0.024539309740066514,
+              0.03261369228363037,
+              0.09894734621047974
+            ],
+            "foreground_mean_normalized": 0.03971200808882713,
+            "foreground_mean_change_normalized": 0.8006223440170288,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6142065167427063,
+              0.10838332772254944,
+              0.4933113694190979
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -0.9426819086074829,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.009861992672085762,
+            "background_abs_error_quantiles_normalized": [
+              0.008304893970489502,
+              0.024110007286071766,
+              0.032287287712097164,
+              0.11051207780838013
+            ],
+            "foreground_mean_normalized": 0.26698601245880127,
+            "foreground_mean_change_normalized": 1.0278964042663574,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5151446998119354,
+              0.4721164405345917,
+              0.631219869852066
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "f94b14f6e062de1363649ec1d8862672b9bfb804b275e80312d927ea7b285bdd",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6445310115814209,
+          0.6445310115814209
+        ],
+        "normal_range": [
+          -1024.0,
+          1515.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 259,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6445310115814209,
+              0.6445310115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011702435091137886,
+            "background_abs_error_quantiles_normalized": [
+              0.009916484355926514,
+              0.028821480274200433,
+              0.037834925651550354,
+              0.061503589153289795
+            ],
+            "foreground_mean_normalized": -0.4252376854419708,
+            "foreground_mean_change_normalized": 0.3592631220817566,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6721512615680695,
+              -0.4483296573162079,
+              -0.10803419500589376
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6445310115814209,
+              0.6445310115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011627217754721642,
+            "background_abs_error_quantiles_normalized": [
+              0.009827792644500732,
+              0.02870175838470459,
+              0.037842663526535106,
+              0.06698310375213623
+            ],
+            "foreground_mean_normalized": -0.19254542887210846,
+            "foreground_mean_change_normalized": 0.5919554829597473,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5799879610538483,
+              -0.22591276466846466,
+              0.27837198376655575
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6445310115814209,
+              0.6445310115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011318381875753403,
+            "background_abs_error_quantiles_normalized": [
+              0.009557396173477173,
+              0.027920353412628166,
+              0.03682029247283937,
+              0.06545001268386841
+            ],
+            "foreground_mean_normalized": 0.04168475791811943,
+            "foreground_mean_change_normalized": 0.8261855840682983,
+            "foreground_intensity_quantiles_normalized": [
+              -0.5140986442565918,
+              0.04617007076740265,
+              0.5859117090702057
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "94774bfdf8ee391f7577556a9d7c2dbcff7816792dac91319a683400e7e16842",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6640620231628418,
+          0.6640620231628418
+        ],
+        "normal_range": [
+          -1024.0,
+          419.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 514,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              0.9954057931900024
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011800394393503666,
+            "background_abs_error_quantiles_normalized": [
+              0.010003387928009033,
+              0.029104909300804137,
+              0.03804099231958389,
+              0.06821715831756592
+            ],
+            "foreground_mean_normalized": -0.5259157419204712,
+            "foreground_mean_change_normalized": 0.23622439801692963,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6923639416694641,
+              -0.535358726978302,
+              -0.33271806985139857
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              0.9724653363227844
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011793874204158783,
+            "background_abs_error_quantiles_normalized": [
+              0.010031584650278091,
+              0.028858424723148337,
+              0.03772331476211546,
+              0.0638575553894043
+            ],
+            "foreground_mean_normalized": -0.2995850741863251,
+            "foreground_mean_change_normalized": 0.46255502104759216,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6125975489616394,
+              -0.31484903395175934,
+              0.05746732167899608
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.011446339078247547,
+            "background_abs_error_quantiles_normalized": [
+              0.009683549404144287,
+              0.02814843952655792,
+              0.036660388410091366,
+              0.06704628467559814
+            ],
+            "foreground_mean_normalized": -0.03617994114756584,
+            "foreground_mean_change_normalized": 0.7259600758552551,
+            "foreground_intensity_quantiles_normalized": [
+              -0.540116423368454,
+              -0.027288475073873997,
+              0.4759329751133919
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "2716c033e7534097d9a00250b53993add605d13f799acfa5691b48c4f9e3cf94",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.625,
+          0.625
+        ],
+        "normal_range": [
+          -1024.0,
+          207.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 466,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.6951345205307007
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010420666076242924,
+            "background_abs_error_quantiles_normalized": [
+              0.008958697319030762,
+              0.025108367204666138,
+              0.032505795359611504,
+              0.0740475058555603
+            ],
+            "foreground_mean_normalized": -0.5225676894187927,
+            "foreground_mean_change_normalized": 0.3530147671699524,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7509395182132721,
+              -0.5402456820011139,
+              -0.2429218627512455
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.7159491181373596
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01044987328350544,
+            "background_abs_error_quantiles_normalized": [
+              0.008957654237747192,
+              0.025166034698486328,
+              0.032820555567741376,
+              0.08074319362640381
+            ],
+            "foreground_mean_normalized": -0.27882105112075806,
+            "foreground_mean_change_normalized": 0.5967614054679871,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7216456830501556,
+              -0.3351508677005768,
+              0.278248555958271
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.7074465751647949
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010166812688112259,
+            "background_abs_error_quantiles_normalized": [
+              0.008692681789398193,
+              0.0246594101190567,
+              0.03221669048070907,
+              0.08560061454772949
+            ],
+            "foreground_mean_normalized": -0.05044473335146904,
+            "foreground_mean_change_normalized": 0.8251376748085022,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7058000564575195,
+              -0.09605273976922035,
+              0.6351269334554672
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "d828cad3ce0da2b677e4f11562a794b2553cbb4758b99a42ce425b924cc15499",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.625,
+          0.625
+        ],
+        "normal_range": [
+          -1024.0,
+          58.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 655,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.48137718439102173
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01046738401055336,
+            "background_abs_error_quantiles_normalized": [
+              0.008982419967651367,
+              0.025360751152038574,
+              0.03342111468315123,
+              0.07599163055419922
+            ],
+            "foreground_mean_normalized": -0.47960349917411804,
+            "foreground_mean_change_normalized": 0.3875895142555237,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7652231216430664,
+              -0.46164852380752563,
+              -0.22224089503288272
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.5005342960357666
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.010503417812287807,
+            "background_abs_error_quantiles_normalized": [
+              0.008998453617095947,
+              0.02539249658584595,
+              0.03331022977828979,
+              0.08129382133483887
+            ],
+            "foreground_mean_normalized": -0.16323165595531464,
+            "foreground_mean_change_normalized": 0.7039613127708435,
+            "foreground_intensity_quantiles_normalized": [
+              -0.7048214733600616,
+              -0.13268804550170898,
+              0.34373424351215337
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.6243800520896912
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01031593605875969,
+            "background_abs_error_quantiles_normalized": [
+              0.008770167827606201,
+              0.02511277198791504,
+              0.03309515953063963,
+              0.08696764707565308
+            ],
+            "foreground_mean_normalized": 0.05506448447704315,
+            "foreground_mean_change_normalized": 0.9222575426101685,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6143338918685913,
+              0.13764812052249908,
+              0.5442246556282043
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      },
+      {
+        "case_key_hash": "7c98a7250aa9556d6d391329f26001a487d1d2a0a56e2bf0e275adf743f15dd1",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6914060115814209,
+          0.6914060115814209
+        ],
+        "normal_range": [
+          -1024.0,
+          1271.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1617,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6914060115814209,
+              0.6914060115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.012347790412604809,
+            "background_abs_error_quantiles_normalized": [
+              0.010498881340026855,
+              0.030259484052658072,
+              0.03948292493820184,
+              0.07547098398208618
+            ],
+            "foreground_mean_normalized": -0.42965933680534363,
+            "foreground_mean_change_normalized": 0.3517551124095917,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6903708219528198,
+              -0.4336448013782501,
+              -0.16589058339595814
+            ]
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6914060115814209,
+              0.6914060115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01233874075114727,
+            "background_abs_error_quantiles_normalized": [
+              0.010515391826629639,
+              0.030110773444175717,
+              0.039498556256294226,
+              0.06734621524810791
+            ],
+            "foreground_mean_normalized": -0.04699365049600601,
+            "foreground_mean_change_normalized": 0.7344208359718323,
+            "foreground_intensity_quantiles_normalized": [
+              -0.6190691947937011,
+              -0.03602331504225731,
+              0.445850509405136
+            ]
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6914060115814209,
+              0.6914060115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_normalized": 0.01205787155777216,
+            "background_abs_error_quantiles_normalized": [
+              0.010240614414215088,
+              0.029431802034378025,
+              0.03859437406063071,
+              0.065635085105896
+            ],
+            "foreground_mean_normalized": 0.16705238819122314,
+            "foreground_mean_change_normalized": 0.9484668374061584,
+            "foreground_intensity_quantiles_normalized": [
+              -0.562962806224823,
+              0.2961418330669403,
+              0.6335802912712097
+            ]
+          }
+        ],
+        "foreground_means_increasing_1_to_3": true
+      }
+    ],
+    "scope": "Array/geometry descriptors, not lesion realism, detection or independent clinical samples"
+  }
+}

@@ -1864,3 +1864,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - PARK standalone method, do not spend remaining GPU allowance to chase the
   favorable binary endpoint. Full rationale/contracts/results in
   research/BATCH_CONDITIONED_UTILITY_20261004.md. No selected S-tier idea yet.
+
+### 2026-10-03T23:40-07:00 — Actual paired synthesis assets verified; zero GPU
+
+- Downloaded ONLY pinned public LeFusion Normal/Demo archives (47,638,016 bytes)
+  outside Git. Size/SHA256 match; bounded member/NIfTI reads, no extraction or
+  author/checkpoint execution. Main grid/protected test not queried or changed.
+- Actual archive has 30 source ROIs / 22 public patient IDs and 90 variants;
+  README's 20 count is stale for this revision. All 90 grids and binary masks
+  match sources. Foreground mean intensities ordered 1<2<3 in all 30 ROIs.
+- Critical unit contract: source HU versus normalized generated NIfTI. First
+  diagnostic cross-unit errors explicitly invalid, retained separately; corrected
+  normalized JSON is authoritative. Background MAE ~0.0115942 normalized,
+  not clinical harm. No claims about published downstream preprocessing failure.
+- Concrete possible next paired verifier-context diagnostic documented, but
+  native competence, overlap, provenance, novelty and total cost gates still
+  required. No GPU test authorized/submitted from these observations.
+- MedCondDiff's advertised releases API empty; static conditioning already
+  cached in author sampler. No verified usable checkpoint or new static-cache
+  novelty. Full audit: research/PAIRED_SYNTHESIS_ASSET_AUDIT_20261004.md.

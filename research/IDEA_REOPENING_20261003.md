@@ -102,6 +102,13 @@ specific affordable hypothesis pass. Main 901-case evaluation stays protected.
 
 ## Honest progress
 
+Further resource progress: [paired synthesis asset audit](PAIRED_SYNTHESIS_ASSET_AUDIT_20261004.md)
+verified the actual small LeFusion archive hashes and matched grids/masks.
+There are 30 source ROIs from 22 public patient IDs and 90 variants, not the
+advertised 20 sources or 90 independent subjects. Generated arrays are normalized,
+not HU. This supplies cheap paired diagnostics without fresh generation, but
+does not yet establish a novel failure or an adequate clinical/task verifier.
+
 Follow-up: [batch-conditioned utility CPU screen](BATCH_CONDITIONED_UTILITY_20261004.md)
 found isolated/full-batch gradient disagreement, but the 29-channel aggregate
 endpoint reversed only 1/256 decisions and the exploratory rare-class target

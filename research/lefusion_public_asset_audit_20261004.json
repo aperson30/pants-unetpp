@@ -1,0 +1,2766 @@
+{
+  "revision": "b0516d354c4473ea4f8539cad395dfddb5944215",
+  "gpu_hours": 0,
+  "scope": "Integrity/member inventory only; upstream provenance and clinical adequacy unverified",
+  "assets": [
+    {
+      "archive": "Normal.tar",
+      "member_count": 63,
+      "expanded_bytes": 6297342,
+      "sha256": "2c3342b79b57b457dd97fbbc1786ef56ce32f81d14e4b3e2caf91b7b03806f02"
+    },
+    {
+      "archive": "Demo.tar",
+      "member_count": 189,
+      "expanded_bytes": 41148897,
+      "sha256": "eea5b165b14d5ae3b10212fe946466831a9edbbcbc8c236a58bb00997d8f6e47"
+    }
+  ],
+  "geometry": {
+    "groups": {
+      "Demo/Image/Image_1": 30,
+      "Demo/Image/Image_2": 30,
+      "Demo/Image/Image_3": 30,
+      "Demo/Mask/Mask_1": 30,
+      "Demo/Mask/Mask_2": 30,
+      "Demo/Mask/Mask_3": 30,
+      "Normal/Image": 30,
+      "Normal/Mask": 30
+    },
+    "normal_roi_count": 30,
+    "normal_unique_public_patient_ids": 22,
+    "all_cases": [
+      {
+        "case_key_hash": "0fd56e0c69101e0ad9320b3d7274a700739aa26b17e712e399218ad9a5321dae",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.9628909826278687,
+          0.9628909826278687
+        ],
+        "normal_range": [
+          -892.0,
+          1137.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 594,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -0.8414826393127441,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 607.3624267578125,
+            "background_mae_clipped": 598.9761352539062,
+            "inside_mean_difference_raw": 771.6408081054688
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -0.847490131855011,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 607.3627319335938,
+            "background_mae_clipped": 598.9764404296875,
+            "inside_mean_difference_raw": 771.7710571289062
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -0.8484026193618774,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 607.3621215820312,
+            "background_mae_clipped": 598.9758911132812,
+            "inside_mean_difference_raw": 772.1785888671875
+          }
+        ]
+      },
+      {
+        "case_key_hash": "29771e24d5660744db7ec8698439c66df3b1ca12cb4113fd6c7cdfa1212a328f",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.9628909826278687,
+          0.9628909826278687
+        ],
+        "normal_range": [
+          -1009.0,
+          1260.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 5709,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 635.5968017578125,
+            "background_mae_clipped": 629.214599609375,
+            "inside_mean_difference_raw": 739.6094970703125
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -0.9916290044784546,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 635.59716796875,
+            "background_mae_clipped": 629.215087890625,
+            "inside_mean_difference_raw": 739.9849243164062
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9628909826278687,
+              0.9628909826278687
+            ],
+            "range": [
+              -0.9943937659263611,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 635.5965576171875,
+            "background_mae_clipped": 629.2144165039062,
+            "inside_mean_difference_raw": 740.1837158203125
+          }
+        ]
+      },
+      {
+        "case_key_hash": "974034f0bbeb6fc3f0b9a1192107621842768ac25ea5991e03ec9340c5da7a48",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.9101560115814209,
+          0.9101560115814209
+        ],
+        "normal_range": [
+          -977.0,
+          1203.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1819,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9101560115814209,
+              0.9101560115814209
+            ],
+            "range": [
+              -0.9467366933822632,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 608.783447265625,
+            "background_mae_clipped": 596.1553344726562,
+            "inside_mean_difference_raw": 837.2888793945312
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9101560115814209,
+              0.9101560115814209
+            ],
+            "range": [
+              -0.9593825340270996,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 608.7838745117188,
+            "background_mae_clipped": 596.1558227539062,
+            "inside_mean_difference_raw": 837.5797119140625
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.9101560115814209,
+              0.9101560115814209
+            ],
+            "range": [
+              -0.9439287781715393,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 608.783203125,
+            "background_mae_clipped": 596.1550903320312,
+            "inside_mean_difference_raw": 837.8582763671875
+          }
+        ]
+      },
+      {
+        "case_key_hash": "6d18e0ac730d6fc2702fc9aebb2b52734e7ba5ca37ad4b70f2fe0ab3c8a51918",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.7421879768371582,
+          0.7421879768371582
+        ],
+        "normal_range": [
+          -1024.0,
+          1217.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1686,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 771.6048583984375,
+            "background_mae_clipped": 770.9859008789062,
+            "inside_mean_difference_raw": 808.3363037109375
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 771.605224609375,
+            "background_mae_clipped": 770.9862670898438,
+            "inside_mean_difference_raw": 808.6747436523438
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 771.60498046875,
+            "background_mae_clipped": 770.9860229492188,
+            "inside_mean_difference_raw": 808.8573608398438
+          }
+        ]
+      },
+      {
+        "case_key_hash": "a81c5a934e0879b3ca52bc6e79f3874eaf820bcd31a2717c50d5cb2e43dab083",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.6054689884185791,
+          0.6054689884185791
+        ],
+        "normal_range": [
+          -1020.0,
+          79.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 4552,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.6054689884185791,
+              0.6054689884185791
+            ],
+            "range": [
+              -0.9964788556098938,
+              0.5256819725036621
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 852.568603515625,
+            "background_mae_clipped": 852.5679321289062,
+            "inside_mean_difference_raw": 875.577880859375
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.6054689884185791,
+              0.6054689884185791
+            ],
+            "range": [
+              -1.0,
+              0.5370374917984009
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 852.56884765625,
+            "background_mae_clipped": 852.5681762695312,
+            "inside_mean_difference_raw": 875.8648071289062
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.6054689884185791,
+              0.6054689884185791
+            ],
+            "range": [
+              -0.9996970295906067,
+              0.7136054039001465
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 852.568603515625,
+            "background_mae_clipped": 852.5679931640625,
+            "inside_mean_difference_raw": 876.0931396484375
+          }
+        ]
+      },
+      {
+        "case_key_hash": "c038b22e84174f0bc72faffa4c21b6013e064ec0a7d6a9f45bb7f2d67c0461bf",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.0,
+          0.72265625,
+          0.72265625
+        ],
+        "normal_range": [
+          -1021.0,
+          173.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 208,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.0,
+              0.72265625,
+              0.72265625
+            ],
+            "range": [
+              -1.0,
+              0.6646339297294617
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 856.297607421875,
+            "background_mae_clipped": 856.294677734375,
+            "inside_mean_difference_raw": 891.9921875
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.0,
+              0.72265625,
+              0.72265625
+            ],
+            "range": [
+              -1.0,
+              0.6706394553184509
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 856.2977905273438,
+            "background_mae_clipped": 856.294921875,
+            "inside_mean_difference_raw": 892.0785522460938
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.0,
+              0.72265625,
+              0.72265625
+            ],
+            "range": [
+              -1.0,
+              0.6699365377426147
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 856.2977294921875,
+            "background_mae_clipped": 856.2947998046875,
+            "inside_mean_difference_raw": 892.283935546875
+          }
+        ]
+      },
+      {
+        "case_key_hash": "603c97d401ffb8f2b6dc3a8cceedb3f790996774e7ea7c75c722d53323e3ce3f",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.5859379768371582,
+          0.5859379768371582
+        ],
+        "normal_range": [
+          -1024.0,
+          1546.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 2357,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.5859379768371582,
+              0.5859379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 611.8572998046875,
+            "background_mae_clipped": 602.4058837890625,
+            "inside_mean_difference_raw": 817.7627563476562
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.5859379768371582,
+              0.5859379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 611.8577270507812,
+            "background_mae_clipped": 602.40625,
+            "inside_mean_difference_raw": 817.9686889648438
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.5859379768371582,
+              0.5859379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 611.857177734375,
+            "background_mae_clipped": 602.4057006835938,
+            "inside_mean_difference_raw": 818.2672119140625
+          }
+        ]
+      },
+      {
+        "case_key_hash": "b6d94afac83dcebd7ece53d13cc23f21d0dd9689173ecda56a202be469f2d3e1",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6972659826278687,
+          0.6972659826278687
+        ],
+        "normal_range": [
+          -1024.0,
+          244.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 309,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.7271876931190491
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 843.5472412109375,
+            "background_mae_clipped": 843.2332153320312,
+            "inside_mean_difference_raw": 896.2144165039062
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.7417780160903931
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 843.547607421875,
+            "background_mae_clipped": 843.2335205078125,
+            "inside_mean_difference_raw": 896.3651123046875
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.7621658444404602
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 843.547607421875,
+            "background_mae_clipped": 843.2333984375,
+            "inside_mean_difference_raw": 896.6416015625
+          }
+        ]
+      },
+      {
+        "case_key_hash": "bf7e200c7bc325f1d3ba0d456cfc51172079955f848f6ff4a0446346d1cb9e40",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6972659826278687,
+          0.6972659826278687
+        ],
+        "normal_range": [
+          -1024.0,
+          1272.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 8578,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 696.8382568359375,
+            "background_mae_clipped": 696.3858642578125,
+            "inside_mean_difference_raw": 861.9068603515625
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 696.8385620117188,
+            "background_mae_clipped": 696.38623046875,
+            "inside_mean_difference_raw": 862.2417602539062
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 696.8381958007812,
+            "background_mae_clipped": 696.3858642578125,
+            "inside_mean_difference_raw": 862.4646606445312
+          }
+        ]
+      },
+      {
+        "case_key_hash": "bec2c86170f4db852e62885fd5b748f48bb44748b89edd628f1369001c18bd24",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6972659826278687,
+          0.6972659826278687
+        ],
+        "normal_range": [
+          -1024.0,
+          139.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1089,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.6106783151626587
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 883.8671875,
+            "background_mae_clipped": 883.5509033203125,
+            "inside_mean_difference_raw": 866.8346557617188
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.597638726234436
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 883.8675537109375,
+            "background_mae_clipped": 883.5512084960938,
+            "inside_mean_difference_raw": 867.1822509765625
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              0.6861138939857483
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 883.8673706054688,
+            "background_mae_clipped": 883.5510864257812,
+            "inside_mean_difference_raw": 867.355712890625
+          }
+        ]
+      },
+      {
+        "case_key_hash": "46cfc7aa1a46b8ff9a9c28f66b997e30cff0e55efc5e3ae01762e0f75a39bf44",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6972659826278687,
+          0.6972659826278687
+        ],
+        "normal_range": [
+          -1024.0,
+          1292.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 353,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 782.8656005859375,
+            "background_mae_clipped": 780.57080078125,
+            "inside_mean_difference_raw": 883.9779663085938
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 782.8659057617188,
+            "background_mae_clipped": 780.5712280273438,
+            "inside_mean_difference_raw": 884.2211303710938
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6972659826278687,
+              0.6972659826278687
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 782.8658447265625,
+            "background_mae_clipped": 780.5711059570312,
+            "inside_mean_difference_raw": 884.47802734375
+          }
+        ]
+      },
+      {
+        "case_key_hash": "5add3f253676f5b6b10020be1ad6bbe31510f3304d1ab5c035f63a144b820622",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6640620231628418,
+          0.6640620231628418
+        ],
+        "normal_range": [
+          -1024.0,
+          1379.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 674,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 836.7435302734375,
+            "background_mae_clipped": 835.5277709960938,
+            "inside_mean_difference_raw": 825.9724731445312
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 836.743896484375,
+            "background_mae_clipped": 835.5281982421875,
+            "inside_mean_difference_raw": 826.1878662109375
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 836.7438354492188,
+            "background_mae_clipped": 835.5281372070312,
+            "inside_mean_difference_raw": 826.439697265625
+          }
+        ]
+      },
+      {
+        "case_key_hash": "148eb0510de61ddb87429c7c412676e119e0ae67883c253a6b903b0879e6b457",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.78125,
+          0.78125
+        ],
+        "normal_range": [
+          -1024.0,
+          1294.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 3079,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.78125,
+              0.78125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 862.8742065429688,
+            "background_mae_clipped": 862.3768920898438,
+            "inside_mean_difference_raw": 875.5872192382812
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.78125,
+              0.78125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 862.8744506835938,
+            "background_mae_clipped": 862.377197265625,
+            "inside_mean_difference_raw": 875.8187866210938
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.78125,
+              0.78125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 862.8743286132812,
+            "background_mae_clipped": 862.3771362304688,
+            "inside_mean_difference_raw": 876.0337524414062
+          }
+        ]
+      },
+      {
+        "case_key_hash": "b817ffee76c10024496d194cefc89eb9033834fc81b8d9a2d0e6e5559fe6f4cc",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.7617189884185791,
+          0.7617189884185791
+        ],
+        "normal_range": [
+          -1024.0,
+          1263.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1265,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7617189884185791,
+              0.7617189884185791
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 625.7523193359375,
+            "background_mae_clipped": 622.2371215820312,
+            "inside_mean_difference_raw": 861.3092651367188
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7617189884185791,
+              0.7617189884185791
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 625.7526245117188,
+            "background_mae_clipped": 622.2373657226562,
+            "inside_mean_difference_raw": 861.6602783203125
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7617189884185791,
+              0.7617189884185791
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 625.7521362304688,
+            "background_mae_clipped": 622.2369384765625,
+            "inside_mean_difference_raw": 861.8857421875
+          }
+        ]
+      },
+      {
+        "case_key_hash": "ead20ac6d4d7b80151b6a14c990aa0ee31f4013db6b20968952793cc0205c58b",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6640620231628418,
+          0.6640620231628418
+        ],
+        "normal_range": [
+          -1024.0,
+          1424.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 903,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 814.9506225585938,
+            "background_mae_clipped": 812.1280517578125,
+            "inside_mean_difference_raw": 825.4684448242188
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 814.9510498046875,
+            "background_mae_clipped": 812.1284790039062,
+            "inside_mean_difference_raw": 825.790771484375
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 814.9508666992188,
+            "background_mae_clipped": 812.1282348632812,
+            "inside_mean_difference_raw": 826.0275268554688
+          }
+        ]
+      },
+      {
+        "case_key_hash": "6956613dae7deeaf4e0db4aae4ded6427ca384e4e3c52776002be420ac10f567",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6738280057907104,
+          0.6738280057907104
+        ],
+        "normal_range": [
+          -1024.0,
+          758.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1333,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6738280057907104,
+              0.6738280057907104
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 792.9049072265625,
+            "background_mae_clipped": 792.3637084960938,
+            "inside_mean_difference_raw": 904.0670776367188
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6738280057907104,
+              0.6738280057907104
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 792.905029296875,
+            "background_mae_clipped": 792.3638916015625,
+            "inside_mean_difference_raw": 904.4950561523438
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6738280057907104,
+              0.6738280057907104
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 792.9048461914062,
+            "background_mae_clipped": 792.36376953125,
+            "inside_mean_difference_raw": 904.6875610351562
+          }
+        ]
+      },
+      {
+        "case_key_hash": "22b700ffe3090aaaedf1cc7c1f633ee2b1893407df49c7d1fc3a7858301e2a4e",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.0,
+          0.546875,
+          0.546875
+        ],
+        "normal_range": [
+          -1023.0,
+          616.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 987,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 765.58349609375,
+            "background_mae_clipped": 765.2540893554688,
+            "inside_mean_difference_raw": 832.616943359375
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 765.583740234375,
+            "background_mae_clipped": 765.25439453125,
+            "inside_mean_difference_raw": 833.03369140625
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 765.58349609375,
+            "background_mae_clipped": 765.254150390625,
+            "inside_mean_difference_raw": 833.2449951171875
+          }
+        ]
+      },
+      {
+        "case_key_hash": "34bb3b7eb8e36be0c207d58af13b6593950dd78b6d2b2163f45e6e7dfb74fc38",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.0,
+          0.546875,
+          0.546875
+        ],
+        "normal_range": [
+          -1023.0,
+          598.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 4308,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 827.7723999023438,
+            "background_mae_clipped": 827.6502685546875,
+            "inside_mean_difference_raw": 848.9899291992188
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 827.772705078125,
+            "background_mae_clipped": 827.6504516601562,
+            "inside_mean_difference_raw": 849.3189697265625
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.0,
+              0.546875,
+              0.546875
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 827.7722778320312,
+            "background_mae_clipped": 827.6500854492188,
+            "inside_mean_difference_raw": 849.4896850585938
+          }
+        ]
+      },
+      {
+        "case_key_hash": "c0a8eecb872a574e1445136ff5424f305a7e034b70e8ae71b1d6540e8d61b623",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.7558590173721313,
+          0.7558590173721313
+        ],
+        "normal_range": [
+          -1024.0,
+          285.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 618,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              0.804590106010437
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 822.13916015625,
+            "background_mae_clipped": 821.646240234375,
+            "inside_mean_difference_raw": 846.0474243164062
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              0.7903690934181213
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 822.1395263671875,
+            "background_mae_clipped": 821.6466064453125,
+            "inside_mean_difference_raw": 846.2855834960938
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              0.8021491765975952
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 822.1395263671875,
+            "background_mae_clipped": 821.6465454101562,
+            "inside_mean_difference_raw": 846.599853515625
+          }
+        ]
+      },
+      {
+        "case_key_hash": "9b9363fac7564707ffd56a9261bf764e14ea21f8e5145b019e3787f6bfe9ef92",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.7558590173721313,
+          0.7558590173721313
+        ],
+        "normal_range": [
+          -1024.0,
+          1525.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1140,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 557.9840698242188,
+            "background_mae_clipped": 548.6675415039062,
+            "inside_mean_difference_raw": 856.0525512695312
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 557.9841918945312,
+            "background_mae_clipped": 548.667724609375,
+            "inside_mean_difference_raw": 856.1913452148438
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 557.9837646484375,
+            "background_mae_clipped": 548.667236328125,
+            "inside_mean_difference_raw": 856.4464111328125
+          }
+        ]
+      },
+      {
+        "case_key_hash": "9b3c6c3c1f7cb3f697bed8981ceec1c06675a8772b376f21a09b678b03866d9a",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.7558590173721313,
+          0.7558590173721313
+        ],
+        "normal_range": [
+          -1024.0,
+          634.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1172,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 674.934326171875,
+            "background_mae_clipped": 674.3642578125,
+            "inside_mean_difference_raw": 865.1699829101562
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 674.9346923828125,
+            "background_mae_clipped": 674.3646240234375,
+            "inside_mean_difference_raw": 865.498291015625
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.7558590173721313,
+              0.7558590173721313
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 674.934326171875,
+            "background_mae_clipped": 674.3641357421875,
+            "inside_mean_difference_raw": 865.721435546875
+          }
+        ]
+      },
+      {
+        "case_key_hash": "76cf0d5d93489920bcbb6d69ad63dede8d4175b88a5ae7ff1b07c070636d8f8e",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          1.25,
+          0.703125,
+          0.703125
+        ],
+        "normal_range": [
+          -1024.0,
+          1091.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 856,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.703125,
+              0.703125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 467.08294677734375,
+            "background_mae_clipped": 463.9798278808594,
+            "inside_mean_difference_raw": 775.59228515625
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.703125,
+              0.703125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 467.0833740234375,
+            "background_mae_clipped": 463.9803161621094,
+            "inside_mean_difference_raw": 775.7459716796875
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              1.25,
+              0.703125,
+              0.703125
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 467.0830383300781,
+            "background_mae_clipped": 463.9799499511719,
+            "inside_mean_difference_raw": 776.1133422851562
+          }
+        ]
+      },
+      {
+        "case_key_hash": "eae28106d6f5d87a74d6859ba1354947305a97e60dec5f6676a2e7681b2f0427",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6484379768371582,
+          0.6484379768371582
+        ],
+        "normal_range": [
+          -1024.0,
+          720.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 153,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6484379768371582,
+              0.6484379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 569.672119140625,
+            "background_mae_clipped": 569.3020629882812,
+            "inside_mean_difference_raw": 905.0847778320312
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6484379768371582,
+              0.6484379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 569.67236328125,
+            "background_mae_clipped": 569.3023071289062,
+            "inside_mean_difference_raw": 905.2247924804688
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6484379768371582,
+              0.6484379768371582
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 569.671875,
+            "background_mae_clipped": 569.3018188476562,
+            "inside_mean_difference_raw": 905.445068359375
+          }
+        ]
+      },
+      {
+        "case_key_hash": "80edb1dfd5db125ca78cc2828852086f939ef61a54831c29fcddcc4e230cb850",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.609375,
+          0.609375
+        ],
+        "normal_range": [
+          -1024.0,
+          1112.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1822,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.609375,
+              0.609375
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 830.3388671875,
+            "background_mae_clipped": 830.1429443359375,
+            "inside_mean_difference_raw": 848.1768798828125
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.609375,
+              0.609375
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 830.33935546875,
+            "background_mae_clipped": 830.1433715820312,
+            "inside_mean_difference_raw": 848.3682861328125
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.609375,
+              0.609375
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 830.3391723632812,
+            "background_mae_clipped": 830.1432495117188,
+            "inside_mean_difference_raw": 848.5679931640625
+          }
+        ]
+      },
+      {
+        "case_key_hash": "91dabbe403ebde536502095ce672484ebe6f017e432066abdcf088b5cdb7996e",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.7421879768371582,
+          0.7421879768371582
+        ],
+        "normal_range": [
+          -962.0,
+          916.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 2663,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -0.9351584315299988,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 668.3662109375,
+            "background_mae_clipped": 668.244873046875,
+            "inside_mean_difference_raw": 832.2288818359375
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -0.9382700324058533,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 668.3666381835938,
+            "background_mae_clipped": 668.2451782226562,
+            "inside_mean_difference_raw": 832.6769409179688
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.7421879768371582,
+              0.7421879768371582
+            ],
+            "range": [
+              -0.9426819086074829,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 668.3660888671875,
+            "background_mae_clipped": 668.2447509765625,
+            "inside_mean_difference_raw": 832.9042358398438
+          }
+        ]
+      },
+      {
+        "case_key_hash": "f94b14f6e062de1363649ec1d8862672b9bfb804b275e80312d927ea7b285bdd",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6445310115814209,
+          0.6445310115814209
+        ],
+        "normal_range": [
+          -1024.0,
+          1515.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 259,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6445310115814209,
+              0.6445310115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 301.2714538574219,
+            "background_mae_clipped": 299.241455078125,
+            "inside_mean_difference_raw": 848.725341796875
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6445310115814209,
+              0.6445310115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 301.2718200683594,
+            "background_mae_clipped": 299.24188232421875,
+            "inside_mean_difference_raw": 848.9580078125
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6445310115814209,
+              0.6445310115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 301.2712097167969,
+            "background_mae_clipped": 299.24127197265625,
+            "inside_mean_difference_raw": 849.1922607421875
+          }
+        ]
+      },
+      {
+        "case_key_hash": "94774bfdf8ee391f7577556a9d7c2dbcff7816792dac91319a683400e7e16842",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6640620231628418,
+          0.6640620231628418
+        ],
+        "normal_range": [
+          -1024.0,
+          419.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 514,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              0.9954057931900024
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 550.0281372070312,
+            "background_mae_clipped": 549.874755859375,
+            "inside_mean_difference_raw": 832.97216796875
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              0.9724653363227844
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 550.028564453125,
+            "background_mae_clipped": 549.8751831054688,
+            "inside_mean_difference_raw": 833.1984252929688
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6640620231628418,
+              0.6640620231628418
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 550.0281372070312,
+            "background_mae_clipped": 549.8746948242188,
+            "inside_mean_difference_raw": 833.4618530273438
+          }
+        ]
+      },
+      {
+        "case_key_hash": "2716c033e7534097d9a00250b53993add605d13f799acfa5691b48c4f9e3cf94",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.625,
+          0.625
+        ],
+        "normal_range": [
+          -1024.0,
+          207.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 466,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.6951345205307007
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 773.3795776367188,
+            "background_mae_clipped": 773.2486572265625,
+            "inside_mean_difference_raw": 912.4473876953125
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.7159491181373596
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 773.3798217773438,
+            "background_mae_clipped": 773.2489624023438,
+            "inside_mean_difference_raw": 912.6911010742188
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.7074465751647949
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 773.3793334960938,
+            "background_mae_clipped": 773.2484741210938,
+            "inside_mean_difference_raw": 912.9195556640625
+          }
+        ]
+      },
+      {
+        "case_key_hash": "d828cad3ce0da2b677e4f11562a794b2553cbb4758b99a42ce425b924cc15499",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.625,
+          0.625
+        ],
+        "normal_range": [
+          -1024.0,
+          58.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 655,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.48137718439102173
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 880.0870971679688,
+            "background_mae_clipped": 880.0681762695312,
+            "inside_mean_difference_raw": 906.5555419921875
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.5005342960357666
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 880.0873413085938,
+            "background_mae_clipped": 880.0684814453125,
+            "inside_mean_difference_raw": 906.871826171875
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.625,
+              0.625
+            ],
+            "range": [
+              -1.0,
+              0.6243800520896912
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 880.087158203125,
+            "background_mae_clipped": 880.0682373046875,
+            "inside_mean_difference_raw": 907.0902709960938
+          }
+        ]
+      },
+      {
+        "case_key_hash": "7c98a7250aa9556d6d391329f26001a487d1d2a0a56e2bf0e275adf743f15dd1",
+        "missing_groups": [],
+        "normal_shape": [
+          32,
+          64,
+          64
+        ],
+        "normal_spacing": [
+          2.5,
+          0.6914060115814209,
+          0.6914060115814209
+        ],
+        "normal_range": [
+          -1024.0,
+          1271.0
+        ],
+        "mask_values": [
+          0.0,
+          1.0
+        ],
+        "mask_positive_voxels": 1617,
+        "variants": [
+          {
+            "variant": 1,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6914060115814209,
+              0.6914060115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 735.16796875,
+            "background_mae_clipped": 733.654052734375,
+            "inside_mean_difference_raw": 846.6309814453125
+          },
+          {
+            "variant": 2,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6914060115814209,
+              0.6914060115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 735.1683349609375,
+            "background_mae_clipped": 733.654296875,
+            "inside_mean_difference_raw": 847.0136108398438
+          },
+          {
+            "variant": 3,
+            "shape": [
+              32,
+              64,
+              64
+            ],
+            "spacing": [
+              2.5,
+              0.6914060115814209,
+              0.6914060115814209
+            ],
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "same_grid": true,
+            "same_mask": true,
+            "background_mae_raw": 735.16796875,
+            "background_mae_clipped": 733.654052734375,
+            "inside_mean_difference_raw": 847.2277221679688
+          }
+        ]
+      }
+    ],
+    "scope": "Array/geometry descriptors, not lesion realism, detection or independent clinical samples"
+  }
+}
