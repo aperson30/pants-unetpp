@@ -1805,3 +1805,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   remainingabsolute-risk/computequestionnotcertifiedS-tier. Noforcedpositive.
 - Save6caseJSON, verifyarithmetic/docs/diff, commit/pushattempt next. MainPanTS
   paper/evaluationremainsseparate. Completiondecisionawaitsfinalartifactaudit.
+
+### 2026-10-03T22:35-07:00 — New literature branch screened without GPU spending
+
+- User reopened idea search; prior negative compression/native-adequacy outcomes
+  remain unchanged. No new jobs or main test-evaluation action.
+- New primary-source overlap: NAM hard-seed mining already documents defective-
+  mode mitigation; selection-bias paper already covers recursive tail removal;
+  PRISM already separates texture/structure/semantic verification; PCaPaint
+  already addresses condition-copying shortcuts. Broad synthesis-filter idea
+  parked, not branded a new or S-tier method.
+- Author LeFusion repository advertises pre-generated paired nodule examples,
+  normal inputs and pretrained weights. Listings accessible; payload/provenance/
+  licence/runtime not validated. Reuse might avoid generation, not downstream
+  utility experiments. No clinical/full-volume/PanTS claim from region examples.
+- Sources, limits, discriminating next checks and accounting cautions saved in
+  research/IDEA_REOPENING_20261003.md. Old total 2 charged GPUh cap unchanged.
+- Pull succeeded before coordination read. Commit/push attempt follows; earlier
+  research commits remain local until GitHub authentication succeeds.
