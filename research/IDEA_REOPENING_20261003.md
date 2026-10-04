@@ -1,7 +1,9 @@
 # New idea search: synthetic utility versus validity
 
-2026-10-03. Literature and author-resource inspection only. No experiment,
-download, GPU allocation or main PanTS evaluation action in this pass.
+2026-10-03. Literature, pinned author-source/resource inspection and a small
+CPU algebra contract. No data/weight payload download, GPU allocation or main
+PanTS evaluation action in this pass. Follow-up audit:
+[SYNTHETIC_UTILITY_SOURCE_AUDIT_20261003.md](SYNTHETIC_UTILITY_SOURCE_AUDIT_20261003.md).
 The prior NO-GO in IDEA_SEARCH_DECISION_20261002.md remains valid; this is not
 a replacement cohort, a revival of failed compression probes, or an S-tier claim.
 
@@ -23,8 +25,9 @@ Public masks support technical consistency tests, not clinical adjudication.
    Its README explicitly warns about defective generator modes and documents
    threshold replacement, VQA filtering, conditional-prediction reranking and
    attention-based mitigation. Generic hard-example mining or filtering is not
-   a new contribution. README inspected; underlying mitigation files could not
-   be retrieved through the web tool. No code-level correctness/reproduction claim.
+   a new contribution. Initially only README inspected; subsequent pinned
+   source reads of HAT, LSRS and QSF succeeded through ordinary public HTTPS.
+   See the follow-up audit for actual limits; no reproduction claim.
    The extended-repository claims must not all be attributed to its CVPR paper.
 2. [When Sample Selection Bias Precipitates Model Collapse](https://arxiv.org/html/2606.13732v2):
    already studies biased selection eliminating distributional tails under
@@ -58,8 +61,9 @@ advertises pretrained LIDC/EMIDEC generators, 20 healthy lung-nodule-region
 inputs with masks, and pre-generated examples at three histogram controls.
 [Data listing](https://huggingface.co/datasets/YuheLiuu/LeFusion_Preprocessed_Data/tree/main)
 and [model listing](https://huggingface.co/YuheLiuu/LeFusion_Pretrained_model/tree/main)
-were accessible. Payloads, hashes, licences, archive contents and paired-case
-integrity have NOT yet been validated. Region examples cannot support claims
+were accessible. Subsequent API reads pinned advertised sizes/hashes and licence
+metadata; payload integrity, upstream data rights and pairing remain unchecked.
+The two small LIDC archives total 47,638,016 bytes. Region examples cannot support claims
 about full-volume context or pancreatic tumor detection.
 
 Authors report ~40 seconds/image on an A100 40GB at jump_length=2 and

@@ -1823,3 +1823,27 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   research/IDEA_REOPENING_20261003.md. Old total 2 charged GPUh cap unchanged.
 - Pull succeeded before coordination read. Commit/push attempt follows; earlier
   research commits remain local until GitHub authentication succeeds.
+
+### 2026-10-03T22:57-07:00 — Pinned mitigation audit and zero-GPU sign contract
+
+- Continued autonomously: complete pinned NAM HAT/LSRS/QSF source reads succeeded.
+  HAT keeps conditions/counts; global LSRS aggregation and 2D QSF adapters have
+  concrete limits, not observed medical failures. No author code executed.
+- CompLift already has local score maps/pixel-count rejection and reports small-
+  object rejection; ASOB already analyzes size/background bias. C2I, Grad-Mimic,
+  DiffAug and newly found FROST further close generic utility/filtering novelty.
+  No selected S-tier method; no GPU probe justified by these combinations.
+- Original stdlib CPU influence_sign_contract.py passes: deliberately label-
+  flipped toy point has equal squared-gap score but opposite actual/first-order
+  target-class loss effects. Signed alternative already in C2I; not a paper
+  reproduction, real generator failure or new-method claim. JSON preserved.
+- Pinned LeFusion data metadata: two demo/normal archives total 47,638,016 bytes;
+  no payloads downloaded because novelty gate failed. Actual source mask semantics
+  and normalization read. Public ungated MONAI lung detector/checkpoint listing
+  found, correcting broad no-model impression; pinned config reveals box/HU/
+  spacing/orientation contracts and unknown small-crop/native adequacy/overlap.
+- Audit/next investment gates in research/SYNTHETIC_UTILITY_SOURCE_AUDIT_20261003.md;
+  earlier idea note corrected. Old 2-hour total budget unchanged, zero new GPU
+  spend, no main test-evaluation/production actions. Pull-before-read succeeded.
+- Re-run CPU assertions, verify generated JSON/source/doc diff, commit only these
+  research/log files, attempt push next; authentication may still block publication.

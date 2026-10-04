@@ -1,0 +1,42 @@
+{
+  "scope": "Algebra illustration, not author-code reproduction or real medical data",
+  "source": "https://arxiv.org/html/2607.12464v1",
+  "intended_condition_class": 0,
+  "control": "Same toy point, deliberately flipped candidate training label",
+  "validation": "Disjoint hand-constructed toy class features, no patient data",
+  "gpu_hours": 0,
+  "checks": "Equal unsigned scores; opposite first-order and finite-step class0 effects; anti-scaling invariance",
+  "results": [
+    {
+      "candidate_training_label": 0,
+      "means": {
+        "0": 0.989412183137118,
+        "1": 0.06975557024462427
+      },
+      "variances": {
+        "0": 5.320516923941092e-05,
+        "1": 0.005151103765908574
+      },
+      "squared_gap_score_eq5": 11.723839426737367,
+      "signed_softmax_eq7_fixed_condition0": 0.7149721330446637,
+      "class0_loss_first_order_coefficient": -0.7877339765891542,
+      "class0_loss_actual_change_eta_1e_4": -7.877136268260217e-05
+    },
+    {
+      "candidate_training_label": 1,
+      "means": {
+        "0": -0.9894121831371179,
+        "1": -0.06975557024462431
+      },
+      "variances": {
+        "0": 5.320516923941108e-05,
+        "1": 0.005151103765908582
+      },
+      "squared_gap_score_eq5": 11.723839426737355,
+      "signed_softmax_eq7_fixed_condition0": 0.2850278669553364,
+      "class0_loss_first_order_coefficient": 0.5175781041781721,
+      "class0_loss_actual_change_eta_1e_4": 5.175868892496697e-05
+    }
+  ],
+  "caveat": "Signed reward is already in the paper. No claim about implemented reward, generated-label errors or published empirical results."
+}
