@@ -117,6 +117,68 @@ its per-pass table as certified complete multi-sample inference cost. Its
 four-mask best-selection statement is about visualization, not an established
 claim that quantitative results are oracle-selected. No code installed/executed.
 
+## Follow-up: CPU intervention contract and native-check resource
+
+`paired_context_contract.py` reuses the pinned, bounded archive loader. On every
+one of the 90 pairs it builds foreground-only and background-only interventions
+in the same normalized units, checks exact retained voxel equality, matched
+geometry/masks, factorial additivity, and squared-change decomposition. All
+assertions passed in 4.41 CPU seconds, zero GPU hours. Three additional unit tests
+cover identity/HU endpoints, intervention locality, and invalid masks/shapes.
+The report is `paired_context_contract_20261004.json`; no derived images saved.
+
+Background contributes 0.241%, 4.875%, and 69.212% of squared intensity change
+at the minimum, median, and maximum respectively. This is **change relative to
+the matched-unit source**, not synthesis error, task harm, or clinical quality.
+The maximum is not representative; no verifier has been executed. Hard pasting
+can introduce seams, so a task-score change alone cannot establish a shortcut.
+
+The broad framing is already covered: [MU-Diff](https://www.nature.com/articles/s44387-025-00016-8)
+explicitly removes background and evaluates lesion regions; [RoentMod](https://www.nature.com/articles/s41746-026-02497-6)
+uses counterfactual edits to expose and mitigate off-target medical shortcuts.
+Those are required competitors, not evidence this diagnostic is novel.
+
+The [Lung-DDPM authors](https://github.com/Manem-Lab/Lung-DDPM) provide three
+real CT/SEG demo pairs, not just generated images. Public Drive inventory lists
+LIDC-IDRI-0001, 0003, and 0037 (~304 MB CT plus ~3.4 MB SEG, rounded displayed
+sizes; files not downloaded/hash-verified here). Freeze all three before model
+outputs; do not select the one on which a detector works. These author-selected
+demos are an engineering competence check, not an independent evaluation cohort.
+Training overlap and source annotation provenance remain unverified.
+
+Author source pinned at `2284405aaa02430065549068a3615e411af48bc9`:
+
+- [Label enum](https://github.com/Manem-Lab/Lung-DDPM/blob/2284405aaa02430065549068a3615e411af48bc9/utils/dtypes.py)
+  declares background=0, lung=1, nodule=2. Do not score the whole lung as a nodule.
+- [Dataset loader](https://github.com/Manem-Lab/Lung-DDPM/blob/2284405aaa02430065549068a3615e411af48bc9/dataset.py)
+  obtains voxel arrays, applies `MinMaxScaler` with last-axis columns, transposes,
+  and resizes to fixed tensor dimensions. This is not a detector's physical-space
+  preprocessing contract. It does not establish original CT units by itself.
+- [Sampler](https://github.com/Manem-Lab/Lung-DDPM/blob/2284405aaa02430065549068a3615e411af48bc9/sample.py)
+  saves a resized/normalized generated array with the source mask affine. A
+  physical detector adapter must explicitly account for changed tensor dimensions;
+  an inherited affine is not automatic physical-grid parity. This source observation
+  is not a finding about unpublished downstream evaluation correctness.
+
+The [MONAI lung detector documentation](https://huggingface.co/MONAI/lung_nodule_ct_detection/blob/main/docs/README.md)
+offers a public pretrained 3D box detector, not a segmentation scorer. Its
+world-coordinate box convention, RAS conversion and prescribed intensity/spacing
+transform must be audited against original CT headers and label-2 components.
+Its LUNA fold metadata can help check overlap; three demos cannot certify held-out
+generalization. Legacy NoduleNet requires old custom CUDA extensions and is a
+worse first integration choice. No weights installed or author code executed.
+
+Next inexpensive gates, in order: verify the native files/headers and terms;
+resolve detector source/coordinate contracts and split overlap; run a bounded
+CPU native competence check if compatible; only then consider a capped paired
+task-model probe with seam/context controls. A GPU probe additionally requires
+verified remaining charged allowance. If adequate context cannot fit this demo,
+or the effect disappears with ordinary preprocessing/boundary controls, stop
+this paper direction rather than swapping in favorable cases.
+
+No new generator training, full-dataset download, clinical-reader substitution,
+or PanTS test reuse is justified by these controls. Still no selected S-tier idea.
+
 ## Resource/decision boundary
 
 This pass used CPU parsing plus 47,638,016 downloaded bytes. No new model weights,

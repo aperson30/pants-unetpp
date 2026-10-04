@@ -40,12 +40,17 @@ def inspect(path):
             "expanded_bytes": expanded, "members": entries}
 
 
-def geometry_audit(root):
+def load_objects(root):
     import nibabel as nib
     import numpy as np
 
     objects = {}
     for name in ASSETS:
+        size, digest = ASSETS[name]
+        path = root/name
+        if path.stat().st_size != size or hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+            raise ValueError("Asset integrity mismatch")
+        inspect(path)
         with tarfile.open(root/name, "r:") as archive:
             for member in archive:
                 if not member.isfile() or not member.name.endswith(".nii.gz"):
@@ -68,6 +73,13 @@ def geometry_audit(root):
                 if (group, key) in objects:
                     raise ValueError("Duplicate pairing key")
                 objects[group, key] = (data, image.affine, image.header.get_zooms())
+    return objects
+
+
+def geometry_audit(root):
+    import numpy as np
+
+    objects = load_objects(root)
     groups = sorted({group for group, _ in objects})
     counts = {group: sum(g == group for g, _ in objects) for group in groups}
     normal_keys = {key for group, key in objects if group == "Normal/Image"}

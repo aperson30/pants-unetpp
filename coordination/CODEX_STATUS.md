@@ -1883,3 +1883,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - MedCondDiff's advertised releases API empty; static conditioning already
   cached in author sampler. No verified usable checkpoint or new static-cache
   novelty. Full audit: research/PAIRED_SYNTHESIS_ASSET_AUDIT_20261004.md.
+
+### 2026-10-03T23:54-07:00 — Paired controls pass; native model gate still open
+
+- Reusable foreground/background intervention contract passed all 90 pairs in
+  4.41 CPU seconds; exact retained voxels, grid/mask parity, factorial identity,
+  squared-change decomposition. Three CPU unit tests also pass. Zero GPU hours.
+- Background fraction of squared change min/median/max 0.241%/4.875%/69.212%:
+  source-relative intensity change only, NOT quality, synthesis error or harm.
+  Hard-composite seam/context confounds explicitly remain; no verifier run.
+- Broad novelty already covered by MU-Diff region metrics and RoentMod medical
+  counterfactual shortcut testing. Not a new method merely by combining them.
+- Located public Lung-DDPM three real CT/SEG demo pairs via public inventory;
+  files not downloaded. Pinned source 2284405aaa02430065549068a3615e411af48bc9
+  labels background/lung/nodule=0/1/2. Loader normalization/resizing is NOT a
+  physical-space detector adapter. Native original headers/units, overlap and
+  permitted data use still need verification before a competent-model claim.
+- No GPU submission, checkpoint loading, launch-script edits or protected test
+  actions. See paired asset audit for ordered cheap gates and kill conditions.
