@@ -18,6 +18,9 @@ RUN=$ROOT/results/evaluation_grid/61be5315e8cc5f4ec35637c9b748e5ebc33da1b7
 exec 9<"$RUN/.evaluation.lock"
 flock -s -n 9 || exit 1
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+# uv's Python may not locate RHEL's trust store automatically. Keep TLS verification.
+test -s /etc/pki/tls/certs/ca-bundle.crt
+export SSL_CERT_FILE=/etc/pki/tls/certs/ca-bundle.crt
 timeout --kill-after=30s 13800s "$ROOT/venv/bin/python" -u "$SOURCE_RECOVERY_SCRIPT" \
   --destination "$ROOT/source_geometry_recovery_20261005_$SLURM_JOB_ID" \
   --evaluation-dir "$RUN"

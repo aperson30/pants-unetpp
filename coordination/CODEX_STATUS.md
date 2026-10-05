@@ -1965,3 +1965,15 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   user's project root. Archive and CT hashes mandatory; partials never certified.
   Original predictions and GT untouched. Header inventory is NOT proof of voxel
   alignment: reconstruction/organ consistency review follows recovered evidence.
+
+### 2026-10-05 — Recovery TLS trust-store fix, retry 47451639
+
+- First recovery 47451599 failed in 8 seconds before file recovery: uv Python
+  default CA path missing, CERTIFICATE_VERIFY_FAILED. No GPU allocation.
+- Verified normal PSC CA bundle /etc/pki/tls/certs/ca-bundle.crt; urllib HTTPS
+  HEAD with SSL_CERT_FILE returns 200 and exact 27,994,666,473 image bytes.
+  Certificate verification stays ON; no unverified SSL context or curl -k.
+- Submitted retry 47451639 using original frozen script/hash plus SSL_CERT_FILE
+  environment override. Current template now explicitly checks/exports bundle.
+  New destination source_geometry_recovery_20261005_47451639. Source mapping
+  remains UNVERIFIED until recovery completes and organ/voxel evidence reviewed.
