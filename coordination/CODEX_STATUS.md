@@ -1940,3 +1940,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Read-only header diagnostic added; no GPU continuation, scoring, output repair,
   training change or cohort exclusion. Full evidence/resolution boundary in
   GEOMETRY_BLOCKER_20261005.md. User idea search remains paused.
+
+### 2026-10-05 — Preparing authorized source recovery, no data repairs
+
+- User explicitly requested original-source recovery/mapping verification.
+  Retrieved original run archive hashes and current label Content-Length
+  (15,561,944,549 bytes); test image archive 27,994,666,473 bytes. Ocean has
+  272G free at check. Both hashes must match before selected member recovery.
+- Added bounded CPU recovery of six exact cases into a new per-job diagnostic
+  folder; retain source archives, never touch existing GT/predictions. Four
+  unit tests cover checksum gate, failed publication, selective recovery,
+  no overwrite and unsafe paths; Python/shell syntax pass.
+- Recovered CT bytes must match saved predictor input hashes. Report inventories
+  all available individual organ headers vs CT, but explicitly does not certify
+  voxel mapping merely from metadata. No metrics, alignment selection, repair,
+  training changes or GPU request. CPU recovery submission follows preflight.
