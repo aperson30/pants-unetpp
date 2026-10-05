@@ -1915,3 +1915,13 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Local existing suite: 12 tests; new invocation: 5 collected tests; all pass.
   Real audit not yet submitted at this entry. No new GPU request submitted.
 - Continuation plan/limits recorded in EVALUATION_CONTINUATION_20261005.md.
+
+### 2026-10-05T16:05-07:00 — CPU integrity audit queued, no new GPU request
+
+- Submitted CPU-only audit 47450997 from frozen ce67418 snapshot, importing
+  original 5e99901 evaluation utilities. Prediction directories remain read-only.
+- PSC live account permits low QOS on RM-shared, not default rm; corrected
+  6 cores / 12000M respects 2000M/core cap. Test-only passed before submission.
+  Earlier rejected requests allocated no resources; template now records limits.
+- Main original evaluation is still stopped; await actual audit success before
+  resubmitting original frozen inference. No source/provenance bypass.

@@ -36,6 +36,14 @@ partial-audit invocation passed 5 collected tests (3 new + 2 imported fixture
 tests). Shell syntax and Python compilation passed. These are logic checks,
 not a GPU runtime guarantee.
 
+CPU audit submitted as job **47450997**, pinned audit revision
+`ce67418bd55307ac654e4d148e9c30e3d3bb44f1`, original evaluation utilities.
+Submission overrides: 6 cores / 12000M and `--qos=low`; current template records
+these defaults. Initial default-QOS and memory/core submissions were rejected
+without allocations. Live association permits low on RM-shared but lacks its
+normal rm QOS. Test-only accepted the corrected request; no GPU continuation
+submitted yet. If low-priority audit is preempted, it changes no prediction data.
+
 ## Ordered remaining steps
 
 1. Complete CPU audit of saved real artifacts; inspect its explicit success

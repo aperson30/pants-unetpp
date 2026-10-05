@@ -2,10 +2,11 @@
 # Integrity-only audit of saved evaluation work: no GPUs or test metrics.
 #SBATCH --account=cis260296p
 #SBATCH --partition=RM-shared
+#SBATCH --qos=low
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=2
-#SBATCH --mem=32G
+#SBATCH --cpus-per-task=6
+#SBATCH --mem=12000M
 #SBATCH --time=02:00:00
 #SBATCH --job-name=pants_eval_resume_audit
 #SBATCH --output=/ocean/projects/cis260296p/asanjeev/pants_unetpp/grid_logs/resume_audit_%j.log
