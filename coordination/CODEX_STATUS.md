@@ -1901,3 +1901,17 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   permitted data use still need verification before a competent-model claim.
 - No GPU submission, checkpoint loading, launch-script edits or protected test
   actions. See paired asset audit for ordered cheap gates and kill conditions.
+
+### 2026-10-05T15:54-07:00 — User paused idea search; finishing original grid
+
+- Live Bridges-2 check: evaluation 47320183 TIMEOUT at 48h; 570 masks + 570
+  score rows per UNet++ cell, no plain-cell directories, all 901 GT saved.
+  No queued/running job or final grid report. Counts are not integrity proof.
+- Predictor already supports guarded per-case resume. Preserve original frozen
+  evaluation 5e99901263f4a9f2092d6674c7c566ba4d9d43cc and training revision;
+  no predictor/metric/TTA/trainer changes needed. No retraining planned.
+- Added independent CPU partial-resume audit and RM-shared launcher (no GPUs),
+  with source fingerprint/pairing/geometry checks and shared read lock.
+  Local existing suite: 12 tests; new invocation: 5 collected tests; all pass.
+  Real audit not yet submitted at this entry. No new GPU request submitted.
+- Continuation plan/limits recorded in EVALUATION_CONTINUATION_20261005.md.
