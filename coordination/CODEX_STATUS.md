@@ -1925,3 +1925,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Earlier rejected requests allocated no resources; template now records limits.
 - Main original evaluation is still stopped; await actual audit success before
   resubmitting original frozen inference. No source/provenance bypass.
+
+### 2026-10-05 — Actual partial audit failed; large geometry mismatch verified
+
+- Audit 47450997 FAILED (1:0, 82s), first at unetpp_ds/9232. Header-only follow-up
+  scanned all 570 saved masks in each cell: same six mismatches in both cells
+  (9232,9357,9362,9452,9480,9515). Shapes match; differences are large origin/axis
+  changes, not rounding. 9232 affine delta ~221mm, corner displacement ~467mm.
+- All other 564 per-cell headers pass; full voxel audit stopped at first mismatch
+  and does NOT certify remaining artifacts. No integrity success marker.
+- Converter copies first available organ header without checking CT/all-organ
+  geometry: missing guard identified, original per-organ cause not yet verified.
+  Need source CT/individual-mask audit, not relaxed tolerances or GT overwrite.
+- Read-only header diagnostic added; no GPU continuation, scoring, output repair,
+  training change or cohort exclusion. Full evidence/resolution boundary in
+  GEOMETRY_BLOCKER_20261005.md. User idea search remains paused.
