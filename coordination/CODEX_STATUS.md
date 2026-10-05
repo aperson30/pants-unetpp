@@ -1955,3 +1955,13 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   all available individual organ headers vs CT, but explicitly does not certify
   voxel mapping merely from metadata. No metrics, alignment selection, repair,
   training changes or GPU request. CPU recovery submission follows preflight.
+
+### 2026-10-05 — Source recovery submitted as 47451599
+
+- CPU-only source recovery 47451599 submitted after four real-environment tests
+  and Slurm test-only accepted request. Frozen revision 62b2ddeb69cb6692ea1a6aeaf768946b491ef37b;
+  script SHA256 e3840dfb79fcca1faebbf965820ff42b13cf22e4d9fce864d9383ae2f38debce.
+- New diagnostic destination source_geometry_recovery_20261005_47451599 under
+  user's project root. Archive and CT hashes mandatory; partials never certified.
+  Original predictions and GT untouched. Header inventory is NOT proof of voxel
+  alignment: reconstruction/organ consistency review follows recovered evidence.
