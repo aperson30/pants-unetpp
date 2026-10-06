@@ -2056,3 +2056,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   a fresh tumor_reference_v1_JOBID directory only. Zero GPU hours requested.
 - Actual 901-case source parity and derivative readiness are not yet passed;
   existing GT/masks/provenance remain intact. Resume/scoring remain gated.
+
+### 2026-10-05 — Full source audit stopped on corrected CT 9812; narrow replay diagnostic
+
+- Job 47453243 FAILED after 28m08s, exit 1:0. Both archive checksums passed;
+  860 exact input CT hashes matched before PanTS_00009812 replay failed. This
+  job never reached the tumor-mask stage; no full-cohort source pass exists.
+- Reference 47453281 remains DependencyNeverSatisfied and never executed.
+  No reference/GT/prediction changes and no GPU hours consumed.
+- Original log explicitly corrected CTs 9812/9871 and GT 9812. Prepared a
+  separate CPU diagnostic recovering just these CTs into fresh persistent
+  scratch, running the actual frozen fix_folder in place versus manual replay,
+  preserving source values and comparing both outputs to original input hashes.
+- Original preprocessing used OMP/MKL=4, whereas audit used 1; diagnostic
+  matches original settings. This is a possible confound, not a proven cause.
+  Installed NiBabel gzip writer has deterministic mtime/filename metadata;
+  timestamp-only explanation is not supported by its implementation.
+- Four local tests passed including exact synthetic in-place/manual parity and
+  untouched source bytes. No weakened hash gate or new inference settings.
