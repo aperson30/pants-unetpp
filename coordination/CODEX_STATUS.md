@@ -2217,3 +2217,24 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Diagnostic CT rows are now persisted before tumor inspection, avoiding loss
   of that metadata on a later error. Five targeted synthetic tests passed in
   the PSC environment; originals, predictions and metric rules remain unchanged.
+
+### 2026-10-06 06:20 UTC — Encoding diagnostic running; original CPU replay approved
+
+- Committed b2cf55b source snapshot passed all 17 synthetic regression tests,
+  shell syntax and Slurm test-only. CPU-only diagnostic 47461386 is RUNNING on
+  r265, explicit CLI export, two-hour cap, no automatic retries. Publication was
+  initially authentication-blocked, but the locally committed exact snapshot was
+  tested/staged independently; user completed authentication and push succeeded.
+- Confirmed original frozen converter hash 7d751048... uses dataobj > 0 at line
+  42. Still awaiting observed source encoding rather than changing the audit's
+  strict binary rule blindly. No original GT or metric definition changed.
+- Saved UNet++ outputs stop at 9570 in both cells; neither has a saved 9812 mask.
+  No inference provenance was rewritten on this basis.
+- User approved one H100-node CPU-only replay, at most three minutes/0.05
+  allocated GPU-hours. Official PSC guide confirms H100 = 2 SU/GPU-hour, giving
+  a 0.1 SU maximum at that wall cap. Prepared separate pinned, bounded harness;
+  three synthetic replay tests pass, including original-file preservation and
+  wrong input/hash refusal. No CUDA/model imports, unsupported ISA forcing or
+  full-cohort pass claim. Actual GPU reservation not yet submitted in this entry.
+- Hardware source: https://www.psc.edu/resources/bridges-2/ (H100 CPUs: Sapphire
+  Rapids 8470). Billing: https://www.psc.edu/resources/bridges-2/user-guide/ .
