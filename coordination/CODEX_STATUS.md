@@ -2199,3 +2199,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   settings can override script directives. Retry uses unchanged published code.
 - Diagnostic outputs remain non-certifying and original reference job stays
   blocked; this submission is not an audit pass or a final result.
+
+### 2026-10-06 — Source diagnostic exposed a binary-mask assumption
+
+- 47459607 FAILED after 9m29s. Both archive hashes passed; all CTs were inspected
+  and only 9812 was logged as a replay mismatch. One source mask passed (9657,
+  zero tumor voxels), then check_tumor rejected a nonbinary source mask before
+  recording its case/value encoding. No full tumor-source certificate exists.
+- Frozen merge_labels actually uses source_data > 0 for class membership, not
+  source_data == 1. Do not silently change the audit based only on that fact:
+  source nonbinary values still need to be observed and understood.
+- Extended diagnostic-only mode to record source exceptions and actual numeric
+  encoding/finite/integer properties, compare the frozen positive-threshold mask
+  against saved class 28, and preserve up to 16 raw exception files with a total
+  512 MiB cap/2 GiB free-space guard. Default certification still rejects the
+  nonbinary source rule; diagnostic equality is never a certification flag.
+- Diagnostic CT rows are now persisted before tumor inspection, avoiding loss
+  of that metadata on a later error. Five targeted synthetic tests passed in
+  the PSC environment; originals, predictions and metric rules remain unchanged.

@@ -7,6 +7,7 @@ Success certifies tumor index/geometry lineage only, not the 27 other organs.
 """
 import argparse
 import json
+import shutil
 import tarfile
 import tempfile
 from pathlib import Path, PurePosixPath
@@ -98,6 +99,23 @@ def check_tumor(source_path, gt_path, ct):
                 gt.affine, ct['prediction_affine'], rtol=0, atol=1e-4))}
 
 
+def inspect_source_encoding(source_path, gt_path):
+    """Diagnostic evidence only; never returns a source-certification flag."""
+    image = nib.load(source_path)
+    data = np.asanyarray(image.dataobj)
+    saved = np.asanyarray(nib.load(gt_path).dataobj)
+    finite = np.isfinite(data)
+    values = np.unique(data[finite])
+    return {'source_tumor_sha256': sha(source_path),
+            'original_gt_sha256': sha(gt_path), 'source_dtype': str(data.dtype),
+            'source_values_first_64': values[:64].tolist(), 'source_unique_values': int(len(values)),
+            'source_all_finite': bool(finite.all()),
+            'source_nonnegative_integer': bool(finite.all() and (data >= 0).all() and np.equal(data, np.floor(data)).all()),
+            'positive_threshold_matches_saved_class28': bool(data.shape == saved.shape and
+                                                            np.array_equal(data > 0, saved == 28)),
+            'source_positive_voxels': int((data > 0).sum())}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--source-dir', type=Path, required=True)
@@ -148,18 +166,41 @@ def main():
                          'expected_prediction_ct_sha256': provenance['inputs'][cid],
                          'exact_ct_identity_passed': matches}
             print(('CT_INPUT_VERIFIED ' if matches else 'CT_REPLAY_MISMATCH ') + cid, flush=True)
+        if args.diagnose_all:
+            with (args.report_dir / 'ct_cases_diagnostic.json').open('x') as output:
+                json.dump({'diagnostic_only': True, 'cases': rows}, output, indent=2, allow_nan=False)
         with (args.report_dir / 'tumor_cases.jsonl').open('x') as output:
             for cid, path, member in selected_members(archives[ARCHIVES[1][0]], 'pancreatic_lesion.nii.gz', scratch):
-                result = check_tumor(path, args.evaluation_dir / 'test_ground_truth' / f'{cid}.nii.gz', rows[cid])
+                gt_path = args.evaluation_dir / 'test_ground_truth' / f'{cid}.nii.gz'
+                try:
+                    result = check_tumor(path, gt_path, rows[cid])
+                except RuntimeError as error:
+                    if not args.diagnose_all:
+                        raise
+                    # Preserve bounded raw evidence for a follow-up; do not
+                    # alter the failed rule or promote threshold equality to
+                    # a certificate. Default mode still raises immediately.
+                    result = {'source_check_error': str(error), **inspect_source_encoding(path, gt_path)}
+                    errors = args.report_dir / 'source_exceptions'
+                    errors.mkdir(exist_ok=True)
+                    copies = list(errors.glob('*.nii.gz'))
+                    copied_bytes = sum(item.stat().st_size for item in copies)
+                    if (len(copies) < 16 and copied_bytes + path.stat().st_size <= 512 * 1024**2
+                            and shutil.disk_usage(errors).free > 2 * 1024**3):
+                        shutil.copyfile(path, errors / f'{cid}.nii.gz')
                 rows[cid].update(result, source_tumor_member=member)
                 output.write(json.dumps({'case': cid, **rows[cid]}, allow_nan=False) + '\n')
                 output.flush()
-                print(f'TUMOR_SOURCE_VERIFIED {cid} voxels={result["tumor_voxels"]}', flush=True)
+                if 'source_check_error' in result:
+                    print(f'TUMOR_SOURCE_EXCEPTION {cid} {json.dumps(result, allow_nan=False)}', flush=True)
+                else:
+                    print(f'TUMOR_SOURCE_VERIFIED {cid} voxels={result["tumor_voxels"]}', flush=True)
     report = {'scope': 'tumor only; no repair/scoring/all-organ certification',
               'diagnostic_only': args.diagnose_all,
               'ct_identity_mismatches': sorted(cid for cid, row in rows.items() if not row['exact_ct_identity_passed']),
+              'source_check_errors': {cid: row['source_check_error'] for cid, row in rows.items() if 'source_check_error' in row},
               'cases': rows, 'archives': {name: digest for name, _, digest, _ in ARCHIVES},
-              'header_mismatches': sorted(cid for cid, row in rows.items() if not row['saved_gt_matches_prediction_grid']),
+              'header_mismatches': sorted(cid for cid, row in rows.items() if row.get('saved_gt_matches_prediction_grid') is False),
               'script_sha256': sha(Path(__file__))}
     publish_report(args.report_dir, report, args.diagnose_all)
 

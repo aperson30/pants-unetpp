@@ -8,10 +8,24 @@ from unittest.mock import patch
 import nibabel as nib
 import numpy as np
 
-from evaluation.audit_all_source_tumors import check_tumor, selected_members, check_ct_identity, publish_report
+from evaluation.audit_all_source_tumors import check_tumor, selected_members, check_ct_identity, publish_report, inspect_source_encoding
 
 
 class AllSourceAuditTests(unittest.TestCase):
+    def test_encoding_inspection_is_not_a_source_pass(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); source = root / 'source.nii.gz'; gt = root / 'gt.nii.gz'
+            data = np.zeros((2, 3, 4), np.uint8); data[1, 1, 1] = 28
+            nib.save(nib.Nifti1Image(data, np.eye(4)), source)
+            nib.save(nib.Nifti1Image(data, np.eye(4)), gt)
+            row = {'shape': list(data.shape), 'raw_affine': np.eye(4).tolist(), 'prediction_affine': np.eye(4).tolist()}
+            with self.assertRaisesRegex(RuntimeError, 'not binary'):
+                check_tumor(source, gt, row)
+            evidence = inspect_source_encoding(source, gt)
+            self.assertEqual(evidence['source_values_first_64'], [0, 28])
+            self.assertTrue(evidence['positive_threshold_matches_saved_class28'])
+            self.assertNotIn('tumor_index_equality', evidence)
+
     def test_default_identity_gate_stays_closed(self):
         with self.assertRaisesRegex(RuntimeError, 'exact frozen'):
             check_ct_identity('case', 'actual', 'expected', False)
