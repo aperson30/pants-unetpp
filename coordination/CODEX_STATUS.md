@@ -2045,3 +2045,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   claim, new metrics, or GPU continuation yet. Builder will run only after a
   successful complete source audit; final scoring must explicitly reference
   this derivative manifest, not silently replace original GT provenance.
+
+### 2026-10-05 — Reference derivative queued behind successful full-source audit
+
+- CPU reference job 47453281 queued with afterok:47453243; Slurm confirmed
+  Dependency pending while audit 47453243 is RUNNING. No automatic retries.
+- Snapshot 3f5125b passes three PSC unit tests and launcher bash/Slurm checks.
+  Launcher pins builder and source-audit script hashes, requires the full final
+  audit JSON, locks original evaluation against concurrent writers, and writes
+  a fresh tumor_reference_v1_JOBID directory only. Zero GPU hours requested.
+- Actual 901-case source parity and derivative readiness are not yet passed;
+  existing GT/masks/provenance remain intact. Resume/scoring remain gated.
