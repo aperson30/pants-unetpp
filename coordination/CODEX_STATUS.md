@@ -2120,3 +2120,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   hash matches. Uses documented OpenBLAS_CORETYPE runtime selection:
   https://www.openmathlib.org/OpenBLAS/docs/runtime_variables/ . Syntax passes;
   real CPU tests/deployment remain next. No GPU spend or original-file edits.
+
+### 2026-10-05 — CPU dispatch job 47458852 submitted; paper packet published
+
+- Diagnostic 47458852 submitted from a498289 after PSC Python/shell syntax and
+  Slurm test-only checks; six RM cores/12 GB, 20-minute cap, no GPU. Parent and
+  child thread limits explicitly set to four at submission. Child crashes are
+  recorded by return code; exact expected CT hash remains mandatory.
+- PAPER_COMPLETION_PACKET_20261005.md is on GitHub. Methods inventory, pending
+  2x2 table, reference/provenance disclosure and final delivery gates prepared
+  without accuracy claims. Versioned CPU scoring adapter is still future work,
+  not falsely marked implemented. Original frozen inference resume stays gated.
