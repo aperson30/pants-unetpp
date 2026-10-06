@@ -1977,3 +1977,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   environment override. Current template now explicitly checks/exports bundle.
   New destination source_geometry_recovery_20261005_47451639. Source mapping
   remains UNVERIFIED until recovery completes and organ/voxel evidence reviewed.
+
+### 2026-10-05 — Source recovery passed; tumor geometry differs from inherited GT header
+
+- Source recovery 47451639 COMPLETED, 30m19s, exit 0:0; original archive hashes
+  pass. Six CTs match original prediction input hashes; 29 source mask files
+  recovered per case (includes author combined_labels).
+- Every source pancreatic_lesion and pancreas header exactly matches its CT.
+  Every first adrenal-left header differs. Source organ metadata are mixed,
+  not universally CT-aligned. This explains why first-organ-header inheritance
+  is unsafe, but no blanket all-organ alignment claim or header repair made.
+- Prepared read-only CPU check against original frozen CLASS_MAP/merge_labels:
+  reconstruct saved GT voxel arrays exactly, validate class-28 equality against
+  original CT-aligned lesion arrays, verify hashes, preserve all artifacts.
+  Narrow synthetic regression passes (good target/bad reference, changed voxels
+  rejected); Python compiles. Actual voxel check follows pinned deployment.
