@@ -2030,3 +2030,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   Fresh diagnostic directory and partial JSONL preserve evidence on failure.
 - Local eight-test check passed (full-source negative cases, six-case mapping,
   partial-resume guards). Actual full-cohort results remain pending deployment.
+
+### 2026-10-05 — Full source audit running; separate reference builder tested
+
+- CPU job 47453243 submitted from snapshot 07a152d after cluster unit tests,
+  bash syntax and Slurm test-only passed. Confirmed RUNNING on r353. Ocean has
+  232 GiB headroom; the audit uses sequential temporary members, not 901 CT copies.
+- Separate build_versioned_tumor_reference.py produces ONLY 0/28 references
+  with unchanged target index masks and verified prediction CT metadata. Keeps
+  original 28-class GT/predictions/manifests untouched and records hashes in a
+  separate versioned readiness manifest after all 901 reload checks pass.
+- Local nine-test combined check passed, including original-byte preservation,
+  exact tumor equality and changed-original rejection. No clinical/all-organ
+  claim, new metrics, or GPU continuation yet. Builder will run only after a
+  successful complete source audit; final scoring must explicitly reference
+  this derivative manifest, not silently replace original GT provenance.
