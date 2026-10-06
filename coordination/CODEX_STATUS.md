@@ -2269,3 +2269,16 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Reference: https://nipy.org/nibabel/nifti_images.html#data-scaling . Paper
   completion packet now distinguishes implemented fixture-tested adapter from
   pending real-cohort certification/inference/scoring. No final quality claims.
+
+### 2026-10-06 06:47 UTC — Full diagnostic completed; committed tests passed
+
+- CPU job 47461386 COMPLETED successfully in 22m33s and examined all 901 cases.
+  Exactly one CT identity mismatch remains: PanTS_00009812. All 89 source-mask
+  exceptions were decoded values [0, 1.0000000591389835]; all finite, and all
+  89 positive-threshold masks exactly matched the saved class-28 voxels.
+  This diagnostic is NOT a certificate; the updated strict audit must still pass.
+- All 32 committed audit/reference/replay/prediction/scoring tests passed on
+  Bridges-2 in 7.439s using snapshot b5b2450, including changed-input rejection.
+  No real cohort scoring, inference or protected artifact changes occurred.
+- Approved original-CPU replay 47461462 remains PENDING/Priority. No replay
+  result and no GPU allocation time yet. Three-minute cap and no automatic retry.
