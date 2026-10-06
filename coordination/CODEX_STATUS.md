@@ -2131,3 +2131,17 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   2x2 table, reference/provenance disclosure and final delivery gates prepared
   without accuracy claims. Versioned CPU scoring adapter is still future work,
   not falsely marked implemented. Original frozen inference resume stays gated.
+
+### 2026-10-05 — Dispatch screen completed; original CT hash still unresolved
+
+- Job 47458852 COMPLETED in 6s, exit 0:0; all three workers succeeded. Nehalem
+  and Sandybridge generate SHA 070678cd..., Haswell 127f2329..., all preserving
+  source voxel values. None matches original 02eca959... SHA. CPU dispatch
+  demonstrably affects the tiny SVD geometry term/file bytes, but the original
+  header has NOT been reconstructed and original-input identity is not passed.
+- Further exact replay may require the original GPU-node CPU/backend; do not
+  force unsupported AVX512 on RM nodes or call tiny differences a passed hash
+  check. No new GPU allocation submitted. Source/partial-artifact gates remain.
+- Paper packet/table preparation is ready; versioned scoring adapter and final
+  integration/tests remain implementation work after reference provenance is
+  resolved. No final metrics, new method or quality claims fabricated.
