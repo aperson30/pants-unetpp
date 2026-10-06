@@ -2017,3 +2017,16 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Updated GEOMETRY_BLOCKER_20261005.md with evidence and remaining gates. Zero
   new GPU hours; original inference protocol untouched. Local combined check:
   10 tests passed (mapping, partial resume, prediction failure/skip guards).
+
+### 2026-10-05 — Full-cohort tumor-source CPU audit prepared
+
+- Added audit_all_source_tumors.py and a bounded RM-shared CPU launcher. Reuses
+  the two checksum-pinned archives already recovered; no download/GPU spend.
+- Sequential streaming keeps only one CT/mask temporary, checks exact 901-case
+  membership, both prediction input manifests, original CT input SHA256 replay
+  including the frozen orthonormality correction, original tumor/CT geometry,
+  and exact saved class-28 voxel equality. No scoring or repaired references.
+- Original evaluation, GT, masks, manifests and inference settings unchanged.
+  Fresh diagnostic directory and partial JSONL preserve evidence on failure.
+- Local eight-test check passed (full-source negative cases, six-case mapping,
+  partial-resume guards). Actual full-cohort results remain pending deployment.
