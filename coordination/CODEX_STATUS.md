@@ -1992,3 +1992,13 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   original CT-aligned lesion arrays, verify hashes, preserve all artifacts.
   Narrow synthetic regression passes (good target/bad reference, changed voxels
   rejected); Python compiles. Actual voxel check follows pinned deployment.
+
+### 2026-10-05 — Voxel-source lineage check submitted as 47452439
+
+- Read-only CPU job 47452439, frozen e86225ffdf38b72c08b373577f4d2dfdcb4c2957,
+  verifier SHA256 f3f3ed4a73367dde735281f0cdafe0abdbe157a0d68f5f2c495ceeac4e841624.
+  Imports original 5e99901 CLASS_MAP/merge_labels; tests also pass on PSC venv.
+- Checks original CT hashes, selected organ-member hashes, full merged GT voxel
+  equality, original-reference affine lineage, and exact target-mask equality
+  on original CT geometry. No scoring, repairs, predictions or source deletion.
+  Success is evidence for tumor target/index mapping, NOT all-organ geometry.
