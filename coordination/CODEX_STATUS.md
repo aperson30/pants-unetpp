@@ -2166,7 +2166,7 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   CT 9812 original input hash remains unresolved; all scoring/resume gates stay
   closed. No final metrics and zero added GPU hours.
 
-### 2026-10-06 04:25 UTC — Full-cohort diagnostic submitted as CPU job 47459567
+### 2026-10-06 04:20 UTC — Full-cohort diagnostic submitted as CPU job 47459567
 
 - Original full audit stopped before checking ANY tumor masks. Added an explicit
   --diagnose-all mode to finish inspecting the cohort even when corrected CT
@@ -2184,3 +2184,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - This will identify any further source mask/index/geometry issues and enumerate
   CT replay mismatches. It cannot resolve or waive CT 9812's exact original hash
   by itself; no inference/scoring readiness or final accuracy claim made.
+
+### 2026-10-06 04:21 UTC — Export default diagnosed; CPU diagnostic running
+
+- 47459567 FAILED in 3s before dataset access: AUDIT_ROOT was absent. Live shell
+  inspection confirmed SBATCH_EXPORT=NONE despite SLURM_EXPORT_ENV=ALL. The
+  prior bash/Slurm test-only checks did not exercise batch environment transfer.
+- Retried published snapshot 57aa621 with explicit COMMAND-LINE
+  --export=ALL,AUDIT_ROOT=...,AUDIT_SHA256=... (which overrides SBATCH_EXPORT).
+  Slurm test-only passed and job 47459607 is confirmed RUNNING on r184 at 04:21
+  UTC, beyond the startup failure. No GPU hours spent and no dataset edits.
+- Added --export=ALL to the prepared launcher as a documented default, but the
+  CLI override remains mandatory while SBATCH_EXPORT=NONE is inherited: environment
+  settings can override script directives. Retry uses unchanged published code.
+- Diagnostic outputs remain non-certifying and original reference job stays
+  blocked; this submission is not an audit pass or a final result.

@@ -9,6 +9,7 @@
 #SBATCH --mem=12000M
 #SBATCH --time=02:00:00
 #SBATCH --job-name=pants_source_diagnostic
+#SBATCH --export=ALL
 #SBATCH --output=/ocean/projects/cis260296p/asanjeev/pants_unetpp/grid_logs/source_diagnostic_%j.log
 set -euo pipefail
 ROOT=/ocean/projects/cis260296p/asanjeev/pants_unetpp
