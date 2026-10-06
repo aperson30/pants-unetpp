@@ -2074,3 +2074,16 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   timestamp-only explanation is not supported by its implementation.
 - Four local tests passed including exact synthetic in-place/manual parity and
   untouched source bytes. No weakened hash gate or new inference settings.
+
+### 2026-10-05 — Two-case correction replay diagnostic submitted as 47458101
+
+- CPU-only job 47458101, frozen 2ecd0ad-verified snapshot; PSC synthetic replay
+  test, shell syntax and Slurm test-only passed before submission. Saves original
+  CTs 9812/9871 and separate in-place/manual corrected copies under a fresh
+  ct_replay_diagnosis_JOBID directory; compares exact original inference hashes.
+- No outcome-selected correction, resampling, source overwrite, GPU allocation,
+  or full-cohort pass claim. Original frozen correction is imported explicitly,
+  with OMP/MKL=4 to match original preprocessing. Raw archive identity gated.
+- One initial deployment preceded completed git push and therefore could not
+  resolve the new revision; no job ran from it. After confirmed push, deployment
+  used a separate fresh directory with pipefail and passed cluster tests.
