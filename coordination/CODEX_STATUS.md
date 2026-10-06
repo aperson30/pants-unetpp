@@ -2145,3 +2145,23 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Paper packet/table preparation is ready; versioned scoring adapter and final
   integration/tests remain implementation work after reference provenance is
   resolved. No final metrics, new method or quality claims fabricated.
+
+### 2026-10-05 — Reference certificate verifier prepared; nine CPU fixture tests pass
+
+- Live SSH check: diagnostic 47458852 COMPLETED; reference job 47453281 still
+  PENDING/DependencyNeverSatisfied. No new inference or GPU job submitted.
+- Added read-only verify_versioned_tumor_reference.py for the future separate
+  scoring adapter. Requires the full production cohort, pinned original source
+  archives, exact source-audit and evaluation/provenance identities, unchanged
+  original GT/reference hashes, unchanged class-28 voxel masks/counts, certified
+  CT geometry and unchanged evidence across verification. It does not weaken
+  the exact CT replay gate or certify the other organs.
+- Nine synthetic fixture tests passed in the existing PSC Python environment
+  (1.745s unittest runtime). Tests cover unchanged inputs, production-vs-fixture
+  cohort, mutated originals/reference bytes, changed tumor voxels and geometry
+  even with updated reference hashes, missing source certification, wrong CT
+  identity and wrong archive identity. Initial test import used the snapshot
+  parent rather than its revision subdirectory; corrected and reran successfully.
+- This is a tested helper, NOT the complete scoring adapter or real-cohort pass.
+  CT 9812 original input hash remains unresolved; all scoring/resume gates stay
+  closed. No final metrics and zero added GPU hours.
