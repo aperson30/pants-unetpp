@@ -27,6 +27,8 @@ def verify(root: Path, reference: Path, source_audit: Path, *, expected_cases=No
     if certificate.get('source_audit_sha256') != audit_hash:
         raise RuntimeError('source audit identity differs')
     report = json.loads(source_audit.read_text())
+    if report.get('diagnostic_only', False) is not False or report.get('ct_identity_mismatches', []):
+        raise RuntimeError('diagnostic/mismatched audit is not a source certificate')
     rows = report['cases']
     if report.get('archives') != {name: digest for name, _, digest, _ in ARCHIVES}:
         raise RuntimeError('source archive identities differ')

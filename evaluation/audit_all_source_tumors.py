@@ -22,6 +22,23 @@ from evaluation.recover_geometry_sources import ARCHIVES, sha
 CASES = {f'PanTS_{i:08d}' for i in range(9001, 9902)}
 
 
+def check_ct_identity(cid, actual, expected, diagnostic):
+    matches = actual == expected
+    if not matches and not diagnostic:
+        raise RuntimeError(cid + ': exact frozen CT input replay failed')
+    return matches
+
+
+def publish_report(folder, report, diagnostic):
+    # Diagnostic output can NEVER satisfy the reference builder's readiness
+    # filename, even if every replay happens to match on this machine.
+    filename = 'source_audit_diagnostic.json' if diagnostic else 'all_901_source_audit.json'
+    with (folder / filename).open('x') as output:
+        json.dump(report, output, indent=2, allow_nan=False)
+    print('SOURCE_DIAGNOSTIC_DONE_NOT_A_CERTIFICATE' if diagnostic else
+          'ALL_901_SOURCE_TUMOR_INPUT_AND_VOXEL_CHECKS_PASSED', flush=True)
+
+
 def selected_members(archive, basename, scratch):
     """Yield one bounded, regular member at a time; no extractall/path traversal."""
     seen = set()
@@ -86,6 +103,8 @@ def main():
     parser.add_argument('--source-dir', type=Path, required=True)
     parser.add_argument('--evaluation-dir', type=Path, required=True)
     parser.add_argument('--report-dir', type=Path, required=True)
+    parser.add_argument('--diagnose-all', action='store_true',
+                        help='continue CT identity mismatches to inspect all source masks; never emit a pass certificate')
     args = parser.parse_args()
     # Fresh diagnostic directory only; failed/partial attempts are not overwritten.
     args.report_dir.mkdir(parents=True, exist_ok=False)
@@ -121,13 +140,14 @@ def main():
                 fixed_path.unlink()
             else:
                 input_digest = raw_digest
-            if input_digest != provenance['inputs'][cid]:
-                raise RuntimeError(cid + ': exact frozen CT input replay failed')
+            matches = check_ct_identity(cid, input_digest, provenance['inputs'][cid], args.diagnose_all)
             rows[cid] = {'ct_member': member, 'raw_ct_sha256': raw_digest,
                          'prediction_ct_sha256': input_digest, 'shape': list(image.shape),
                          'raw_affine': image.affine.tolist(), 'prediction_affine': affine.tolist(),
-                         'frozen_ct_correction_replayed': corrected}
-            print('CT_INPUT_VERIFIED ' + cid, flush=True)
+                         'frozen_ct_correction_replayed': corrected,
+                         'expected_prediction_ct_sha256': provenance['inputs'][cid],
+                         'exact_ct_identity_passed': matches}
+            print(('CT_INPUT_VERIFIED ' if matches else 'CT_REPLAY_MISMATCH ') + cid, flush=True)
         with (args.report_dir / 'tumor_cases.jsonl').open('x') as output:
             for cid, path, member in selected_members(archives[ARCHIVES[1][0]], 'pancreatic_lesion.nii.gz', scratch):
                 result = check_tumor(path, args.evaluation_dir / 'test_ground_truth' / f'{cid}.nii.gz', rows[cid])
@@ -136,12 +156,12 @@ def main():
                 output.flush()
                 print(f'TUMOR_SOURCE_VERIFIED {cid} voxels={result["tumor_voxels"]}', flush=True)
     report = {'scope': 'tumor only; no repair/scoring/all-organ certification',
+              'diagnostic_only': args.diagnose_all,
+              'ct_identity_mismatches': sorted(cid for cid, row in rows.items() if not row['exact_ct_identity_passed']),
               'cases': rows, 'archives': {name: digest for name, _, digest, _ in ARCHIVES},
               'header_mismatches': sorted(cid for cid, row in rows.items() if not row['saved_gt_matches_prediction_grid']),
               'script_sha256': sha(Path(__file__))}
-    with (args.report_dir / 'all_901_source_audit.json').open('x') as output:
-        json.dump(report, output, indent=2, allow_nan=False)
-    print('ALL_901_SOURCE_TUMOR_INPUT_AND_VOXEL_CHECKS_PASSED', flush=True)
+    publish_report(args.report_dir, report, args.diagnose_all)
 
 
 if __name__ == '__main__':

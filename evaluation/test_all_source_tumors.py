@@ -8,10 +8,23 @@ from unittest.mock import patch
 import nibabel as nib
 import numpy as np
 
-from evaluation.audit_all_source_tumors import check_tumor, selected_members
+from evaluation.audit_all_source_tumors import check_tumor, selected_members, check_ct_identity, publish_report
 
 
 class AllSourceAuditTests(unittest.TestCase):
+    def test_default_identity_gate_stays_closed(self):
+        with self.assertRaisesRegex(RuntimeError, 'exact frozen'):
+            check_ct_identity('case', 'actual', 'expected', False)
+        self.assertFalse(check_ct_identity('case', 'actual', 'expected', True))
+        self.assertTrue(check_ct_identity('case', 'same', 'same', False))
+
+    def test_diagnostic_never_publishes_certificate(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            publish_report(folder, {'ct_identity_mismatches': []}, True)
+            self.assertTrue((folder / 'source_audit_diagnostic.json').is_file())
+            self.assertFalse((folder / 'all_901_source_audit.json').exists())
+
     def test_target_equality_accepts_wrong_combined_header_not_wrong_voxels(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

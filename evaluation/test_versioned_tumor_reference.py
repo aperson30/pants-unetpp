@@ -5,11 +5,20 @@ from pathlib import Path
 import nibabel as nib
 import numpy as np
 
-from evaluation.build_versioned_tumor_reference import write_reference
+from evaluation.build_versioned_tumor_reference import write_reference, build
 from evaluation.recover_geometry_sources import sha
 
 
 class VersionedReferenceTests(unittest.TestCase):
+    def test_builder_refuses_diagnostic_before_writing(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); audit = root / 'diagnostic.json'
+            audit.write_text('{"diagnostic_only": true}')
+            destination = root / 'refused'
+            with self.assertRaisesRegex(RuntimeError, 'not a source certificate'):
+                build(root, audit, sha(audit), destination)
+            self.assertFalse(destination.exists())
+
     def test_preserves_tumor_and_original_bytes_but_uses_ct_geometry(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); original = root / 'original.nii.gz'; output = root / 'derived.nii.gz'

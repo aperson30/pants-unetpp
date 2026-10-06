@@ -100,6 +100,11 @@ class ReferenceCertificateTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'archive identities'):
             self.check()
 
+    def test_diagnostic_cannot_be_promoted_to_certificate(self):
+        self.report['diagnostic_only'] = True; self.update_audit()
+        with self.assertRaisesRegex(RuntimeError, 'not a source certificate'):
+            self.check()
+
     def test_changed_original(self):
         with self.original.open('ab') as output: output.write(b'changed')
         with self.assertRaisesRegex(RuntimeError, 'original GT identity'):

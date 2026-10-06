@@ -46,6 +46,8 @@ def build(root, audit_path, expected_audit_hash, destination):
     if sha(audit_path) != expected_audit_hash:
         raise RuntimeError('source audit hash differs')
     report = json.loads(audit_path.read_text())
+    if report.get('diagnostic_only', False) is not False or report.get('ct_identity_mismatches', []):
+        raise RuntimeError('diagnostic/mismatched audit is not a source certificate')
     rows = report['cases']
     if set(rows) != CASES:
         raise RuntimeError('source audit is not the complete frozen cohort')
