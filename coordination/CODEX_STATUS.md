@@ -2105,3 +2105,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   adapter requirements. Identified moving-HEAD trap in submit_evaluation.sh:
   continuation must use original frozen launch revision, not current repo HEAD.
 - No GPU submissions or final score claims. Original files remain untouched.
+
+### 2026-10-05 — Header diagnostic 47458555 complete; CPU dispatch hypothesis next
+
+- Header job 47458555 COMPLETED in 6s, exit 0:0. Preserved GT and fresh CT
+  correction differ by 1.734723475976807e-18 in one srow_z field. Both candidate
+  files preserve source voxels but neither reproduces original expected CT SHA.
+  This is not enough to certify original CT identity or relax the exact gate.
+- Original inference ran on w009 (104-core H100 node); RM/login OpenBLAS reports
+  Haswell. CPU-dependent numerical dispatch is a hypothesis only. Slurm rejected
+  test-only CPU-without-GPU on GPU-shared: no allocation/job was submitted there.
+- Prepared bounded RM CPU dispatch diagnostic (Nehalem/Sandybridge/Haswell only,
+  no unsupported AVX512), preserving raw source bytes and requiring exact original
+  hash matches. Uses documented OpenBLAS_CORETYPE runtime selection:
+  https://www.openmathlib.org/OpenBLAS/docs/runtime_variables/ . Syntax passes;
+  real CPU tests/deployment remain next. No GPU spend or original-file edits.
