@@ -2165,3 +2165,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - This is a tested helper, NOT the complete scoring adapter or real-cohort pass.
   CT 9812 original input hash remains unresolved; all scoring/resume gates stay
   closed. No final metrics and zero added GPU hours.
+
+### 2026-10-06 04:25 UTC — Full-cohort diagnostic submitted as CPU job 47459567
+
+- Original full audit stopped before checking ANY tumor masks. Added an explicit
+  --diagnose-all mode to finish inspecting the cohort even when corrected CT
+  identity replay differs. Default certification still fails immediately on any
+  mismatch. Diagnostic mode always writes source_audit_diagnostic.json, never
+  all_901_source_audit.json, and emits an explicitly non-certifying marker.
+- Builder and reference verifier now explicitly reject diagnostic/mismatched
+  source reports as well. Sixteen synthetic regression tests passed from the
+  actual committed cluster snapshot, including a diagnostic report being refused
+  before reference-directory creation. bash -n and Slurm test-only also passed.
+- Published code 57aa621, then submitted 47459567 from that pinned snapshot:
+  RM-shared low QOS, six CPU cores/12 GB, two-hour wall cap; no GPU, no automatic
+  retries. Existing evaluation shared lock required; fresh per-job scratch and
+  report directory only. Original predictions/GT/checkpoints are not modified.
+- This will identify any further source mask/index/geometry issues and enumerate
+  CT replay mismatches. It cannot resolve or waive CT 9812's exact original hash
+  by itself; no inference/scoring readiness or final accuracy claim made.
