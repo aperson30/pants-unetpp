@@ -89,10 +89,25 @@ reference manifest. Preserve the original metric implementation/math, exact
 901 IDs, checkpoint/input identity, mask/score pairing and pre/post artifact
 snapshots. Publish a final report only if all four complete cells pass.
 
-This adapter is still an implementation/testing item, not already verified.
-Tests must reject missing/extra cases, changed GT/reference hashes, changed
-mask/probability data, wrong checkpoint, wrong geometry and partial publication.
-Original GT/masks/manifests must remain byte-identical after scoring tests.
+The separate adapter is implemented as evaluation/score_versioned_grid_cpu.py,
+with read-only certificate and four-cell prediction-audit helpers. Synthetic
+fixtures exercise the ORIGINAL checksum-bound compute_tumor_metrics.py, known
+metrics and refusal gates. Real 901-case use is still blocked by source
+certification and incomplete predictions; fixture success is not a cohort pass.
+Outputs must be in a fresh directory outside the original evaluation/reference
+trees. Diagnostic source reports are refused. No original GT substitution or
+metric-math change is performed. A worker failure, changed inputs or a failed
+denominator/protocol check prevents publication of grid_metrics.json.
+
+Source-audit numeric check: preserved int8 lesion masks carry slope
+0.003921568859368563 and intercept 0.501960813999176, producing decoded foreground
+1.0000000591389835. Exact equality to 1 was an audit bug. The updated binary
+validation allows near-one decoding (absolute tolerance 1e-6), requires EXACT
+zero background, then uses the frozen converter's source_data > 0 membership
+and exact voxel-for-voxel equality with saved class 28. No rounding, annotation
+edits, resampling, inference changes or new tumor definition. Negative values,
+tiny positive background, fractional masks and extra label classes are rejected.
+This does not resolve CT 9812's exact input hash or certify the other organs.
 
 ## Final table structure (no accuracy values until certified scoring)
 

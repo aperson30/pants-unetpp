@@ -12,6 +12,27 @@ from evaluation.audit_all_source_tumors import check_tumor, selected_members, ch
 
 
 class AllSourceAuditTests(unittest.TestCase):
+    def test_real_int8_scaling_keeps_exact_positive_voxel_membership(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); source = root / 'scaled.nii.gz'; gt = root / 'gt.nii.gz'
+            stored = np.full((2, 3, 4), -128, np.int8); stored[1, 1, 1] = 127
+            image = nib.Nifti1Image(stored, np.eye(4))
+            image.header.set_slope_inter(0.003921568859368563, 0.501960813999176)
+            nib.save(image, source)
+            decoded = np.asanyarray(nib.load(source).dataobj)
+            self.assertEqual(decoded[0, 0, 0], 0)
+            self.assertEqual(decoded[1, 1, 1], 1.0000000591389835)
+            nib.save(nib.Nifti1Image((decoded > 0).astype(np.uint8) * 28, np.eye(4)), gt)
+            before = source.read_bytes()
+            row = {'shape': list(stored.shape), 'raw_affine': np.eye(4).tolist(), 'prediction_affine': np.eye(4).tolist()}
+            self.assertTrue(check_tumor(source, gt, row)['tumor_index_equality'])
+            self.assertEqual(source.read_bytes(), before)
+            for bad in (-1e-8, 1e-8, 0.5, 2):
+                data = np.zeros((2, 3, 4), np.float32); data[1, 1, 1] = bad
+                nib.save(nib.Nifti1Image(data, np.eye(4)), source)
+                with self.assertRaisesRegex(RuntimeError, 'not binary'):
+                    check_tumor(source, gt, row)
+
     def test_encoding_inspection_is_not_a_source_pass(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); source = root / 'source.nii.gz'; gt = root / 'gt.nii.gz'

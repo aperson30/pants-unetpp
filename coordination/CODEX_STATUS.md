@@ -2238,3 +2238,34 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   full-cohort pass claim. Actual GPU reservation not yet submitted in this entry.
 - Hardware source: https://www.psc.edu/resources/bridges-2/ (H100 CPUs: Sapphire
   Rapids 8470). Billing: https://www.psc.edu/resources/bridges-2/user-guide/ .
+
+### 2026-10-06 06:39 UTC — Scaling audit fix and original-math CPU adapter prepared
+
+- Authorized capped replay 47461462 is submitted and PENDING/Priority: one H100
+  reservation, three-minute hard cap, 0.05 GPU-hour/0.1 SU maximum, no auto retry.
+  Code snapshot 72884ba passed committed replay tests, shell syntax and Slurm
+  test-only; no GPU time is consumed while pending. No actual replay result yet.
+- CPU diagnostic 47461386 has recorded 671/901 source cases at this observation.
+  First source exceptions are decoded [0, 1.0000000591389835], and their positive
+  masks exactly match saved class 28. Header-only inspection of five preserved
+  files confirms int8 storage, slope 0.003921568859368563, intercept
+  0.501960813999176. This is scaling precision, not evidence of new tumor types.
+- Fixed audit-only binary comparison to require exact zero or near-one decoded
+  foreground (absolute tolerance 1e-6), followed by UNCHANGED frozen >0 mapping
+  and exact saved class-28 voxel equality. Six tests pass including the actual
+  scaled-int8 encoding, byte preservation and rejection of negative/tiny-positive
+  background, fractional values and extra classes. Running job retains its old
+  diagnostic snapshot; no source certificate is claimed from these exceptions.
+- Added read-only audit_versioned_predictions.py and separate
+  score_versioned_grid_cpu.py. They bind certificate, checkpoint/CT identities,
+  original predictor/protocol, plans/dataset equality, geometry, mask/CSV pairs
+  and pre/post fingerprints. Fresh outputs outside original/reference trees;
+  diagnostic certificates and failed workers cannot publish a final summary.
+- Eight combined prediction/scoring fixture tests passed, including four cells
+  with known toy metrics and unchanged input bytes. Metric script SHA b4416035...
+  was independently confirmed byte-identical to original frozen 5e99901, not a
+  rewritten scoring convention. Additional changed-input test/full committed
+  suite verification follow; no actual protected-cohort scoring occurred.
+- Reference: https://nipy.org/nibabel/nifti_images.html#data-scaling . Paper
+  completion packet now distinguishes implemented fixture-tested adapter from
+  pending real-cohort certification/inference/scoring. No final quality claims.

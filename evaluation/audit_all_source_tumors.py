@@ -21,6 +21,7 @@ from data_conversion.fix_affine_orthonormality import (
 from evaluation.recover_geometry_sources import ARCHIVES, sha
 
 CASES = {f'PanTS_{i:08d}' for i in range(9001, 9902)}
+SOURCE_BINARY_DECODE_ATOL = 1e-6
 
 
 def check_ct_identity(cid, actual, expected, diagnostic):
@@ -85,7 +86,11 @@ def check_tumor(source_path, gt_path, ct):
     saved = np.asanyarray(gt.dataobj)
     if not np.isfinite(source_data).all() or not np.isfinite(saved).all():
         raise RuntimeError('nonfinite source/GT voxels')
-    if not np.isin(source_data, (0, 1)).all():
+    # NIfTI int8 slope/intercept encoding in the pinned archive decodes the
+    # foreground to 1.0000000591389835, not exactly 1. Do NOT round or modify
+    # any voxels: require exact zero background and near-one foreground, then
+    # use the original frozen converter's >0 membership and exact GT equality.
+    if not ((source_data == 0) | np.isclose(source_data, 1, rtol=0, atol=SOURCE_BINARY_DECODE_ATOL)).all():
         raise RuntimeError('source tumor is not binary')
     if not np.equal(saved, np.floor(saved)).all() or saved.min() < 0 or saved.max() > 28:
         raise RuntimeError('invalid saved GT labels')
@@ -94,6 +99,8 @@ def check_tumor(source_path, gt_path, ct):
         raise RuntimeError('saved class-28 voxels differ from original source tumor')
     return {'tumor_voxels': int(tumor.sum()), 'source_tumor_sha256': sha(source_path),
             'original_gt_sha256': sha(gt_path), 'tumor_index_equality': True,
+            'source_membership_rule': 'decoded source_data > 0, matching frozen converter; no rounding',
+            'source_binary_decode_atol': SOURCE_BINARY_DECODE_ATOL,
             'source_geometry_matches_original_ct': True,
             'saved_gt_matches_prediction_grid': bool(np.allclose(
                 gt.affine, ct['prediction_affine'], rtol=0, atol=1e-4))}
