@@ -2087,3 +2087,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - One initial deployment preceded completed git push and therefore could not
   resolve the new revision; no job ran from it. After confirmed push, deployment
   used a separate fresh directory with pipefail and passed cluster tests.
+
+### 2026-10-05 — Replay results and parallel paper completion preparation
+
+- Diagnostic 47458101 COMPLETED in 7m50s, exit 0:0. CT 9871 exact original
+  input SHA256 reproduced by both actual frozen fix_folder/manual replay.
+  CT 9812 both methods agree (127f2329...) but differ from original expected
+  hash (02eca959...). Source voxel values remain exactly unchanged in both.
+  Full-cohort certification still blocked; OMP/MKL matching did not resolve it.
+- Prepared bounded CPU metadata diagnostic reusing persisted 9812 source/replay
+  copies: compare stored corrected GT transform fields with independent replay,
+  reject spatially different geometry, retain source voxels, compare diagnostic
+  candidates to immutable original CT SHA256. No model-score-selected alignment.
+  Two local tests passed; cluster deployment follows.
+- Added PAPER_COMPLETION_PACKET_20261005.md: methods/provenance facts, transparent
+  geometry disclosure, pending 4-cell table, final delivery gates and CPU scoring
+  adapter requirements. Identified moving-HEAD trap in submit_evaluation.sh:
+  continuation must use original frozen launch revision, not current repo HEAD.
+- No GPU submissions or final score claims. Original files remain untouched.
