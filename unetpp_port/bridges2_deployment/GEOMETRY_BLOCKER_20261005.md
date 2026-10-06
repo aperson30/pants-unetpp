@@ -78,3 +78,41 @@ audit nor the final scorer should be bypassed or set to a huge affine tolerance.
 
 Do not drop the six cases, score by array shape alone, realign to whichever
 prediction overlaps best, rerun training reflexively, or claim the table complete.
+
+## Resolved source/tumor mapping for the six flagged cases
+
+Recovery 47451639 completed in 30m19s (0:0), verifying both original archive
+checksums and all six CT fingerprints. Source header inventory shows the
+pancreas and pancreatic-lesion masks have exactly the CT affine and shape
+in all six cases. Other organ headers conflict (including adrenal-left, the
+converter's first reference); the author combined-label file also conflicts.
+Do not claim all source organs are correctly mapped.
+
+Independent CPU job **47452439** completed in **63 seconds**, exit **0:0**, with
+`ALL_RECOVERED_TUMOR_ARRAY_AND_SOURCE_GEOMETRY_CHECKS_PASSED`. It used the original
+frozen conversion code and checked recovered mask hashes before decoding.
+In **all six cases**:
+
+- Reconstructing all classes with original merge order reproduces every saved
+  combined-GT voxel exactly. Its inherited affine also matches the original
+  first-organ reference, explaining the header lineage.
+- Extracting `saved_GT == 28` is exactly equal, voxel for voxel, to the original
+  `pancreatic_lesion > 0` array. The original target has CT-aligned geometry.
+- Thus the target arrays are index-aligned to the source CT according to the
+  original tumor annotation's physical mapping. The saved combined-GT header
+  incorrectly describes those target voxels. This evidence does not use model
+  predictions to select alignment, compare Dice, or choose easier cases.
+
+**These six tumor targets need no voxel flip or resampling.** A future separate,
+versioned tumor-reference derivative may use the verified target/CT geometry
+while preserving target voxels and original artifacts. That repair has NOT
+been applied. The original partial audit still fails on original GT headers;
+this narrower source proof must not be mislabeled a full-grid integrity pass.
+
+Before completing evaluation, audit the full 901-case source target mapping,
+document the versioned reference/provenance convention, and test the final
+auditor/scorer against it. Resume original prediction without changing its
+checkpoint, inputs, TTA or outputs. Do not bypass existing source manifests or
+change predictions to compensate for GT metadata. No retraining is warranted
+solely by the verified tumor-reference header issue; broader training/organ
+geometry is not certified by this six-case check.

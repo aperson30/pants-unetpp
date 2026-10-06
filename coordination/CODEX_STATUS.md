@@ -2002,3 +2002,18 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   equality, original-reference affine lineage, and exact target-mask equality
   on original CT geometry. No scoring, repairs, predictions or source deletion.
   Success is evidence for tumor target/index mapping, NOT all-organ geometry.
+
+### 2026-10-05 — All six tumor-source voxel mapping checks passed
+
+- CPU job 47452439 COMPLETED in 63s, exit 0:0, explicit all-target success marker.
+  Original merge reconstructs EVERY saved combined-GT voxel in each case;
+  saved_GT==28 exactly equals original pancreatic_lesion>0 on the CT grid.
+- Original tumor/pancreas geometry matches CT; saved GT inherited conflicting
+  first-organ metadata. Therefore these six tumor arrays need no flip/resample.
+  This is original-source evidence, not prediction/Dice-selected alignment.
+- No GT repair yet. Next: all-901 target-source geometry audit and separate
+  versioned reference/provenance handling before final audit/scoring. Original
+  output files/manifests stay intact; no all-organ or full-grid integrity claim.
+- Updated GEOMETRY_BLOCKER_20261005.md with evidence and remaining gates. Zero
+  new GPU hours; original inference protocol untouched. Local combined check:
+  10 tests passed (mapping, partial resume, prediction failure/skip guards).
