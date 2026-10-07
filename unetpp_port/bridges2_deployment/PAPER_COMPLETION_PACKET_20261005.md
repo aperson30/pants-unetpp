@@ -79,6 +79,41 @@ and network source, not that template. Do not claim these hyperparameters were
 chosen by test-set tuning; recorded equality supports a controlled comparison,
 but the historical selection rationale requires the original protocol/source.
 
+### Tumor-specific training curve, not final test accuracy
+
+Read-only extraction from the original training logs found exactly 1,000
+recorded epochs (0 through 999), with no duplicate epoch records, for each cell.
+The logged Pseudo dice vector has 28 foreground entries; entry 27 is class 28.
+Sparse validation repeats the preceding value on skipped epochs. Summaries below
+therefore use only epoch % 5 == 0 plus epoch 999: 201 finite validation points
+per cell, not 1,000 independent validation measurements.
+
+| Cell | First nonzero tumor proxy epoch | Median proxy, epochs 400-499 | Median proxy, epochs 900-999 | Epoch-999 proxy |
+| --- | --- | --- | --- | --- |
+| UNet++ DS-on | 330 | 0.0081 | 0.4538 | 0.3181 |
+| UNet++ DS-off | 285 | 0.0000 | 0.3137 | 0.2875 |
+| Plain U-Net DS-on | 490 | 0.0000 | 0.3988 | 0.4814 |
+| Plain U-Net DS-off | 625 | 0.0000 | 0.4128 | 0.2243 |
+
+All four had a zero median in epochs 0-99. First nonzero does NOT imply sustained
+tumor detection: e.g. UNet++ DS-off has a first nonzero at 285 but a zero median
+at 400-499. These are sampled-patch pseudo-Dice values, not full-volume tumor
+Dice, patient/lesion sensitivity, percentages of patients detected or final test
+metrics. End-point variability is another reason not to rank models by a single
+training log value. No test-driven tuning, early stopping or architecture claim
+is made. Plain DS-off's signal first appearing at 625 supports the decision not
+to truncate this experiment at 500 epochs.
+
+Training log SHA256s (chronological within each cell):
+
+- UNet++ DS-on: e61df8d87b784b3b81072080b522b378e08f057c6b2ca9977232e6c545a8ee87;
+  3f544476a0239b255284db9ce4f1416fd20bc344b6ac9e7f723586840843b36d.
+- UNet++ DS-off: dbf19933c54c99567001009fd5eb1d466f149b03406b3492b89d340de365af8c;
+  1678423a3cf44067573aa314aade71e0164dd0e190e3e331b44779ad2920f570.
+- Plain DS-on: d5a54bbed2f108cd08e0fccc89717d85a1abf4c02a74c61a537480f424eb9959.
+- Plain DS-off: 98b7db11982d69079a73d7bea8efa30a6ea72da8b2245f5112e1a31c7aff6a97;
+  624cd2523e840302f2293482a950a8011523a2b19e4aa8fbc365fb2588622c98.
+
 ## Test source and geometry disclosure
 
 The frozen image archive and label archive are identified by SHA256 in the
@@ -156,6 +191,19 @@ Outputs must be in a fresh directory outside the original evaluation/reference
 trees. Diagnostic source reports are refused. No original GT substitution or
 metric-math change is performed. A worker failure, changed inputs or a failed
 denominator/protocol check prevents publication of grid_metrics.json.
+
+Independent final report verifier: evaluation/verify_versioned_grid_report.py.
+It rechecks the complete input/reference snapshot, exact metric source identity,
+all twelve per-cell output fingerprints, unique per-case IDs, original probability
+scores, source tumor voxel counts and denominators. It independently aggregates
+Dice/detection/specificity and uses pairwise probability ranking (ties count 0.5)
+to verify AUC without relying on sklearn's implementation. Comparison tolerance
+1e-12 only accommodates floating-point summation; original score math is unchanged.
+Toy validation passes with unchanged inputs/outputs, and rejects consistently
+edited metric JSON/hashes, duplicate CSV rows and a partial-report schema.
+Read-only CPU verifier job 47497968, pinned snapshot 9c64275, is queued afterok
+of scorer 47497147. A successful scoring job alone is not the final delivery gate;
+the independent verification marker and matching report SHA256 are required.
 
 Source-audit numeric check: preserved int8 lesion masks carry slope
 0.003921568859368563 and intercept 0.501960813999176, producing decoded foreground

@@ -2362,3 +2362,30 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   batch Dice, five-epoch validation, no DDP. Debug snapshots are startup settings,
   not completion evidence. Foreground .33 is NOT tumor-specific oversampling.
   Completion packet records exact source hashes and these interpretation cautions.
+
+### 2026-10-07 06:44 UTC — Reference complete; final verification chained; tumor curves extracted
+
+- Reference builder 47497024 completed all 901 derivative masks and emitted
+  ALL_VERSIONED_TUMOR_REFERENCES_VERIFIED. Independent reference/partial-mask
+  audit 47497134 is RUNNING on r203 (8m05s observed). No audit pass yet.
+- Inference 47497144 and scoring 47497147 remain dependency-pending. Current
+  squeue --start shows N/A while dependencies are unresolved. Earlier scheduler
+  test-only estimates are NOT a confirmed start. Confirmed login timezone EDT;
+  user-facing dates must be converted to Pacific if any estimate is reported.
+- Added read-only independent final-report verifier, tested on the original
+  metric script's toy outputs (one test with multiple tamper/refusal checks,
+  79.824s including subprocess imports). Checks current full artifact audit,
+  original metric fingerprint, exact output set, per-case IDs/GT counts/scores,
+  independently derived aggregate metrics and pairwise-rank AUC with ties.
+  Refuses consistently edited AUC+JSON hashes, duplicate CSVs and partial reports.
+- Bounded CPU verifier 47497968 submitted afterok:47497147, pinned snapshot
+  9c64275, 6CPU/12GB/two-hour cap, existing shared evidence lock, read-only.
+  Shell syntax/Slurm test-only passed. No new GPU job or automatic retry.
+- Read-only original training-log extraction: all four have epochs 0..999,
+  exactly 1000 records, no duplicates and 201 finite real validation points
+  (epoch % 5 == 0 plus 999). Filtered cached skipped-epoch values. Class-28
+  first nonzero sampled-patch proxy epochs: UNet++ on330/off285, Plain on490/off625.
+  First nonzero is NOT sustained detection. Last-100-epoch proxy medians:
+  .4538/.3137/.3988/.4128 respectively; these are NOT full-volume test Dice,
+  patient/lesion recall or final rankings. Packet stores exact log fingerprints,
+  extraction criteria, values and limitations. No test outcomes examined/tuned.
