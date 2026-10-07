@@ -5,7 +5,7 @@
 #SBATCH --qos=low
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=6
 #SBATCH --mem=12000M
 #SBATCH --time=01:00:00
 #SBATCH --job-name=pants_partial_resume_audit
