@@ -2456,3 +2456,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Preserved code/full numerical report/limitations; old 2 charged-GPU-hour cap
   unchanged and posted spending not refreshed. No protected test queries, new
   GPU allocations, model-weight downloads, or experiment-setting mutations.
+
+### 2026-10-07 08:04 UTC — Consolidated fresh-swing handoff for Claude
+
+- User requested comprehensive context for Claude's independent idea search.
+  Created research/CLAUDE_IDEA_HANDOFF_20261007.md as the new entry point:
+  project/PI goals, protected evaluation snapshot (explicitly time-stamped),
+  optimization lessons, all main positive/negative screens, scoped decisions,
+  four conditional leads, public asset contracts, primary-source collisions,
+  exact document index, accounting/access limits and failure lessons.
+- Explicitly distinguishes rare-mode prevalence from spatial lesion size,
+  detector-score weakening from clinical erasure, prior gates from universal
+  impossibility, and cheap probes from cheap complete papers. No S-tier claim.
+- Claude is asked to challenge conclusions and bring a distinguishing mechanism,
+  strong-baseline test and full-paper resource plan, not defend these hypotheses.
+  Old source/weight/license/overlap and posted-budget uncertainties remain open.
+- Confirmed previous CPU-screen commit 797d5bc is on origin/main after pull.
+  This handoff uses only repository/historical evidence; no live evaluation
+  recheck, new GPU allocation, raw-data publication or external message sent.
