@@ -57,9 +57,13 @@ CT 9871 also reproduced its original inference hash in diagnostic job 47458101.
 The audit's optional exact-replay handoff independently rechecks raw/code/file
 hashes, shape, affine, voxel equality and unchanged evidence; it does not accept
 approximate identity or promote a replay diagnostic into a cohort certificate.
-Full CPU audit 47497014 uses snapshot ebd86ea and this verified replay; dependent
-reference builder 47497024 may run only after successful audit completion.
-No weakened provenance gate is acceptable. No final cohort pass is yet claimed.
+Full CPU audit 47497014 COMPLETED in 23m41s using snapshot ebd86ea and this
+verified replay: all 901 CT identities and tumor masks passed, no CT mismatch
+or source error. It records 151 tumor-positive cases and nine combined-GT header
+mismatches; the earlier six flagged cases were not the complete mismatch count.
+Reference builder 47497024 started after this pass. Its derivative and the saved
+partial predictions must still be independently checked before GPU continuation.
+No weakened provenance gate is acceptable; no final model metrics are claimed.
 
 The separate tumor-reference derivative, if certified, must be disclosed as
 unchanged class-28 index masks on the verified prediction-CT grid, with no
@@ -113,8 +117,18 @@ zero background, then uses the frozen converter's source_data > 0 membership
 and exact voxel-for-voxel equality with saved class 28. No rounding, annotation
 edits, resampling, inference changes or new tumor definition. Negative values,
 tiny positive background, fractional masks and extra label classes are rejected.
-CT 9812's exact input hash has now been reproduced; the complete strict audit
-still must pass. These checks do not certify the other organs.
+CT 9812's exact input hash has now been reproduced and the complete strict audit
+passed. These checks do not certify the other organs.
+
+Read-only partial resume checker: evaluation/audit_versioned_predictions.py
+with --partial, snapshot d11910f, job 47497134 dependent on successful reference
+builder 47497024. It independently verifies the full reference, then checks all
+existing mask/score pairs against certified CT geometry and original checkpoint,
+input, predictor, protocol and plans identities. Unstarted cells are explicitly
+recorded as remaining work. Orphans, extra IDs and unprovenanced outputs fail.
+Its separate report always declares final_scoring_ready=false; the default full
+audit/scorer still require all 901 cases in all four cells. It never retires or
+rewrites predictions. Six prediction and ten certificate fixture tests passed.
 
 ## Final table structure (no accuracy values until certified scoring)
 

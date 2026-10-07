@@ -2309,3 +2309,28 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   preserved. No additional GPU job submitted. Full cohort certificate, reference
   verification, remaining inference and final scoring still pending. Completion
   packet updated to distinguish the resolved CT identity from these open gates.
+
+### 2026-10-07 06:24 UTC — Strict source audit passed; partial reuse gate queued
+
+- Strict CPU source audit 47497014 COMPLETED in 23m41s. Actual certificate has
+  901 cases, diagnostic_only=false, zero CT mismatches and zero source errors.
+  All CT fingerprints and source-vs-saved tumor voxel checks passed. Cohort has
+  151 tumor-positive cases; nine combined-GT header mismatches, not just the six
+  originally flagged. Source masks are unchanged; this remains tumor-only evidence.
+- Reference builder 47497024 RUNNING, 200/901 serialized/reloaded at observation.
+  Saved original GT/predictions/checkpoints remain untouched. Not a completed
+  derivative certificate yet; no final metrics or model ranking claimed.
+- Implemented explicit read-only --partial prediction resume audit. Independently
+  verifies certified reference, existing compact mask/score pairs, CT geometry,
+  checkpoint/input/predictor/protocol/plans identity. Records unstarted cells;
+  refuses orphans, extra IDs and unprovenanced outputs. Separate partial schema
+  always says final_scoring_ready=false; default full audit/scoring unchanged.
+- Six prediction plus ten certificate fixtures passed; shell syntax passed.
+  First Slurm test-only rejected 12GB/4CPU (>2GB/core), BEFORE submission or
+  allocation. Corrected request to 6CPU/12GB; test-only passed. CPU-only job
+  47497134 submitted with afterok:47497024, pinned snapshot d11910f, one-hour cap,
+  shared evidence lock, fresh external report and no retries. No new GPU job.
+- Live access restored through bridges2-paper-oct6b.sock after earlier master
+  failed. Published 400953a and d11910f. The partial gate is preparation for
+  reusing saved valid predictions, not permission to bypass certification or
+  score incomplete cells. Independent remaining inference readiness still open.
