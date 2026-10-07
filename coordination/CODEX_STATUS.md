@@ -2417,3 +2417,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   recorded final verification is explicitly distinguished from a full new audit.
 - Main pre-inference audit chain is complete. The GPU job is queued, not staging
   or generating new predictions yet. No new accuracy ranking/final table claimed.
+
+### 2026-10-07 07:28 UTC — Continuation allocated; startup checks passed, staging underway
+
+- Protected inference continuation 47497144 started on w009 at 07:13:07 UTC
+  (October 7 00:13:07 Pacific), earlier than the previous queue estimate.
+  Two H100s, original frozen launcher/settings, Requeue=0, 48-hour cap;
+  allocation EndTime October 9 00:13:07 Pacific is NOT a completion forecast.
+- Verified expected torch 2.10.0+cu126/cuDNN 91002, original evaluation source
+  manifest, four readable 1800-case validations, and two distinct GPU UUIDs.
+  Test-image archive download completed at 07:26:43 UTC; staging remains in
+  progress. No new inference pairs confirmed: counts still 570/570/0/0.
+  Old predictor log tails are historical and must not be called resumed inference.
+- Scorer 47497147 and independent verifier 47497968 remain dependency-pending.
+  No active launcher/predictor/settings changed, no new allocation submitted.
+- Corrected stale source-certification/queued wording in the paper completion
+  packet. Final scoring still requires all four complete 901-case collections
+  and independent report verification; no accuracy values or ranking claimed.

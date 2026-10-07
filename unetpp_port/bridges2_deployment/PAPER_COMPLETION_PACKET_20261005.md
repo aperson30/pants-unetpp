@@ -3,7 +3,19 @@
 Prepared October 5, 2026. This is an execution/reporting checklist, not final
 results and not a new experiment. Idea discovery remains paused.
 
-## What can be prepared before the source audit passes
+## Current execution status (October 7, 2026)
+
+All pre-inference source/reference/reuse gates passed. Continuation 47497144
+started on w009 at October 7 00:13:07 Pacific (07:13:07 UTC), using two H100s.
+Software-version, original-source-manifest, four complete validation and distinct
+GPU-binding startup checks passed. At 07:28 UTC the test-image archive download
+was complete and staging was still underway; no new prediction pairs were yet
+confirmed. A RUNNING allocation is not proof that inference has resumed.
+Its allocation ends October 9 00:13:07 Pacific unless it finishes sooner.
+This is a wall-time cap, not a completion forecast. Scoring and independent
+verification remain success-dependent CPU jobs; the final table is not ready.
+
+## Preparation checklist
 
 - Methods/provenance inventory below, with missing facts explicitly marked.
 - Resume and scoring review using frozen code; no new inference settings.
@@ -124,7 +136,7 @@ alignment or exclusion.
 Six initially flagged combined-GT headers inherited conflicting metadata from
 the first organ mask. Six-case original-source checks proved exact tumor voxel
 equality and CT-aligned original tumor annotations; this is not an all-organ
-certificate. The complete strict source audit remains pending. Original-CPU
+certificate. The complete strict source audit subsequently passed. Original-CPU
 replay job 47461462 reproduced CT 9812's exact historical inference hash
 02eca9599c5266c09e88d00238b73fe23b537633828d60e07211459b8bf3813f
 in 12 seconds on an H100 node's Intel CPU, without changing source voxel values.
@@ -142,7 +154,7 @@ saved mask/score pairs per UNet++ cell passed. Plain cells have zero test pairs.
 Remaining inference is 331 + 331 + 901 + 901 = 2,464 cases across the four cells.
 No weakened provenance gate is acceptable; no final model metrics are claimed.
 
-The separate tumor-reference derivative, if certified, must be disclosed as
+The independently certified tumor-reference derivative must be disclosed as
 unchanged class-28 index masks on the verified prediction-CT grid, with no
 resampling, flip or case exclusion. Keep its source-audit, original-GT and
 derived-reference hashes in the final scoring provenance. Do not silently
@@ -157,7 +169,7 @@ the original source-hash gate would reject a changed launch/scoring revision.
 For the continuation, use the ORIGINAL frozen evaluate_grid.sbatch with the
 original TRAIN_COMMIT and EVAL_COMMIT explicitly supplied. Keep original GT
 publication and all inference settings untouched. This is a preparation note,
-not authorization to bypass the pending source/partial-artifact gates.
+not authorization to bypass source/partial-artifact gates on future resumes.
 
 Before submitting: full-source pass, certified derivative manifest, audit of
 saved pairs against verified CT geometry, current checkpoint/readiness checks,
@@ -170,7 +182,8 @@ Continuation 47497144 is now submitted using the ORIGINAL frozen launcher,
 afterok:47497134. All original source hashes, four final checkpoint hashes and
 validation-summary identities passed a read-only preflight. Version metadata:
 torch 2.10.0+cu126, torchvision 0.25.0, nnunetv2 2.8.1. No final grid report exists.
-This is a queued continuation, not resumed prediction yet. Dependent CPU scorer
+The continuation is now RUNNING but still staging at the observation above;
+new prediction generation has not yet been confirmed. Dependent CPU scorer
 47497147 uses pinned snapshot 2185542 and the original metric file, afterok of
 successful inference. Timeout/failure prevents scoring; no automatic GPU retry.
 Scheduler-native Requeue was explicitly set to 0 on pending continuation
@@ -191,8 +204,9 @@ snapshots. Publish a final report only if all four complete cells pass.
 The separate adapter is implemented as evaluation/score_versioned_grid_cpu.py,
 with read-only certificate and four-cell prediction-audit helpers. Synthetic
 fixtures exercise the ORIGINAL checksum-bound compute_tumor_metrics.py, known
-metrics and refusal gates. Real 901-case use is still blocked by source
-certification and incomplete predictions; fixture success is not a cohort pass.
+metrics and refusal gates. Real 901-case scoring now awaits complete predictions;
+source/reference certification passed, but fixture success is not a final
+four-cell cohort-scoring pass.
 Outputs must be in a fresh directory outside the original evaluation/reference
 trees. Diagnostic source reports are refused. No original GT substitution or
 metric-math change is performed. A worker failure, changed inputs or a failed
