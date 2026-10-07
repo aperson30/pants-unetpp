@@ -2334,3 +2334,31 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   failed. Published 400953a and d11910f. The partial gate is preparation for
   reusing saved valid predictions, not permission to bypass certification or
   score incomplete cells. Independent remaining inference readiness still open.
+
+### 2026-10-07 06:32 UTC — Protected continuation and CPU scoring chained
+
+- Reference 47497024 still RUNNING, 600/901 observed; partial resume checker
+  47497134 remains dependency-pending. No inference is executing yet.
+- Independently rechecked EVERY original evaluation source hash against frozen
+  5e99901, four checkpoint identities and validation summaries against recorded
+  provenance; all passed. Actual package metadata torch 2.10.0+cu126,
+  torchvision 0.25.0, nnunetv2 2.8.1. No final grid report exists. Ocean 231GiB
+  headroom observed. Original launcher SHA 4cb01b37... matches original manifest.
+- Submitted original protected two-H100 inference continuation 47497144, strictly
+  afterok:47497134, original TRAIN_COMMIT/EVAL_COMMIT and explicit CLI export.
+  No changed predictor, autocast, TTA, tile step, final checkpoint or GT. Original
+  valid saved pairs are reused by the frozen predictor. 48-hour cap, no auto retry.
+- Added CPU-only score_versioned_grid.sbatch; syntax and Slurm test-only passed.
+  Job 47497147 submitted afterok:47497144, pinned snapshot 2185542, 6CPU/12GB,
+  ten-hour cap, original metric script, fresh external output. Full pre/post
+  certificate/prediction audits remain mandatory. No scoring on incomplete cells.
+- Non-submitting scheduler probes: two H100s estimated October 18 17:50 scheduler
+  local time; one H100 only ~48min earlier. 24/12/6-hour two-GPU requests yielded
+  the SAME estimated start. These are transient scheduler estimates, not promised
+  dates. No alternative GPU jobs submitted or protected queue position discarded.
+- Read actual four-cell plans/debug settings and fingerprints for the paper:
+  same plans hash; BS4, patch [64,160,224], 1000 epochs, 250 updates/epoch,
+  SGD lr .01/momentum .99/Nesterov/weight decay 3e-5, PolyLR, foreground .33,
+  batch Dice, five-epoch validation, no DDP. Debug snapshots are startup settings,
+  not completion evidence. Foreground .33 is NOT tumor-specific oversampling.
+  Completion packet records exact source hashes and these interpretation cautions.

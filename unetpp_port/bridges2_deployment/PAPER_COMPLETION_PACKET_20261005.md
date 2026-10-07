@@ -39,6 +39,46 @@ BF16 training/validation and FP16 CLI test inference are different paths and
 must be reported explicitly. Physical training batch size remains four;
 ordinary gradient accumulation is not claimed equivalent to batch Dice.
 
+### Saved hyperparameter inventory (read October 6, Pacific time)
+
+Read from each model's actual plans.json and fold_0/debug.json, not a calibration
+sample. All four plans files share SHA256
+`a9fd3a3963ad25e0070feb938b7faa5a8102201bdb8fbeb40c19624436389f1a`.
+
+| Setting | Recorded value in all four cells |
+| --- | --- |
+| Configuration / fold | 3d_fullres / 0 |
+| Epoch budget / training iterations per epoch | 1,000 / 250 |
+| Physical batch / patch | 4 / [64, 160, 224] |
+| Target spacing, transposed axis order (mm) | [1.25, 0.7929689884185791, 0.8046875] |
+| Normalization / batch Dice | CTNormalization / true |
+| Optimizer | SGD, momentum 0.99, Nesterov true, dampening 0 |
+| Initial learning rate / weight decay | 0.01 / 3e-5 |
+| Scheduler | PolyLRScheduler (exponent not extracted in this inventory) |
+| Foreground oversampling | 0.33; foreground is not synonymous with tumor |
+| Recorded validation cadence / iterations | every 5 epochs / 50 iterations |
+| DDP | false |
+| Loss | DC_and_CE_loss; DS-on additionally uses DeepSupervisionWrapper |
+
+The 250 training updates per epoch imply 250,000 planned optimizer updates per
+cell; an nnU-Net epoch is NOT necessarily one exhaustive pass over every case.
+Startup debug.json records settings, not proof of completion: current_epoch=0
+there must not be interpreted as the final epoch. Completion is established by
+the independently checked final checkpoints and validation artifacts.
+
+debug.json SHA256s, in model order:
+
+- UNet++ DS-on: 2f5963793b908d1bdbaa7a38ec53ed22bc0979667198e7ea55debbe5a6cb9505.
+- UNet++ DS-off: 665549b664d6a7199a98281a22a708a63ebf57f02c466aaef615a87e06223726.
+- Plain U-Net DS-on: 447bb871cbe0e9e65c90b2f7b0e17b78397f14770f725c13c057e7d5fc9dfc54.
+- Plain U-Net DS-off: bc7d185cdc187418566ed95c7c4fa87607ef5bc4570741eac776bdb64b73c692.
+
+The plans architecture field is a PlainConvUNet template even in the UNet++
+model folder. Describe the UNet++ architecture from its actual custom trainer
+and network source, not that template. Do not claim these hyperparameters were
+chosen by test-set tuning; recorded equality supports a controlled comparison,
+but the historical selection rationale requires the original protocol/source.
+
 ## Test source and geometry disclosure
 
 The frozen image archive and label archive are identified by SHA256 in the
@@ -88,6 +128,14 @@ Ocean headroom, syntax/Slurm test-only, and no concurrent evaluation writer.
 The existing GPU script ends with a predictions-only marker; CPU scoring is
 separate. A 48-hour timeout can resume valid persistent pairs with unchanged
 fingerprints; another allocation is not guaranteed to finish in 48 hours.
+
+Continuation 47497144 is now submitted using the ORIGINAL frozen launcher,
+afterok:47497134. All original source hashes, four final checkpoint hashes and
+validation-summary identities passed a read-only preflight. Version metadata:
+torch 2.10.0+cu126, torchvision 0.25.0, nnunetv2 2.8.1. No final grid report exists.
+This is a queued continuation, not resumed prediction yet. Dependent CPU scorer
+47497147 uses pinned snapshot 2185542 and the original metric file, afterok of
+successful inference. Timeout/failure prevents scoring; no automatic GPU retry.
 
 ## CPU scoring preparation
 
