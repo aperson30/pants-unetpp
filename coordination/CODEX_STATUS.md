@@ -2389,3 +2389,31 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   .4538/.3137/.3988/.4128 respectively; these are NOT full-volume test Dice,
   patient/lesion recall or final rankings. Packet stores exact log fingerprints,
   extraction criteria, values and limitations. No test outcomes examined/tuned.
+
+### 2026-10-07 07:04 UTC — All pre-inference gates passed; continuation eligible
+
+- Independent audit 47497134 COMPLETED in 19m36s, actual report schema
+  pants-partial-prediction-resume-audit-v1. Full reference certificate verified,
+  570 valid mask/score pairs in each UNet++ cell, zero in each Plain cell.
+  Remaining counts 331/331/901/901 = 2464. final_scoring_ready=false correctly.
+  Original source/GT/predictions and checkpoint bytes remain preserved.
+- GPU continuation 47497144 is PENDING/Priority with no dependency, correct
+  cis260296p account, gpu QoS, Nice=0, 24CPU/220GB/two H100s/48h. Actual frozen
+  command matches original snapshot. squeue/scontrol now estimate Oct7 22:12:54
+  EDT = Wednesday Oct7 19:12:54 Pacific, NOT a reservation. Earlier test-only
+  Oct18 dates are superseded by the real eligible job's current estimate.
+- Caught native scheduler Requeue=1 despite no scripted retry. Explicitly set
+  Requeue=0 while job was pending; verified flag and unchanged submit/eligible
+  timestamps. No cancelled/replaced job and no lost queue age. Future manual
+  resumes should pass --no-requeue. Scoring 47497147 and final verifier 47497968
+  remain dependency-pending; failures stop the success chain.
+- Read-only raw volume size screen: largest remaining single float32 29-channel
+  probability array estimate 18.73GiB; already-completed maximum 25.15GiB.
+  This is dimensional arithmetic, NOT a measured end-to-end memory peak or an
+  OOM guarantee. No allocator/model/inference settings changed.
+- Deployed/tested lightweight read-only progress helper snapshot cf20c05.
+  It reports current states/counts and the correct NEW versioned output path,
+  without model imports. Counts are not relabeled as fresh integrity checks;
+  recorded final verification is explicitly distinguished from a full new audit.
+- Main pre-inference audit chain is complete. The GPU job is queued, not staging
+  or generating new predictions yet. No new accuracy ranking/final table claimed.

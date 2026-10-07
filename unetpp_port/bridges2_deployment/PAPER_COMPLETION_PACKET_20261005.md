@@ -136,8 +136,10 @@ Full CPU audit 47497014 COMPLETED in 23m41s using snapshot ebd86ea and this
 verified replay: all 901 CT identities and tumor masks passed, no CT mismatch
 or source error. It records 151 tumor-positive cases and nine combined-GT header
 mismatches; the earlier six flagged cases were not the complete mismatch count.
-Reference builder 47497024 started after this pass. Its derivative and the saved
-partial predictions must still be independently checked before GPU continuation.
+Reference builder 47497024 COMPLETED in 14m38s. Independent reference and partial
+prediction audit 47497134 COMPLETED in 19m36s: all 901 reference cases and 570
+saved mask/score pairs per UNet++ cell passed. Plain cells have zero test pairs.
+Remaining inference is 331 + 331 + 901 + 901 = 2,464 cases across the four cells.
 No weakened provenance gate is acceptable; no final model metrics are claimed.
 
 The separate tumor-reference derivative, if certified, must be disclosed as
@@ -171,6 +173,10 @@ torch 2.10.0+cu126, torchvision 0.25.0, nnunetv2 2.8.1. No final grid report exi
 This is a queued continuation, not resumed prediction yet. Dependent CPU scorer
 47497147 uses pinned snapshot 2185542 and the original metric file, afterok of
 successful inference. Timeout/failure prevents scoring; no automatic GPU retry.
+Scheduler-native Requeue was explicitly set to 0 on pending continuation
+47497144; submit/eligible timestamps were preserved. Future manual continuations
+should use --no-requeue explicitly. A hardware failure/timeout requires review,
+but valid persistent pairs remain reusable; no retraining is required.
 
 ## CPU scoring preparation
 
@@ -254,3 +260,18 @@ leaderboard equivalence. Aggregate organ Dice is not the tumor success signal.
    audit and limitations, including one-fold/seed coverage actually performed.
 5. PI-reviewed interpretation. No claim that a depth/supervision variant helps
    tumor detection before the actual class-28 results exist.
+
+## Lightweight progress command (read-only; no model/GPU imports)
+
+Inside a Bridges-2 SSH session:
+
+```bash
+bash /ocean/projects/cis260296p/asanjeev/pants_unetpp/completion_status_frozen/cf20c05/unetpp_port/bridges2_deployment/progress_paper_completion.sh
+```
+
+The helper reports scheduler states and mask/score counts, not a fresh integrity
+audit. The final table belongs at
+`/ocean/projects/cis260296p/asanjeev/pants_unetpp/versioned_grid_scores_47497147/grid_metrics.json`,
+NOT the old original-evaluation grid_metrics.json path. It checks whether the
+recorded independent verification marker matches the current report fingerprint;
+final delivery still requires the complete input/output verification.
