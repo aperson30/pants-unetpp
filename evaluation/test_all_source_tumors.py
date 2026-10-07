@@ -1,4 +1,6 @@
 import io
+import json
+import shutil
 import tarfile
 import tempfile
 import unittest
@@ -9,9 +11,53 @@ import nibabel as nib
 import numpy as np
 
 from evaluation.audit_all_source_tumors import check_tumor, selected_members, check_ct_identity, publish_report, inspect_source_encoding
+from evaluation.audit_all_source_tumors import verified_exact_replay
+from evaluation.recover_geometry_sources import sha
+from evaluation.replay_ct_original_cpu import replay
+from data_conversion import fix_affine_orthonormality as correction
 
 
 class AllSourceAuditTests(unittest.TestCase):
+    def test_exact_replay_handoff_refuses_wrong_bytes_metadata_and_voxels(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); cid = 'PanTS_00009812'
+            raw = root / f'{cid}_0000.nii.gz'
+            affine = np.eye(4); affine[0, 1] = 0.001
+            data = np.arange(24, dtype=np.int16).reshape(2, 3, 4)
+            nib.save(nib.Nifti1Image(data, affine), raw)
+            code = root / 'frozen.py'; shutil.copyfile(correction.__file__, code)
+            baseline = root / 'baseline'; baseline.mkdir()
+            shutil.copyfile(raw, baseline / raw.name); correction.fix_folder(baseline)
+            expected = sha(baseline / raw.name)
+            folder = root / 'replay'
+            replay(raw, folder, code, expected, sha(raw), sha(code))
+            original = {p: p.read_bytes() for p in (raw, code, folder / raw.name, folder / 'original_cpu_replay.json')}
+            digest, result_affine, evidence = verified_exact_replay(folder, cid, raw, expected, code)
+            self.assertEqual(digest, expected)
+            self.assertTrue(evidence['exact_replay_source_voxels_verified'])
+            np.testing.assert_array_equal(result_affine, nib.load(baseline / raw.name).affine)
+            self.assertEqual(original, {p: p.read_bytes() for p in original})
+            report_path = folder / 'original_cpu_replay.json'
+            report = json.loads(report_path.read_text())
+            for field, bad in [('raw_sha256', '0' * 64), ('correction_sha256', '0' * 64),
+                               ('exact_prediction_input_match', False), ('affine', np.eye(4).tolist())]:
+                altered = dict(report); altered[field] = bad
+                report_path.write_text(json.dumps(altered))
+                with self.assertRaises(RuntimeError):
+                    verified_exact_replay(folder, cid, raw, expected, code)
+            report_path.write_bytes(original[report_path])
+            with self.assertRaises(RuntimeError):
+                verified_exact_replay(folder, cid, raw, '0' * 64, code)
+            # Even a self-consistent report/hash cannot authorize changed voxels.
+            fixed = folder / raw.name
+            nib.save(nib.Nifti1Image(data + 1, result_affine), fixed)
+            changed = sha(fixed)
+            report.update(replayed_sha256=changed, expected_prediction_sha256=changed,
+                          affine=nib.load(fixed).affine.tolist())
+            report_path.write_text(json.dumps(report))
+            with self.assertRaisesRegex(RuntimeError, 'geometry/voxels differ'):
+                verified_exact_replay(folder, cid, raw, changed, code)
+
     def test_real_int8_scaling_keeps_exact_positive_voxel_membership(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); source = root / 'scaled.nii.gz'; gt = root / 'gt.nii.gz'

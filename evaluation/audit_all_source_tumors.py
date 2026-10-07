@@ -31,6 +31,44 @@ def check_ct_identity(cid, actual, expected, diagnostic):
     return matches
 
 
+def verified_exact_replay(folder, cid, raw_path, expected, correction_path):
+    """Read an exact replay, never promote its diagnostic report to a certificate.
+
+    The full audit still independently checks archives, every CT and every mask.
+    Fingerprints are checked against frozen provenance, not trusted from JSON.
+    """
+    replay_path = folder / f'{cid}_0000.nii.gz'
+    report_path = folder / 'original_cpu_replay.json'
+    before = {p: sha(p) for p in (raw_path, replay_path, report_path, correction_path)}
+    report = json.loads(report_path.read_text())
+    if (report.get('schema') != 'pants-original-cpu-ct-replay-v1'
+            or report.get('exact_prediction_input_match') is not True
+            or report.get('source_voxels_unchanged') is not True
+            or report.get('raw_sha256') != before[raw_path]
+            or report.get('correction_sha256') != before[correction_path]
+            or report.get('expected_prediction_sha256') != expected
+            or report.get('replayed_sha256') != expected
+            or before[replay_path] != expected):
+        raise RuntimeError(cid + ': exact CT replay evidence differs')
+    raw = nib.load(raw_path)
+    replayed = nib.load(replay_path)
+    if (len(replayed.shape) != 3 or replayed.shape != raw.shape
+            or not np.isfinite(replayed.affine).all()
+            or abs(np.linalg.det(replayed.affine[:3, :3])) < 1e-12
+            or list(replayed.shape) != report.get('shape')
+            or not np.array_equal(replayed.affine, np.asarray(report.get('affine')))
+            or not np.array_equal(np.asanyarray(raw.dataobj), np.asanyarray(replayed.dataobj))):
+        raise RuntimeError(cid + ': exact CT replay geometry/voxels differ')
+    if any(sha(p) != digest for p, digest in before.items()):
+        raise RuntimeError(cid + ': exact CT replay evidence changed during check')
+    return expected, replayed.affine.copy(), {
+        'exact_replay_file_sha256': expected,
+        'exact_replay_report_sha256': before[report_path],
+        'exact_replay_correction_sha256': before[correction_path],
+        'exact_replay_source_voxels_verified': True,
+    }
+
+
 def publish_report(folder, report, diagnostic):
     # Diagnostic output can NEVER satisfy the reference builder's readiness
     # filename, even if every replay happens to match on this machine.
@@ -128,6 +166,8 @@ def main():
     parser.add_argument('--source-dir', type=Path, required=True)
     parser.add_argument('--evaluation-dir', type=Path, required=True)
     parser.add_argument('--report-dir', type=Path, required=True)
+    parser.add_argument('--exact-ct-replay-dir', type=Path,
+                        help='optional original-CPU replay; used only on local hash mismatch and independently verified')
     parser.add_argument('--diagnose-all', action='store_true',
                         help='continue CT identity mismatches to inspect all source masks; never emit a pass certificate')
     args = parser.parse_args()
@@ -165,13 +205,18 @@ def main():
                 fixed_path.unlink()
             else:
                 input_digest = raw_digest
+            replay_evidence = {}
+            if input_digest != provenance['inputs'][cid] and args.exact_ct_replay_dir is not None:
+                input_digest, affine, replay_evidence = verified_exact_replay(
+                    args.exact_ct_replay_dir, cid, path, provenance['inputs'][cid],
+                    Path(nearest_orthonormal_affine.__code__.co_filename))
             matches = check_ct_identity(cid, input_digest, provenance['inputs'][cid], args.diagnose_all)
             rows[cid] = {'ct_member': member, 'raw_ct_sha256': raw_digest,
                          'prediction_ct_sha256': input_digest, 'shape': list(image.shape),
                          'raw_affine': image.affine.tolist(), 'prediction_affine': affine.tolist(),
                          'frozen_ct_correction_replayed': corrected,
                          'expected_prediction_ct_sha256': provenance['inputs'][cid],
-                         'exact_ct_identity_passed': matches}
+                         'exact_ct_identity_passed': matches, **replay_evidence}
             print(('CT_INPUT_VERIFIED ' if matches else 'CT_REPLAY_MISMATCH ') + cid, flush=True)
         if args.diagnose_all:
             with (args.report_dir / 'ct_cases_diagnostic.json').open('x') as output:
