@@ -2282,3 +2282,30 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   No real cohort scoring, inference or protected artifact changes occurred.
 - Approved original-CPU replay 47461462 remains PENDING/Priority. No replay
   result and no GPU allocation time yet. Three-minute cap and no automatic retry.
+
+### 2026-10-07 05:56 UTC — Exact CT replay succeeded; certification chain running
+
+- User requested continued work and faster progress; live Bridges-2 access was
+  restored through bridges2-paper-oct6.sock. Original-CPU job 47461462 COMPLETED
+  in 12 seconds on w002. CT 9812 matches historical fingerprint exactly:
+  02eca9599c5266c09e88d00238b73fe23b537633828d60e07211459b8bf3813f.
+  Original raw CT and correction hashes verified; source voxels unchanged.
+  Allocated GPU time was 12 seconds (~0.00333 GPU-hour); billing rounded usage
+  not independently checked. No CUDA or training/inference was run.
+- Published ebd86ea exact-replay handoff. Full source audit independently checks
+  raw/code/replay fingerprints, geometry, unchanged voxels and evidence before
+  using the replay. Local mismatch is not waived or approximated. Seven source
+  audit tests passed (including wrong hashes/report/voxels), actual CT 9812
+  handoff passed read-only, and all 33 combined regression tests passed.
+- First short SSH test session disconnected during slow imports and left a
+  fixture suite alive; terminated only its identified own processes. The second
+  bounded suite completed in 155.784s. No protected evaluation processes touched.
+- CPU-only strict full-source audit 47497014 is RUNNING on r223 (20s observed).
+  Explicit CLI export, pinned snapshot, fresh report, shared evidence lock,
+  two-hour cap, no automatic retries. Reference builder 47497024 is queued with
+  afterok:47497014, one-hour CPU cap, fresh derivative output; it cannot run on
+  failed or diagnostic evidence. Slurm syntax/test-only checks passed.
+- Original predictions, GT, checkpoints, inference settings and metric math
+  preserved. No additional GPU job submitted. Full cohort certificate, reference
+  verification, remaining inference and final scoring still pending. Completion
+  packet updated to distinguish the resolved CT identity from these open gates.

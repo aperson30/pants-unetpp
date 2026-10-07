@@ -49,11 +49,17 @@ alignment or exclusion.
 Six initially flagged combined-GT headers inherited conflicting metadata from
 the first organ mask. Six-case original-source checks proved exact tumor voxel
 equality and CT-aligned original tumor annotations; this is not an all-organ
-certificate. The complete source audit remains pending. CT 9812 has a replay
-byte mismatch under investigation; CT 9871 reproduced its original inference
-hash exactly in diagnostic job 47458101. Both diagnostic replays preserve
-original source voxel values, but this alone does not certify the historical
-9812 inference input. No weakened provenance gate is acceptable.
+certificate. The complete strict source audit remains pending. Original-CPU
+replay job 47461462 reproduced CT 9812's exact historical inference hash
+02eca9599c5266c09e88d00238b73fe23b537633828d60e07211459b8bf3813f
+in 12 seconds on an H100 node's Intel CPU, without changing source voxel values.
+CT 9871 also reproduced its original inference hash in diagnostic job 47458101.
+The audit's optional exact-replay handoff independently rechecks raw/code/file
+hashes, shape, affine, voxel equality and unchanged evidence; it does not accept
+approximate identity or promote a replay diagnostic into a cohort certificate.
+Full CPU audit 47497014 uses snapshot ebd86ea and this verified replay; dependent
+reference builder 47497024 may run only after successful audit completion.
+No weakened provenance gate is acceptable. No final cohort pass is yet claimed.
 
 The separate tumor-reference derivative, if certified, must be disclosed as
 unchanged class-28 index masks on the verified prediction-CT grid, with no
@@ -107,7 +113,8 @@ zero background, then uses the frozen converter's source_data > 0 membership
 and exact voxel-for-voxel equality with saved class 28. No rounding, annotation
 edits, resampling, inference changes or new tumor definition. Negative values,
 tiny positive background, fractional masks and extra label classes are rejected.
-This does not resolve CT 9812's exact input hash or certify the other organs.
+CT 9812's exact input hash has now been reproduced; the complete strict audit
+still must pass. These checks do not certify the other organs.
 
 ## Final table structure (no accuracy values until certified scoring)
 
