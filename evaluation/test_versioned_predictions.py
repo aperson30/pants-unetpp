@@ -1,4 +1,5 @@
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -62,6 +63,31 @@ class VersionedPredictionTests(unittest.TestCase):
         self.assertEqual(result['gt_positive_cases'], 1)
         self.assertEqual(result['gt_negative_cases'], 1)
         self.assertEqual(before, {str(p): sha(p) for p in Path(self.temporary.name).rglob('*') if p.is_file()})
+
+    def test_partial_resume_is_not_a_final_scoring_pass(self):
+        shutil.rmtree(self.root / 'default_ds')
+        shutil.rmtree(self.root / 'default_nods')
+        path = self.root / 'unetpp_nods/PanTS_00009002.nii.gz'; path.unlink()
+        (self.root / 'unetpp_nods/max_tumor_probs.csv').write_text(
+            'case_id,max_tumor_probability\nPanTS_00009001,0.8\n')
+        before = {str(p): sha(p) for p in Path(self.temporary.name).rglob('*') if p.is_file()}
+        result = audit(self.root, self.reference, self.source, expected_cases=self.cases, partial=True)
+        self.assertFalse(result['final_scoring_ready'])
+        self.assertEqual(result['schema'], 'pants-partial-prediction-resume-audit-v1')
+        self.assertEqual(len(result['completed_cases']['unetpp_ds']), 2)
+        self.assertEqual(result['remaining_cases']['unetpp_nods'], ['PanTS_00009002'])
+        self.assertEqual(result['remaining_cases']['default_ds'], sorted(self.cases))
+        self.assertEqual(before, {str(p): sha(p) for p in Path(self.temporary.name).rglob('*') if p.is_file()})
+        with self.assertRaises((RuntimeError, FileNotFoundError)):
+            self.check()
+
+    def test_partial_resume_rejects_orphans_and_unprovenanced_outputs(self):
+        path = self.root / 'default_ds/PanTS_00009001.nii.gz'; path.unlink()
+        with self.assertRaisesRegex(RuntimeError, 'mask or probability'):
+            audit(self.root, self.reference, self.source, expected_cases=self.cases, partial=True)
+        (self.root / 'default_ds/prediction_provenance.json').unlink()
+        with self.assertRaisesRegex(RuntimeError, 'unprovenanced'):
+            audit(self.root, self.reference, self.source, expected_cases=self.cases, partial=True)
 
     def test_missing_mask_or_score_or_extra_case(self):
         for failure in ('mask', 'score', 'extra'):
