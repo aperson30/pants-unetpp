@@ -2434,3 +2434,25 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Corrected stale source-certification/queued wording in the paper completion
   packet. Final scoring still requires all four complete 901-case collections
   and independent report verification; no accuracy values or ranking claimed.
+
+### 2026-10-07 07:53 UTC — User reopened idea search; zero-GPU solver mechanism screen
+
+- Reviewed prior NO-GO/0-of-4 native-adequacy results and batch-utility negatives;
+  did not revive them, substitute easier cases, or change protected evaluation.
+- Fresh primary-source searches covered timestep sampling, SNR schedules,
+  instance-aware solvers, multimodal transitions and representation/decision
+  decoupling. Sources, exclusions and next gates in IDEA_REOPENING_20261007.md.
+- New exact-score 1D VE CPU screen: 216 fixed solver/grid/mixture/NFE settings,
+  all retained, 4096 quadrature points. Contracts passed; 9.207s execution plus
+  imports/setup, zero GPU-hours. Exact prior and quantile endpoints separate
+  numerical integration error from weak judges/model/prior error.
+- At weight .01/separation4/NFE32/rho7, Euler loses 12.195% of exact-positive
+  trajectories; ordinary Heun/RK4 lose zero at the SAME total score-call budget.
+  Mass/shape errors can remain. This kills a weak-baseline motivation, not all
+  rare-outcome questions. No spatial-lesion/clinical inference or S-tier claim.
+- Read-only training-folder inventory found best/final only in all four cells,
+  not a temporal checkpoint sequence. Other backups/best epochs not exhaustively
+  inspected. No retraining/inference job to bridge this evidence gap.
+- Preserved code/full numerical report/limitations; old 2 charged-GPU-hour cap
+  unchanged and posted spending not refreshed. No protected test queries, new
+  GPU allocations, model-weight downloads, or experiment-setting mutations.
