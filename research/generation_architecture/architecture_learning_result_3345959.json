@@ -1,0 +1,106 @@
+{
+  "scope": "architecture-only exploratory feasibility; no clinical/generalization claim",
+  "recipe": {
+    "scope": "architecture-only exploratory feasibility; no clinical/generalization claim",
+    "updates": 200,
+    "microbatch": 1,
+    "accumulation": 2,
+    "loss": "epsilon L1",
+    "learning_rate": 1e-05,
+    "weight_decay": 0.01,
+    "max_grad_norm": 1,
+    "precision": "FP32 parameters, BF16 autocast",
+    "channels": [
+      32,
+      64,
+      128
+    ],
+    "initialization": "both original small models from scratch",
+    "VAE": "frozen SMILE posterior parameters cached; fresh shared draws",
+    "supervision": "deepest only; no auxiliary losses/EMA/early exits/compile"
+  },
+  "recipe_hash": "73fb196819fc846d07d2614ee5148ca1696ea23e31513af647c17200395ba0a1",
+  "job_id": "3345959",
+  "data_sha256": "c781e6f41143b0ca22180f1a9161bde9f790693a85add72d173e40f9ea2d83d1",
+  "torch": "2.10.0+cu129",
+  "gpu": "NVIDIA GH200 120GB",
+  "preparation_seconds": 2.042375809047371,
+  "elapsed_seconds": 17.352534422185272,
+  "results": {
+    "plain": {
+      "parameters": 1096516,
+      "curve": [
+        {
+          "update": 0,
+          "development_denoising_L1": 0.8608217090368271
+        },
+        {
+          "update": 50,
+          "last_train_L1": 0.7883942127227783,
+          "development_denoising_L1": 0.7856602370738983,
+          "gradient_norm": 0.3855651021003723
+        },
+        {
+          "update": 100,
+          "last_train_L1": 0.7484791278839111,
+          "development_denoising_L1": 0.7577971369028091,
+          "gradient_norm": 0.48722130060195923
+        },
+        {
+          "update": 150,
+          "last_train_L1": 0.7343888878822327,
+          "development_denoising_L1": 0.7225181013345718,
+          "gradient_norm": 0.5493239760398865
+        },
+        {
+          "update": 200,
+          "last_train_L1": 0.7226037383079529,
+          "development_denoising_L1": 0.6812659502029419,
+          "gradient_norm": 0.7241171598434448
+        }
+      ],
+      "learning_seconds_including_periodic_checks": 6.719306821003556,
+      "GPU_next_update_resume_bitwise_pass": true,
+      "peak_allocated_bytes_including_resume": 144036864
+    },
+    "nested": {
+      "parameters": 1202536,
+      "curve": [
+        {
+          "update": 0,
+          "development_denoising_L1": 0.8412204682826996
+        },
+        {
+          "update": 50,
+          "last_train_L1": 0.7766146659851074,
+          "development_denoising_L1": 0.7717674225568771,
+          "gradient_norm": 0.4243490695953369
+        },
+        {
+          "update": 100,
+          "last_train_L1": 0.7174421548843384,
+          "development_denoising_L1": 0.7280092388391495,
+          "gradient_norm": 0.5504283905029297
+        },
+        {
+          "update": 150,
+          "last_train_L1": 0.6897326707839966,
+          "development_denoising_L1": 0.6715849488973618,
+          "gradient_norm": 0.68095862865448
+        },
+        {
+          "update": 200,
+          "last_train_L1": 0.6710216403007507,
+          "development_denoising_L1": 0.609854981303215,
+          "gradient_norm": 0.5716869235038757
+        }
+      ],
+      "learning_seconds_including_periodic_checks": 7.670856408076361,
+      "GPU_next_update_resume_bitwise_pass": true,
+      "peak_allocated_bytes_including_resume": 156375552
+    }
+  },
+  "medical_quality_tested": false,
+  "capacity_matched": false,
+  "paper_speedup_established": false
+}

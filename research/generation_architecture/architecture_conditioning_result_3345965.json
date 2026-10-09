@@ -1,0 +1,140 @@
+{
+  "scope": "frozen four-triplet engineering conditioning sensitivity",
+  "medical_quality_tested": false,
+  "causal_or_statistical_claim": false,
+  "zero_source_is_out_of_distribution": true,
+  "results": {
+    "plain": [
+      {
+        "index": 0,
+        "timestep": 801,
+        "normal": {
+          "epsilon_L1": 0.6617875099182129,
+          "prediction_change_RMS": 0.0
+        },
+        "zero_source": {
+          "epsilon_L1": 0.6582481861114502,
+          "prediction_change_RMS": 0.11080212891101837
+        },
+        "other_phase": {
+          "epsilon_L1": 0.6600411534309387,
+          "prediction_change_RMS": 0.05642518401145935
+        }
+      },
+      {
+        "index": 1,
+        "timestep": 620,
+        "normal": {
+          "epsilon_L1": 0.6746926307678223,
+          "prediction_change_RMS": 0.0
+        },
+        "zero_source": {
+          "epsilon_L1": 0.6724321246147156,
+          "prediction_change_RMS": 0.11904499679803848
+        },
+        "other_phase": {
+          "epsilon_L1": 0.6730430126190186,
+          "prediction_change_RMS": 0.05721330642700195
+        }
+      },
+      {
+        "index": 2,
+        "timestep": 542,
+        "normal": {
+          "epsilon_L1": 0.6788530349731445,
+          "prediction_change_RMS": 0.0
+        },
+        "zero_source": {
+          "epsilon_L1": 0.6756372451782227,
+          "prediction_change_RMS": 0.11812583357095718
+        },
+        "other_phase": {
+          "epsilon_L1": 0.6775375604629517,
+          "prediction_change_RMS": 0.0555858351290226
+        }
+      },
+      {
+        "index": 3,
+        "timestep": 190,
+        "normal": {
+          "epsilon_L1": 0.7097306251525879,
+          "prediction_change_RMS": 0.0
+        },
+        "zero_source": {
+          "epsilon_L1": 0.7044728994369507,
+          "prediction_change_RMS": 0.1727292686700821
+        },
+        "other_phase": {
+          "epsilon_L1": 0.7083770632743835,
+          "prediction_change_RMS": 0.05539524927735329
+        }
+      }
+    ],
+    "nested": [
+      {
+        "index": 0,
+        "timestep": 801,
+        "normal": {
+          "epsilon_L1": 0.5863878726959229,
+          "prediction_change_RMS": 0.0
+        },
+        "zero_source": {
+          "epsilon_L1": 0.5836961269378662,
+          "prediction_change_RMS": 0.11451767385005951
+        },
+        "other_phase": {
+          "epsilon_L1": 0.5876485109329224,
+          "prediction_change_RMS": 0.05981091782450676
+        }
+      },
+      {
+        "index": 1,
+        "timestep": 620,
+        "normal": {
+          "epsilon_L1": 0.5923174619674683,
+          "prediction_change_RMS": 0.0
+        },
+        "zero_source": {
+          "epsilon_L1": 0.5886589288711548,
+          "prediction_change_RMS": 0.12492670118808746
+        },
+        "other_phase": {
+          "epsilon_L1": 0.5929453372955322,
+          "prediction_change_RMS": 0.06039200350642204
+        }
+      },
+      {
+        "index": 2,
+        "timestep": 542,
+        "normal": {
+          "epsilon_L1": 0.6061865091323853,
+          "prediction_change_RMS": 0.0
+        },
+        "zero_source": {
+          "epsilon_L1": 0.6024366021156311,
+          "prediction_change_RMS": 0.12826046347618103
+        },
+        "other_phase": {
+          "epsilon_L1": 0.6064263582229614,
+          "prediction_change_RMS": 0.060039326548576355
+        }
+      },
+      {
+        "index": 3,
+        "timestep": 190,
+        "normal": {
+          "epsilon_L1": 0.6545280814170837,
+          "prediction_change_RMS": 0.0
+        },
+        "zero_source": {
+          "epsilon_L1": 0.6462259292602539,
+          "prediction_change_RMS": 0.18756377696990967
+        },
+        "other_phase": {
+          "epsilon_L1": 0.6543774604797363,
+          "prediction_change_RMS": 0.061736833304166794
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "scope": "candidate-paired architecture-only exploratory feasibility",
+  "triplets_sha256": "c781e6f41143b0ca22180f1a9161bde9f790693a85add72d173e40f9ea2d83d1",
+  "source_v1_triplets_sha256": "87220c9eca7bb8c0dfd29a896676b60f61f2d730f4a05a4ecea6afe45d63f91e",
+  "development_ct_hashes": {
+    "CV_00007899": "c11802be029940992df22fad504100ee58dceccea953ac154465a9755ed7d201",
+    "CV_00019311": "728c47738ad9d0d8c8fb7283d9c07317d5546ce443880a4068a3614a29998e0a"
+  },
+  "training_case_ids": [
+    "CV_00018276",
+    "CV_00008477",
+    "CV_00011916",
+    "CV_00018699"
+  ],
+  "development_case_ids": [
+    "CV_00007899",
+    "CV_00019311"
+  ],
+  "phase_prompts": [
+    "An venous phase CT slice.",
+    "An arterial phase CT slice."
+  ],
+  "normalized_range": [
+    -1,
+    1
+  ],
+  "shape": {
+    "train_source": [
+      8,
+      3,
+      512,
+      512
+    ],
+    "train_target": [
+      8,
+      3,
+      512,
+      512
+    ],
+    "train_phase_index": [
+      8
+    ],
+    "development_source": [
+      4,
+      3,
+      512,
+      512
+    ],
+    "development_target": [
+      4,
+      3,
+      512,
+      512
+    ],
+    "development_phase_index": [
+      4
+    ]
+  },
+  "clinical_phase_verified": false,
+  "patient_independence_certified": false,
+  "protected_PanTS_overlap_excluded": false,
+  "clinical_training_eligible": false,
+  "registration_applied": false,
+  "medical_quality_tested": false,
+  "gpu_hours": 0
+}

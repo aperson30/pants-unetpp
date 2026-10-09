@@ -2659,3 +2659,26 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   No learning job submitted. Protected 2x2 evaluation remains untouched.
 - See research/generation_architecture/ARCHITECTURE_LEARNING_PILOT_20261008.md
   for scope, uncertainties and fail-closed release checklist.
+
+### 2026-10-08 — Authorized learning and conditioning probes completed
+
+- User reopened deltaai-pilot-oct8; improved CPU split assembled, fixed phase order,
+  NPZ SHA c781e6f41143b0ca22180f1a9161bde9f790693a85add72d173e40f9ea2d83d1.
+  Input montage inspected: mixed abdomen/chest training fixture, not clinical data
+  certification. All uncertainty flags retained; protected 2x2 untouched.
+- Official queue guide/live billing weights verified factor2. Job3345959 submitted
+  held, checked oneGPU/billing2000/10min/Requeue0/account, released; COMPLETED0:0,
+  37allocated seconds. Both arms200updates, finite curves and bitwise GPU next-update
+  checkpoint replay passed. Plain final epsilonL1 .681266 vs nested .609855;
+  nested14.16% slower,9.67% more parameters. NOT capacity-matched or a method win.
+- Frozen follow-up3345965 likewise held/verified/released,3min cap; COMPLETED0:0,
+  22seconds. Reacts to source/phase, BUT zero-source slightly improves epsilonL1
+  (.677698 plain/.605254 nested). Useful enhancement conditioning is NOT shown.
+  Negative finding preserved; no relaxation, no tumor/clinical/speedup claim.
+- Total59seconds*factor2/3600 = estimated0.032778charged h before rounding, within
+  authorized0.5h cap. No automatic retry or other submitted learning jobs.
+- All42CPUtests pass6.564s; result JSONs and scoped code saved in
+  research/generation_architecture. Checkpoints/CTs remain isolated remote only.
+- Next meaningful design needs correct-vs-mismatched source/unconditional controls,
+  verified abdominal pairs and capacity/compute-matched comparisons; not a longer
+  uncontrolled run. See ARCHITECTURE_LEARNING_PILOT_20261008.md for exact limitations.
