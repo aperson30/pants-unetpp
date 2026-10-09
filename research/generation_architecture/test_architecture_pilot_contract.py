@@ -38,3 +38,20 @@ class PilotContracts(unittest.TestCase):
             torch.testing.assert_close(x, y, rtol=0, atol=0)
         self.assertFalse(torch.equal(first[0], other[0]))
         self.assertTrue(torch.equal(before, torch.get_rng_state()))
+
+    def test_fixed_timestep_preserves_shared_draws(self):
+        class Scheduler:
+            config = SimpleNamespace(num_train_timesteps=1000)
+            def add_noise(self, target, noise, timestep):
+                return target + noise*timestep[:, None, None, None]
+        mean, std = torch.zeros(1, 4, 2, 2), torch.ones(1, 4, 2, 2)
+        stats = (mean, std, mean, std)
+        ctx = torch.zeros(1, 2, 16)
+        first = draw_latents(stats, 0, 5, ctx, Scheduler(), timestep_override=100, return_target=True)
+        other = draw_latents(stats, 0, 5, ctx, Scheduler(), timestep_override=900, return_target=True)
+        torch.testing.assert_close(first[0][:, 4:], other[0][:, 4:], rtol=0, atol=0)
+        torch.testing.assert_close(first[3], other[3], rtol=0, atol=0)
+        torch.testing.assert_close(first[4], other[4], rtol=0, atol=0)
+        self.assertEqual(int(first[1]), 100)
+        with self.assertRaises(ValueError):
+            draw_latents(stats, 0, 5, ctx, Scheduler(), timestep_override=1000)

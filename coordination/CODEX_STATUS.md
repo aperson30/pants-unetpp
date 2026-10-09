@@ -2686,3 +2686,36 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   1,200,976/1,202,536 (~0.13% apart); plain32/64/128 vs nested30/60/120 counts
   1,096,516/1,092,678 (~0.35%). Near parameter-count controls, not compute-matched,
   not trained; unused instantiated heads must be distinguished from active counts.
+
+### 2026-10-08 — Consolidated near-capacity pilot, generation gate fails
+
+- User asked all steps and larger jobs ASAP, then explicitly reiterated stinginess.
+  Kept existing0.5charged-hour cap; no production authorization inferred.
+- Job3345990 held/verified/released:1GH200,2CPU,16G,billing2000,6min,Requeue0.
+  COMPLETED0:0,279allocated seconds. Six arms:two seeds,1000updates,near-equal
+  counts plain34/68/136 vs nested32/64/128,plus independently trained phase-only
+  plain control. Frozen VAE/text cached once, abdominal/venous training triplets
+  only, no downloads/staging on paid GPU, exact serialized GPU replay passed all6.
+- Correct versus wrong-patient input improves epsilonL1 in both seeds; nested lower
+  error than near-capacity plain. Plain conditioned does not beat its independently
+  trained phase-only control. Tiny candidate groups do not establish generality.
+- Real20step DDIM generation+decode tested:generated-target unregisteredL1
+  .5274–.7762 versus copy-source .08096,VAEtarget reconstruction .01070.
+  Best nested montage inspected:noise,not plausible preserved anatomy. Do NOT run
+  frozen tumor scoring on this failed output or launch expensive scaling from it.
+  Undertrained small-fixture failure is NOT evidence PI's direction cannot work.
+- Total current learning authorization spending(37+22+279)*2/3600 = estimate
+  0.187778charged h before rounding. No retries, no further jobs,2x2 untouched.
+- Re-read8page PI CVPR draft and visually inspected method page2:deep supervision,
+  MSE,AdaLN-zero and depth-scheduled inference are not represented by the original
+  deepest-L1 FiLM fixtures. Prepared original convolutional AdaLN-zero adapter with
+  CPU zero-init/gradient/nontrivial-pruning tests; NOT exact DiT/SMILE or GPU-trained.
+- Prepared endpoint-specific larger-run CPU gate:general architecture development
+  does not need paired tumors; tumor-preserving endpoint retains additional flags.
+  Both require explicit budget,verified data/recipe andappropriate evidence.
+- CPU general-venous grouped proposal:18candidate patients,19pairs,14/4provisional
+  train/dev grouping. Unknown identities/phase/protected-overlap flags stayfalse;
+  not locked or eligible, no CT download. All52CPUtests pass6.882s.
+- Results/preparation in research/generation_architecture/LARGER_RUN_PREPARATION_20261008.md
+  and controlled_architecture_result_3345990.json. Checkpoints/CTarraysremoteonly,
+  images outsideGit. No pretend-ready production launcher or automated escalation.

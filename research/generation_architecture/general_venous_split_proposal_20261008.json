@@ -1,0 +1,189 @@
+{
+  "scope": "candidate-only general venous architecture split proposal",
+  "source_revision": "c15802c28cb31b71dee2e680319d522b3bc4cbbf",
+  "source_metadata_hash": "3e58b8a1b8cb3b9664d446ef4d7ca393c51495af5073119c25596b2d4bb903d8",
+  "candidate_patients": 18,
+  "candidate_pairs": 19,
+  "split_candidate_patients": {
+    "train": 14,
+    "development": 4
+  },
+  "clinical_training_eligible": false,
+  "patient_identity_certified": false,
+  "registration_certified": false,
+  "protected_overlap_excluded": false,
+  "split_locked_for_experiment": false,
+  "rows": [
+    {
+      "candidate_group": "group_006",
+      "source": "CV_00015417",
+      "target": "CV_00022260",
+      "candidate_patient": "patient_006",
+      "provisional_split": "development",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_005",
+      "source": "CV_00001682",
+      "target": "CV_00004024",
+      "candidate_patient": "patient_005",
+      "provisional_split": "development",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_013",
+      "source": "CV_00016930",
+      "target": "CV_00001913",
+      "candidate_patient": "patient_013",
+      "provisional_split": "development",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_014",
+      "source": "CV_00013266",
+      "target": "CV_00000124",
+      "candidate_patient": "patient_013",
+      "provisional_split": "development",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_016",
+      "source": "CV_00009235",
+      "target": "CV_00015641",
+      "candidate_patient": "patient_015",
+      "provisional_split": "development",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_003",
+      "source": "CV_00018276",
+      "target": "CV_00008477",
+      "candidate_patient": "patient_003",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_001",
+      "source": "CV_00010488",
+      "target": "CV_00004804",
+      "candidate_patient": "patient_001",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_026",
+      "source": "CV_00010642",
+      "target": "CV_00003474",
+      "candidate_patient": "patient_025",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_015",
+      "source": "CV_00013410",
+      "target": "CV_00007344",
+      "candidate_patient": "patient_014",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_028",
+      "source": "CV_00004971",
+      "target": "CV_00018861",
+      "candidate_patient": "patient_027",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_009",
+      "source": "CV_00001602",
+      "target": "CV_00002801",
+      "candidate_patient": "patient_009",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_023",
+      "source": "CV_00017533",
+      "target": "CV_00005937",
+      "candidate_patient": "patient_022",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_007",
+      "source": "CV_00014494",
+      "target": "CV_00011093",
+      "candidate_patient": "patient_007",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_018",
+      "source": "CV_00007899",
+      "target": "CV_00019311",
+      "candidate_patient": "patient_017",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_017",
+      "source": "CV_00014810",
+      "target": "CV_00000358",
+      "candidate_patient": "patient_016",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_021",
+      "source": "CV_00011920",
+      "target": "CV_00002870",
+      "candidate_patient": "patient_020",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_025",
+      "source": "CV_00022322",
+      "target": "CV_00001073",
+      "candidate_patient": "patient_024",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_024",
+      "source": "CV_00006245",
+      "target": "CV_00000417",
+      "candidate_patient": "patient_023",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    },
+    {
+      "candidate_group": "group_008",
+      "source": "CV_00007372",
+      "target": "CV_00002859",
+      "candidate_patient": "patient_008",
+      "provisional_split": "train",
+      "training_eligible": false,
+      "protected_overlap_excluded": false
+    }
+  ]
+}

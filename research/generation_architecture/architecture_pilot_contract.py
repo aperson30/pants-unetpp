@@ -22,7 +22,7 @@ def validate_engineering_manifest(manifest, charged_cap):
         raise ValueError("Require prepared-data content hash")
 
 
-def draw_latents(stats, index, seed, phase_context, scheduler):
+def draw_latents(stats, index, seed, phase_context, scheduler, *, timestep_override=None, return_target=False):
     """Fresh, explicit shared draws across arms; no fixed posterior sample cache."""
     mean_s, std_s, mean_t, std_t = stats
     g = torch.Generator(device=mean_s.device).manual_seed(seed)
@@ -31,8 +31,13 @@ def draw_latents(stats, index, seed, phase_context, scheduler):
     target = mean_t[index:index+1] + std_t[index:index+1] * rand(mean_t[index:index+1])
     noise = rand(target)
     timestep = torch.randint(0, scheduler.config.num_train_timesteps, (1,), device=source.device, generator=g)
+    if timestep_override is not None:
+        if type(timestep_override) is not int or not 0 <= timestep_override < scheduler.config.num_train_timesteps:
+            raise ValueError("Invalid fixed timestep")
+        timestep.fill_(timestep_override)
     noisy = scheduler.add_noise(target, noise, timestep)
-    return torch.cat((noisy, source), dim=1), timestep, phase_context, noise
+    result = (torch.cat((noisy, source), dim=1), timestep, phase_context, noise)
+    return result + (target,) if return_target else result
 
 
 def require_data_hash(path, expected):
