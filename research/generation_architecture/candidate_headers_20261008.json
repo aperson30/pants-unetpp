@@ -1,0 +1,99 @@
+{
+  "revision": "c15802c28cb31b71dee2e680319d522b3bc4cbbf",
+  "scope": "header-only candidate screen",
+  "gpu_hours": 0,
+  "results": [
+    {
+      "case_id": "CV_00010488",
+      "url": "https://huggingface.co/datasets/BodyMaps/CancerVerse/resolve/c15802c28cb31b71dee2e680319d522b3bc4cbbf/CancerVerse/CV_00010488/ct.nii.gz",
+      "http_status": 206,
+      "bytes_read": 65536,
+      "geometry": {
+        "shape": [
+          512,
+          512,
+          226
+        ],
+        "spacing_header": [
+          0.859375,
+          0.859375,
+          1.5
+        ],
+        "spatial_units_code": 2,
+        "qform_code": 1,
+        "sform_code": 1,
+        "sform_rows": [
+          [
+            -0.859375,
+            -0.0,
+            -0.0,
+            229.5703125
+          ],
+          [
+            -0.0,
+            0.859375,
+            0.0,
+            -39.5703125
+          ],
+          [
+            0.0,
+            0.0,
+            -1.5,
+            -466.0
+          ]
+        ],
+        "datatype_code": 4,
+        "header_sha256": "6f04c6f89741284719430dd0c6391d5811d629cb33e758d3d88693916c2c0f46"
+      },
+      "full_file_integrity_verified": false,
+      "registration_verified": false,
+      "tumor_annotations_verified": false
+    },
+    {
+      "case_id": "CV_00004804",
+      "url": "https://huggingface.co/datasets/BodyMaps/CancerVerse/resolve/c15802c28cb31b71dee2e680319d522b3bc4cbbf/CancerVerse/CV_00004804/ct.nii.gz",
+      "http_status": 206,
+      "bytes_read": 65536,
+      "geometry": {
+        "shape": [
+          512,
+          512,
+          414
+        ],
+        "spacing_header": [
+          0.8569492101669312,
+          0.8569492101669312,
+          1.5
+        ],
+        "spatial_units_code": 2,
+        "qform_code": 1,
+        "sform_code": 1,
+        "sform_rows": [
+          [
+            -0.8569492101669312,
+            -0.0,
+            -0.0,
+            220.91851806640625
+          ],
+          [
+            -0.0,
+            0.8569492101669312,
+            0.0,
+            -85.95050048828125
+          ],
+          [
+            0.0,
+            0.0,
+            -1.5,
+            -1070.614013671875
+          ]
+        ],
+        "datatype_code": 4,
+        "header_sha256": "3ebecc7c5d5b0f764f898e0ef6866bda956f8d108043b28de229529dc4e86392"
+      },
+      "full_file_integrity_verified": false,
+      "registration_verified": false,
+      "tumor_annotations_verified": false
+    }
+  ]
+}

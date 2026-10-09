@@ -55,6 +55,36 @@ Next data work, bounded and cheapest first:
 4. Only then propose a separately budgeted matched training pilot. No full
    training authorization is implied by the smoke-test budget.
 
+### Executed header follow-up
+
+Exact pinned public paths resolved through the Hugging Face tree API. Only
+64 KiB compressed prefix per CT was read (six files, 384 KiB total); exactly
+348 decompressed NIfTI header bytes parsed. No voxel array/full CT retained.
+
+- group001: CV_00010488 (NC hint), CV_00004804 (venous hint). Shapes
+  512x512x226 versus 512x512x414. Stored sform z extents at voxel centers are
+  approximately [-803.5,-466] and [-1690.1,-1070.6] mm: no overlap. Exclude from
+  naive coordinate pairing pending image/source investigation. This does not
+  distinguish anonymization-coordinate changes from a wrong linkage.
+- group002: CV_00018276 (NC hint), CV_00008477 (venous hint). Both 512x512x373,
+  0.73464x0.73464x1.5 mm, identical stored sforms. Public LFS content identifiers
+  differ (c668a4798714530c1f0bec09b1c0c1961252dee744df4d663ce2fc775d31abba
+  versus 595980567a1ce42d41cc88d8f2d7ac20aca06e0a214ecd96ee0876cef3098eb4),
+  file sizes118253758/115815466 bytes. These are different compressed files,
+  not proof of distinct voxel data or true phases. Strongest first pixel-audit
+  candidate among the three groups screened, NOT training-approved.
+- group003: CV_00011916 (NC hint), CV_00018699 (arterial hint). Both512x512x488,
+  1.171875x1.171875x1 mm; stored origins differ about0.4mm in y and2mm in z.
+  Second promising geometry candidate, NOT confirmed registration.
+
+Header SHA256s and observations are saved in candidate_headers_20261008.json
+and candidate_headers_followup_20261008.json. A header-only pass cannot establish
+patient identity, anatomical motion, image equality, tumor visibility, labels,
+CRC/full-file integrity or lack of protected PanTS overlap. No dataset-wide pass
+or training eligibility is inferred from two promising candidates.
+All28 CPU contract tests passed2.379s before the CLI follow-up; final rerun recorded
+separately. Added explicit public-ID validation and an eight-header per-run cap.
+
 ## Completed GH200 training contract / cost probe
 
 Job `3345424`: COMPLETED, exit 0, 18 allocated seconds. Raw output:

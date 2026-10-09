@@ -2599,3 +2599,15 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   from properly aligned paired fidelity evaluation.
 - DATA_AND_TRAIN_PROBE_20261008.md records measured costs, data gates and bounded
   next checks. No silent unpaired/teacher-target/JEPA pivot or full-training launch.
+
+### 2026-10-08 — Six CancerVerse headers checked without full CT downloads
+
+- Resolved pinned public file paths; read384KiB total across6CT prefixes, bounded
+  NIfTI-header parsing only. group001 has nonoverlapping stored sform z extents:
+  do not pair blindly; anonymization shift versus linkage error unresolved.
+- group002 NC/venous hints have identical shape/spacing/sform; distinct public
+  compressed-file content IDs. group003 NC/arterial hints have matching shapes
+  and spacing with0.4mm y/2mm z origin differences. Promising pixel-audit leads,
+  NOT verified phases/patients/registration/tumor annotations or training pairs.
+- Saved derived headers/tests/report; no full CT, raw patient reports, GPU jobs,
+  production changes or protected evaluation access. Smoke charge unchanged.
