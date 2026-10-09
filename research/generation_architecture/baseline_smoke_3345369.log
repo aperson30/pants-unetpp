@@ -1,0 +1,23 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+{
+  "scope": "synthetic two-step pretrained component smoke only",
+  "medical_quality_tested": false,
+  "gpu": "NVIDIA GH200 120GB",
+  "torch": "2.10.0+cu129",
+  "load_encode_seconds": 11.844372926978394,
+  "denoiser_seconds": [
+    0.21543084387667477,
+    0.03180606407113373
+  ],
+  "decoded_shape": [
+    1,
+    3,
+    512,
+    512
+  ],
+  "decoded_min": -0.7724609375,
+  "decoded_max": 0.513671875,
+  "peak_allocated_bytes": 2847553536,
+  "peak_reserved_bytes": 3198156800,
+  "elapsed_seconds": 12.147903900127858
+}

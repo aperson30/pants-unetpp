@@ -49,7 +49,11 @@ Added an original conventional single-decoder control using the same conditionin
 blocks as the nested fixture. Equal widths != equal parameter count; neither is
 a capacity-matched SD1.5. All 22 CPU tests passed in 4.320s under a 90s timeout.
 
-Public center-triplet job 3345403 released after held-job checks: 1GPU/3min,
-no requeue, billing2000, maximum extra estimated0.1h. Last pending. Uses inspected
-public input, 200 DDIM steps, phase prompt and CFG7.5; not released overlapping
-volume inference, paired evaluation or tumor preservation. No protected data.
+Public center-triplet job 3345403 COMPLETED/exit0 in 34 allocated seconds:
+1GPU/3min cap, no requeue, billing2000. Passed 200 DDIM steps, phase prompt and
+CFG7.5 on the inspected public input; finite decoded 1x3x512x512 output saved
+in a fresh exclusive array file. Decoder range [-1.013671875,1.046875] is recorded;
+unit conversion clamps like the reference image processor, not evidence of HU
+fidelity. Peak allocated 2,847,870,464 bytes; reserved 3,193,962,496 bytes.
+Not released overlapping-volume inference, paired evaluation or tumor protection.
+Total estimated charged smoke usage (13+35+34)*2/3600 = 0.045556h before rounding.

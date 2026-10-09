@@ -2569,3 +2569,14 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Held/preflighted/released public center-triplet job3345403: matching input hash,
   exclusive fresh output, DDIM200/CFG7.5, 3min/no retries/billing2000. Last pending;
   maximum extra0.1h fits smoke cap0.25h. No protected data or full training.
+
+### 2026-10-08 21:25 PDT — Public CT center-triplet runtime PASS
+
+- Job3345403 COMPLETED/exit0 in34 allocated seconds. DDIM200/CFG7.5 using actual
+  pretrained SMILE and inspected public CT triplet produced finite decoded output.
+  Fresh .npy saved remotely, no input edits; raw stdout retained. Decoder overshoot
+  recorded before reference-style unit clipping. No tumor/paired/volume claim.
+- Combined estimated charged smoke usage0.045556h before provider rounding
+  (13+35+34 seconds at factor2), below0.25h approved cap. No automatic retries.
+- Github latest observed main still a5665aa while push of258501e awaits completion;
+  do not claim latest literature/control/runtime updates published without check.
