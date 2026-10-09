@@ -10,9 +10,16 @@ See `DATA_AND_TRAIN_PROBE_20261008.md`: CancerVerse has 23 candidate phase-pair
 groups, not verified training pairs; PanTS can support tumor checks. CTVerse is
 optional. Known estimated smoke charge is 0.055556 GPU-hours before rounding.
 
+Follow-up: `PILOT_EXECUTION_GATE_20261008.md` and
+`data_gate_report_complete_20261008.json` supersede the initial mask-prefix
+uncertainty. All109expanded same-day candidate scans have mask evidence, but
+only one candidate patient has nonempty pancreatic masks in both phases; no
+certified tumor-training split exists. CPU resume/split/budget helpers are tested,
+not production integration. No matched medical training or evaluation launched.
+
 Source audit and original CPU prototype complete. Random-weight GPU contract
 probe **3344849 passed** on DeltaAI GH200; see `GPU_SMOKE_RESULT.md` and raw log.
-**No baseline enhancement run, trained U-Net++ generator, medical fidelity result
+**No full-volume baseline reproduction, trained U-Net++ generator, medical fidelity result
 or end-to-end generation speedup exists yet.**
 The frozen PanTS 2x2 implementation, data, checkpoints and evaluation were not
 modified. An isolated copy of this prototype was uploaded to a separate cluster

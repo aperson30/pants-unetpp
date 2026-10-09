@@ -1,0 +1,207 @@
+{
+  "scope": "index-space overlays; source labels unchanged, no clinical/registration pass",
+  "cases": {
+    "CV_00007899": {
+      "mask_sha256": "d38cce84db7600ba27478c09a03261a4ebd70dd622d4a9f3ce136b5f66715257",
+      "foreground_voxels": 39444,
+      "mask_units": [
+        "unknown",
+        "unknown"
+      ],
+      "mask_affine": [
+        [
+          -0.83203125,
+          0.0,
+          0.0,
+          194.583984375
+        ],
+        [
+          0.0,
+          0.83203125,
+          0.0,
+          -3.583984375
+        ],
+        [
+          0.0,
+          0.0,
+          -1.5,
+          -1056.9000244140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ct_affine": [
+        [
+          -0.83203125,
+          -0.0,
+          -0.0,
+          194.583984375
+        ],
+        [
+          -0.0,
+          0.83203125,
+          0.0,
+          -3.583984375
+        ],
+        [
+          0.0,
+          0.0,
+          -1.5,
+          -1056.9000244140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "same_stored_affine": true,
+      "mask_index_alignment_verified": false
+    },
+    "CV_00019311": {
+      "mask_sha256": "93edca5d0de156ad493b0a951e22c78ac2e4aa4a10db1abaa6c67cddf87d9e2c",
+      "foreground_voxels": 687140,
+      "mask_units": [
+        "unknown",
+        "unknown"
+      ],
+      "mask_affine": [
+        [
+          -0.83203125,
+          0.0,
+          0.0,
+          194.583984375
+        ],
+        [
+          0.0,
+          0.83203125,
+          0.0,
+          -3.583984375
+        ],
+        [
+          0.0,
+          0.0,
+          -1.5,
+          -1056.9000244140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ct_affine": [
+        [
+          -0.83203125,
+          -0.0,
+          -0.0,
+          194.583984375
+        ],
+        [
+          -0.0,
+          0.83203125,
+          0.0,
+          -3.583984375
+        ],
+        [
+          0.0,
+          0.0,
+          -1.5,
+          -1056.9000244140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "same_stored_affine": true,
+      "mask_index_alignment_verified": false
+    },
+    "CV_00019743": {
+      "mask_sha256": "26c493c750763914b14c27993ed705fde4ffca63d2c233cc95cb508ac91c9299",
+      "foreground_voxels": 767050,
+      "mask_units": [
+        "unknown",
+        "unknown"
+      ],
+      "mask_affine": [
+        [
+          -0.83203125,
+          0.0,
+          0.0,
+          194.583984375
+        ],
+        [
+          0.0,
+          0.83203125,
+          0.0,
+          -3.583984375
+        ],
+        [
+          0.0,
+          0.0,
+          -1.5,
+          -1056.9000244140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ct_affine": [
+        [
+          -0.83203125,
+          -0.0,
+          -0.0,
+          194.583984375
+        ],
+        [
+          -0.0,
+          0.83203125,
+          0.0,
+          -3.583984375
+        ],
+        [
+          0.0,
+          0.0,
+          -1.5,
+          -1056.9000244140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "same_stored_affine": true,
+      "mask_index_alignment_verified": false
+    }
+  },
+  "mask_comparisons": {
+    "CV_00007899:CV_00019311": {
+      "index_space_mask_dice": 0.0663983792651641,
+      "clinical_label_agreement_established": false
+    },
+    "CV_00007899:CV_00019743": {
+      "index_space_mask_dice": 0.05493903240445682,
+      "clinical_label_agreement_established": false
+    },
+    "CV_00019311:CV_00019743": {
+      "index_space_mask_dice": 0.8666432859530048,
+      "clinical_label_agreement_established": false
+    }
+  },
+  "training_eligible": false,
+  "gpu_hours": 0
+}

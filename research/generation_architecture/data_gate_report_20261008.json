@@ -1,0 +1,902 @@
+{
+  "scope": "candidate label availability; no clinical/registration/split certification",
+  "metadata_sha256": "3e58b8a1b8cb3b9664d446ef4d7ca393c51495af5073119c25596b2d4bb903d8",
+  "revision": "c15802c28cb31b71dee2e680319d522b3bc4cbbf",
+  "candidate_groups": 28,
+  "candidate_patients": 27,
+  "candidate_series": 109,
+  "mask_inspections_available": 95,
+  "unknown_mask_cases": [
+    "CV_00009422",
+    "CV_00010960",
+    "CV_00012013",
+    "CV_00013361",
+    "CV_00014092",
+    "CV_00015000",
+    "CV_00015295",
+    "CV_00017236",
+    "CV_00018199",
+    "CV_00019009",
+    "CV_00019642",
+    "CV_00019718",
+    "CV_00022358",
+    "CV_00022492"
+  ],
+  "candidate_patients_with_nonempty_both_phase_masks": 1,
+  "verified_tumor_training_pairs": 0,
+  "frozen_training_manifest": false,
+  "gpu_training_launched": false,
+  "groups": [
+    {
+      "candidate_group": "group_001",
+      "candidate_patient": "patient_001",
+      "noncontrast": [
+        {
+          "case_id": "CV_00010488",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00004804",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00017236",
+          "phase_hint": "venous",
+          "foreground_voxels": null
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_002",
+      "candidate_patient": "patient_002",
+      "noncontrast": [
+        {
+          "case_id": "CV_00000257",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00015295",
+          "phase_hint": "arterial_early",
+          "foreground_voxels": null
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_003",
+      "candidate_patient": "patient_003",
+      "noncontrast": [
+        {
+          "case_id": "CV_00018276",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00022470",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00008477",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_004",
+      "candidate_patient": "patient_004",
+      "noncontrast": [
+        {
+          "case_id": "CV_00011916",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00018103",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00018699",
+          "phase_hint": "arterial",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_005",
+      "candidate_patient": "patient_005",
+      "noncontrast": [
+        {
+          "case_id": "CV_00001682",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00002817",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00018199",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": null
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00004024",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_006",
+      "candidate_patient": "patient_006",
+      "noncontrast": [
+        {
+          "case_id": "CV_00015417",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00022260",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_007",
+      "candidate_patient": "patient_007",
+      "noncontrast": [
+        {
+          "case_id": "CV_00014494",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00019549",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00011093",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00015377",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00015664",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00023422",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_008",
+      "candidate_patient": "patient_008",
+      "noncontrast": [
+        {
+          "case_id": "CV_00007372",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00002859",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00013483",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_009",
+      "candidate_patient": "patient_009",
+      "noncontrast": [
+        {
+          "case_id": "CV_00001602",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00002801",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00013361",
+          "phase_hint": "venous",
+          "foreground_voxels": null
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_010",
+      "candidate_patient": "patient_010",
+      "noncontrast": [
+        {
+          "case_id": "CV_00022492",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": null
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00005388",
+          "phase_hint": "portal_venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_011",
+      "candidate_patient": "patient_011",
+      "noncontrast": [
+        {
+          "case_id": "CV_00005155",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00023378",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00019370",
+          "phase_hint": "arterial",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_012",
+      "candidate_patient": "patient_012",
+      "noncontrast": [
+        {
+          "case_id": "CV_00004593",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00019009",
+          "phase_hint": "portal_venous",
+          "foreground_voxels": null
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_013",
+      "candidate_patient": "patient_013",
+      "noncontrast": [
+        {
+          "case_id": "CV_00016930",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00001913",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_014",
+      "candidate_patient": "patient_013",
+      "noncontrast": [
+        {
+          "case_id": "CV_00013266",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00000124",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00003628",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00009911",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00014377",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00015000",
+          "phase_hint": "venous",
+          "foreground_voxels": null
+        },
+        {
+          "case_id": "CV_00020700",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_015",
+      "candidate_patient": "patient_014",
+      "noncontrast": [
+        {
+          "case_id": "CV_00013410",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00007344",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_016",
+      "candidate_patient": "patient_015",
+      "noncontrast": [
+        {
+          "case_id": "CV_00009235",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00014082",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00015641",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_017",
+      "candidate_patient": "patient_016",
+      "noncontrast": [
+        {
+          "case_id": "CV_00014810",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00000358",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00001172",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00001828",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00010960",
+          "phase_hint": "arterial",
+          "foreground_voxels": null
+        },
+        {
+          "case_id": "CV_00019718",
+          "phase_hint": "venous",
+          "foreground_voxels": null
+        },
+        {
+          "case_id": "CV_00021751",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00022358",
+          "phase_hint": "venous",
+          "foreground_voxels": null
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_018",
+      "candidate_patient": "patient_017",
+      "noncontrast": [
+        {
+          "case_id": "CV_00007899",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 39444
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00019311",
+          "phase_hint": "venous",
+          "foreground_voxels": 687140
+        },
+        {
+          "case_id": "CV_00019743",
+          "phase_hint": "venous",
+          "foreground_voxels": 767050
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": true,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_019",
+      "candidate_patient": "patient_018",
+      "noncontrast": [
+        {
+          "case_id": "CV_00001967",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00001493",
+          "phase_hint": "portal_venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_020",
+      "candidate_patient": "patient_019",
+      "noncontrast": [
+        {
+          "case_id": "CV_00000571",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00010293",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00006582",
+          "phase_hint": "arterial",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_021",
+      "candidate_patient": "patient_020",
+      "noncontrast": [
+        {
+          "case_id": "CV_00011920",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00002870",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00005108",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00006145",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00008283",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00009422",
+          "phase_hint": "venous",
+          "foreground_voxels": null
+        },
+        {
+          "case_id": "CV_00014092",
+          "phase_hint": "venous",
+          "foreground_voxels": null
+        },
+        {
+          "case_id": "CV_00020251",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00021636",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_022",
+      "candidate_patient": "patient_021",
+      "noncontrast": [
+        {
+          "case_id": "CV_00012013",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": null
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00019642",
+          "phase_hint": "arterial_late",
+          "foreground_voxels": null
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_023",
+      "candidate_patient": "patient_022",
+      "noncontrast": [
+        {
+          "case_id": "CV_00017533",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00005937",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00011774",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00011784",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00013433",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_024",
+      "candidate_patient": "patient_023",
+      "noncontrast": [
+        {
+          "case_id": "CV_00006245",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00008234",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00000417",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00003556",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00003979",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00004250",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00009618",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00010902",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00011653",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00015077",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00015493",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00015780",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00016556",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00017701",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00023669",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_025",
+      "candidate_patient": "patient_024",
+      "noncontrast": [
+        {
+          "case_id": "CV_00022322",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00001073",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00008975",
+          "phase_hint": "arterial",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00022015",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_026",
+      "candidate_patient": "patient_025",
+      "noncontrast": [
+        {
+          "case_id": "CV_00010642",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00003474",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00004523",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        },
+        {
+          "case_id": "CV_00021609",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_027",
+      "candidate_patient": "patient_026",
+      "noncontrast": [
+        {
+          "case_id": "CV_00003268",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00008359",
+          "phase_hint": "portal_venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    },
+    {
+      "candidate_group": "group_028",
+      "candidate_patient": "patient_027",
+      "noncontrast": [
+        {
+          "case_id": "CV_00004971",
+          "phase_hint": "non-contrast",
+          "foreground_voxels": 0
+        }
+      ],
+      "contrast": [
+        {
+          "case_id": "CV_00018861",
+          "phase_hint": "venous",
+          "foreground_voxels": 0
+        }
+      ],
+      "nonempty_pancreatic_masks_both_phases": false,
+      "tumor_correspondence_verified": false,
+      "training_eligible": false
+    }
+  ],
+  "input_artifact_provenance": {
+    "strict": {
+      "filename": "cancerverse_pair_candidates_20261008.json",
+      "sha256": "5bfa9927e8ada853e6eb9f436bda8772d3f08399ad1c07b33bec5501ba9a01b2"
+    },
+    "expanded": {
+      "filename": "cancerverse_cross_accession_candidates_20261008.json",
+      "sha256": "17b846ac02a14c00b3ac7a8305a4ef9ad5f2ec482f1903047d3ab06c29a52a90"
+    },
+    "previous": {
+      "filename": "phase_public_annotation_geometry_full_20261007.json",
+      "sha256": "77530cb61e919fa30bb9ba4949646a8af5cee92a493dcaa021a82a25f06f17c9"
+    },
+    "extension": {
+      "filename": "cancerverse_label_extension_20261008.json",
+      "sha256": "b2a837e8f5fb87fbc03f5f5b68da1d44f282f2d50040237d18c932ee30b38f0f"
+    }
+  }
+}

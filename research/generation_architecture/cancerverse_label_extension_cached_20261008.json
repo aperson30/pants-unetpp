@@ -1,0 +1,340 @@
+{
+  "revision": "c15802c28cb31b71dee2e680319d522b3bc4cbbf",
+  "metadata_sha256": "3e58b8a1b8cb3b9664d446ef4d7ca393c51495af5073119c25596b2d4bb903d8",
+  "archive": "https://www.cs.jhu.edu/~zongwei/dataset/CancerVerse_Label.tar.gz",
+  "archive_headers": {
+    "cached_archive_sha256": "d78e18a46a896df71cd49db12817738439f35df4d243979a2aad0f03b39a473a",
+    "Content-Length": "551163721"
+  },
+  "compressed_bytes_read": 517079050,
+  "compressed_prefix_sha256": "84e59b1e6c416555d8e7346b2083d2a58a6ca90b12cd1d912e2ae2e7e30be586",
+  "archive_scan_complete": false,
+  "stop_reason": "All extension targets inspected; archive not exhausted",
+  "target_cases": [
+    "CV_00000257",
+    "CV_00001493",
+    "CV_00001682",
+    "CV_00001828",
+    "CV_00001967",
+    "CV_00002817",
+    "CV_00002859",
+    "CV_00003268",
+    "CV_00003474",
+    "CV_00004024",
+    "CV_00004593",
+    "CV_00005108",
+    "CV_00005388",
+    "CV_00008283",
+    "CV_00008359",
+    "CV_00009422",
+    "CV_00010960",
+    "CV_00012013",
+    "CV_00013361",
+    "CV_00014092",
+    "CV_00015000",
+    "CV_00015295",
+    "CV_00017236",
+    "CV_00018199",
+    "CV_00019009",
+    "CV_00019642",
+    "CV_00019718",
+    "CV_00022358",
+    "CV_00022492"
+  ],
+  "masks": {
+    "CV_00000257": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        78
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00001493": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        399
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00001682": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        327
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00001828": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        76
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00001967": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        243
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00002817": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        327
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00002859": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        570
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00003268": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        331
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00003474": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        557
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00004024": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        327
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00004593": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        421
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00005108": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        414
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00005388": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        434
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00008283": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        414
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00008359": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        302
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00009422": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        226
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00010960": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        423
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00012013": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        506
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00013361": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        457
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00014092": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        413
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00015000": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        422
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00015295": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        238
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00017236": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        414
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00018199": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        327
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00019009": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        502
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00019642": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        515
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00019718": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        423
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00022358": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        423
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    },
+    "CV_00022492": {
+      "foreground_voxels": 0,
+      "shape": [
+        512,
+        512,
+        77
+      ],
+      "tumor_correspondence_verified": false,
+      "registration_verified": false
+    }
+  },
+  "unseen_targets": [],
+  "gpu_hours": 0,
+  "training_eligible": false,
+  "raw_identifiers_saved": false
+}

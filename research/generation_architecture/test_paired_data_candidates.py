@@ -30,6 +30,18 @@ class CandidateInventoryContracts(unittest.TestCase):
             with self.assertRaises(ValueError):
                 inventory(raw)
 
+    def test_cross_accession_discovery_is_explicit_not_verification(self):
+        raw = (HEADER + "CV_00000001,p,a,date1,non-contrast,r\n"
+               "CV_00000002,p,b,date1,venous,r\n"
+               "CV_00000003,p,c,date2,venous,r\n").encode()
+        self.assertEqual(inventory(raw)["candidate_groups"], [])
+        expanded = inventory(raw, "patient_date")
+        self.assertEqual(len(expanded["candidate_groups"]), 1)
+        self.assertFalse(expanded["candidate_groups"][0]["patient_linkage_verified"])
+        self.assertEqual(len(expanded["candidate_groups"][0]["contrast"]), 1)
+        with self.assertRaises(ValueError):
+            inventory(raw, "patient_only")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,157 @@
+{
+  "scope": "public candidate pixels; no clinical or registration pass",
+  "revision": "c15802c28cb31b71dee2e680319d522b3bc4cbbf",
+  "files": {
+    "CV_00007899": {
+      "shape": [
+        512,
+        512,
+        378
+      ],
+      "file_sha256": "c11802be029940992df22fad504100ee58dceccea953ac154465a9755ed7d201",
+      "scaled_voxel_sha256": "540acab3c02dd29741f79998f711600da50a79d6d5c4d4869b1c2ff314932496",
+      "voxel_min": -999.9999997671694,
+      "voxel_max": 999.9999997671694,
+      "sampled_percentiles": [
+        -1000.0,
+        -1000.0,
+        200.0
+      ]
+    },
+    "CV_00019311": {
+      "shape": [
+        512,
+        512,
+        378
+      ],
+      "file_sha256": "728c47738ad9d0d8c8fb7283d9c07317d5546ce443880a4068a3614a29998e0a",
+      "scaled_voxel_sha256": "4131014f9fb95d629127822d9522e645fcbb575f758ccd6eab2e3958bc584bf7",
+      "voxel_min": -999.9999997671694,
+      "voxel_max": 999.9999997671694,
+      "sampled_percentiles": [
+        -1000.0,
+        -938.9944458007812,
+        285.9998474121094
+      ]
+    },
+    "CV_00019743": {
+      "shape": [
+        512,
+        512,
+        378
+      ],
+      "file_sha256": "784fe634145a8355f6cf973e8d3b826c7ccdc4799200902baf5fff5f02ca3a42",
+      "scaled_voxel_sha256": "e9f0a6299b30caded60c4fe5ce348d1fa5b2ce6e4ed48e0ef01f4a2fb32980d3",
+      "voxel_min": -999.9999997671694,
+      "voxel_max": 999.9999997671694,
+      "sampled_percentiles": [
+        -1000.0,
+        -930.9987182617188,
+        301.9913024902344
+      ]
+    }
+  },
+  "affines": {
+    "CV_00007899": [
+      [
+        -0.83203125,
+        -0.0,
+        -0.0,
+        194.583984375
+      ],
+      [
+        -0.0,
+        0.83203125,
+        0.0,
+        -3.583984375
+      ],
+      [
+        0.0,
+        0.0,
+        -1.5,
+        -1056.9000244140625
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "CV_00019311": [
+      [
+        -0.83203125,
+        -0.0,
+        -0.0,
+        194.583984375
+      ],
+      [
+        -0.0,
+        0.83203125,
+        0.0,
+        -3.583984375
+      ],
+      [
+        0.0,
+        0.0,
+        -1.5,
+        -1056.9000244140625
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "CV_00019743": [
+      [
+        -0.83203125,
+        -0.0,
+        -0.0,
+        194.583984375
+      ],
+      [
+        -0.0,
+        0.83203125,
+        0.0,
+        -3.583984375
+      ],
+      [
+        0.0,
+        0.0,
+        -1.5,
+        -1056.9000244140625
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "descriptive_pairs": {
+    "CV_00007899:CV_00019311": {
+      "sampled_voxels_equal": false,
+      "sampled_body_voxels": 469150,
+      "unregistered_body_correlation": 0.9497003747985241,
+      "unregistered_body_mean_abs_difference": 25.43419075012207
+    },
+    "CV_00007899:CV_00019743": {
+      "sampled_voxels_equal": false,
+      "sampled_body_voxels": 468322,
+      "unregistered_body_correlation": 0.9223811783016354,
+      "unregistered_body_mean_abs_difference": 32.78999710083008
+    },
+    "CV_00019311:CV_00019743": {
+      "sampled_voxels_equal": false,
+      "sampled_body_voxels": 578046,
+      "unregistered_body_correlation": 0.9869219266868637,
+      "unregistered_body_mean_abs_difference": 13.66662883758545
+    }
+  },
+  "training_eligible": false,
+  "tumor_labels_inspected_in_this_run": false,
+  "gpu_hours": 0
+}

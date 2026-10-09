@@ -1,0 +1,145 @@
+{
+  "revision": "c15802c28cb31b71dee2e680319d522b3bc4cbbf",
+  "scope": "header-only candidate screen",
+  "gpu_hours": 0,
+  "results": [
+    {
+      "case_id": "CV_00007899",
+      "url": "https://huggingface.co/datasets/BodyMaps/CancerVerse/resolve/c15802c28cb31b71dee2e680319d522b3bc4cbbf/CancerVerse/CV_00007899/ct.nii.gz",
+      "http_status": 206,
+      "bytes_read": 65536,
+      "geometry": {
+        "shape": [
+          512,
+          512,
+          378
+        ],
+        "spacing_header": [
+          0.83203125,
+          0.83203125,
+          1.5
+        ],
+        "spatial_units_code": 2,
+        "qform_code": 1,
+        "sform_code": 1,
+        "sform_rows": [
+          [
+            -0.83203125,
+            -0.0,
+            -0.0,
+            194.583984375
+          ],
+          [
+            -0.0,
+            0.83203125,
+            0.0,
+            -3.583984375
+          ],
+          [
+            0.0,
+            0.0,
+            -1.5,
+            -1056.9000244140625
+          ]
+        ],
+        "datatype_code": 4,
+        "header_sha256": "ea0ab16f29a8f95d243a047fea587518f069c32ea257dd8443ea26167c070df8"
+      },
+      "full_file_integrity_verified": false,
+      "registration_verified": false,
+      "tumor_annotations_verified": false
+    },
+    {
+      "case_id": "CV_00019311",
+      "url": "https://huggingface.co/datasets/BodyMaps/CancerVerse/resolve/c15802c28cb31b71dee2e680319d522b3bc4cbbf/CancerVerse/CV_00019311/ct.nii.gz",
+      "http_status": 206,
+      "bytes_read": 65536,
+      "geometry": {
+        "shape": [
+          512,
+          512,
+          378
+        ],
+        "spacing_header": [
+          0.83203125,
+          0.83203125,
+          1.5
+        ],
+        "spatial_units_code": 2,
+        "qform_code": 1,
+        "sform_code": 1,
+        "sform_rows": [
+          [
+            -0.83203125,
+            -0.0,
+            -0.0,
+            194.583984375
+          ],
+          [
+            -0.0,
+            0.83203125,
+            0.0,
+            -3.583984375
+          ],
+          [
+            0.0,
+            0.0,
+            -1.5,
+            -1056.9000244140625
+          ]
+        ],
+        "datatype_code": 4,
+        "header_sha256": "ea0ab16f29a8f95d243a047fea587518f069c32ea257dd8443ea26167c070df8"
+      },
+      "full_file_integrity_verified": false,
+      "registration_verified": false,
+      "tumor_annotations_verified": false
+    },
+    {
+      "case_id": "CV_00019743",
+      "url": "https://huggingface.co/datasets/BodyMaps/CancerVerse/resolve/c15802c28cb31b71dee2e680319d522b3bc4cbbf/CancerVerse/CV_00019743/ct.nii.gz",
+      "http_status": 206,
+      "bytes_read": 65536,
+      "geometry": {
+        "shape": [
+          512,
+          512,
+          378
+        ],
+        "spacing_header": [
+          0.83203125,
+          0.83203125,
+          1.5
+        ],
+        "spatial_units_code": 2,
+        "qform_code": 1,
+        "sform_code": 1,
+        "sform_rows": [
+          [
+            -0.83203125,
+            -0.0,
+            -0.0,
+            194.583984375
+          ],
+          [
+            -0.0,
+            0.83203125,
+            0.0,
+            -3.583984375
+          ],
+          [
+            0.0,
+            0.0,
+            -1.5,
+            -1056.9000244140625
+          ]
+        ],
+        "datatype_code": 4,
+        "header_sha256": "38def95f9d07dc7078ac06c34a8deb9fde9c5014d3b83670b4686bdde2f49d65"
+      },
+      "full_file_integrity_verified": false,
+      "registration_verified": false,
+      "tumor_annotations_verified": false
+    }
+  ]
+}

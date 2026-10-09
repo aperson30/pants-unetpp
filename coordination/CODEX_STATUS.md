@@ -2611,3 +2611,33 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   NOT verified phases/patients/registration/tumor annotations or training pairs.
 - Saved derived headers/tests/report; no full CT, raw patient reports, GPU jobs,
   production changes or protected evaluation access. Smoke charge unchanged.
+
+### 2026-10-08 — Expanded data gate complete; pilot safety prepared, training blocked
+
+- Reused the completed83-series prior mask audit; two initially geometry-matched
+  groups have empty pancreatic masks. Same-day cross-accession discovery expands
+  to28candidate groups/27candidate patients/109distinct phase-hinted series.
+  All109mask availabilities checked after a bounded cached-archive follow-up;
+  still only ONE candidate patient has nonempty pancreatic masks in both phases.
+  This is coverage of this candidate inventory, not all possible CancerVerse pairs.
+- Staged just3public CTs for that patient into isolated personal home286.1MB;
+  pinned content hashes, shape/affine and finite pixels checked. Sampled anatomy
+  broadly corresponds but does not certify patient, phase, clinical labels or
+  protected PanTS overlap. Original-source data and production untouched.
+- Verified/cached public label archive551.2MB once in personal home; extracted
+  just3target masks for index-space overlays. NC/CE mask coverage differs greatly
+  (reference-mask Dice0.0664/0.0549, not model performance). Identical stored
+  affines are not proof of identical annotated lesions; scope needs clarification.
+  One failed CPU overlay attempt preserved its output; fixed sparse gzip buffering,
+  verified/reused it and completed the bounded check. No automatic GPU retries.
+- Added split/scan leakage, overlap/unknown-data, recipe/safety-margin and separate
+  charged-budget gates. Tested serialized stochastic next-update resume including
+  model/AdamW/scheduler/Python+NumPy+Torch RNG/sampler state. All38CPU tests passed
+  6.386s. Helpers are NOT full production/AMP/EMA/dataloader integration.
+- PILOT_EXECUTION_GATE_20261008.md gives exact remaining boundaries and actual
+  released SMILE recipe (not the BF16/MSE random fixture). No frozen tumor split,
+  real training launch, quality/speedup claim or protected evaluation read/change.
+  No new GPU hours: known smoke estimate remains0.055556h before rounding.
+- Alternative general-pair training plus independently labeled PanTS NC development
+  evaluation is documented as a separately defined design, not silently substituted.
+  Training budget, patient-overlap review and recipe still needed before launch.

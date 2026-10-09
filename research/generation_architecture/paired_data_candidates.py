@@ -20,7 +20,9 @@ CE = {"arterial", "arterial_early", "arterial_late", "venous", "portal_venous", 
 MISSING = {"", "na", "n/a", "nan", "none", "unknown"}
 
 
-def inventory(raw):
+def inventory(raw, grouping="patient_accession_date"):
+    if grouping not in ("patient_accession_date", "patient_date"):
+        raise ValueError("Unknown candidate grouping")
     reader = csv.DictReader(io.StringIO(raw.decode("utf-8-sig")))
     required = {"CancerVerse ID", "Patient ID", "Encrypted Accession Number", "exam_date", "phase"}
     if not required.issubset(reader.fieldnames or []):
@@ -32,7 +34,8 @@ def inventory(raw):
         if not re.fullmatch(r"CV_[0-9]{8}", case) or case in case_ids:
             raise ValueError("Malformed or duplicate public case ID")
         case_ids.add(case)
-        key = tuple(row[k].strip() for k in ("Patient ID", "Encrypted Accession Number", "exam_date"))
+        columns = ("Patient ID", "Encrypted Accession Number", "exam_date") if grouping == "patient_accession_date" else ("Patient ID", "exam_date")
+        key = tuple(row[k].strip() for k in columns)
         if any(value.casefold() in MISSING for value in key):
             continue
         phase = row["phase"].strip().casefold()
@@ -50,7 +53,7 @@ def inventory(raw):
                        "patient_linkage_verified": False, "phase_acquisition_verified": False,
                        "registration_verified": False, "tumor_annotations_verified": False,
                        "training_eligible": False})
-    return {"revision": REVISION, "metadata_sha256": hashlib.sha256(raw).hexdigest(),
+    return {"revision": REVISION, "metadata_sha256": hashlib.sha256(raw).hexdigest(), "grouping": grouping,
             "candidate_groups": result, "scope": "metadata hints only; all training eligibility false",
             "raw_identifiers_or_reports_saved": False, "CT_or_masks_downloaded": False}
 
@@ -58,12 +61,13 @@ def inventory(raw):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", required=True)
+    parser.add_argument("--grouping", choices=("patient_accession_date", "patient_date"), default="patient_accession_date")
     args = parser.parse_args()
     with urllib.request.urlopen(URL, timeout=30) as response:
         raw = response.read(32 * 1024 * 1024 + 1)
     if len(raw) > 32 * 1024 * 1024:
         raise ValueError("Metadata exceeds bounded cap")
-    result = inventory(raw)
+    result = inventory(raw, grouping=args.grouping)
     with open(args.out, "x", encoding="utf-8") as output:
         json.dump(result, output, indent=2, allow_nan=False)
     print(json.dumps({"candidate_groups": len(result["candidate_groups"]),
