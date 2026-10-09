@@ -2555,3 +2555,17 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   paired registration; do not interpret demo outputs as clinical evidence.
 - Installed nibabel 5.3.2 only in isolated baseline_venv. No production edits,
   original CT writes, protected test access or full training submission.
+
+### 2026-10-08 21:21 PDT — Pretrained component PASS; plain control and JEPA audit
+
+- Job3345369 COMPLETED/exit0/35s on GH200. Actual pretrained loading, synthetic
+  two-step denoising and finite decode passed; raw log preserved. Estimated charge
+  0.019444h, cumulative known smoke0.026667h before rounding. Not clinical proof.
+- Original single-decoder ConditionalPlainDenoiser added; same conditioning block
+  as nested fixture. Equal widths != equal parameters; neither SD1.5-matched.
+  All22 CPU tests passed4.320s under90s timeout; nested source unchanged.
+- JEPA_REVIEW.md audits I-JEPA, D-JEPA, REPA and U-REPA prior work. JEPA alignment
+  alone is not novel or a demonstrated CT speed gain. No JEPA GPU experiment.
+- Held/preflighted/released public center-triplet job3345403: matching input hash,
+  exclusive fresh output, DDIM200/CFG7.5, 3min/no retries/billing2000. Last pending;
+  maximum extra0.1h fits smoke cap0.25h. No protected data or full training.
