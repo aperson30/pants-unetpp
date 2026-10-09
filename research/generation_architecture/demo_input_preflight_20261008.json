@@ -1,0 +1,46 @@
+{
+  "scope": "public demo source metadata and center triplet only",
+  "path": "/u/asanjeev/generation_architecture_20261008_v1/demo_inputs/Dataset101/demo_non-contrast/ct.nii.gz",
+  "sha256": "71e2b4c49eec6cdc1c665c242588ef84d5599b62605910aa4c24ec97014ae2be",
+  "shape_hwd": [
+    512,
+    512,
+    283
+  ],
+  "affine": [
+    [
+      -0.732421875,
+      -0.0,
+      -0.0,
+      195.5
+    ],
+    [
+      -0.0,
+      0.732421875,
+      0.0,
+      -363.767578125
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0,
+      512.7999877929688
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "spacing": [
+    0.732421875,
+    0.732421875,
+    1.0
+  ],
+  "center_triplet_start": 140,
+  "center_min": -1000.0,
+  "center_max": 1000.0,
+  "paired_registration_verified": false,
+  "tumor_labels_available": false
+}

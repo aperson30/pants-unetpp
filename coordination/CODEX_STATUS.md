@@ -2538,3 +2538,20 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - No added GPU allocation, actual model tensor loading, CT enhancement or quality
   claim. Full experiment steps require verified input data/recipe and additional
   training budget; do not mistake prepared assets for a trained generator.
+
+### 2026-10-08 21:13 PDT — Bounded pretrained smoke submitted; public demo checked
+
+- Prepared original component smoke using pinned pretrained SMILE denoiser/VAE,
+  CLIP and DDIM, two synthetic denoising steps. This is not medical enhancement
+  evaluation or an end-to-end reproduction of the released 200-step pipeline.
+- Submitted job 3345369 on hold, verified account, 1 GPU/2 CPU/16GB/3min,
+  no requeue, billing=2000, then released it. Last check PENDING; no pass claimed.
+  Maximum charge estimate 0.1h, plus prior 0.00722h, within existing 0.25h smoke
+  cap before provider rounding. Python timeout 160s plus 5s kill grace.
+- Public pinned Dataset101 demo archive downloaded (804.7MB). Inspected inventory,
+  extracted only noncontrast CT with no-overwrite option in isolated home directory.
+  Read-only input preflight passed: 512x512x283, valid affine, finite center triplet,
+  SHA256 recorded in demo_input_preflight_20261008.json. No tumor labels or verified
+  paired registration; do not interpret demo outputs as clinical evidence.
+- Installed nibabel 5.3.2 only in isolated baseline_venv. No production edits,
+  original CT writes, protected test access or full training submission.
