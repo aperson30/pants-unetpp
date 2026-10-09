@@ -2496,3 +2496,27 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   screening, not 20 full readings. Depth/noise routing has extensive prior art;
   strong solver/fewer-step controls and medical fidelity gates required.
 - No extra GPU jobs for reading, no checkpoint download or production install.
+
+### 2026-10-08 — Weight-independent generation preflight follow-up
+
+- User busy with HF signup; completed unaffected local preparation without
+  asking for credentials or allocating more GPU time. Added original baseline
+  contracts and seven tests: 19 total passed in 7.557s on Torch 2.10.0+cpu,
+  wrapped in 90s subprocess timeout. Helpers not integrated into SMILE yet.
+- Fail-closed triplet coverage/duplicates, 4/4/4 latent contract, finite HU
+  conversion, geometry and bounded safetensors header checks. Header fixture
+  is not real checkpoint loading/integrity validation.
+- Source audit found original-size noise can be bilinearly resized to latent
+  resolution after 512x512 image resize. CPU fixture verifies variance/correlation
+  changes, not clinical failure. Preserve source behavior for reproduction;
+  direct latent-size noise is a labeled control, not silent per-arm correction.
+- BASELINE_PREFLIGHT.md records asset/version/RNG manifest, geometry/units/
+  coverage gates and matched experimental ladder; no guessed dependency lock,
+  clinical tolerance or full-training authorization. Nondense nested fixture
+  explicitly not advertised as a conventional plain U-Net.
+- Finished targeted method/experiment pass across 20 selected paper families
+  (not 20 full proof/appendix audits). Added MICCAI 2026 sparse voxel-space
+  diffusion neighbor: two B200s; 10x convergence-iteration headline is not our
+  measured GPU-hour saving. Solver/model-call and medical-quality controls remain.
+- No original SMILE code modified, protected evaluation accessed, large assets
+  downloaded, environment installs, new GPU jobs or production changes.

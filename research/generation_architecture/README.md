@@ -148,6 +148,14 @@ and resume state; no unconditional automatic retry of a known broken startup.
 
 ## Genuine remaining gates
 
+Preparation follow-up: `BASELINE_PREFLIGHT.md` records the source-specific noise,
+coverage, unit, asset and fair-comparison gates. `baseline_contracts.py` adds seven
+CPU tests; **19 total tests passed**, 7.557 seconds locally under a 90-second
+timeout. These helpers are not yet wired into SMILE's pipeline. The twenty-paper
+register now includes targeted method/experiment reading for every selected
+family, not full end-to-end readings; an additional MICCAI 2026 medical-acceleration
+neighbor is documented. No further GPU allocation for this follow-up.
+
 We need the PI-intended baseline recipe/data and approved checkpoint access.
 SMILE's Hugging Face repository is gated: a config request returned 401 /
 GatedRepoError. The user has no Hugging Face account. Do not bypass the gate,

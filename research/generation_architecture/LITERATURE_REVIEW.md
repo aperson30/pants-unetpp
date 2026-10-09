@@ -10,9 +10,9 @@ results are their experiments, not predictions for our conditional CT task.
 
 | Primary source | Depth | Consequence for our experiment |
 | --- | --- | --- |
-| [UNet++](https://arxiv.org/abs/1807.10165) | A | Nested skips, supervision and pruning are established ingredients, not standalone novelty. |
-| [Latent Diffusion](https://arxiv.org/abs/2112.10752) | A | Hold latent representation and condition encoder fixed to isolate denoiser changes. |
-| [U-ViT](https://arxiv.org/html/2209.12152v2) | A | Time/condition/image tokens and long skips offer a backbone comparator, not an identical CNN. |
+| [UNet++](https://arxiv.org/html/1807.10165v1) | M | Sections 3–4: nested skips, supervision and pruning are established ingredients; its wide U-Net control addresses parameter-count confounding. |
+| [Latent Diffusion](https://arxiv.org/html/2112.10752v2) | M | Section 3: separate autoencoding and diffusion, concatenation/cross-attention conditioning. Hold latent representation and condition encoder fixed. |
+| [U-ViT](https://arxiv.org/html/2209.12152v2) | M | Sections 3/5: time/condition/image tokens, skip fusion and latent/CLIP setup. Backbone comparison must control size/representation. |
 | [Matryoshka](https://arxiv.org/html/2310.15111v2) | M | Multi-resolution objectives plus progressive training. Appendix D, 8 A100s: nested/ordinary training iteration 0.52/0.50s, inference step 0.41/0.40s. Nesting alone did not accelerate this comparison. |
 | [ASE](https://arxiv.org/html/2408.05927v1) | M | Timestep-dependent exits and finetuning/EMA/loss changes; U-ViT/DiT/PixArt on A100. Direct collision with broad depth-versus-noise novelty. |
 | [AdaDiff / DeeDiff](https://arxiv.org/html/2309.17074v3) | M | Intermediate heads and timestep-aware learned uncertainty. Same paper family; timing hardware not verified here. |
@@ -23,9 +23,9 @@ results are their experiments, not predictions for our conditional CT task.
 | [FasterDiffusion](https://arxiv.org/html/2312.09608v2) | M | Encoder propagation and decoder work; A40 48GB inference. Feature-propagation failures warn against assuming details survive caching. |
 | [Cache Me If You Can](https://arxiv.org/html/2312.03209v2) | M | Block-wise caching and alignment. Compare at equal wall time to fewer-step sampling; some alignment choices require fitting. Hardware not verified. |
 | [DuoDiff](https://arxiv.org/html/2410.09633v1) | M | Independently trained shallow/deep U-ViTs and fixed switch, A100 40GB. Simple routing avoids batching overhead; extra model training still costs. |
-| [DPM-Solver++](https://arxiv.org/html/2211.01095v3) | A | Strong training-free guided sampler comparator. Natural-image 15–20-step claims do not prove CT can safely drop from 200 steps. |
-| [UniPC](https://arxiv.org/html/2302.04867v3) | A | Predictor-corrector comparator; verify scheduler/parameterization and count actual model evaluations. |
-| [Consistency Models](https://arxiv.org/html/2303.01469v2) | A | Few-step learned mapping/objective, not simply a scheduler switch. |
+| [DPM-Solver++](https://arxiv.org/html/2211.01095v3) | M | Sections 4/7: multistep reuse vs extra singlestep model calls. Latent experiments omit thresholding because latents are unbounded. Natural-image 15–20-step results do not prove CT fidelity. |
+| [UniPC](https://arxiv.org/html/2302.04867v3) | M | Sections 3/4: predictor-corrector reuse and same-noise latent convergence versus long DDIM. Decoder perceptual metrics can hide latent convergence error. |
+| [Consistency Models](https://arxiv.org/html/2303.01469v2) | M | Sections 5/6: teacher-free training vs pretrained distillation, EMA/discretization and metric choices. Different objective; not a scheduler switch. |
 | [Latent Consistency Models](https://arxiv.org/html/2310.04378v1) | M | Guided latent distillation: 4k-update/32 A100-hour fast-convergence demonstration alongside 100k-update main settings. Headline is not cost of every adaptation. |
 | [MeanFlow](https://arxiv.org/html/2505.13447v1) | M | Average-velocity training with stop-gradient JVP target. Changes objective, needs training; not a replacement scheduler for epsilon checkpoints. |
 | [MAISI](https://arxiv.org/html/2409.11169v2) | M | 3D latent compression, spacing/body-region and ControlNet conditions. Mask-conditioned synthesis cannot assume unknown test tumor masks. |
@@ -56,6 +56,22 @@ results are their experiments, not predictions for our conditional CT task.
   schedule on development data, compare against fewer model evaluations.
 - Protected 2x2 test evaluation stays outside architecture development.
 
-Remaining A entries need deeper method/evaluation reading. None of this establishes
-medical benefit, conference odds or a novelty guarantee. No additional GPU job
-was submitted for this reading pass.
+All twenty now have targeted method/experimental or full-source reading, but
+this remains a selective engineering pass, not twenty full proof/appendix audits.
+Hardware marked unverified remains unverified. None establishes our medical
+benefit, conference odds or a novelty guarantee. No additional GPU job submitted.
+
+## Current medical acceleration neighbor (additional, not part of the twenty)
+
+[Structure-Adaptive Sparse Diffusion, MICCAI 2026](https://papers.miccai.org/miccai-2026/paper/5369_paper.pdf):
+method and experiment pages inspected. Conditional voxel-space 3D denoising/
+super-resolution, five selected timesteps, clean-image prediction, velocity-space
+loss and anatomy-conditioned time modulation; two B200s, batch four. Its 10x
+claim is primarily fewer iterations to baseline quality; table 3 reports relative
+training cost without an absolute GPU-hour budget. Restricting eligible noise
+timesteps alone does not reduce per-update model calls in ordinary sampled-timestep
+training. No direct noncontrast-to-contrast pancreatic tumor result is established
+here. Treat as relevant prior art/possible later comparator, not evidence that
+our epsilon architecture can adopt the changes without retraining. Reviewers
+also demanded stronger non-diffusion baselines; a direct conditional image-to-image
+U-Net control is worth considering after the basic pilot.
