@@ -1,0 +1,33 @@
+{
+  "schema": "cancerverse-pair-availability-v1",
+  "metadata_sha256": "3e58b8a1b8cb3b9664d446ef4d7ca393c51495af5073119c25596b2d4bb903d8",
+  "metadata_bytes": 24499836,
+  "rows": 24422,
+  "phase_counts_original_strings": {
+    "": 4238,
+    "arterial": 246,
+    "arterial_early": 1578,
+    "arterial_late": 2720,
+    "non-contrast": 1681,
+    "portal_venous": 11993,
+    "venous": 1966
+  },
+  "rows_missing_pair_key": 4153,
+  "same_patient_accession_date_nc_ce_groups": 23,
+  "patients_with_candidate_groups": 20,
+  "candidate_groups_with_C25_diagnostic_code": 0,
+  "candidate_CT_series_total": 83,
+  "verified_pancreatic_tumor_pairs": null,
+  "limitations": [
+    "C25 diagnostic code is not proof of a tumor mask or lesion type.",
+    "String-based phase labels are not independently verified acquisition truth.",
+    "Pairing candidates need image/geometry, lesion correspondence and date review.",
+    "PanTS overlap and patient-disjoint fitting/evaluation are unverified.",
+    "CC BY-NC-ND 4.0 requires license review before use or distribution of derivatives."
+  ],
+  "patient_identifiers_or_reports_saved": false,
+  "CT_or_masks_downloaded": false,
+  "gpu_hours": 0,
+  "revision": "c15802c28cb31b71dee2e680319d522b3bc4cbbf",
+  "public_metadata_url": "https://huggingface.co/datasets/BodyMaps/CancerVerse/resolve/c15802c28cb31b71dee2e680319d522b3bc4cbbf/CancerVerse_dataset_metadata.csv"
+}

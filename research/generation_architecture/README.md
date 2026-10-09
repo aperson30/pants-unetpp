@@ -2,6 +2,14 @@
 
 ## Actual status
 
+**Latest October 8 update supersedes the earlier pending items below:** pretrained
+synthetic execution and public CT center-triplet runtime passed (jobs 3345369 and
+3345403); tiny matched-input architecture training execution also passed
+(3345424). No trained U-Net++ generator or medical quality/speedup result exists.
+See `DATA_AND_TRAIN_PROBE_20261008.md`: CancerVerse has 23 candidate phase-pair
+groups, not verified training pairs; PanTS can support tumor checks. CTVerse is
+optional. Known estimated smoke charge is 0.055556 GPU-hours before rounding.
+
 Source audit and original CPU prototype complete. Random-weight GPU contract
 probe **3344849 passed** on DeltaAI GH200; see `GPU_SMOKE_RESULT.md` and raw log.
 **No baseline enhancement run, trained U-Net++ generator, medical fidelity result

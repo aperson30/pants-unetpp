@@ -2580,3 +2580,22 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   (13+35+34 seconds at factor2), below0.25h approved cap. No automatic retries.
 - Github latest observed main still a5665aa while push of258501e awaits completion;
   do not claim latest literature/control/runtime updates published without check.
+
+### 2026-10-08 — Architecture update PASS; available-data gate clarified
+
+- Job3345424 COMPLETED/exit0/18s: tiny same-input GH200 plain/nested training
+  contract passed. Median17.67/22.34/22.72ms plain/deepest/all-head; nested deepest
+  26.4% slower on this unequal-parameter random fixture, NOT clinical or production
+  speed evidence. Raw log preserved; estimated cumulative smoke charge0.055556h
+  before rounding versus approved0.25h. No additional GPU job submitted here.
+- User has CancerVerse/PanTS; CTVerse is optional. Refreshed pinned CancerVerse
+  metadata:23candidate phase groups/20candidate patients/83series. Saved public
+  filename inventory only, all verification/eligibility flags false. No CT/mask
+  download, raw patient IDs/reports retained or protected evaluation access.
+- All25 CPU tests passed4.330s. Candidate grouping does not prove identity,
+  registration, phases or tumor labels. Four prior empty masks do not classify
+  remaining79series. Released SMILE training uses same-relative-z phase slices,
+  not an implemented voxel-perfect registration step; distinguish training recipe
+  from properly aligned paired fidelity evaluation.
+- DATA_AND_TRAIN_PROBE_20261008.md records measured costs, data gates and bounded
+  next checks. No silent unpaired/teacher-target/JEPA pivot or full-training launch.

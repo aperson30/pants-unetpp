@@ -1,0 +1,73 @@
+{
+  "job_id": "3345424",
+  "gpu": "NVIDIA GH200 120GB",
+  "torch": "2.10.0+cu129",
+  "cuda": "12.9",
+  "cudnn": 91002,
+  "scope": "tiny random fixture; equal widths NOT equal capacity; not quality/end-to-end speed",
+  "precision": "bf16 autocast, FP32 weights",
+  "batch_size": 1,
+  "results": {
+    "plain": {
+      "parameters": 1096516,
+      "active_parameters": 1096516,
+      "median_train_step_seconds": 0.017667288426309824,
+      "samples_seconds": [
+        0.017758901929482818,
+        0.018040652852505445,
+        0.01757567492313683,
+        0.017354176845401525,
+        0.017790229059755802,
+        0.017381151905283332,
+        0.01755945198237896,
+        0.017823315924033523
+      ],
+      "last_random_target_loss": 0.9946253895759583,
+      "peak_allocated_bytes": 104550400,
+      "peak_reserved_bytes": 125829120,
+      "expected_unused_parameters": []
+    },
+    "nested_deepest": {
+      "parameters": 1202536,
+      "active_parameters": 1202404,
+      "median_train_step_seconds": 0.022337703499943018,
+      "samples_seconds": [
+        0.023295677034184337,
+        0.023076322861015797,
+        0.02279473003000021,
+        0.022358038928359747,
+        0.022051840089261532,
+        0.022030655993148685,
+        0.02144363196566701,
+        0.02231736807152629
+      ],
+      "last_random_target_loss": 0.9789023995399475,
+      "peak_allocated_bytes": 113460736,
+      "peak_reserved_bytes": 134217728,
+      "expected_unused_parameters": [
+        "heads.1.weight",
+        "heads.1.bias"
+      ]
+    },
+    "nested_all": {
+      "parameters": 1202536,
+      "active_parameters": 1202536,
+      "median_train_step_seconds": 0.022716621053405106,
+      "samples_seconds": [
+        0.02379899099469185,
+        0.023374873911961913,
+        0.023380250902846456,
+        0.022657901979982853,
+        0.02277534012682736,
+        0.021974497009068727,
+        0.021986433072015643,
+        0.022068991092965007
+      ],
+      "last_random_target_loss": 0.9969638586044312,
+      "peak_allocated_bytes": 113462784,
+      "peak_reserved_bytes": 134217728,
+      "expected_unused_parameters": []
+    }
+  },
+  "failures": {}
+}
