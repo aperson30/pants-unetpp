@@ -1,0 +1,50 @@
+{
+  "scope": "CPU headers/config/imports only; NOT model loading or enhancement",
+  "checkpoint": {
+    "size_bytes": 3438213624,
+    "tensor_count": 686,
+    "conv_in_shape": [
+      320,
+      8,
+      3,
+      3
+    ],
+    "scope": "header only; hash, full loader and GPU inference still required"
+  },
+  "versions": {
+    "torch": {
+      "version": "2.10.0+cu129",
+      "path": "/sw/user/python/miniforge3-pytorch-2.10.0/lib/python3.12/site-packages/torch/__init__.py"
+    },
+    "torchvision": {
+      "version": "0.25.0+cu129",
+      "path": "/sw/user/python/miniforge3-pytorch-2.10.0/lib/python3.12/site-packages/torchvision/__init__.py"
+    },
+    "diffusers": {
+      "version": "0.35.1",
+      "path": "/u/asanjeev/generation_architecture_20261008_v1/baseline_venv/lib/python3.12/site-packages/diffusers/__init__.py"
+    },
+    "transformers": {
+      "version": "4.56.1",
+      "path": "/u/asanjeev/generation_architecture_20261008_v1/baseline_venv/lib/python3.12/site-packages/transformers/__init__.py"
+    },
+    "accelerate": {
+      "version": "1.10.1",
+      "path": "/u/asanjeev/generation_architecture_20261008_v1/baseline_venv/lib/python3.12/site-packages/accelerate/__init__.py"
+    },
+    "safetensors": {
+      "version": "0.7.0",
+      "path": "/u/asanjeev/generation_architecture_20261008_v1/baseline_venv/lib/python3.12/site-packages/safetensors/__init__.py"
+    },
+    "huggingface_hub": {
+      "version": "0.35.3",
+      "path": "/u/asanjeev/generation_architecture_20261008_v1/baseline_venv/lib/python3.12/site-packages/huggingface_hub/__init__.py"
+    }
+  },
+  "latent_contract": [
+    8,
+    4,
+    768
+  ],
+  "scheduler_prediction": "epsilon"
+}

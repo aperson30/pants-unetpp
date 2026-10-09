@@ -2520,3 +2520,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
   measured GPU-hour saving. Solver/model-call and medical-quality controls remain.
 - No original SMILE code modified, protected evaluation accessed, large assets
   downloaded, environment installs, new GPU jobs or production changes.
+
+### 2026-10-08 21:00 PDT — Authenticated SMILE staging; CPU import gate passed
+
+- User personally completed HF gated access and browser authorization; live
+  `hf auth whoami` confirmed their account. No credentials collected or logged.
+- Staged pinned SMILE denoiser/VAE and SD1.5 config/tokenizer/text/initialization
+  assets under `/u/asanjeev/generation_architecture_20261008_v1/assets` (~7.2GiB),
+  excluding optimizer and alternate checkpoints. Detached 1200s download timeout;
+  completed SHA256 inventory. Home quota checked first (~8GiB/100GiB before setup).
+- Created separate system-site venv over cluster Torch 2.10, installed only
+  diffusion core dependencies there after dry-run inspection. Shared packages,
+  existing pants_venv, training jobs and protected evaluation untouched.
+- 60s CPU preflight passed lazy diffusers/CLIP imports and real bounded checkpoint
+  header checks: 686 tensors, [320,8,3,3] input convolution; epsilon scheduler.
+  Version/import-path evidence saved in asset_preflight_20261008.json.
+- No added GPU allocation, actual model tensor loading, CT enhancement or quality
+  claim. Full experiment steps require verified input data/recipe and additional
+  training budget; do not mistake prepared assets for a trained generator.

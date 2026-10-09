@@ -156,11 +156,35 @@ register now includes targeted method/experiment reading for every selected
 family, not full end-to-end readings; an additional MICCAI 2026 medical-acceleration
 neighbor is documented. No further GPU allocation for this follow-up.
 
-We need the PI-intended baseline recipe/data and approved checkpoint access.
-SMILE's Hugging Face repository is gated: a config request returned 401 /
-GatedRepoError. The user has no Hugging Face account. Do not bypass the gate,
-request tokens in chat, or silently substitute generic Stable Diffusion weights.
-An approved author/PI-provided copy is another route. The completed prototype
+We still need the PI-intended training recipe/data. On October 8 the user created
+their own Hugging Face account, received SMILE access and personally authorized
+the cluster's browser login. Authenticated downloads now succeeded; the earlier
+401 gate is resolved. Never request tokens in chat or substitute generic SD
+weights for the finetuned SMILE reference. The completed prototype
 job used approximately 0.00722 charge-equivalent GPU-hours before accounting
 rounding, against the authorized 0.25 smoke cap. Full training needs a separate
 budget and frozen recipe. No acceptance or quality guarantee.
+
+## October 8 authenticated asset and environment preflight
+
+Selected pinned SMILE/SD1.5 assets downloaded into the isolated cluster home
+directory (about 7.2 GiB reported by `du`), not shared project storage. Omitted
+optimizer states, alternate denoisers and auxiliary networks. Downloads were
+detached and timeout-bounded; SHA256 inventory saved remotely. This inventory
+records local content, not an independent authenticity proof.
+
+New `baseline_venv` inherits the read-only cluster Torch stack, disables user-site
+for checks and installs diffusion dependencies locally only. No segmentation
+environment or shared module was edited. CPU preflight passed actual lazy model
+imports and finetuned checkpoint-header validation: 686 tensors, conv_in
+[320,8,3,3], four output latent channels and width-768 conditioning. Torch
+2.10.0+cu129, torchvision 0.25.0+cu129, diffusers 0.35.1, transformers 4.56.1,
+accelerate 1.10.1, safetensors 0.7.0, huggingface_hub 0.35.3.
+See `asset_preflight_20261008.json` for observed package paths and scope.
+
+**Not yet done:** strict full weight loading, CT enhancement, production source
+imports, output coverage/geometry verification, matched generator training or
+clinical evaluation. No additional GPU job was submitted for this staging.
+The new environment is an inference-core preparation, NOT a full SMILE training
+requirements reproduction. Full training remains gated by paired training/dev
+data, frozen recipe, agreed quality margins and a separate compute budget.
