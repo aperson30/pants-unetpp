@@ -2474,3 +2474,25 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Confirmed previous CPU-screen commit 797d5bc is on origin/main after pull.
   This handoff uses only repository/historical evidence; no live evaluation
   recheck, new GPU allocation, raw-data publication or external message sent.
+
+### 2026-10-08 — PI-directed generation architecture smoke and reading register
+
+- Isolated original conditional nested-denoiser prototype and 12 CPU contracts;
+  protected 2x2 implementation/data/evaluation untouched. SMILE source audit at
+  23f5a28fe25ed0472024b688e19a79ce119c4833; public training code exists but shell
+  recipe differs from supplied paper. No faithful reproduction claim.
+- Authorized capped DeltaAI GPU smoke 3344849 completed on GH200 gh021, exit 0,
+  13s allocation elapsed. Estimate 0.007222 charge-equivalent GPU-hours before
+  posted rounding, within 0.25 authorized cap. Random-weight fixture only.
+- CPU suite passed on cluster; GPU selected-head output parity and finite
+  FP32/BF16 gradients passed. Shallow/deepest/all-head FP32 forward times:
+  2.729/4.871/4.925 ms for 1.20M-parameter 64x64 latent fixture. Not trained
+  CT fidelity or end-to-end speedup. Raw stdout retained in generation folder.
+- SMILE checkpoint access blocked by gated Hugging Face repository (401);
+  user has no HF account. Approved PI/author weights or normal access approval
+  needed, no bypass/token disclosure or generic-weight substitution.
+- Saved GPU_SMOKE_RESULT.md, updated README, and LITERATURE_REVIEW.md with
+  20 paper families and explicit reading depth. Some remain abstract/source
+  screening, not 20 full readings. Depth/noise routing has extensive prior art;
+  strong solver/fewer-step controls and medical fidelity gates required.
+- No extra GPU jobs for reading, no checkpoint download or production install.

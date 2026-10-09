@@ -1,0 +1,50 @@
+test_conditioning_reaches_every_exit (test_conditional_nested_denoiser.DenoiserContracts.test_conditioning_reaches_every_exit) ... ok
+test_explicit_loss_scale (test_conditional_nested_denoiser.DenoiserContracts.test_explicit_loss_scale) ... ok
+test_finite_update_and_exact_serialization_resume (test_conditional_nested_denoiser.DenoiserContracts.test_finite_update_and_exact_serialization_resume) ... ok
+test_no_unrequested_heads_computed (test_conditional_nested_denoiser.DenoiserContracts.test_no_unrequested_heads_computed) ... ok
+test_nondense_variant (test_conditional_nested_denoiser.DenoiserContracts.test_nondense_variant) ... ok
+test_pruned_head_bit_exact_output_and_gradient (test_conditional_nested_denoiser.DenoiserContracts.test_pruned_head_bit_exact_output_and_gradient) ... ok
+test_rejects_unsupported_and_malformed_inputs (test_conditional_nested_denoiser.DenoiserContracts.test_rejects_unsupported_and_malformed_inputs) ... ok
+test_shapes_and_scalar_batch_time (test_conditional_nested_denoiser.DenoiserContracts.test_shapes_and_scalar_batch_time) ... ok
+test_all_depth_pruning_contracts (test_diffusion_contracts.DiffusionContracts.test_all_depth_pruning_contracts) ... ok
+test_deterministic_trajectory_does_not_mutate_inputs (test_diffusion_contracts.DiffusionContracts.test_deterministic_trajectory_does_not_mutate_inputs) ... ok
+test_invalid_schedule (test_diffusion_contracts.DiffusionContracts.test_invalid_schedule) ... ok
+test_known_noise_reconstructs_clean (test_diffusion_contracts.DiffusionContracts.test_known_noise_reconstructs_clean) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 2.157s
+
+OK
+{
+  "status": "PASS",
+  "job_id": "3344849",
+  "torch": "2.10.0+cu129",
+  "cuda": "12.9",
+  "cudnn": 91002,
+  "cpu_arch": "aarch64",
+  "gpu": "NVIDIA GH200 120GB",
+  "parameters": 1202536,
+  "timings": {
+    "shallow": {
+      "seconds_per_forward": 0.0027291136095300315,
+      "peak_allocated_bytes": 45766144,
+      "peak_reserved_bytes": 67108864
+    },
+    "deepest": {
+      "seconds_per_forward": 0.004870899394154549,
+      "peak_allocated_bytes": 47142400,
+      "peak_reserved_bytes": 67108864
+    },
+    "all_heads": {
+      "seconds_per_forward": 0.004925105790607631,
+      "peak_allocated_bytes": 47142400,
+      "peak_reserved_bytes": 67108864
+    }
+  },
+  "finite_gradient_losses": {
+    "torch.float32": 1.0895315408706665,
+    "torch.bfloat16": 1.0895081758499146
+  },
+  "elapsed_seconds": 5.9530207889620215,
+  "scope": "random-weight prototype only; no SMILE checkpoint, data, generation quality or end-to-end speedup"
+}
