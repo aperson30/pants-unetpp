@@ -31,8 +31,9 @@ def file_hash(path):
     return result.hexdigest()
 
 
-def stage(root, case, deadline):
-    size, digest = FILES[case]
+def stage(root, case, deadline, files=None):
+    files = FILES if files is None else files
+    size, digest = files[case]
     path = root / f"{case}.nii.gz"
     if path.exists():
         if path.stat().st_size != size or file_hash(path) != digest:

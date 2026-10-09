@@ -2641,3 +2641,21 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Alternative general-pair training plus independently labeled PanTS NC development
   evaluation is documented as a separately defined design, not silently substituted.
   Training budget, patient-overlap review and recipe still needed before launch.
+
+### 2026-10-08 — Capped architecture-learning pilot prepared, not submitted
+
+- User explicitly authorized 0.5 charged GPU-hours including startup/failures.
+  Prepared one ten-minute GH200 allocation, no automatic retry. Factor-two budget
+  estimate is one-third hour before rounding; current billing needs recheck.
+- Bounded CPU download/staging of four public CTs completed remotely, pinned
+  hashes checked, 452,042,142 bytes. No additional GPU hours spent this turn.
+- Prepared two-phase training/separate candidate development assembler, explicit
+  shared stochastic draws, cached frozen posterior parameters (not samples),
+  200-update plain/nested pilot and exact GPU next-update checkpoint replay gate.
+  These are small unequal-capacity prototypes, NOT clinical or paper results.
+- All42 CPU tests pass in2.111s, including phase ordering and split-array checks.
+  Remote improved assembler, candidate montage review and GPU replay still pending.
+- Old SSH socket disappeared; requested deltaai-pilot-oct8.sock also unavailable.
+  No learning job submitted. Protected 2x2 evaluation remains untouched.
+- See research/generation_architecture/ARCHITECTURE_LEARNING_PILOT_20261008.md
+  for scope, uncertainties and fail-closed release checklist.
