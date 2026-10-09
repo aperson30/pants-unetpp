@@ -132,3 +132,12 @@ source on independent verified abdominal pairs at fixed noise/timestep, compare
 against an unconditional control, and include decoded image fidelity. Predeclare
 capacity/compute controls before expanding training. Do not simply increase model
 size or run a long study on the strength of the lower nested epsilon loss.
+
+CPU parameter-count preparation (no training performed): plain widths(34,68,136)
+has1,200,976 parameters versus nested(32,64,128)1,202,536 (~0.13% difference).
+Plain(32,64,128)1,096,516 versus nested(30,60,120)1,092,678 (~0.35% difference).
+These give two near-capacity-matched control candidates rather than assuming
+identical widths are fair. Counts include instantiated unused heads; production
+analysis must separately report active and total parameters. This does not match
+actual FLOPs, wall-time, initialization, or prove equal representational capacity.
+Compute-matched comparisons remain a separate requirement.

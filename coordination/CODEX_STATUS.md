@@ -2682,3 +2682,7 @@ Node: bdmap2.wse.jhu.edu (dedicated, do not use bdmap1/3/4 to avoid collision wi
 - Next meaningful design needs correct-vs-mismatched source/unconditional controls,
   verified abdominal pairs and capacity/compute-matched comparisons; not a longer
   uncontrolled run. See ARCHITECTURE_LEARNING_PILOT_20261008.md for exact limitations.
+- CPU-only next-control preparation: plain34/68/136 vs nested32/64/128 counts
+  1,200,976/1,202,536 (~0.13% apart); plain32/64/128 vs nested30/60/120 counts
+  1,096,516/1,092,678 (~0.35%). Near parameter-count controls, not compute-matched,
+  not trained; unused instantiated heads must be distinguished from active counts.
